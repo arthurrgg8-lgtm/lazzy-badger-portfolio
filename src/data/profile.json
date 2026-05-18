@@ -1,0 +1,226 @@
+{
+  "identity": {
+    "name": "Anudit Khatri",
+    "brand_name": "Lazzy Badger",
+    "tagline": "remember the name",
+    "short_bio": "A passionately curious mind."
+  },
+  "about": {
+    "persona": "Software developer, cybersecurity researcher, AI systems builder, and automation-focused engineer.",
+    "full_description": "I am a highly versatile software developer, cybersecurity researcher, and advanced systems builder driven by an intensely curious mind and a philosophy of high-leverage efficiency. I proudly define myself as a 'lazy' engineer in the best sense of the word—I reject brute-force manual labor and mundane repetition, choosing instead to deploy innovative architecture, automation scripts, and local AI workflows to get complex tasks done creatively and effortlessly.\n\nMy work combines systems programming, cybersecurity, AI orchestration, computer vision, local LLM tooling, and automation engineering. I specialize in privacy-focused, local-first systems using Python, Rust, Linux environments, CLI agents, and AI-assisted workflows."
+  },
+  "design_preferences": {
+    "website_vibe": "Hacker, cinematic, highly technical, futuristic",
+    "theme": "Dark mode",
+    "colors_liked": [
+      "black",
+      "navy blue",
+      "gold",
+      "silver",
+      "cream"
+    ],
+    "colors_disliked": [
+      "sky blue",
+      "light green",
+      "pale purple"
+    ],
+    "inspiration_site": "https://animejs.com",
+    "animation_level": "insane",
+    "animation_style": "Apple-style smoothness with advanced interactions and cinematic transitions"
+  },
+  "skills_and_tools": {
+    "core_traits": [
+      "Determined",
+      "Superhuman Curiosity",
+      "Systems Thinking",
+      "Automation-First Mindset"
+    ],
+    "languages": [
+      "Rust",
+      "Python",
+      "TypeScript",
+      "JavaScript",
+      "Bash / Shell"
+    ],
+    "tools": [
+      "Raspberry Pi",
+      "Ralink 3070",
+      "Linux",
+      "Ubuntu",
+      "Streamlit",
+      "Codex",
+      "Gemini CLI",
+      "DeepSeek",
+      "Claude",
+      "Ollama",
+      "Local LLM Endpoints",
+      "CLI Agents",
+      "Cron Jobs",
+      "Terminal Multiplexers",
+      "File Watchers",
+      "Android APK Tooling",
+      "iOS Shortcuts"
+    ],
+    "bug_bounty_tools": [
+      "HackerOne",
+      "Bugcrowd",
+      "Burp Suite",
+      "Nuclei",
+      "Nuclei Templates",
+      "SQLMap",
+      "Arjun",
+      "GitDumper",
+      "Bettercap",
+      "Fluxion",
+      "Wifite",
+      "Packet Monitoring",
+      "Attack Surface Mapping",
+      "Wireless Analysis"
+    ],
+    "mcp_infrastructure": [
+      "MCP Servers",
+      "Kali MCP Server",
+      "Codex MCP Tooling",
+      "Local Tool Connectors",
+      "Terminal Automation Agents",
+      "Shell-Command Workflows",
+      "Context-Aware File Operations",
+      "Local AI Orchestration"
+    ],
+    "certifications": [
+      "AI Certifications",
+      "Bug Bounty Certifications",
+      "Basic Networking Certifications",
+      "Full-Stack Development Certifications"
+    ]
+  },
+  "projects": [
+    {
+      "name": "Lazzybiointel-v6.2-PRO",
+      "description": "Forensic-grade biometric identity verification system built with Python, InsightFace, and MediaPipe for advanced facial recognition and geometry tracking.",
+      "status": "active"
+    },
+    {
+      "name": "Deepfake-Analyzer",
+      "description": "Offline privacy-first deepfake detection workbench using Rust and Python hybrid architecture.",
+      "status": "active"
+    },
+    {
+      "name": "Hardware-Driven Network & Motion Sensing Node",
+      "description": "Raspberry Pi and Ralink 3070-based sensing and packet monitoring node for low-level network analysis.",
+      "status": "active"
+    },
+    {
+      "name": "Cafe Billing System",
+      "description": "Operational billing and reporting application for local service operations.",
+      "repository": "github.com/arthurrgg8-lgtm/cafe_billing_system"
+    },
+    {
+      "name": "Confidential Project I",
+      "description": "Details omitted for security."
+    },
+    {
+      "name": "Confidential Project II",
+      "description": "Details omitted for security."
+    }
+  ],
+  "socials": {
+    "email": "anuditkhatri2011@gmail.com",
+    "github": "Arthurrgg8-lgtm",
+    "instagram": "yk_anudit",
+    "whatsapp": "9762691579",
+    "facebook": "anudit.xettri",
+    "youtube": "@anudit1.5"
+  },
+  "website_structure": {
+    "type": "Personal technical portfolio",
+    "target_audience": "clients",
+    "focus": [
+      "animation",
+      "interactivity",
+      "clean UI",
+      "performance",
+      "mobile-first responsiveness"
+    ],
+    "preferred_stack": {
+      "frontend": [
+        "Next.js",
+        "TypeScript",
+        "Tailwind CSS"
+      ],
+      "animation": [
+        "Framer Motion",
+        "GSAP",
+        "Three.js"
+      ],
+      "hosting": "Vercel"
+    },
+    "seo": false,
+    "speed_priority": true,
+    "mobile_friendly": true
+  },
+  "ai_builder_rules": {
+    "never_assume_missing_information": true,
+    "always_ask_before_adding_unknown_details": true,
+    "allow_future_self_hosting": true,
+    "primary_focus": [
+      "smooth animations",
+      "interactive visuals",
+      "high-end UI",
+      "maintainable architecture"
+    ]
+  },
+  "assets": {
+    "note": "User will provide media assets, profile photos, videos, and additional files in a separate folder."
+  },
+  "pillars": [
+    "Local LLM orchestration",
+    "Computer algorithm",
+    "Cybersecurity research",
+    "Fullstack dev",
+    "Mobile ecosystems",
+    "Forensic analysis"
+  ],
+  "gallery": [
+    {
+      "src": "/assets/gallery/night-ride.png",
+      "alt": "Helmeted rider on a dirt bike at night in a city street",
+      "label": "Night ride"
+    },
+    {
+      "src": "/assets/gallery/web1.jpg",
+      "alt": "Helmeted rider in fog on an off-road motorcycle",
+      "label": "ZONTES350 T"
+    },
+    {
+      "src": "/assets/gallery/web2.jpg",
+      "alt": "Cinematic outdoor frame with a rider and hard shadows",
+      "label": "NATURE"
+    },
+    {
+      "src": "/assets/gallery/web3.jpg",
+      "alt": "Personal cinematic outdoor image",
+      "label": "PANCHPOKHARI"
+    },
+    {
+      "src": "/assets/gallery/portrait-outdoor.png",
+      "alt": "Outdoor portrait in a scenic location",
+      "label": "CHILLINN"
+    },
+    {
+      "src": "/assets/gallery/urban-view.png",
+      "alt": "Urban rooftop perspective",
+      "label": "PILOT BABA ASHRAM RUNNING"
+    },
+    {
+      "src": "/assets/gallery/dirt-bike-crew.png",
+      "alt": "Group of riders with dirt bikes on a trail",
+      "label": "SQUAD"
+    },
+    {
+      "src": "/assets/gallery/squad-stairs.png",
+      "alt": "Group photo on a staircase",
+      "label": "COLLEGE SQUAD"
+    }
+  ]
+}
