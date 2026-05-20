@@ -6,8 +6,8 @@
     "short_bio": "A passionately curious mind."
   },
   "about": {
-    "persona": "Fullstack Developer, Web Developer, Software developer, cybersecurity researcher, AI systems builder, and automation-focused engineer.",
-    "full_description": "I am a highly versatile fullstack developer, web developer, software developer, cybersecurity researcher, and advanced systems builder driven by an intensely curious mind and a philosophy of high-leverage efficiency. I proudly define myself as a 'lazy' engineer in the best sense of the word—I reject brute-force manual labor and mundane repetition, choosing instead to deploy innovative architecture, automation scripts, and local AI workflows to get complex tasks done creatively and effortlessly.\n\nMy work combines systems programming, cybersecurity, AI orchestration, computer vision, local LLM tooling, and automation engineering. I specialize in privacy-focused, local-first systems using Python, Rust, Linux environments, CLI agents, and AI-assisted workflows."
+    "persona": "Fullstack Developer, Web Developer, Software Developer, Cybersecurity Researcher, AI Systems Builder, and Automation-Focused Engineer.",
+    "full_description": "I am a highly versatile Fullstack Developer, Web Developer, Software Developer, Cybersecurity Researcher, and Advanced Systems Builder driven by an intensely curious mind and a philosophy of high-leverage efficiency. I proudly define myself as a 'lazy' engineer in the best sense of the word—I reject brute-force manual labor and mundane repetition, choosing instead to deploy innovative architecture, automation scripts, and local AI workflows to get complex tasks done creatively and effortlessly.\n\nMy work combines systems programming, cybersecurity, AI orchestration, computer vision, local LLM tooling, and automation engineering. I specialize in privacy-focused, local-first systems using Python, Rust, Linux environments, CLI agents, and AI-assisted workflows."
   },
   "design_preferences": {
     "website_vibe": "Hacker, cinematic, highly technical, futuristic",
@@ -101,14 +101,14 @@
     {
       "name": "MR Tour Service",
       "description": "A premium, high-performance travel booking and service management platform crafted for modern tour operators.",
-      "status": "delivered & live",
+      "status": "Delivered & Live",
       "url": "https://mr-tour-service.pages.dev/",
       "highlighted": true
     },
     {
       "name": "Ar. Anushka Khatri Portfolio",
       "description": "An elite, interactive architectural portfolio drafted around custom blueprint watermarks, a dynamic CAD slider, and a physical-media material flat-lay system.",
-      "status": "delivered & live",
+      "status": "Delivered & Live",
       "url": "https://anushkakhatri.vercel.app/",
       "highlighted": true
     },
@@ -191,12 +191,12 @@
     "note": "User will provide media assets, profile photos, videos, and additional files in a separate folder."
   },
   "pillars": [
-    "Local LLM orchestration",
-    "Computer algorithm",
-    "Cybersecurity research",
-    "Fullstack dev",
-    "Mobile ecosystems",
-    "Forensic analysis"
+    "Local LLM Orchestration",
+    "Computer Algorithms & Architectures",
+    "Cybersecurity Research",
+    "Fullstack Development",
+    "Mobile Ecosystems",
+    "Forensic Analysis"
   ],
   "gallery": [
     {
