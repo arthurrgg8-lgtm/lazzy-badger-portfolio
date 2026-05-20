@@ -145,22 +145,61 @@ export default function Home() {
         <div className="mt-12 grid gap-5">
           {profile.projects.map((project, index) => (
             <Reveal delay={index * 0.05} key={project.name}>
-              <article className="glass group grid gap-6 rounded-[2rem] p-6 transition duration-500 hover:border-[rgba(215,181,109,0.48)] md:grid-cols-[0.22fr_1fr_0.22fr] md:items-center" data-tilt-card>
+              <article 
+                className={`glass group relative grid gap-6 rounded-[2rem] p-6 transition-all duration-500 md:grid-cols-[0.22fr_1fr_0.22fr] md:items-center ${
+                  project.highlighted 
+                    ? "border-[rgba(215,181,109,0.38)] shadow-[0_0_30px_rgba(215,181,109,0.12)] hover:border-[var(--gold)] hover:shadow-[0_0_40px_rgba(215,181,109,0.22)] bg-gradient-to-br from-white/[0.07] via-white/[0.02] to-[rgba(215,181,109,0.04)]" 
+                    : "hover:border-[rgba(215,181,109,0.48)]"
+                }`}
+                data-tilt-card
+              >
+                {/* Golden corner glow for highlighted cards */}
+                {project.highlighted && (
+                  <div className="absolute top-0 right-0 -mr-4 -mt-4 w-20 h-20 bg-[var(--gold)]/8 blur-2xl pointer-events-none rounded-full" />
+                )}
+
+                {/* Absolute overlay link to open live site if URL exists */}
+                {project.url && (
+                  <a 
+                    href={project.url} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="absolute inset-0 z-10 rounded-[2rem]" 
+                    title={`Open ${project.name} live site`}
+                  />
+                )}
+
                 <span className="font-display text-5xl text-white/18 transition group-hover:text-[var(--gold)]">{String(index + 1).padStart(2, "0")}</span>
                 <div>
                   <div className="flex flex-wrap items-center gap-3">
-                    <h3 className="text-2xl font-semibold">{project.name}</h3>
-                    {project.status ? <span className="rounded-full border border-[rgba(215,181,109,0.24)] px-3 py-1 text-[10px] uppercase tracking-[0.24em] text-[var(--gold)]">{project.status}</span> : null}
+                    <h3 className="text-2xl font-semibold transition group-hover:text-[var(--cream)]">{project.name}</h3>
+                    {project.status ? (
+                      <span className={`rounded-full px-3 py-1 text-[10px] uppercase tracking-[0.24em] font-semibold flex items-center gap-1.5 ${
+                        project.highlighted 
+                          ? "border border-[var(--gold)]/50 bg-[rgba(215,181,109,0.12)] text-[var(--gold)] shadow-[0_0_12px_rgba(215,181,109,0.18)]" 
+                          : "border border-[rgba(215,181,109,0.24)] text-[var(--gold)]"
+                      }`}>
+                        {project.highlighted && <span className="h-1.5 w-1.5 rounded-full bg-[var(--gold)] animate-pulse shadow-[0_0_6px_var(--gold)]" />}
+                        {project.status}
+                      </span>
+                    ) : null}
                   </div>
-                  <p className="mt-3 max-w-3xl leading-7 text-white/62">{project.description}</p>
+                  <p className="mt-3 max-w-3xl leading-7 text-white/62 transition group-hover:text-white/80">{project.description}</p>
                 </div>
-                {project.repository ? (
-                  <Link className="text-sm uppercase tracking-[0.22em] text-[var(--gold)] transition hover:text-white" href={`https://${project.repository}`}>
-                    repo
-                  </Link>
-                ) : (
-                  <span className="text-sm uppercase tracking-[0.22em] text-white/28">private</span>
-                )}
+                
+                <div className="flex md:justify-end">
+                  {project.url ? (
+                    <span className="text-sm uppercase tracking-[0.22em] text-[var(--gold)] font-bold transition duration-300 group-hover:text-white flex items-center gap-1">
+                      live site <span className="text-xs transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
+                    </span>
+                  ) : project.repository ? (
+                    <Link className="relative z-20 text-sm uppercase tracking-[0.22em] text-[var(--gold)] transition hover:text-white" href={`https://${project.repository}`}>
+                      repo
+                    </Link>
+                  ) : (
+                    <span className="text-sm uppercase tracking-[0.22em] text-white/28">private</span>
+                  )}
+                </div>
               </article>
             </Reveal>
           ))}

@@ -96,6 +96,20 @@
   },
   "projects": [
     {
+      "name": "MR Tour Service",
+      "description": "A premium, high-performance travel booking and service management platform crafted for modern tour operators.",
+      "status": "delivered & live",
+      "url": "https://mr-tour-service.pages.dev/",
+      "highlighted": true
+    },
+    {
+      "name": "Ar. Anushka Khatri Portfolio",
+      "description": "An elite, interactive architectural portfolio drafted around custom blueprint watermarks, a dynamic CAD slider, and a physical-media material flat-lay system.",
+      "status": "delivered & live",
+      "url": "https://anushkakhatri.vercel.app/",
+      "highlighted": true
+    },
+    {
       "name": "Lazzybiointel-v6.2-PRO",
       "description": "Forensic-grade biometric identity verification system built with Python, InsightFace, and MediaPipe for advanced facial recognition and geometry tracking.",
       "status": "active"

@@ -5,6 +5,8 @@ export type Project = {
   description: string;
   status?: string;
   repository?: string;
+  url?: string;
+  highlighted?: boolean;
 };
 
 export type GalleryItem = {
