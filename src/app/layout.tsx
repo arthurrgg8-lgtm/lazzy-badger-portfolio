@@ -16,7 +16,12 @@ const sans = Space_Grotesk({
 
 export const metadata: Metadata = {
   title: "Lazzy Badger | Anudit Khatri",
-  description: "Personal technical portfolio for Anudit Khatri, also known as Lazzy Badger."
+  description: "Personal technical portfolio for Anudit Khatri, also known as Lazzy Badger.",
+  icons: {
+    icon: "/assets/lazzy.jpeg",
+    shortcut: "/assets/lazzy.jpeg",
+    apple: "/assets/lazzy.jpeg",
+  }
 };
 
 export const viewport: Viewport = {
