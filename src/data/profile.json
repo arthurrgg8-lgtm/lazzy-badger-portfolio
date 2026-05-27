@@ -103,42 +103,57 @@
       "description": "A premium, high-performance travel booking and service management platform crafted for modern tour operators.",
       "status": "Delivered & Live",
       "url": "https://manoranjan.com.np/",
-      "highlighted": true
+      "highlighted": true,
+      "stack": ["Next.js", "React", "PostgreSQL", "Tailwind CSS"]
     },
     {
       "name": "Ar. Anushka Khatri Portfolio",
       "description": "An elite, interactive architectural portfolio drafted around custom blueprint watermarks, a dynamic CAD slider, and a physical-media material flat-lay system.",
       "status": "Delivered & Live",
       "url": "https://anushkakhatri.com.np/",
-      "highlighted": true
+      "highlighted": true,
+      "stack": ["Next.js", "Tailwind CSS 4", "Framer Motion", "Cloudflare Workers"]
+    },
+    {
+      "name": "Himalayan Mastiff Nepal",
+      "description": "A premium, cinematic full-stack portal (Bhotey Kukur) showcasing champion bloodlines, featuring a FastAPI backend, optimized Next.js 16 frontend, and dynamic eSewa puppy reservation system.",
+      "status": "In Development",
+      "highlighted": true,
+      "stack": ["Next.js 16", "React 19", "FastAPI", "Tailwind CSS 4", "eSewa"]
     },
     {
       "name": "Lazzybiointel-v6.2-PRO",
       "description": "Forensic-grade biometric identity verification system built with Python, InsightFace, and MediaPipe for advanced facial recognition and geometry tracking.",
-      "status": "active"
+      "status": "active",
+      "stack": ["Python", "InsightFace", "MediaPipe", "OpenCV"]
     },
     {
       "name": "Deepfake-Analyzer",
       "description": "Offline privacy-first deepfake detection workbench using Rust and Python hybrid architecture.",
-      "status": "active"
+      "status": "active",
+      "stack": ["Rust", "Python", "PyTorch", "Offline-First"]
     },
     {
       "name": "Hardware-Driven Network & Motion Sensing Node",
-      "description": "Raspberry Pi and Ralink 3070-based sensing and packet monitoring node for low-level network analysis.",
-      "status": "active"
+      "description": "Raspberry Pi 4 and Ralink 3070-based sensing and packet monitoring node for low-level wireless network analysis and packet injection.",
+      "status": "active",
+      "stack": ["Raspberry Pi 4", "Ralink 3070", "Bash", "Linux", "Monitor Mode"]
     },
     {
       "name": "Cafe Billing System",
       "description": "Operational billing and reporting application for local service operations.",
-      "repository": "github.com/arthurrgg8-lgtm/cafe_billing_system"
+      "repository": "github.com/arthurrgg8-lgtm/cafe_billing_system",
+      "stack": ["FastAPI", "React", "SQLite", "Tailwind CSS"]
     },
     {
       "name": "Confidential Project I",
-      "description": "Details omitted for security."
+      "description": "Details omitted for security.",
+      "stack": ["Systems Security", "DoD Scopes"]
     },
     {
       "name": "Confidential Project II",
-      "description": "Details omitted for security."
+      "description": "Details omitted for security.",
+      "stack": ["GraphQL Analysis", "Next.js Auditing"]
     }
   ],
   "socials": {

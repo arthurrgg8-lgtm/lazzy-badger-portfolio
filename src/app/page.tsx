@@ -142,20 +142,26 @@ export default function Home() {
           <p className="text-xs uppercase tracking-[0.36em] text-[var(--gold)]">projects</p>
           <h2 className="font-display mt-3 text-5xl tracking-[-0.04em] md:text-7xl">Systems with teeth.</h2>
         </Reveal>
-        <div className="mt-12 grid gap-5">
+        <div className="mt-12 grid gap-6">
           {profile.projects.map((project, index) => (
             <Reveal delay={index * 0.05} key={project.name}>
               <article 
-                className={`glass group relative grid gap-6 rounded-[2rem] p-6 transition-all duration-500 md:grid-cols-[0.22fr_1fr_0.22fr] md:items-center ${
+                className={`glass group relative grid gap-6 rounded-[2rem] p-8 transition-all duration-500 md:grid-cols-[0.16fr_1fr_0.2fr] md:items-center overflow-hidden ${
                   project.highlighted 
-                    ? "border-[rgba(215,181,109,0.38)] shadow-[0_0_30px_rgba(215,181,109,0.12)] hover:border-[var(--gold)] hover:shadow-[0_0_40px_rgba(215,181,109,0.22)] bg-gradient-to-br from-white/[0.07] via-white/[0.02] to-[rgba(215,181,109,0.04)]" 
-                    : "hover:border-[rgba(215,181,109,0.48)]"
+                    ? "border-[rgba(215,181,109,0.38)] shadow-[0_0_35px_rgba(215,181,109,0.12)] hover:border-[var(--gold)] hover:shadow-[0_0_45px_rgba(215,181,109,0.22)] bg-gradient-to-br from-white/[0.07] via-white/[0.02] to-[rgba(215,181,109,0.05)]" 
+                    : "border-white/5 hover:border-[rgba(215,181,109,0.48)] hover:shadow-[0_0_30px_rgba(255,255,255,0.02)]"
                 }`}
                 data-tilt-card
               >
+                {/* Visual HUD Crop Marks (Teeth corners) */}
+                <div className="pointer-events-none absolute -left-px -top-px h-3.5 w-3.5 border-l border-t border-[var(--gold)]/30 group-hover:border-[var(--gold)] transition-colors duration-500" />
+                <div className="pointer-events-none absolute -right-px -top-px h-3.5 w-3.5 border-r border-t border-[var(--gold)]/30 group-hover:border-[var(--gold)] transition-colors duration-500" />
+                <div className="pointer-events-none absolute -left-px -bottom-px h-3.5 w-3.5 border-l border-b border-[var(--gold)]/30 group-hover:border-[var(--gold)] transition-colors duration-500" />
+                <div className="pointer-events-none absolute -right-px -bottom-px h-3.5 w-3.5 border-r border-b border-[var(--gold)]/30 group-hover:border-[var(--gold)] transition-colors duration-500" />
+
                 {/* Golden corner glow for highlighted cards */}
                 {project.highlighted && (
-                  <div className="absolute top-0 right-0 -mr-4 -mt-4 w-20 h-20 bg-[var(--gold)]/8 blur-2xl pointer-events-none rounded-full" />
+                  <div className="absolute top-0 right-0 -mr-4 -mt-4 w-20 h-20 bg-[var(--gold)]/6 blur-2xl pointer-events-none rounded-full" />
                 )}
 
                 {/* Absolute overlay link to open live site if URL exists */}
@@ -169,22 +175,47 @@ export default function Home() {
                   />
                 )}
 
-                <span className="font-display text-5xl text-white/18 transition group-hover:text-[var(--gold)]">{String(index + 1).padStart(2, "0")}</span>
+                <div className="flex flex-col">
+                  <span className="font-display text-5xl text-white/12 transition duration-500 group-hover:text-[var(--gold)]/40">{String(index + 1).padStart(2, "0")}</span>
+                  <span className="mt-1 font-mono text-[9px] uppercase tracking-[0.2em] text-white/20">SYS // L-0{index + 1}</span>
+                </div>
+
                 <div>
                   <div className="flex flex-wrap items-center gap-3">
                     <h3 className="text-2xl font-semibold transition group-hover:text-[var(--cream)]">{project.name}</h3>
                     {project.status ? (
-                      <span className={`rounded-full px-3 py-1 text-[10px] uppercase tracking-[0.24em] font-semibold flex items-center gap-1.5 ${
-                        project.highlighted 
-                          ? "border border-[var(--gold)]/50 bg-[rgba(215,181,109,0.12)] text-[var(--gold)] shadow-[0_0_12px_rgba(215,181,109,0.18)]" 
-                          : "border border-[rgba(215,181,109,0.24)] text-[var(--gold)]"
+                      <span className={`rounded-full px-3 py-1 text-[9px] uppercase tracking-[0.24em] font-semibold font-mono flex items-center gap-1.5 border transition-all duration-500 ${
+                        project.status === "Delivered & Live"
+                          ? "border-emerald-500/30 bg-emerald-500/5 text-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.1)]"
+                          : project.status === "In Development"
+                          ? "border-[var(--gold)]/40 bg-[rgba(215,181,109,0.06)] text-[var(--gold)] shadow-[0_0_10px_rgba(215,181,109,0.1)]"
+                          : "border-blue-400/30 bg-blue-400/5 text-blue-400 shadow-[0_0_10px_rgba(96,165,250,0.1)]"
                       }`}>
-                        {project.highlighted && <span className="h-1.5 w-1.5 rounded-full bg-[var(--gold)] animate-pulse shadow-[0_0_6px_var(--gold)]" />}
+                        <span className={`h-1.5 w-1.5 rounded-full ${
+                          project.status === "Delivered & Live"
+                            ? "bg-emerald-400 animate-pulse shadow-[0_0_6px_rgba(52,211,153,0.6)]"
+                            : project.status === "In Development"
+                            ? "bg-[var(--gold)] animate-pulse shadow-[0_0_6px_rgba(215,181,109,0.6)]"
+                            : "bg-blue-400 animate-pulse shadow-[0_0_6px_rgba(96,165,250,0.6)]"
+                        }`} />
                         {project.status}
                       </span>
                     ) : null}
                   </div>
-                  <p className="mt-3 max-w-3xl leading-7 text-white/62 transition group-hover:text-white/80">{project.description}</p>
+                  <p className="mt-3 max-w-3xl leading-7 text-white/60 transition group-hover:text-white/80">{project.description}</p>
+                  
+                  {project.stack && (
+                    <div className="mt-5 flex flex-wrap gap-1.5">
+                      {project.stack.map((tech) => (
+                        <span 
+                          key={tech} 
+                          className="rounded border border-white/5 bg-white/[0.02] px-2.5 py-0.5 font-mono text-[9px] uppercase tracking-wider text-white/40 transition-colors duration-300 group-hover:border-[var(--gold)]/15 group-hover:text-white/60"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  )}
                 </div>
                 
                 <div className="flex md:justify-end">

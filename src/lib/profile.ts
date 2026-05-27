@@ -7,6 +7,7 @@ export type Project = {
   repository?: string;
   url?: string;
   highlighted?: boolean;
+  stack?: string[];
 };
 
 export type GalleryItem = {
