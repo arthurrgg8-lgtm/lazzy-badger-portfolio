@@ -160,18 +160,18 @@ export default function Home() {
         </div>
       </div>
 
-      <section className="section-shell relative z-10 grid min-h-screen items-center gap-12 pb-20 pt-28 lg:grid-cols-[1.1fr_0.9fr]" id="top">
-        <div>
+      <section className="section-shell relative z-10 grid items-center gap-8 pb-12 pt-20 md:pb-20 md:pt-28 lg:grid-cols-[1.1fr_0.9fr] min-h-[calc(100vh-4rem)]" id="top">
+        <div className="flex flex-col justify-center">
           <Reveal>
             <TaglineHud />
           </Reveal>
           <Reveal delay={0.08}>
-            <h1 className="font-display text-6xl font-bold leading-[0.86] tracking-[-0.06em] text-gradient sm:text-7xl lg:text-9xl">
+            <h1 className="font-display text-4xl xs:text-5xl sm:text-7xl lg:text-9xl font-bold leading-[0.95] md:leading-[0.86] tracking-[-0.06em] text-gradient">
               <ScrambleText text={profile.identity.brand_name} trigger={startScramble} />
             </h1>
           </Reveal>
           <Reveal delay={0.16}>
-            <p className="mt-7 max-w-2xl text-lg leading-8 text-white/68 sm:text-xl">
+            <p className="mt-4 sm:mt-7 max-w-2xl text-sm sm:text-lg leading-6 sm:leading-8 text-white/68 sm:text-xl">
               {profile.about.persona}
             </p>
           </Reveal>
@@ -179,7 +179,7 @@ export default function Home() {
             <HardwareHud />
           </Reveal>
           <Reveal delay={0.24}>
-            <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-6 sm:mt-10 flex flex-col gap-3 sm:flex-row">
               <Link className="rounded-full bg-[var(--cream)] px-7 py-4 text-center text-sm font-bold uppercase tracking-[0.22em] text-black transition hover:bg-[var(--gold)]" href="#projects">
                 view systems
               </Link>
@@ -187,7 +187,7 @@ export default function Home() {
           </Reveal>
         </div>
 
-        <Reveal delay={0.18}>
+        <Reveal delay={0.18} className="flex justify-center items-center mt-6 lg:mt-0">
           <ProfileScanner />
         </Reveal>
       </section>
@@ -197,7 +197,7 @@ export default function Home() {
           <div className="mb-10 flex flex-col justify-between gap-6 md:flex-row md:items-end">
             <div>
               <p className="text-xs uppercase tracking-[0.36em] text-[var(--gold)]">about</p>
-              <h2 className="font-display mt-3 max-w-3xl text-5xl leading-none tracking-[-0.04em] md:text-7xl">
+              <h2 className="font-display mt-3 max-w-3xl text-3xl sm:text-5xl md:text-7xl leading-tight md:leading-none tracking-[-0.04em]">
                 Built around curiosity, automation, and local-first systems.
               </h2>
             </div>
@@ -255,7 +255,7 @@ export default function Home() {
       <section className="section-shell relative z-10 py-24" id="projects">
         <Reveal>
           <p className="text-xs uppercase tracking-[0.36em] text-[var(--gold)]">projects</p>
-          <h2 className="font-display mt-3 text-5xl tracking-[-0.04em] md:text-7xl">Systems with teeth.</h2>
+          <h2 className="font-display mt-3 text-3xl sm:text-5xl md:text-7xl tracking-[-0.04em]">Systems with teeth.</h2>
         </Reveal>
         <div className="mt-12 grid gap-6">
           {profile.projects.map((project, index) => {
@@ -366,38 +366,40 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="relative z-10 min-h-screen overflow-x-auto md:overflow-hidden py-24 scrollbar-none" data-gallery-section id="gallery">
+      <section className="relative z-10 md:min-h-screen overflow-hidden py-24" id="gallery">
         <div className="section-shell mb-12">
           <Reveal>
             <p className="text-xs uppercase tracking-[0.36em] text-[var(--gold)] font-mono">gallery // field_intel</p>
-            <h2 className="font-display mt-3 max-w-3xl text-5xl tracking-[-0.04em] md:text-7xl">MEMORIES</h2>
+            <h2 className="font-display mt-3 max-w-3xl text-3xl sm:text-5xl md:text-7xl tracking-[-0.04em]">MEMORIES</h2>
           </Reveal>
         </div>
-        <div className="flex w-max gap-5 pl-[max(16px,calc((100vw-1180px)/2))] pr-8 pb-6 will-change-transform" data-gallery-track>
-          {gallery.map((item, index) => {
-            const coords = galleryIntel[item.label] || "LAT: 27.7172° N // LNG: 85.3240° E";
-            return (
-              <Reveal className="w-[78vw] shrink-0 sm:w-[360px] lg:w-[420px]" delay={index * 0.05} key={item.src}>
-                <div className="glass group relative aspect-[3/4] overflow-hidden rounded-[2rem] border border-white/5 hover:border-[var(--gold)]/35 transition duration-500 bg-black/20">
-                  <Image alt={item.alt} className="object-cover transition duration-700 group-hover:scale-105" fill sizes="(max-width: 640px) 78vw, 420px" src={item.src} />
-                  
-                  {/* Forensic target crops */}
-                  <div className="pointer-events-none absolute left-0 top-0 h-3 w-3 border-l border-t border-[var(--gold)]/30" />
-                  <div className="pointer-events-none absolute right-0 bottom-0 h-3 w-3 border-r border-b border-[var(--gold)]/30" />
+        <div className="w-full overflow-x-auto md:overflow-visible scrollbar-none" data-gallery-section>
+          <div className="flex w-max gap-5 pl-[max(16px,calc((100vw-1180px)/2))] pr-8 pb-6 will-change-transform" data-gallery-track>
+            {gallery.map((item, index) => {
+              const coords = galleryIntel[item.label] || "LAT: 27.7172° N // LNG: 85.3240° E";
+              return (
+                <Reveal className="w-[78vw] shrink-0 sm:w-[360px] lg:w-[420px]" delay={index * 0.05} key={item.src}>
+                  <div className="glass group relative aspect-[3/4] overflow-hidden rounded-[2rem] border border-white/5 hover:border-[var(--gold)]/35 transition duration-500 bg-black/20">
+                    <Image alt={item.alt} className="object-cover transition duration-700 group-hover:scale-105" fill sizes="(max-width: 640px) 78vw, 420px" src={item.src} />
+                    
+                    {/* Forensic target crops */}
+                    <div className="pointer-events-none absolute left-0 top-0 h-3 w-3 border-l border-t border-[var(--gold)]/30" />
+                    <div className="pointer-events-none absolute right-0 bottom-0 h-3 w-3 border-r border-b border-[var(--gold)]/30" />
 
-                  {/* Corner telemetry overlays */}
-                  <div className="absolute top-4 left-4 p-1.5 bg-black/60 backdrop-blur-md rounded border border-white/5 font-mono text-[7px] text-white/40 pointer-events-none">
-                    <span>{coords}</span>
-                  </div>
+                    {/* Corner telemetry overlays */}
+                    <div className="absolute top-4 left-4 p-1.5 bg-black/60 backdrop-blur-md rounded border border-white/5 font-mono text-[7px] text-white/40 pointer-events-none">
+                      <span>{coords}</span>
+                    </div>
 
-                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/45 to-transparent p-6">
-                    <p className="font-mono text-[8px] uppercase tracking-[0.2em] text-white/30 mb-1">INTEL_LOG // 0{index + 1}</p>
-                    <p className="text-xs uppercase tracking-[0.3em] text-[var(--gold)] font-semibold">{item.label}</p>
+                    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/45 to-transparent p-6">
+                      <p className="font-mono text-[8px] uppercase tracking-[0.2em] text-white/30 mb-1">INTEL_LOG // 0{index + 1}</p>
+                      <p className="text-xs uppercase tracking-[0.3em] text-[var(--gold)] font-semibold">{item.label}</p>
+                    </div>
                   </div>
-                </div>
-              </Reveal>
-            );
-          })}
+                </Reveal>
+              );
+            })}
+          </div>
         </div>
       </section>
 

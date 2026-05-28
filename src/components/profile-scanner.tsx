@@ -31,7 +31,7 @@ export function ProfileScanner() {
   ];
 
   return (
-    <div className="relative mx-auto w-full max-w-[460px] lg:mr-0 group">
+    <div className="relative mx-auto w-full max-w-[320px] xs:max-w-[380px] md:max-w-[460px] lg:mr-0 group">
       {/* Dynamic Golden Aura back glow */}
       <div className="absolute -inset-5 rounded-[2.5rem] bg-[conic-gradient(from_140deg,transparent,rgba(215,181,109,0.45),rgba(8,35,70,0.65),transparent)] blur-xl opacity-90 group-hover:opacity-100 transition duration-500" />
       
