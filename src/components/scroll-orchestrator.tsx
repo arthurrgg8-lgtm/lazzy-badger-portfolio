@@ -12,7 +12,7 @@ export function ScrollOrchestrator() {
       const gallerySection = document.querySelector<HTMLElement>("[data-gallery-section]");
       const galleryTrack = document.querySelector<HTMLElement>("[data-gallery-track]");
 
-      if (gallerySection && galleryTrack) {
+      if (gallerySection && galleryTrack && window.innerWidth >= 768) {
         const getTravelDistance = () => galleryTrack.scrollWidth - window.innerWidth + 32;
 
         gsap.to(galleryTrack, {

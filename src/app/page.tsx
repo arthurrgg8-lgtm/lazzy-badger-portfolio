@@ -1,18 +1,92 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { AmbientStage } from "@/components/ambient-stage";
 import { Reveal } from "@/components/reveal";
 import { ScrollOrchestrator } from "@/components/scroll-orchestrator";
 import { gallery, pillars, profile } from "@/lib/profile";
+import { BootScreen } from "@/components/boot-screen";
+import { ScrambleText } from "@/components/scramble-text";
+import { HardwareHud } from "@/components/hardware-hud";
+import { ProfileScanner } from "@/components/profile-scanner";
+import { NavLink } from "@/components/nav-link";
+import { useEffect } from "react";
+import { TaglineHud } from "@/components/tagline-hud";
 
 const navItems = ["about", "projects", "gallery", "contact"];
 
+const projectDiagnostics: Record<string, { host: string; port: number; class: string }> = {
+  "MR Tour Service": { host: "manoranjan.com.np", port: 443, class: "LIVE_SYS" },
+  "Ar. Anushka Khatri Portfolio": { host: "anushkakhatri.com.np", port: 443, class: "LIVE_SYS" },
+  "Himalayan Mastiff Nepal": { host: "bhoteykukur.com.np", port: 8080, class: "DEV_PORT" },
+  "Lazzybiointel-v6.2-PRO": { host: "127.0.0.1", port: 9090, class: "LOCAL_CORE" },
+  "Deepfake-Analyzer": { host: "127.0.0.1", port: 8000, class: "LOCAL_CORE" },
+  "Hardware-Driven Network & Motion Sensing Node": { host: "192.168.1.137", port: 22, class: "NODE_SSH" },
+  "Cafe Billing System": { host: "192.168.1.104", port: 3000, class: "DEV_PORT" },
+  "Confidential Project I": { host: "10.0.0.82", port: 8443, class: "SEC_TUNNEL" },
+  "Confidential Project II": { host: "10.0.0.95", port: 8000, class: "SEC_TUNNEL" }
+};
+
+const galleryIntel: Record<string, string> = {
+  "Night ride": "LAT: 27.7172° N // LNG: 85.3240° E",
+  "ZONTES350 T": "LAT: 27.6815° N // LNG: 85.3182° E",
+  "NATURE": "LAT: 27.8105° N // LNG: 85.2917° E",
+  "PANCHPOKHARI": "LAT: 28.0264° N // LNG: 85.7104° E",
+  "CHILLINN": "LAT: 27.7028° N // LNG: 85.3195° E",
+  "PILOT BABA ASHRAM RUNNING": "LAT: 27.6384° N // LNG: 85.4290° E",
+  "SQUAD": "LAT: 27.7408° N // LNG: 85.3325° E",
+  "COLLEGE SQUAD": "LAT: 27.6890° N // LNG: 85.3204° E"
+};
+
 export default function Home() {
+  const [isBooted, setIsBooted] = useState(false);
+  const [startScramble, setStartScramble] = useState(false);
+  const [ping, setPing] = useState(24);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    if (!isBooted) return;
+    const pingInterval = setInterval(() => {
+      setPing((prev) => {
+        const delta = Math.floor((Math.random() - 0.5) * 6);
+        return Math.min(45, Math.max(12, prev + delta));
+      });
+    }, 2000);
+    return () => clearInterval(pingInterval);
+  }, [isBooted]);
+
   return (
-    <main className="relative isolate min-h-screen overflow-hidden">
+    <>
+      {!isBooted && (
+        <BootScreen
+          onComplete={() => {
+            setIsBooted(true);
+            setStartScramble(true);
+          }}
+        />
+      )}
+      <main
+        className={`relative isolate min-h-screen overflow-hidden transition-all duration-[1200ms] ease-out ${
+          isBooted ? "opacity-100 filter-none" : "opacity-0 blur-md pointer-events-none"
+        }`}
+      >
       <AmbientStage />
       <ScrollOrchestrator />
       <div className="noise" />
+
+      {/* Site-wide Concentric HUD Backdrop */}
+      <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden flex items-center justify-center opacity-[0.02] select-none">
+        <div className="absolute w-[110vmin] h-[110vmin] rounded-full border border-dashed border-[var(--gold)] animate-[hud-spin_65s_infinite_linear]" />
+        <div className="absolute w-[80vmin] h-[80vmin] rounded-full border border-[var(--gold)] border-double" />
+        <div className="absolute w-[50vmin] h-[50vmin] rounded-full border border-dashed border-[var(--gold)] animate-[hud-spin-rev_40s_infinite_linear]" />
+        <div className="absolute w-[20vmin] h-[20vmin] rounded-full border border-[var(--gold)]" />
+        
+        {/* Fine Axis Lines */}
+        <div className="absolute w-[120vmin] h-[1px] bg-gradient-to-r from-transparent via-[var(--gold)] to-transparent" />
+        <div className="absolute h-[120vmin] w-[1px] bg-gradient-to-b from-transparent via-[var(--gold)] to-transparent" />
+      </div>
 
       <header className="fixed left-0 right-0 top-0 z-30 border-b border-white/10 bg-black/30 backdrop-blur-2xl">
         <nav className="section-shell flex h-16 items-center justify-between">
@@ -25,37 +99,84 @@ export default function Home() {
                 Lazzy<span className="text-[var(--gold)]">Badger</span>
               </span>
             </Link>
-            <div className="hidden items-center gap-2 border-l border-white/10 pl-6 md:flex">
-              <div className="h-1.5 w-1.5 animate-pulse rounded-full bg-[var(--gold)] shadow-[0_0_8px_var(--gold)]" />
-              <span className="text-[10px] uppercase tracking-[0.2em] text-white/40">System: Online</span>
+            <div className="hidden items-center gap-4 border-l border-white/10 pl-6 md:flex">
+              <div className="flex items-center gap-2">
+                <div className="h-1.5 w-1.5 animate-pulse rounded-full bg-[var(--gold)] shadow-[0_0_8px_var(--gold)]" />
+                <span className="text-[10px] uppercase tracking-[0.2em] text-white/40">System: Online</span>
+              </div>
+              <div className="h-3 w-px bg-white/10" />
+              <span className="font-mono text-[9px] text-[var(--gold)] tracking-wider">LATENCY: {ping}ms</span>
             </div>
           </div>
           <div className="hidden items-center gap-8 text-xs uppercase tracking-[0.26em] text-white/58 md:flex">
             {navItems.map((item) => (
-              <Link className="transition hover:text-[var(--gold)]" href={`#${item}`} key={item}>
-                {item}
-              </Link>
+              <NavLink className="transition hover:text-[var(--gold)]" href={`#${item}`} key={item} text={item} />
             ))}
           </div>
+
+          {/* Mobile hamburger button */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.02] text-[var(--cream)] hover:border-[var(--gold)] hover:text-[var(--gold)] transition duration-300 md:hidden z-40 focus:outline-none"
+            aria-label="Toggle navigation menu"
+            aria-expanded={mobileMenuOpen}
+          >
+            {mobileMenuOpen ? (
+              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            ) : (
+              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16m-7 6h7" />
+              </svg>
+            )}
+          </button>
         </nav>
       </header>
+
+      {/* Mobile Menu Overlay */}
+      <div
+        className={`fixed inset-0 z-20 flex flex-col justify-center items-center bg-black/95 backdrop-blur-3xl md:hidden transition-all duration-500 ease-in-out ${
+          mobileMenuOpen ? "opacity-100 pointer-events-auto scale-100" : "opacity-0 pointer-events-none scale-105"
+        }`}
+      >
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(215,181,109,0.06),transparent_70%)] pointer-events-none" />
+        <div className="absolute inset-x-0 h-px bg-gradient-to-r from-transparent via-[var(--gold)]/20 to-transparent top-1/4" />
+        <div className="absolute inset-x-0 h-px bg-gradient-to-r from-transparent via-[var(--gold)]/20 to-transparent bottom-1/4" />
+
+        <nav className="flex flex-col items-center gap-8 text-lg font-bold uppercase tracking-[0.3em] text-[var(--cream)]">
+          {navItems.map((item) => (
+            <NavLink
+              className="transition-all duration-300 hover:text-[var(--gold)] hover:scale-115 active:text-[var(--gold)] py-2 block text-center"
+              href={`#${item}`}
+              key={item}
+              text={item}
+              onClick={() => setMobileMenuOpen(false)}
+            />
+          ))}
+        </nav>
+        <div className="absolute bottom-10 text-[9px] font-mono tracking-widest text-white/30 select-none">
+          SECURE_MENU // ACCESS_GRANTED
+        </div>
+      </div>
 
       <section className="section-shell relative z-10 grid min-h-screen items-center gap-12 pb-20 pt-28 lg:grid-cols-[1.1fr_0.9fr]" id="top">
         <div>
           <Reveal>
-            <p className="mb-5 inline-flex rounded-full border border-[rgba(215,181,109,0.28)] bg-[rgba(215,181,109,0.08)] px-4 py-2 text-xs uppercase tracking-[0.32em] text-[var(--gold)]">
-              {profile.identity.tagline}
-            </p>
+            <TaglineHud />
           </Reveal>
           <Reveal delay={0.08}>
             <h1 className="font-display text-6xl font-bold leading-[0.86] tracking-[-0.06em] text-gradient sm:text-7xl lg:text-9xl">
-              {profile.identity.brand_name}
+              <ScrambleText text={profile.identity.brand_name} trigger={startScramble} />
             </h1>
           </Reveal>
           <Reveal delay={0.16}>
             <p className="mt-7 max-w-2xl text-lg leading-8 text-white/68 sm:text-xl">
               {profile.about.persona}
             </p>
+          </Reveal>
+          <Reveal delay={0.20}>
+            <HardwareHud />
           </Reveal>
           <Reveal delay={0.24}>
             <div className="mt-10 flex flex-col gap-3 sm:flex-row">
@@ -67,23 +188,7 @@ export default function Home() {
         </div>
 
         <Reveal delay={0.18}>
-          <div className="relative mx-auto w-full max-w-[460px] lg:mr-0">
-            <div className="absolute -inset-5 rounded-[2.5rem] bg-[conic-gradient(from_140deg,transparent,rgba(215,181,109,0.45),rgba(8,35,70,0.65),transparent)] blur-xl" />
-            <div className="glass relative aspect-square w-full overflow-hidden rounded-[2.5rem]">
-              <Image alt="Anudit Khatri profile portrait" className="object-cover grayscale-[15%] contrast-110" fill priority sizes="(max-width: 768px) 92vw, 460px" src="/assets/lazzy.jpeg" />
-            </div>
-            <div className="relative mt-10 pl-6">
-              <div className="absolute left-0 top-0 h-full w-px bg-gradient-to-b from-[var(--gold)] via-[var(--gold)]/20 to-transparent" />
-              <div className="absolute -left-1 -top-1 h-2 w-2 border-l border-t border-[var(--gold)]" />
-              <div className="absolute -left-1 bottom-0 h-2 w-2 border-b border-l border-[var(--gold)]" />
-              
-              <div className="space-y-2">
-                <p className="text-xs font-semibold uppercase tracking-[0.34em] text-[var(--gold)]">identity</p>
-                <h2 className="text-4xl font-semibold text-[var(--cream)]">{profile.identity.name}</h2>
-                <p className="text-lg font-medium text-white/60">{profile.identity.short_bio}</p>
-              </div>
-            </div>
-          </div>
+          <ProfileScanner />
         </Reveal>
       </section>
 
@@ -101,20 +206,32 @@ export default function Home() {
         </Reveal>
         <div className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr]">
           <Reveal>
-            <div className="glass h-full rounded-[2rem] p-7">
+            <div className="glass h-full rounded-[2rem] p-7 relative overflow-hidden bg-black/20">
+              <div className="absolute left-0 top-0 h-full w-px bg-gradient-to-b from-[var(--gold)]/40 via-transparent to-transparent" />
+              <div className="absolute left-0 top-0 h-4 w-4 border-l border-t border-[var(--gold)]/40" />
+              <div className="absolute right-0 bottom-0 h-4 w-4 border-r border-b border-white/10" />
               <p className="text-base leading-8 text-white/70">{profile.about.full_description}</p>
             </div>
           </Reveal>
           <div className="grid gap-5 sm:grid-cols-2">
             {pillars.map((pillar, index) => (
               <Reveal delay={index * 0.04} key={pillar}>
-                <div className="glass group relative overflow-hidden rounded-[2rem] p-6 transition duration-500 hover:-translate-y-2 hover:border-[rgba(215,181,109,0.45)]" data-tilt-card>
-                  <div className="absolute left-2 top-0 h-full w-[2px] bg-gradient-to-b from-[var(--gold)] via-[var(--gold)]/40 to-transparent" />
-                  <div className="absolute left-2 top-0 h-3 w-3 border-l-2 border-t-2 border-[var(--gold)]" />
+                <div className="glass group relative overflow-hidden rounded-[2rem] p-6 transition duration-500 hover:-translate-y-2 hover:border-[rgba(215,181,109,0.45)] bg-black/20" data-tilt-card>
+                  <div className="absolute left-0 top-0 h-full w-px bg-gradient-to-b from-[var(--gold)] via-[var(--gold)]/20 to-transparent" />
+                  <div className="absolute left-0 top-0 h-3.5 w-3.5 border-l border-t border-[var(--gold)]" />
+                  <div className="absolute right-0 top-0 h-3.5 w-3.5 border-r border-t border-white/5 group-hover:border-[var(--gold)]/30 transition-colors" />
                   
-                  <span className="text-xs uppercase tracking-[0.3em] text-white/36">0{index + 1}</span>
-                  <h3 className="mt-8 text-2xl font-semibold text-[var(--cream)]">{pillar}</h3>
-                  <div className="mt-8 h-px bg-gradient-to-r from-[var(--gold)] to-transparent opacity-60" />
+                  <div className="flex items-center justify-between border-b border-white/5 pb-3">
+                    <span className="font-mono text-[8px] uppercase tracking-[0.25em] text-white/30">CORE MODULE // 0{index + 1}</span>
+                    <span className="font-mono text-[8px] uppercase tracking-[0.15em] text-[var(--gold)] group-hover:animate-pulse">Active</span>
+                  </div>
+                  
+                  <h3 className="mt-6 text-xl font-semibold text-[var(--cream)] font-display tracking-wide group-hover:text-[var(--gold)] transition-colors">{pillar}</h3>
+                  
+                  <div className="mt-6 flex items-center justify-between font-mono text-[8px] text-white/20">
+                    <span>SEC_CLASS: LEVEL_4</span>
+                    <span>SYS_STATUS: OK</span>
+                  </div>
                 </div>
               </Reveal>
             ))}
@@ -124,15 +241,13 @@ export default function Home() {
 
       <section className="section-shell relative z-10 py-24">
         <Reveal>
-          <div className="glass rounded-[2.5rem] p-6 md:p-10">
-            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-              <SkillCluster title="Languages" values={profile.skills_and_tools.languages} />
-              <SkillCluster title="Bug Bounty Stack" values={profile.skills_and_tools.bug_bounty_tools} />
-              <SkillCluster title="MCP + AI Infra" values={profile.skills_and_tools.mcp_infrastructure} />
-              <SkillCluster title="Tools + Systems" values={profile.skills_and_tools.tools} />
-              <SkillCluster title="Traits" values={profile.skills_and_tools.core_traits} />
-              <SkillCluster title="Certifications" values={profile.skills_and_tools.certifications} />
-            </div>
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            <SkillCluster title="Languages" values={profile.skills_and_tools.languages} />
+            <SkillCluster title="Bug Bounty Stack" values={profile.skills_and_tools.bug_bounty_tools} />
+            <SkillCluster title="MCP + AI Infra" values={profile.skills_and_tools.mcp_infrastructure} />
+            <SkillCluster title="Tools + Systems" values={profile.skills_and_tools.tools} />
+            <SkillCluster title="Traits" values={profile.skills_and_tools.core_traits} />
+            <SkillCluster title="Certifications" values={profile.skills_and_tools.certifications} />
           </div>
         </Reveal>
       </section>
@@ -143,131 +258,168 @@ export default function Home() {
           <h2 className="font-display mt-3 text-5xl tracking-[-0.04em] md:text-7xl">Systems with teeth.</h2>
         </Reveal>
         <div className="mt-12 grid gap-6">
-          {profile.projects.map((project, index) => (
-            <Reveal delay={index * 0.05} key={project.name}>
-              <article 
-                className={`glass group relative grid gap-6 rounded-[2rem] p-8 transition-all duration-500 md:grid-cols-[0.16fr_1fr_0.2fr] md:items-center overflow-hidden ${
-                  project.highlighted 
-                    ? "border-[rgba(215,181,109,0.38)] shadow-[0_0_35px_rgba(215,181,109,0.12)] hover:border-[var(--gold)] hover:shadow-[0_0_45px_rgba(215,181,109,0.22)] bg-gradient-to-br from-white/[0.07] via-white/[0.02] to-[rgba(215,181,109,0.05)]" 
-                    : "border-white/5 hover:border-[rgba(215,181,109,0.48)] hover:shadow-[0_0_30px_rgba(255,255,255,0.02)]"
-                }`}
-                data-tilt-card
-              >
-                {/* Visual HUD Crop Marks (Teeth corners) */}
-                <div className="pointer-events-none absolute -left-px -top-px h-3.5 w-3.5 border-l border-t border-[var(--gold)]/30 group-hover:border-[var(--gold)] transition-colors duration-500" />
-                <div className="pointer-events-none absolute -right-px -top-px h-3.5 w-3.5 border-r border-t border-[var(--gold)]/30 group-hover:border-[var(--gold)] transition-colors duration-500" />
-                <div className="pointer-events-none absolute -left-px -bottom-px h-3.5 w-3.5 border-l border-b border-[var(--gold)]/30 group-hover:border-[var(--gold)] transition-colors duration-500" />
-                <div className="pointer-events-none absolute -right-px -bottom-px h-3.5 w-3.5 border-r border-b border-[var(--gold)]/30 group-hover:border-[var(--gold)] transition-colors duration-500" />
+          {profile.projects.map((project, index) => {
+            const diag = projectDiagnostics[project.name] || { host: "unknown", port: 80, class: "TARGET" };
+            return (
+              <Reveal delay={index * 0.05} key={project.name}>
+                <article 
+                  className={`glass group relative grid gap-6 rounded-[2rem] p-5 sm:p-8 transition-all duration-500 md:grid-cols-[0.16fr_1fr_0.2fr] md:items-center overflow-hidden bg-black/20 ${
+                    project.highlighted 
+                      ? "border-[rgba(215,181,109,0.38)] shadow-[0_0_35px_rgba(215,181,109,0.12)] hover:border-[var(--gold)] hover:shadow-[0_0_45px_rgba(215,181,109,0.22)] bg-gradient-to-br from-white/[0.07] via-white/[0.02] to-[rgba(215,181,109,0.05)]" 
+                      : "border-white/5 hover:border-[rgba(215,181,109,0.48)] hover:shadow-[0_0_30px_rgba(255,255,255,0.02)]"
+                  }`}
+                  data-tilt-card
+                >
+                  {/* Visual HUD Crop Marks (Teeth corners) */}
+                  <div className="pointer-events-none absolute -left-px -top-px h-3.5 w-3.5 border-l border-t border-[var(--gold)]/30 group-hover:border-[var(--gold)] transition-colors duration-500" />
+                  <div className="pointer-events-none absolute -right-px -top-px h-3.5 w-3.5 border-r border-t border-[var(--gold)]/30 group-hover:border-[var(--gold)] transition-colors duration-500" />
+                  <div className="pointer-events-none absolute -left-px -bottom-px h-3.5 w-3.5 border-l border-b border-[var(--gold)]/30 group-hover:border-[var(--gold)] transition-colors duration-500" />
+                  <div className="pointer-events-none absolute -right-px -bottom-px h-3.5 w-3.5 border-r border-b border-[var(--gold)]/30 group-hover:border-[var(--gold)] transition-colors duration-500" />
 
-                {/* Golden corner glow for highlighted cards */}
-                {project.highlighted && (
-                  <div className="absolute top-0 right-0 -mr-4 -mt-4 w-20 h-20 bg-[var(--gold)]/6 blur-2xl pointer-events-none rounded-full" />
-                )}
+                  {/* Golden corner glow for highlighted cards */}
+                  {project.highlighted && (
+                    <div className="absolute top-0 right-0 -mr-4 -mt-4 w-20 h-20 bg-[var(--gold)]/6 blur-2xl pointer-events-none rounded-full" />
+                  )}
 
-                {/* Absolute overlay link to open live site if URL exists */}
-                {project.url && (
-                  <a 
-                    href={project.url} 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="absolute inset-0 z-10 rounded-[2rem]" 
-                    title={`Open ${project.name} live site`}
-                  />
-                )}
+                  {/* Absolute overlay link to open live site if URL exists */}
+                  {project.url && (
+                    <a 
+                      href={project.url} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="absolute inset-0 z-10 rounded-[2rem]" 
+                      title={`Open ${project.name} live site`}
+                    />
+                  )}
 
-                <div className="flex flex-col">
-                  <span className="font-display text-5xl text-white/12 transition duration-500 group-hover:text-[var(--gold)]/40">{String(index + 1).padStart(2, "0")}</span>
-                  <span className="mt-1 font-mono text-[9px] uppercase tracking-[0.2em] text-white/20">SYS // L-0{index + 1}</span>
-                </div>
-
-                <div>
-                  <div className="flex flex-wrap items-center gap-3">
-                    <h3 className="text-2xl font-semibold transition group-hover:text-[var(--cream)]">{project.name}</h3>
-                    {project.status ? (
-                      <span className={`rounded-full px-3 py-1 text-[9px] uppercase tracking-[0.24em] font-semibold font-mono flex items-center gap-1.5 border transition-all duration-500 ${
-                        project.status === "Delivered & Live"
-                          ? "border-emerald-500/30 bg-emerald-500/5 text-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.1)]"
-                          : project.status === "In Development"
-                          ? "border-[var(--gold)]/40 bg-[rgba(215,181,109,0.06)] text-[var(--gold)] shadow-[0_0_10px_rgba(215,181,109,0.1)]"
-                          : "border-blue-400/30 bg-blue-400/5 text-blue-400 shadow-[0_0_10px_rgba(96,165,250,0.1)]"
-                      }`}>
-                        <span className={`h-1.5 w-1.5 rounded-full ${
-                          project.status === "Delivered & Live"
-                            ? "bg-emerald-400 animate-pulse shadow-[0_0_6px_rgba(52,211,153,0.6)]"
-                            : project.status === "In Development"
-                            ? "bg-[var(--gold)] animate-pulse shadow-[0_0_6px_rgba(215,181,109,0.6)]"
-                            : "bg-blue-400 animate-pulse shadow-[0_0_6px_rgba(96,165,250,0.6)]"
-                        }`} />
-                        {project.status}
-                      </span>
-                    ) : null}
+                  <div className="flex flex-col">
+                    <span className="font-display text-5xl text-white/12 transition duration-500 group-hover:text-[var(--gold)]/40">{String(index + 1).padStart(2, "0")}</span>
+                    <span className="mt-1 font-mono text-[8px] uppercase tracking-[0.2em] text-white/20">{diag.class}</span>
                   </div>
-                  <p className="mt-3 max-w-3xl leading-7 text-white/60 transition group-hover:text-white/80">{project.description}</p>
-                  
-                  {project.stack && (
-                    <div className="mt-5 flex flex-wrap gap-1.5">
-                      {project.stack.map((tech) => (
-                        <span 
-                          key={tech} 
-                          className="rounded border border-white/5 bg-white/[0.02] px-2.5 py-0.5 font-mono text-[9px] uppercase tracking-wider text-white/40 transition-colors duration-300 group-hover:border-[var(--gold)]/15 group-hover:text-white/60"
-                        >
-                          {tech}
-                        </span>
-                      ))}
+
+                  <div>
+                    {/* Technical Diagnostics Info bar */}
+                    <div className="flex items-center gap-3 font-mono text-[8px] text-white/30 mb-2 select-none">
+                      <span>IP: {diag.host}</span>
+                      <span>{"//"}</span>
+                      <span className="text-[var(--gold)]">PORT: {diag.port}</span>
+                      <span>{"//"}</span>
+                      <span>STATUS: ACTIVE</span>
                     </div>
-                  )}
-                </div>
-                
-                <div className="flex md:justify-end">
-                  {project.url ? (
-                    <span className="text-sm uppercase tracking-[0.22em] text-[var(--gold)] font-bold transition duration-300 group-hover:text-white flex items-center gap-1">
-                      live site <span className="text-xs transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
-                    </span>
-                  ) : project.repository ? (
-                    <Link className="relative z-20 text-sm uppercase tracking-[0.22em] text-[var(--gold)] transition hover:text-white" href={`https://${project.repository}`}>
-                      repo
-                    </Link>
-                  ) : (
-                    <span className="text-sm uppercase tracking-[0.22em] text-white/28">private</span>
-                  )}
-                </div>
-              </article>
-            </Reveal>
-          ))}
+
+                    <div className="flex flex-wrap items-center gap-3">
+                      <h3 className="text-2xl font-semibold transition group-hover:text-[var(--cream)]">
+                        <ScrambleText text={project.name} trigger={startScramble} />
+                      </h3>
+                      {project.status ? (
+                        <span className={`rounded-full px-3 py-1 text-[9px] uppercase tracking-[0.24em] font-semibold font-mono flex items-center gap-1.5 border transition-all duration-500 ${
+                          project.status === "Delivered & Live"
+                            ? "border-emerald-500/30 bg-emerald-500/5 text-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.1)]"
+                            : project.status === "In Development"
+                            ? "border-[var(--gold)]/40 bg-[rgba(215,181,109,0.06)] text-[var(--gold)] shadow-[0_0_10px_rgba(215,181,109,0.1)]"
+                            : "border-blue-400/30 bg-blue-400/5 text-blue-400 shadow-[0_0_10px_rgba(96,165,250,0.1)]"
+                        }`}>
+                          <span className={`h-1.5 w-1.5 rounded-full ${
+                            project.status === "Delivered & Live"
+                              ? "bg-emerald-400 animate-pulse shadow-[0_0_6px_rgba(52,211,153,0.6)]"
+                              : project.status === "In Development"
+                              ? "bg-[var(--gold)] animate-pulse shadow-[0_0_6px_rgba(215,181,109,0.6)]"
+                              : "bg-blue-400 animate-pulse shadow-[0_0_6px_rgba(96,165,250,0.6)]"
+                          }`} />
+                          {project.status}
+                        </span>
+                      ) : null}
+                    </div>
+                    <p className="mt-3 max-w-3xl leading-7 text-white/60 transition group-hover:text-white/80">{project.description}</p>
+                    
+                    {project.stack && (
+                      <div className="mt-5 flex flex-wrap gap-1.5">
+                        {project.stack.map((tech) => (
+                          <span 
+                            key={tech} 
+                            className="rounded border border-white/5 bg-white/[0.02] px-2.5 py-0.5 font-mono text-[9px] uppercase tracking-wider text-white/40 transition-colors duration-300 group-hover:border-[var(--gold)]/15 group-hover:text-white/60"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                  
+                  <div className="flex md:justify-end">
+                    {project.url ? (
+                      <span className="text-sm uppercase tracking-[0.22em] text-[var(--gold)] font-bold transition duration-300 group-hover:text-white flex items-center gap-1">
+                        live site <span className="text-xs transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
+                      </span>
+                    ) : project.repository ? (
+                      <Link className="relative z-20 text-sm uppercase tracking-[0.22em] text-[var(--gold)] transition hover:text-white" href={`https://${project.repository}`}>
+                        repo
+                      </Link>
+                    ) : (
+                      <span className="text-sm uppercase tracking-[0.22em] text-white/28 font-mono">private</span>
+                    )}
+                  </div>
+                </article>
+              </Reveal>
+            );
+          })}
         </div>
       </section>
 
-      <section className="relative z-10 min-h-screen overflow-hidden py-24" data-gallery-section id="gallery">
+      <section className="relative z-10 min-h-screen overflow-x-auto md:overflow-hidden py-24 scrollbar-none" data-gallery-section id="gallery">
         <div className="section-shell mb-12">
           <Reveal>
-            <p className="text-xs uppercase tracking-[0.36em] text-[var(--gold)]">gallery</p>
+            <p className="text-xs uppercase tracking-[0.36em] text-[var(--gold)] font-mono">gallery // field_intel</p>
             <h2 className="font-display mt-3 max-w-3xl text-5xl tracking-[-0.04em] md:text-7xl">MEMORIES</h2>
           </Reveal>
         </div>
-        <div className="flex w-max gap-5 pl-[max(16px,calc((100vw-1180px)/2))] pr-8 will-change-transform" data-gallery-track>
-          {gallery.map((item, index) => (
-            <Reveal className="w-[78vw] shrink-0 sm:w-[360px] lg:w-[420px]" delay={index * 0.05} key={item.src}>
-              <div className="glass group relative aspect-[3/4] overflow-hidden rounded-[2rem]">
-                <Image alt={item.alt} className="object-cover transition duration-700 group-hover:scale-105" fill sizes="(max-width: 640px) 78vw, 420px" src={item.src} />
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/45 to-transparent p-6">
-                  <p className="text-xs uppercase tracking-[0.3em] text-[var(--gold)]">{item.label}</p>
+        <div className="flex w-max gap-5 pl-[max(16px,calc((100vw-1180px)/2))] pr-8 pb-6 will-change-transform" data-gallery-track>
+          {gallery.map((item, index) => {
+            const coords = galleryIntel[item.label] || "LAT: 27.7172° N // LNG: 85.3240° E";
+            return (
+              <Reveal className="w-[78vw] shrink-0 sm:w-[360px] lg:w-[420px]" delay={index * 0.05} key={item.src}>
+                <div className="glass group relative aspect-[3/4] overflow-hidden rounded-[2rem] border border-white/5 hover:border-[var(--gold)]/35 transition duration-500 bg-black/20">
+                  <Image alt={item.alt} className="object-cover transition duration-700 group-hover:scale-105" fill sizes="(max-width: 640px) 78vw, 420px" src={item.src} />
+                  
+                  {/* Forensic target crops */}
+                  <div className="pointer-events-none absolute left-0 top-0 h-3 w-3 border-l border-t border-[var(--gold)]/30" />
+                  <div className="pointer-events-none absolute right-0 bottom-0 h-3 w-3 border-r border-b border-[var(--gold)]/30" />
+
+                  {/* Corner telemetry overlays */}
+                  <div className="absolute top-4 left-4 p-1.5 bg-black/60 backdrop-blur-md rounded border border-white/5 font-mono text-[7px] text-white/40 pointer-events-none">
+                    <span>{coords}</span>
+                  </div>
+
+                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/45 to-transparent p-6">
+                    <p className="font-mono text-[8px] uppercase tracking-[0.2em] text-white/30 mb-1">INTEL_LOG // 0{index + 1}</p>
+                    <p className="text-xs uppercase tracking-[0.3em] text-[var(--gold)] font-semibold">{item.label}</p>
+                  </div>
                 </div>
-              </div>
-            </Reveal>
-          ))}
+              </Reveal>
+            );
+          })}
         </div>
       </section>
 
       <section className="section-shell relative z-10 pb-28 pt-16" id="contact">
         <Reveal>
-          <div className="glass relative overflow-hidden rounded-[2.75rem] p-8 md:p-16">
+          <div className="glass relative overflow-hidden rounded-[2.75rem] p-8 md:p-16 bg-black/20">
             <div className="absolute left-0 top-0 h-full w-px bg-gradient-to-b from-[var(--gold)]/40 via-transparent to-transparent" />
             <div className="absolute left-0 top-0 h-4 w-4 border-l border-t border-[var(--gold)]/40" />
             <div className="absolute right-0 top-0 h-4 w-4 border-r border-t border-white/10" />
+            <div className="absolute left-0 bottom-0 h-4 w-4 border-l border-b border-white/10" />
+            <div className="absolute right-0 bottom-0 h-4 w-4 border-r border-b border-[var(--gold)]/40" />
 
             <div className="flex flex-col gap-12">
-              <div>
-                <p className="text-xs uppercase tracking-[0.4em] text-[var(--gold)]">connect</p>
+              <div className="relative">
+                {/* Terminal prompt watermarks in bg */}
+                <div className="absolute -top-10 right-0 font-mono text-[8px] text-white/5 select-none hidden md:block space-y-1">
+                  <p>badger@sec-shell:~$ ping -c 3 google.com</p>
+                  <p>badger@sec-shell:~$ initiate secure_handshake --port 8443</p>
+                  <p>STATUS: ESTABLISHED // CHANNEL: SECURE</p>
+                </div>
+
+                <p className="text-xs uppercase tracking-[0.4em] text-[var(--gold)] font-mono">connect // secure_handshake</p>
                 <h2 className="font-display mt-6 text-5xl leading-[1.1] tracking-[-0.03em] md:text-7xl">
                   Build less by hand.<br />Build more with systems.<br />
                   <span className="text-[var(--gold)]/80">Else if</span> Build your own System.
@@ -286,6 +438,7 @@ export default function Home() {
         </Reveal>
       </section>
     </main>
+    </>
   );
 }
 
@@ -307,14 +460,21 @@ function SocialIcon({ href, icon }: { href: string; icon: React.ReactNode }) {
 
 function SkillCluster({ title, values }: { title: string; values: string[] }) {
   return (
-    <div className="relative pl-6">
-      <div className="absolute left-0 top-0 h-full w-px bg-gradient-to-b from-[var(--gold)]/40 via-transparent to-transparent" />
-      <div className="absolute left-0 top-0 h-2 w-2 border-l border-t border-[var(--gold)]/40" />
+    <div className="glass relative p-6 rounded-[1.5rem] bg-black/25 border border-white/5 transition-all duration-300 hover:border-[var(--gold)]/20 shadow-lg">
+      <div className="absolute left-0 top-0 h-3 w-3 border-l border-t border-[var(--gold)]/40" />
+      <div className="absolute right-0 bottom-0 h-3 w-3 border-r border-b border-white/10" />
       
-      <h3 className="mb-5 text-[10px] uppercase tracking-[0.32em] text-[var(--gold)]">{title}</h3>
-      <div className="flex flex-wrap gap-2">
+      <div className="flex items-center justify-between border-b border-white/5 pb-3 mb-4 select-none">
+        <h3 className="font-mono text-[9px] uppercase tracking-[0.25em] text-[var(--gold)]">{title}</h3>
+        <span className="font-mono text-[7px] text-white/20 select-none">DB_CLUSTER_READY</span>
+      </div>
+
+      <div className="flex flex-wrap gap-1.5">
         {values.map((value) => (
-          <span className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-[11px] font-medium tracking-wide text-white/60 transition-colors hover:border-[var(--gold)]/30 hover:text-[var(--gold)]" key={value}>
+          <span 
+            className="rounded border border-white/5 bg-white/[0.02] px-2.5 py-1 font-mono text-[9px] uppercase tracking-wider text-white/50 transition-all duration-300 hover:border-[var(--gold)]/35 hover:text-[var(--gold)] hover:bg-[var(--gold)]/5 hover:scale-[1.03] select-none" 
+            key={value}
+          >
             {value}
           </span>
         ))}
