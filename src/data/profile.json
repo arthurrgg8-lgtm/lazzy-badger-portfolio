@@ -122,6 +122,15 @@
       "stack": ["Next.js 16", "React 19", "FastAPI", "Tailwind CSS 4", "eSewa"]
     },
     {
+      "name": "VastuVision AI",
+      "description": "A premium, modern hybrid web dashboard and native Android application designed to analyze home layouts and furniture placements against Vastu Shastra rules using local direction sensors and AI vision mapping.",
+      "status": "Delivered & Live",
+      "url": "https://vastuvision-beta.vercel.app/",
+      "repository": "github.com/arthurrgg8-lgtm/vastuvision",
+      "highlighted": true,
+      "stack": ["Python Serverless", "Kotlin", "CameraX", "HTML5", "Vanilla CSS", "JavaScript", "Groq AI"]
+    },
+    {
       "name": "Lazzybiointel-v6.2-PRO",
       "description": "Forensic-grade biometric identity verification system built with Python, InsightFace, and MediaPipe for advanced facial recognition and geometry tracking.",
       "status": "active",
