@@ -91,6 +91,7 @@
       "Local AI Orchestration"
     ],
     "certifications": [
+      "🏆 2nd Place - Nepal Police Hackathon 2083",
       "AI Certifications",
       "Bug Bounty Certifications",
       "Basic Networking Certifications",
@@ -98,6 +99,14 @@
     ]
   },
   "projects": [
+    {
+      "name": "Prahari-Link (प्रहरी-Link)",
+      "description": "🏆 2nd Place Winner, Government Led First Hackathon 2083 by Nepal Police. An emergency communication bridge linking remote communities in Nepal with command centers via LoRa/ESP-NOW and offline Bluetooth telemetry.",
+      "status": "Delivered & Live",
+      "url": "https://github.com/arthurrgg8-lgtm/HACKATHON-prahari-link-TEAM-SB",
+      "highlighted": true,
+      "stack": ["Next.js", "React Native", "Express", "ESP32 C++", "ESP-NOW", "BLE"]
+    },
     {
       "name": "MR Tour Service",
       "description": "A premium, high-performance travel booking and service management platform crafted for modern tour operators.",
