@@ -282,14 +282,14 @@ export default function Home() {
                     <div className="absolute top-0 right-0 -mr-4 -mt-4 w-20 h-20 bg-[var(--gold)]/6 blur-2xl pointer-events-none rounded-full" />
                   )}
 
-                  {/* Absolute overlay link to open live site if URL exists */}
+                  {/* Absolute overlay link to open project URL if it exists */}
                   {project.url && (
                     <a 
                       href={project.url} 
                       target="_blank" 
                       rel="noopener noreferrer" 
                       className="absolute inset-0 z-10 rounded-[2rem]" 
-                      title={`Open ${project.name} live site`}
+                      title={`Open ${project.name} ${project.url?.includes("github.com") ? "repository" : "live site"}`}
                     />
                   )}
 
@@ -316,14 +316,14 @@ export default function Home() {
                         <span className={`rounded-full px-3 py-1 text-[9px] uppercase tracking-[0.24em] font-semibold font-mono flex items-center gap-1.5 border transition-all duration-500 ${
                           project.status === "Live"
                             ? "border-emerald-500/30 bg-emerald-500/5 text-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.1)]"
-                            : project.status === "In Development"
+                            : project.status === "In Development" || project.status === "2nd Place"
                             ? "border-[var(--gold)]/40 bg-[rgba(215,181,109,0.06)] text-[var(--gold)] shadow-[0_0_10px_rgba(215,181,109,0.1)]"
                             : "border-blue-400/30 bg-blue-400/5 text-blue-400 shadow-[0_0_10px_rgba(96,165,250,0.1)]"
                         }`}>
                           <span className={`h-1.5 w-1.5 rounded-full ${
                             project.status === "Live"
                               ? "bg-emerald-400 animate-pulse shadow-[0_0_6px_rgba(52,211,153,0.6)]"
-                              : project.status === "In Development"
+                              : project.status === "In Development" || project.status === "2nd Place"
                               ? "bg-[var(--gold)] animate-pulse shadow-[0_0_6px_rgba(215,181,109,0.6)]"
                               : "bg-blue-400 animate-pulse shadow-[0_0_6px_rgba(96,165,250,0.6)]"
                           }`} />
@@ -350,7 +350,7 @@ export default function Home() {
                   <div className="flex md:justify-end">
                     {project.url ? (
                       <span className="text-sm uppercase tracking-[0.22em] text-[var(--gold)] font-bold transition duration-300 group-hover:text-white flex items-center gap-1">
-                        live site <span className="text-xs transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
+                        {project.url.includes("github.com") ? "repo link" : "live site"} <span className="text-xs transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
                       </span>
                     ) : project.repository ? (
                       <Link className="relative z-20 text-sm uppercase tracking-[0.22em] text-[var(--gold)] transition hover:text-white" href={`https://${project.repository}`}>
