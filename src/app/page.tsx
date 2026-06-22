@@ -314,14 +314,14 @@ export default function Home() {
                       </h3>
                       {project.status ? (
                         <span className={`rounded-full px-3 py-1 text-[9px] uppercase tracking-[0.24em] font-semibold font-mono flex items-center gap-1.5 border transition-all duration-500 ${
-                          project.status === "Delivered & Live"
+                          project.status === "Live"
                             ? "border-emerald-500/30 bg-emerald-500/5 text-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.1)]"
                             : project.status === "In Development"
                             ? "border-[var(--gold)]/40 bg-[rgba(215,181,109,0.06)] text-[var(--gold)] shadow-[0_0_10px_rgba(215,181,109,0.1)]"
                             : "border-blue-400/30 bg-blue-400/5 text-blue-400 shadow-[0_0_10px_rgba(96,165,250,0.1)]"
                         }`}>
                           <span className={`h-1.5 w-1.5 rounded-full ${
-                            project.status === "Delivered & Live"
+                            project.status === "Live"
                               ? "bg-emerald-400 animate-pulse shadow-[0_0_6px_rgba(52,211,153,0.6)]"
                               : project.status === "In Development"
                               ? "bg-[var(--gold)] animate-pulse shadow-[0_0_6px_rgba(215,181,109,0.6)]"

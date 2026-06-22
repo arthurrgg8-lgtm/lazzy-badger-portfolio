@@ -102,7 +102,7 @@
     {
       "name": "Prahari-Link (प्रहरी-Link)",
       "description": "🏆 2nd Place Winner, Government Led First Hackathon 2083 by Nepal Police. An emergency communication bridge linking remote communities in Nepal with command centers via LoRa/ESP-NOW and offline Bluetooth telemetry.",
-      "status": "Delivered & Live",
+      "status": "Live",
       "url": "https://github.com/arthurrgg8-lgtm/HACKATHON-prahari-link-TEAM-SB",
       "highlighted": true,
       "stack": ["Next.js", "React Native", "Express", "ESP32 C++", "ESP-NOW", "BLE"]
@@ -110,7 +110,7 @@
     {
       "name": "MR Tour Service",
       "description": "A premium, high-performance travel booking and service management platform crafted for modern tour operators.",
-      "status": "Delivered & Live",
+      "status": "Live",
       "url": "https://manoranjan.com.np/",
       "highlighted": true,
       "stack": ["Next.js", "React", "PostgreSQL", "Tailwind CSS"]
@@ -118,7 +118,7 @@
     {
       "name": "Ar. Anushka Khatri Portfolio",
       "description": "An elite, interactive architectural portfolio drafted around custom blueprint watermarks, a dynamic CAD slider, and a physical-media material flat-lay system.",
-      "status": "Delivered & Live",
+      "status": "Live",
       "url": "https://anushkakhatri.com.np/",
       "highlighted": true,
       "stack": ["Next.js", "Tailwind CSS 4", "Framer Motion", "Cloudflare Workers"]
@@ -133,7 +133,7 @@
     {
       "name": "VastuVision AI",
       "description": "A premium, modern hybrid web dashboard and native Android application designed to analyze home layouts and furniture placements against Vastu Shastra rules using local direction sensors and AI vision mapping.",
-      "status": "Delivered & Live",
+      "status": "Live",
       "url": "https://vastuvision-beta.vercel.app/",
       "repository": "github.com/arthurrgg8-lgtm/vastuvision",
       "highlighted": true,
