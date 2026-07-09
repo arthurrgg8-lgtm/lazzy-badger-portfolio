@@ -19,6 +19,7 @@ const navItems = ["about", "projects", "gallery", "contact"];
 
 const projectDiagnostics: Record<string, { host: string; port: number; class: string }> = {
   "Prahari-Link (प्रहरी-Link)": { host: "127.0.0.1", port: 3001, class: "LORA_MESH" },
+  "AI Trial Nepal (aitrialnp.com)": { host: "aitrialnp.com", port: 443, class: "LIVE_SYS" },
   "MR Tour Service": { host: "manoranjan.com.np", port: 443, class: "LIVE_SYS" },
   "Ar. Anushka Khatri Portfolio": { host: "anushkakhatri.com.np", port: 443, class: "LIVE_SYS" },
   "Himalayan Mastiff Nepal": { host: "bhoteykukur.com.np", port: 8080, class: "DEV_PORT" },

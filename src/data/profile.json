@@ -108,6 +108,14 @@
       "stack": ["Next.js", "React Native", "Express", "ESP32 C++", "ESP-NOW", "BLE"]
     },
     {
+      "name": "AI Trial Nepal (aitrialnp.com)",
+      "description": "An elite, high-performance virtual try-on software suite tailored for boutique retailers and modern designers in Nepal. Features a serverless Cloudflare Worker API, PostgreSQL database triggers, real-time shared capture-sessions, and high-fidelity clothing draping pipelines.",
+      "status": "Live",
+      "url": "https://aitrialnp.com",
+      "highlighted": true,
+      "stack": ["Next.js", "Cloudflare Workers", "Supabase", "PostgreSQL", "R2 Storage", "Gemini Vision"]
+    },
+    {
       "name": "MR Tour Service",
       "description": "A premium, high-performance travel booking and service management platform crafted for modern tour operators.",
       "status": "Live",
