@@ -337,6 +337,12 @@
       "category": "Cloud"
     },
     {
+      "name": "Understanding Microsoft Azure",
+      "issuer": "DataCamp",
+      "file": "/assets/certs/understanding-microsoft-azure.pdf",
+      "category": "Cloud"
+    },
+    {
       "name": "GitHub Copilot Fundamentals (GH-300)",
       "issuer": "DataCamp",
       "file": "/assets/certs/github-copilot-fundamentals-gh300.pdf",
