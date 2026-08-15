@@ -52,7 +52,7 @@ export function ProfileScanner() {
         <div className="absolute left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-[var(--gold)] to-transparent shadow-[0_0_12px_var(--gold)] animate-[scanner-sweep_5s_infinite_ease-in-out] pointer-events-none z-20" />
 
         {/* 2. Target Crosshair HUD */}
-        <div className="absolute left-1/2 top-[46%] -translate-x-1/2 -translate-y-1/2 w-44 h-44 rounded-full border border-dashed border-[var(--gold)]/25 animate-[hud-spin_20s_infinite_linear] pointer-events-none z-10 flex items-center justify-center">
+        <div className="absolute left-1/2 top-[46%] -translate-x-1/2 -translate-y-1/2 w-44 h-44 rounded-full border border-dashed border-[var(--gold)]/25 animate-[hud-spin-center_20s_infinite_linear] pointer-events-none z-10 flex items-center justify-center">
           <div className="w-40 h-40 rounded-full border border-[var(--gold)]/10" />
           <div className="absolute w-2 h-0.5 bg-[var(--gold)]/60 left-0" />
           <div className="absolute w-2 h-0.5 bg-[var(--gold)]/60 right-0" />
@@ -115,28 +115,12 @@ export function ProfileScanner() {
         <div className="absolute -left-1 bottom-0 h-2 w-2 border-b border-l border-[var(--gold)]" />
         
         <div className="space-y-2">
-          <p className="text-xs font-semibold uppercase tracking-[0.34em] text-[var(--gold)] font-mono">biometric profile</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.34em] text-[var(--gold)] font-mono">{profile.identity.tagline}</p>
           <h2 className="text-4xl font-semibold text-[var(--cream)] font-display">{profile.identity.name}</h2>
           <p className="text-lg font-medium text-white/60">{profile.identity.short_bio}</p>
         </div>
       </div>
 
-      {/* Isolated CSS Animations styling */}
-      <style jsx global>{`
-        @keyframes scanner-sweep {
-          0% { top: 0%; }
-          50% { top: 100%; }
-          100% { top: 0%; }
-        }
-        @keyframes hud-spin {
-          0% { transform: translate(-50%, -50%) rotate(0deg); }
-          100% { transform: translate(-50%, -50%) rotate(360deg); }
-        }
-        @keyframes blink-dot {
-          0%, 100% { opacity: 0.3; transform: scale(0.8); }
-          50% { opacity: 1; transform: scale(1.3); }
-        }
-      `}</style>
     </div>
   );
 }

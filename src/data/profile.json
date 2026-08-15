@@ -241,7 +241,7 @@
   ],
   "gallery": [
     {
-      "src": "/assets/gallery/night-ride.png",
+      "src": "/assets/gallery/night-ride.webp",
       "alt": "Helmeted rider on a dirt bike at night in a city street",
       "label": "Night ride"
     },
@@ -261,24 +261,98 @@
       "label": "PANCHPOKHARI"
     },
     {
-      "src": "/assets/gallery/portrait-outdoor.png",
+      "src": "/assets/gallery/portrait-outdoor.webp",
       "alt": "Outdoor portrait in a scenic location",
       "label": "CHILLINN"
     },
     {
-      "src": "/assets/gallery/urban-view.png",
+      "src": "/assets/gallery/urban-view.webp",
       "alt": "Urban rooftop perspective",
       "label": "PILOT BABA ASHRAM RUNNING"
     },
     {
-      "src": "/assets/gallery/dirt-bike-crew.png",
+      "src": "/assets/gallery/dirt-bike-crew.webp",
       "alt": "Group of riders with dirt bikes on a trail",
       "label": "SQUAD"
     },
     {
-      "src": "/assets/gallery/squad-stairs.png",
+      "src": "/assets/gallery/squad-stairs.webp",
       "alt": "Group photo on a staircase",
       "label": "COLLEGE SQUAD"
+    }
+  ],
+  "certifications_detail": [
+    {
+      "name": "AI Engineer for Developers Associate",
+      "issuer": "DataCamp",
+      "file": "/assets/certs/ai-engineer-developers-associate.pdf",
+      "category": "AI"
+    },
+    {
+      "name": "AI Ethics",
+      "issuer": "DataCamp",
+      "file": "/assets/certs/ai-ethics.pdf",
+      "category": "AI"
+    },
+    {
+      "name": "AI-Assisted Coding for Developers",
+      "issuer": "DataCamp",
+      "file": "/assets/certs/ai-assisted-coding-developers.pdf",
+      "category": "AI"
+    },
+    {
+      "name": "AWS Cloud Practitioner (CLF-C02)",
+      "issuer": "DataCamp",
+      "file": "/assets/certs/aws-cloud-practitioner-clf-c02.pdf",
+      "category": "Cloud"
+    },
+    {
+      "name": "AWS Cloud Technology & Services",
+      "issuer": "DataCamp",
+      "file": "/assets/certs/aws-cloud-technology-services.pdf",
+      "category": "Cloud"
+    },
+    {
+      "name": "AWS Concepts",
+      "issuer": "DataCamp",
+      "file": "/assets/certs/aws-concepts.pdf",
+      "category": "Cloud"
+    },
+    {
+      "name": "Understanding Cloud Computing",
+      "issuer": "DataCamp",
+      "file": "/assets/certs/understanding-cloud-computing.pdf",
+      "category": "Cloud"
+    },
+    {
+      "name": "GitHub Copilot Fundamentals (GH-300)",
+      "issuer": "DataCamp",
+      "file": "/assets/certs/github-copilot-fundamentals-gh300.pdf",
+      "category": "DevTools"
+    },
+    {
+      "name": "Software Development with GitHub Copilot",
+      "issuer": "DataCamp",
+      "file": "/assets/certs/software-dev-github-copilot.pdf",
+      "category": "DevTools"
+    },
+    {
+      "name": "Intro to AI for Work",
+      "issuer": "DataCamp",
+      "file": "/assets/certs/intro-ai-for-work.pdf",
+      "category": "AI"
+    },
+    {
+      "name": "Large Language Models (LLMs) Concepts",
+      "issuer": "DataCamp",
+      "file": "/assets/certs/large-language-models-concepts.pdf",
+      "category": "AI"
+    },
+    {
+      "name": "Working with OpenAI API",
+      "issuer": "DataCamp",
+      "file": "/assets/certs/working-with-openai-api.pdf",
+      "category": "AI"
     }
   ]
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { AmbientStage } from "@/components/ambient-stage";
@@ -12,10 +12,8 @@ import { ScrambleText } from "@/components/scramble-text";
 import { HardwareHud } from "@/components/hardware-hud";
 import { ProfileScanner } from "@/components/profile-scanner";
 import { NavLink } from "@/components/nav-link";
-import { useEffect } from "react";
-import { TaglineHud } from "@/components/tagline-hud";
 
-const navItems = ["about", "projects", "gallery", "contact"];
+const navItems = ["about", "certifications", "projects", "gallery", "contact"];
 
 const projectDiagnostics: Record<string, { host: string; port: number; class: string }> = {
   "Prahari-Link (प्रहरी-Link)": { host: "127.0.0.1", port: 3001, class: "LORA_MESH" },
@@ -164,9 +162,6 @@ export default function Home() {
 
       <section className="section-shell relative z-10 grid items-center gap-8 pb-12 pt-20 md:pb-20 md:pt-28 lg:grid-cols-[1.1fr_0.9fr] min-h-[calc(100vh-4rem)]" id="top">
         <div className="flex flex-col justify-center">
-          <Reveal>
-            <TaglineHud />
-          </Reveal>
           <Reveal delay={0.08}>
             <h1 className="font-display text-4xl xs:text-5xl sm:text-7xl lg:text-9xl font-bold leading-[0.95] md:leading-[0.86] tracking-[-0.06em] text-gradient">
               <ScrambleText text={profile.identity.brand_name} trigger={startScramble} />
@@ -252,6 +247,59 @@ export default function Home() {
             <SkillCluster title="Certifications" values={profile.skills_and_tools.certifications} />
           </div>
         </Reveal>
+      </section>
+
+      <section className="section-shell relative z-10 py-24" id="certifications">
+        <Reveal>
+          <p className="text-xs uppercase tracking-[0.36em] text-[var(--gold)] font-mono">certifications // verified_credentials</p>
+          <h2 className="font-display mt-3 text-3xl sm:text-5xl md:text-7xl tracking-[-0.04em]">Proof of work.</h2>
+        </Reveal>
+        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {profile.certifications_detail.map((cert: { name: string; issuer: string; file: string; category: string }, index: number) => (
+            <Reveal delay={index * 0.04} key={cert.name}>
+              <a
+                href={cert.file}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="glass group relative flex flex-col justify-between overflow-hidden rounded-[1.5rem] p-5 sm:p-6 transition-all duration-500 hover:-translate-y-1 hover:border-[var(--gold)] hover:shadow-[0_0_30px_rgba(215,181,109,0.12)] bg-black/20 h-full"
+              >
+                {/* HUD corner marks */}
+                <div className="pointer-events-none absolute -left-px -top-px h-3 w-3 border-l border-t border-[var(--gold)]/30 group-hover:border-[var(--gold)] transition-colors duration-500" />
+                <div className="pointer-events-none absolute -right-px -bottom-px h-3 w-3 border-r border-b border-[var(--gold)]/30 group-hover:border-[var(--gold)] transition-colors duration-500" />
+
+                {/* Header: index + category */}
+                <div className="flex items-center justify-between border-b border-white/5 pb-3 mb-4">
+                  <span className="font-mono text-[8px] uppercase tracking-[0.25em] text-white/30">CERT // {String(index + 1).padStart(2, "0")}</span>
+                  <span className={`rounded-full px-2.5 py-0.5 text-[8px] uppercase tracking-[0.2em] font-mono font-semibold border transition-all duration-300 ${
+                    cert.category === "AI"
+                      ? "border-[var(--gold)]/30 bg-[var(--gold)]/5 text-[var(--gold)]"
+                      : cert.category === "Cloud"
+                      ? "border-sky-400/30 bg-sky-400/5 text-sky-400"
+                      : "border-emerald-400/30 bg-emerald-400/5 text-emerald-400"
+                  }`}>
+                    {cert.category}
+                  </span>
+                </div>
+
+                {/* Cert name */}
+                <h3 className="text-base font-semibold text-[var(--cream)] font-display tracking-wide leading-snug group-hover:text-[var(--gold)] transition-colors duration-300">{cert.name}</h3>
+
+                {/* Footer */}
+                <div className="mt-5 flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <svg className="h-3.5 w-3.5 text-white/30 group-hover:text-[var(--gold)] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342" />
+                    </svg>
+                    <span className="font-mono text-[9px] uppercase tracking-wider text-white/40">{cert.issuer}</span>
+                  </div>
+                  <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-[var(--gold)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center gap-1">
+                    view <span className="text-[8px]">↗</span>
+                  </span>
+                </div>
+              </a>
+            </Reveal>
+          ))}
+        </div>
       </section>
 
       <section className="section-shell relative z-10 py-24" id="projects">
