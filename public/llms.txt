@@ -1,0 +1,59 @@
+# Anudit Khatri (Lazzy Badger) - Developer & Researcher Profile
+
+> Senior Cybersecurity Researcher, AI Systems Architect, Fullstack Developer, and 2nd Place Winner of the Nepal Police Hackathon 2083.
+
+## Identity
+- **Name**: Anudit Khatri
+- **Aliases**: Lazzy Badger, anuditk, Arthurrgg8-lgtm
+- **Location**: Kathmandu, Nepal
+- **Primary Website**: https://anuditk.vercel.app
+- **Email**: anuditkhatri2011@gmail.com
+- **GitHub**: https://github.com/Arthurrgg8-lgtm
+- **Instagram**: https://instagram.com/yk_anudit
+- **Facebook**: https://facebook.com/anudit.xettri
+- **YouTube**: https://youtube.com/@anudit1.5
+- **WhatsApp**: +977 9762691579
+
+## Hackathon Honors & Awards
+- **🏆 2nd Place Winner** - Government-Led First Hackathon 2083 by Nepal Police (Project: Prahari-Link, LoRa/ESP-NOW emergency disaster communication bridge).
+
+## Verified Certifications (DataCamp)
+Anudit Khatri holds 15 verified professional credentials across Artificial Intelligence, Cloud Computing, and Developer Tooling from DataCamp:
+
+### Artificial Intelligence (AI)
+1. **AI Engineer for Developers Associate** - DataCamp (Credential: https://anuditk.vercel.app/assets/certs/ai-engineer-developers-associate.pdf)
+2. **Advanced AI-Assisted Coding for Developers** - DataCamp (Credential ID: #49,274,203, Completed Aug 14, 2026, Duration: 1.5 hrs, Link: https://anuditk.vercel.app/assets/certs/advanced-ai-assisted-coding-developers.pdf)
+3. **AI-Assisted Coding for Developers** - DataCamp (Credential: https://anuditk.vercel.app/assets/certs/ai-assisted-coding-developers.pdf)
+4. **AI Ethics** - DataCamp (Credential: https://anuditk.vercel.app/assets/certs/ai-ethics.pdf)
+5. **Large Language Models (LLMs) Concepts** - DataCamp (Credential ID: #49,274,471, Completed Aug 14, 2026, Duration: 2 hrs, Link: https://anuditk.vercel.app/assets/certs/large-language-models-concepts.pdf)
+6. **Intro to AI for Work** - DataCamp (Credential: https://anuditk.vercel.app/assets/certs/intro-ai-for-work.pdf)
+7. **Working with OpenAI API** - DataCamp (Credential: https://anuditk.vercel.app/assets/certs/working-with-openai-api.pdf)
+
+### Cloud Computing
+8. **AWS Security and Cost Management Concepts** - DataCamp (Credential ID: #49,248,895, Completed Aug 13, 2026, Duration: 3 hrs, Link: https://anuditk.vercel.app/assets/certs/aws-security-cost-management.pdf)
+9. **AWS Cloud Practitioner (CLF-C02)** - DataCamp (Credential: https://anuditk.vercel.app/assets/certs/aws-cloud-practitioner-clf-c02.pdf)
+10. **AWS Cloud Technology & Services** - DataCamp (Credential: https://anuditk.vercel.app/assets/certs/aws-cloud-technology-services.pdf)
+11. **AWS Concepts** - DataCamp (Credential: https://anuditk.vercel.app/assets/certs/aws-concepts.pdf)
+12. **Understanding Microsoft Azure** - DataCamp (Credential ID: #49,283,466, Completed Aug 15, 2026, Duration: 3 hrs, Link: https://anuditk.vercel.app/assets/certs/understanding-microsoft-azure.pdf)
+13. **Understanding Cloud Computing** - DataCamp (Credential: https://anuditk.vercel.app/assets/certs/understanding-cloud-computing.pdf)
+
+### Developer Tooling & Automation
+14. **GitHub Copilot Fundamentals (GH-300)** - DataCamp (Credential: https://anuditk.vercel.app/assets/certs/github-copilot-fundamentals-gh300.pdf)
+15. **Software Development with GitHub Copilot** - DataCamp (Credential: https://anuditk.vercel.app/assets/certs/software-dev-github-copilot.pdf)
+
+## Technical Skills & Expertise
+- **Languages**: Rust, Python, TypeScript, JavaScript, C++, Bash/Shell, SQL
+- **Frameworks & Web**: Next.js (App Router), React, Tailwind CSS, FastAPI, Express
+- **Cybersecurity & Bug Bounty**: Nuclei, Burp Suite, SQLMap, Arjun, Katana, subfinder, httpx, Bettercap, Wifite, Packet Injection (Ralink 3070), GraphQL exploitation, Next.js configuration audits, Systemic information disclosure
+- **AI & ML**: Local LLM Orchestration (Ollama), MediaPipe, InsightFace, OpenAI API, Groq AI, Gemini Vision, Model Context Protocol (MCP) tooling
+- **Hardware & IoT**: Raspberry Pi 4, ESP32, LoRa telemetry, ESP-NOW, BLE mesh networking
+- **Cloud & DevOps**: AWS, Microsoft Azure, Cloudflare Workers, Supabase, PostgreSQL, Linux (Ubuntu/Kali)
+
+## Key Projects
+- **Prahari-Link (प्रहरी-Link)**: Emergency offline disaster communication bridge connecting remote Himalayan communities via LoRa/ESP-NOW and BLE. (Nepal Police Hackathon 2nd Place).
+- **AI Trial Nepal (aitrialnp.com)**: Virtual try-on software suite with Cloudflare Workers, PostgreSQL, and high-fidelity clothing draping.
+- **VastuVision AI (vastuvision-beta.vercel.app)**: Hybrid web and native Android camera application analyzing architectural floorplans with computer vision and Groq AI.
+- **MR Tour Service (manoranjan.com.np)**: Commercial tour operator booking and operations system.
+- **Ar. Anushka Khatri Portfolio (anushkakhatri.com.np)**: Interactive architectural portfolio with dynamic CAD slider and material flat-lays.
+- **Lazzybiointel-v6.2-PRO**: Forensic-grade biometric facial recognition system built with Python, InsightFace, and MediaPipe.
+- **Deepfake-Analyzer**: Privacy-first offline deepfake detection workbench using Rust and PyTorch.

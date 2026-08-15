@@ -56,7 +56,8 @@ export function generateSchemaGraph() {
     hasCredential: profile.certifications_detail.map((cert) => ({
       "@type": "EducationalOccupationalCredential",
       name: cert.name,
-      credentialCategory: cert.category,
+      credentialCategory: cert.category === "AI" ? "Artificial Intelligence" : cert.category === "Cloud" ? "Cloud Computing Architecture" : "Developer Tooling & Automation",
+      description: `Verified professional credential in ${cert.name} awarded to Anudit Khatri (Lazzy Badger) by ${cert.issuer}.`,
       recognizedBy: {
         "@type": "Organization",
         name: cert.issuer,

@@ -250,10 +250,14 @@ export default function Home() {
         </Reveal>
       </section>
 
-      <section className="section-shell relative z-10 py-24" id="certifications">
+      <section className="section-shell relative z-10 py-24" id="certifications" aria-labelledby="certifications-heading">
         <Reveal>
           <p className="text-xs uppercase tracking-[0.36em] text-[var(--gold)] font-mono">certifications // verified_credentials</p>
-          <h2 className="font-display mt-3 text-3xl sm:text-5xl md:text-7xl tracking-[-0.04em]">Proof of work.</h2>
+          <h2 id="certifications-heading" className="font-display mt-3 text-3xl sm:text-5xl md:text-7xl tracking-[-0.04em]">Proof of work.</h2>
+          <p className="sr-only">
+            Anudit Khatri (Lazzy Badger) holds 15 verified technical certifications from DataCamp covering Artificial Intelligence, Cloud Infrastructure (AWS and Microsoft Azure), and Developer Tools:
+            {profile.certifications_detail.map((c) => `${c.name} (${c.category}, by ${c.issuer})`).join(", ")}.
+          </p>
         </Reveal>
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {profile.certifications_detail.map((cert: { name: string; issuer: string; file: string; category: string }, index: number) => (
