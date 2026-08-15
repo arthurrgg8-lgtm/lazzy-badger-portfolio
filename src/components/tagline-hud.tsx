@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { profile } from "@/lib/profile";
 
 const matrixGlyphs = "X0189ABCDEF!@#$%^&*()_+~`<>?:{}[]-=/|";
@@ -10,6 +10,14 @@ export function TaglineHud() {
   const [displayText, setDisplayText] = useState(text);
   const animationRef = useRef<number | null>(null);
   const frameRef = useRef(0);
+
+  useEffect(() => {
+    return () => {
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+    };
+  }, []);
 
   const startScramble = () => {
     const duration = 15; // Snappy hover scramble (15 frames)

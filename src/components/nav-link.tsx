@@ -1,12 +1,12 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect, type ComponentProps } from "react";
 import Link from "next/link";
 
 const matrixGlyphs = "X0189ABCDEF!@#$%^&*()_+~`<>?:{}[]-=/|";
 
 interface NavLinkProps {
-  href: string;
+  href: ComponentProps<typeof Link>["href"];
   text: string;
   className?: string;
   onClick?: () => void;
@@ -16,6 +16,14 @@ export function NavLink({ href, text, className, onClick }: NavLinkProps) {
   const [displayText, setDisplayText] = useState(text);
   const animationRef = useRef<number | null>(null);
   const frameRef = useRef(0);
+
+  useEffect(() => {
+    return () => {
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+    };
+  }, []);
 
   const startScramble = () => {
     const duration = 12; // Fast, snappy hover scramble (12 frames)
@@ -64,7 +72,7 @@ export function NavLink({ href, text, className, onClick }: NavLinkProps) {
   return (
     <Link
       className={className}
-      href={href as any}
+      href={href}
       onMouseEnter={handleMouseEnter}
       onClick={onClick}
     >

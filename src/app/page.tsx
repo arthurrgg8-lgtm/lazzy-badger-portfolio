@@ -310,6 +310,7 @@ export default function Home() {
         <div className="mt-12 grid gap-6">
           {profile.projects.map((project, index) => {
             const diag = projectDiagnostics[project.name] || { host: "unknown", port: 80, class: "TARGET" };
+            const projectTarget = project.url || (project.repository ? `https://${project.repository}` : undefined);
             return (
               <Reveal delay={index * 0.05} key={project.name}>
                 <article 
@@ -331,14 +332,14 @@ export default function Home() {
                     <div className="absolute top-0 right-0 -mr-4 -mt-4 w-20 h-20 bg-[var(--gold)]/6 blur-2xl pointer-events-none rounded-full" />
                   )}
 
-                  {/* Absolute overlay link to open project URL if it exists */}
-                  {project.url && (
+                  {/* Absolute overlay link to open project target if it exists */}
+                  {projectTarget && (
                     <a 
-                      href={project.url} 
+                      href={projectTarget} 
                       target="_blank" 
                       rel="noopener noreferrer" 
                       className="absolute inset-0 z-10 rounded-[2rem]" 
-                      title={`Open ${project.name} ${project.url?.includes("github.com") ? "repository" : "live site"}`}
+                      title={`Open ${project.name} ${projectTarget.includes("github.com") ? "repository" : "live site"}`}
                     />
                   )}
 
@@ -397,14 +398,10 @@ export default function Home() {
                   </div>
                   
                   <div className="flex md:justify-end">
-                    {project.url ? (
+                    {projectTarget ? (
                       <span className="text-sm uppercase tracking-[0.22em] text-[var(--gold)] font-bold transition duration-300 group-hover:text-white flex items-center gap-1">
-                        {project.url.includes("github.com") ? "repo link" : "live site"} <span className="text-xs transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
+                        {projectTarget.includes("github.com") ? "repo link" : "live site"} <span className="text-xs transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
                       </span>
-                    ) : project.repository ? (
-                      <Link className="relative z-20 text-sm uppercase tracking-[0.22em] text-[var(--gold)] transition hover:text-white" href={`https://${project.repository}`}>
-                        repo
-                      </Link>
                     ) : (
                       <span className="text-sm uppercase tracking-[0.22em] text-white/28 font-mono">private</span>
                     )}

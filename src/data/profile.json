@@ -301,6 +301,12 @@
       "category": "AI"
     },
     {
+      "name": "Advanced AI-Assisted Coding for Developers",
+      "issuer": "DataCamp",
+      "file": "/assets/certs/advanced-ai-assisted-coding-developers.pdf",
+      "category": "AI"
+    },
+    {
       "name": "AWS Cloud Practitioner (CLF-C02)",
       "issuer": "DataCamp",
       "file": "/assets/certs/aws-cloud-practitioner-clf-c02.pdf",
@@ -316,6 +322,12 @@
       "name": "AWS Concepts",
       "issuer": "DataCamp",
       "file": "/assets/certs/aws-concepts.pdf",
+      "category": "Cloud"
+    },
+    {
+      "name": "AWS Security & Cost Management",
+      "issuer": "DataCamp",
+      "file": "/assets/certs/aws-security-cost-management.pdf",
       "category": "Cloud"
     },
     {
