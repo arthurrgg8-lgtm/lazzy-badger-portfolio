@@ -164,6 +164,7 @@ export default function Home() {
         <div className="flex flex-col justify-center">
           <Reveal delay={0.08}>
             <h1 className="font-display text-4xl xs:text-5xl sm:text-7xl lg:text-9xl font-bold leading-[0.95] md:leading-[0.86] tracking-[-0.06em] text-gradient">
+              <span className="sr-only">Anudit Khatri (Lazzy Badger) — Cybersecurity Researcher, AI Systems Architect & Fullstack Developer</span>
               <ScrambleText text={profile.identity.brand_name} trigger={startScramble} />
             </h1>
           </Reveal>
