@@ -255,7 +255,7 @@ export default function Home() {
           <p className="text-xs uppercase tracking-[0.36em] text-[var(--gold)] font-mono">certifications // verified_credentials</p>
           <h2 id="certifications-heading" className="font-display mt-3 text-3xl sm:text-5xl md:text-7xl tracking-[-0.04em]">Proof of work.</h2>
           <p className="sr-only">
-            Anudit Khatri (Lazzy Badger) holds 15 verified technical certifications from DataCamp covering Artificial Intelligence, Cloud Infrastructure (AWS and Microsoft Azure), and Developer Tools:
+            Anudit Khatri (Lazzy Badger) holds {profile.certifications_detail.length} verified technical certifications from DataCamp covering Artificial Intelligence, Cloud Infrastructure (AWS and Microsoft Azure), and Developer Tools:
             {profile.certifications_detail.map((c) => `${c.name} (${c.category}, by ${c.issuer})`).join(", ")}.
           </p>
         </Reveal>

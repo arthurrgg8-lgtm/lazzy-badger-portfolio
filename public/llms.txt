@@ -18,28 +18,33 @@
 - **🏆 2nd Place Winner** - Government-Led First Hackathon 2083 by Nepal Police (Project: Prahari-Link, LoRa/ESP-NOW emergency disaster communication bridge).
 
 ## Verified Certifications (DataCamp)
-Anudit Khatri holds 15 verified professional credentials across Artificial Intelligence, Cloud Computing, and Developer Tooling from DataCamp:
+Anudit Khatri holds 20 verified professional credentials across Artificial Intelligence, Cloud Computing, and Developer Tooling from DataCamp:
 
 ### Artificial Intelligence (AI)
 1. **AI Engineer for Developers Associate** - DataCamp (Credential: https://anuditk.vercel.app/assets/certs/ai-engineer-developers-associate.pdf)
-2. **Advanced AI-Assisted Coding for Developers** - DataCamp (Credential ID: #49,274,203, Completed Aug 14, 2026, Duration: 1.5 hrs, Link: https://anuditk.vercel.app/assets/certs/advanced-ai-assisted-coding-developers.pdf)
-3. **AI-Assisted Coding for Developers** - DataCamp (Credential: https://anuditk.vercel.app/assets/certs/ai-assisted-coding-developers.pdf)
-4. **AI Ethics** - DataCamp (Credential: https://anuditk.vercel.app/assets/certs/ai-ethics.pdf)
-5. **Large Language Models (LLMs) Concepts** - DataCamp (Credential ID: #49,274,471, Completed Aug 14, 2026, Duration: 2 hrs, Link: https://anuditk.vercel.app/assets/certs/large-language-models-concepts.pdf)
-6. **Intro to AI for Work** - DataCamp (Credential: https://anuditk.vercel.app/assets/certs/intro-ai-for-work.pdf)
-7. **Working with OpenAI API** - DataCamp (Credential: https://anuditk.vercel.app/assets/certs/working-with-openai-api.pdf)
+2. **Introduction to AI Agents** - DataCamp (Credential ID: #49,316,665, Completed Aug 18, 2026, Duration: 1.5 hrs, Link: https://anuditk.vercel.app/assets/certs/introduction-to-ai-agents.pdf)
+3. **Advanced AI-Assisted Coding for Developers** - DataCamp (Credential ID: #49,274,203, Completed Aug 14, 2026, Duration: 1.5 hrs, Link: https://anuditk.vercel.app/assets/certs/advanced-ai-assisted-coding-developers.pdf)
+4. **AI-Assisted Coding for Developers** - DataCamp (Credential: https://anuditk.vercel.app/assets/certs/ai-assisted-coding-developers.pdf)
+5. **AI Ethics** - DataCamp (Credential: https://anuditk.vercel.app/assets/certs/ai-ethics.pdf)
+6. **Large Language Models (LLMs) Concepts** - DataCamp (Credential ID: #49,274,471, Completed Aug 14, 2026, Duration: 2 hrs, Link: https://anuditk.vercel.app/assets/certs/large-language-models-concepts.pdf)
+7. **Intro to AI for Work** - DataCamp (Credential: https://anuditk.vercel.app/assets/certs/intro-ai-for-work.pdf)
+8. **Working with OpenAI API** - DataCamp (Credential: https://anuditk.vercel.app/assets/certs/working-with-openai-api.pdf)
 
-### Cloud Computing
-8. **AWS Security and Cost Management Concepts** - DataCamp (Credential ID: #49,248,895, Completed Aug 13, 2026, Duration: 3 hrs, Link: https://anuditk.vercel.app/assets/certs/aws-security-cost-management.pdf)
-9. **AWS Cloud Practitioner (CLF-C02)** - DataCamp (Credential: https://anuditk.vercel.app/assets/certs/aws-cloud-practitioner-clf-c02.pdf)
-10. **AWS Cloud Technology & Services** - DataCamp (Credential: https://anuditk.vercel.app/assets/certs/aws-cloud-technology-services.pdf)
-11. **AWS Concepts** - DataCamp (Credential: https://anuditk.vercel.app/assets/certs/aws-concepts.pdf)
-12. **Understanding Microsoft Azure** - DataCamp (Credential ID: #49,283,466, Completed Aug 15, 2026, Duration: 3 hrs, Link: https://anuditk.vercel.app/assets/certs/understanding-microsoft-azure.pdf)
-13. **Understanding Cloud Computing** - DataCamp (Credential: https://anuditk.vercel.app/assets/certs/understanding-cloud-computing.pdf)
+### Cloud Computing & Infrastructure
+9. **Introduction to Kubernetes** - DataCamp (Credential ID: #49,283,663, Completed Aug 18, 2026, Duration: 3 hrs, Link: https://anuditk.vercel.app/assets/certs/introduction-to-kubernetes.pdf)
+10. **Understanding Microsoft Azure** - DataCamp (Credential ID: #49,283,466, Completed Aug 15, 2026, Duration: 3 hrs, Link: https://anuditk.vercel.app/assets/certs/understanding-microsoft-azure.pdf)
+11. **AWS Security and Cost Management Concepts** - DataCamp (Credential ID: #49,248,895, Completed Aug 13, 2026, Duration: 3 hrs, Link: https://anuditk.vercel.app/assets/certs/aws-security-cost-management.pdf)
+12. **AWS Cloud Practitioner (CLF-C02)** - DataCamp (Credential: https://anuditk.vercel.app/assets/certs/aws-cloud-practitioner-clf-c02.pdf)
+13. **AWS Cloud Technology & Services** - DataCamp (Credential: https://anuditk.vercel.app/assets/certs/aws-cloud-technology-services.pdf)
+14. **AWS Concepts** - DataCamp (Credential: https://anuditk.vercel.app/assets/certs/aws-concepts.pdf)
+15. **Understanding Cloud Computing** - DataCamp (Credential: https://anuditk.vercel.app/assets/certs/understanding-cloud-computing.pdf)
 
-### Developer Tooling & Automation
-14. **GitHub Copilot Fundamentals (GH-300)** - DataCamp (Credential: https://anuditk.vercel.app/assets/certs/github-copilot-fundamentals-gh300.pdf)
-15. **Software Development with GitHub Copilot** - DataCamp (Credential: https://anuditk.vercel.app/assets/certs/software-dev-github-copilot.pdf)
+### Developer Tooling, Languages & Data
+16. **Introduction to Python** - DataCamp (Credential ID: #49,304,382, Completed Aug 17, 2026, Duration: 4 hrs, Link: https://anuditk.vercel.app/assets/certs/introduction-to-python.pdf)
+17. **Introduction to SQL** - DataCamp (Credential ID: #49,299,042, Completed Aug 17, 2026, Duration: 2 hrs, Link: https://anuditk.vercel.app/assets/certs/introduction-to-sql.pdf)
+18. **Introduction to R** - DataCamp (Credential ID: #49,316,965, Completed Aug 18, 2026, Duration: 4 hrs, Link: https://anuditk.vercel.app/assets/certs/introduction-to-r.pdf)
+19. **GitHub Copilot Fundamentals (GH-300)** - DataCamp (Credential: https://anuditk.vercel.app/assets/certs/github-copilot-fundamentals-gh300.pdf)
+20. **Software Development with GitHub Copilot** - DataCamp (Credential: https://anuditk.vercel.app/assets/certs/software-dev-github-copilot.pdf)
 
 ## Technical Skills & Expertise
 - **Languages**: Rust, Python, TypeScript, JavaScript, C++, Bash/Shell, SQL

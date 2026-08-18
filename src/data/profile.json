@@ -93,6 +93,11 @@
     "certifications": [
       "🏆 2nd Place - Nepal Police Hackathon 2083",
       "AI Engineer for Developers Associate",
+      "Introduction to AI Agents",
+      "Introduction to Kubernetes",
+      "Introduction to Python",
+      "Introduction to SQL",
+      "Introduction to R",
       "Advanced AI-Assisted Coding for Developers",
       "AWS Security and Cost Management Concepts",
       "Understanding Microsoft Azure",
@@ -379,6 +384,36 @@
       "issuer": "DataCamp",
       "file": "/assets/certs/working-with-openai-api.pdf",
       "category": "AI"
+    },
+    {
+      "name": "Introduction to AI Agents",
+      "issuer": "DataCamp",
+      "file": "/assets/certs/introduction-to-ai-agents.pdf",
+      "category": "AI"
+    },
+    {
+      "name": "Introduction to Kubernetes",
+      "issuer": "DataCamp",
+      "file": "/assets/certs/introduction-to-kubernetes.pdf",
+      "category": "Cloud"
+    },
+    {
+      "name": "Introduction to Python",
+      "issuer": "DataCamp",
+      "file": "/assets/certs/introduction-to-python.pdf",
+      "category": "DevTools"
+    },
+    {
+      "name": "Introduction to SQL",
+      "issuer": "DataCamp",
+      "file": "/assets/certs/introduction-to-sql.pdf",
+      "category": "DevTools"
+    },
+    {
+      "name": "Introduction to R",
+      "issuer": "DataCamp",
+      "file": "/assets/certs/introduction-to-r.pdf",
+      "category": "DevTools"
     }
   ]
 }
