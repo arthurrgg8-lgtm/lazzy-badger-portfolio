@@ -357,9 +357,110 @@ export default function Home() {
           <p className="text-xs uppercase tracking-[0.36em] text-[var(--gold)] font-mono">certifications // verified_credentials</p>
           <h2 id="certifications-heading" className="font-display mt-3 text-3xl sm:text-5xl md:text-7xl tracking-[-0.04em]">Proof of work.</h2>
           <p className="sr-only">
-            Anudit Khatri (Lazzy Badger) holds {profile.certifications_detail.length} verified technical certifications from DataCamp covering Artificial Intelligence, Cloud Infrastructure (AWS and Microsoft Azure), and Developer Tools:
+            Anudit Khatri (LazZy Badger) holds #1 All-Time Leaderboard ranking on Code for Nepal / DataCamp, completed the 66-Days Challenge, and holds {profile.certifications_detail.length} verified technical certifications from DataCamp covering Artificial Intelligence, Cloud Infrastructure (AWS and Microsoft Azure), and Developer Tools:
             {profile.certifications_detail.map((c) => `${c.name} (${c.category}, by ${c.issuer})`).join(", ")}.
           </p>
+        </Reveal>
+
+        {/* Code for Nepal / DataCamp #1 Leaderboard Showcase */}
+        <Reveal delay={0.06}>
+          <div className="mt-10 mb-12 glass relative overflow-hidden rounded-[2.5rem] border border-[rgba(215,181,109,0.38)] p-6 sm:p-10 bg-gradient-to-br from-white/[0.04] via-black/40 to-[rgba(215,181,109,0.06)] shadow-[0_0_40px_rgba(215,181,109,0.12)]">
+            {/* HUD Corner Accents */}
+            <div className="pointer-events-none absolute -left-px -top-px h-5 w-5 border-l-2 border-t-2 border-[var(--gold)]" />
+            <div className="pointer-events-none absolute -right-px -top-px h-5 w-5 border-r-2 border-t-2 border-[var(--gold)]" />
+            <div className="pointer-events-none absolute -left-px -bottom-px h-5 w-5 border-l-2 border-b-2 border-[var(--gold)]" />
+            <div className="pointer-events-none absolute -right-px -bottom-px h-5 w-5 border-r-2 border-b-2 border-[var(--gold)]" />
+
+            <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-6 mb-8">
+              <div>
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="h-2 w-2 rounded-full bg-[var(--gold)] animate-pulse shadow-[0_0_8px_var(--gold)]" />
+                  <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-[var(--gold)]">HALL OF FAME // COMPETITIVE RANKINGS</span>
+                </div>
+                <h3 className="text-2xl sm:text-4xl font-bold font-display text-[var(--cream)] tracking-tight">
+                  DataCamp / Code for Nepal #1 Leaderboard & 66-Days Challenge Completer
+                </h3>
+              </div>
+              <div className="flex flex-wrap items-center gap-2 font-mono text-[9px]">
+                <span className="rounded-full border border-[var(--gold)]/40 bg-[var(--gold)]/10 px-3.5 py-1 text-[var(--gold)] uppercase tracking-widest font-semibold flex items-center gap-1.5 shadow-[0_0_12px_rgba(215,181,109,0.2)]">
+                  <span>🏆</span> #1 All-Time Rank
+                </span>
+                <span className="rounded-full border border-emerald-400/40 bg-emerald-400/10 px-3.5 py-1 text-emerald-400 uppercase tracking-widest font-semibold flex items-center gap-1.5">
+                  <span>🔥</span> 77-Day Active Streak
+                </span>
+              </div>
+            </div>
+
+            <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] items-center">
+              <div className="space-y-5">
+                <p className="text-base leading-relaxed text-white/70">
+                  Secured the <span className="text-[var(--gold)] font-bold">#1 All-Time Leaderboard position</span> in the prestigious <span className="text-white font-semibold">Code for Nepal × DataCamp</span> community initiative, completing the grueling <span className="text-white font-semibold">66-Days Continuous Learning Challenge</span> and maintaining an unbroken <span className="text-emerald-400 font-mono font-bold">77+ Days daily learning streak</span>.
+                </p>
+
+                {/* Scorecards */}
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 font-mono text-center">
+                  <div className="rounded-2xl border border-white/5 bg-black/40 p-4">
+                    <span className="text-[8px] uppercase tracking-widest text-white/40 block mb-1">TOTAL EARNED XP</span>
+                    <span className="text-xl sm:text-2xl font-bold text-[var(--gold)]">826,306</span>
+                  </div>
+                  <div className="rounded-2xl border border-white/5 bg-black/40 p-4">
+                    <span className="text-[8px] uppercase tracking-widest text-white/40 block mb-1">LEADERBOARD XP</span>
+                    <span className="text-xl sm:text-2xl font-bold text-[var(--cream)]">368,042</span>
+                  </div>
+                  <div className="rounded-2xl border border-white/5 bg-black/40 p-4 col-span-2 sm:col-span-1">
+                    <span className="text-[8px] uppercase tracking-widest text-white/40 block mb-1">DAILY STREAK</span>
+                    <span className="text-xl sm:text-2xl font-bold text-emerald-400">77 Days 🔥</span>
+                  </div>
+                </div>
+
+                {/* Accreditation Stack */}
+                <div className="rounded-2xl border border-white/5 bg-black/40 p-5">
+                  <span className="font-mono text-[9px] uppercase tracking-widest text-[var(--gold)] block mb-3">
+                    VERIFIED ASSOCIATE ACCREDITATIONS
+                  </span>
+                  <div className="flex flex-wrap gap-2">
+                    {[
+                      "AI Engineer for Developers Associate",
+                      "Python Data Associate",
+                      "Data Scientist Associate",
+                      "Data Engineer Associate",
+                      "AI Engineer for Data Scientists Associate",
+                      "Data Analyst Associate",
+                    ].map((badge) => (
+                      <span
+                        key={badge}
+                        className="rounded-lg border border-[var(--gold)]/20 bg-[var(--gold)]/5 px-2.5 py-1 text-[10px] font-mono text-[var(--cream)] flex items-center gap-1.5"
+                      >
+                        <span className="text-[var(--gold)] text-xs">🏅</span>
+                        {badge}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Verified Screenshot Showcase */}
+              <div className="group relative rounded-2xl border border-white/10 bg-black/60 p-2 sm:p-3 overflow-hidden shadow-2xl transition-all duration-500 hover:border-[var(--gold)]/50">
+                <div className="absolute top-4 left-4 z-20 flex items-center gap-2 rounded bg-black/85 px-2.5 py-1 font-mono text-[8px] text-[var(--gold)] backdrop-blur-md border border-white/10">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[var(--gold)] animate-pulse" />
+                  <span>DATACAMP // LIVE LEADERBOARD VERIFICATION</span>
+                </div>
+                <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl">
+                  <Image
+                    src="/assets/research/datacamp-leaderboard-66days.png"
+                    alt="DataCamp Code for Nepal All Time #1 Leaderboard and 66 Days Challenge Completer - LazZy Badger"
+                    fill
+                    className="object-cover object-top transition duration-700 group-hover:scale-[1.02]"
+                    sizes="(max-width: 1024px) 100vw, 550px"
+                  />
+                </div>
+                <div className="mt-3 flex items-center justify-between px-2 font-mono text-[8px] text-white/40">
+                  <span>HANDLE: LazZy Badger</span>
+                  <span className="text-[var(--gold)]">RANK: #1 ALL-TIME // 826K+ XP</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </Reveal>
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {profile.certifications_detail.map((cert: { name: string; issuer: string; file: string; category: string }, index: number) => (

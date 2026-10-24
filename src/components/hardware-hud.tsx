@@ -3,6 +3,7 @@
 import { useEffect, useState, useRef } from "react";
 
 const securityLogs = [
+  "[DataCamp] Code for Nepal #1 Leaderboard: 826K+ XP // 77-Day Streak ACTIVE",
   "[Research] WordPress SQLite issue #568: LIKE to GLOB query distortion disclosed",
   "[SecOps] Active client security: Manoranjan, aitrialnp, and Anushka secured",
   "[CVE-Triage] Mitigated Node.js Brotli RCE (CVE-2026-111497) across client edge",
