@@ -17,6 +17,9 @@ const cspHeader = `
 
 const nextConfig: NextConfig = {
   typedRoutes: true,
+  turbopack: {
+    root: __dirname,
+  },
   async headers() {
     return [
       {
