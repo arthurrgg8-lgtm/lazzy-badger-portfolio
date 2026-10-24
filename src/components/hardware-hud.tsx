@@ -3,6 +3,9 @@
 import { useEffect, useState, useRef } from "react";
 
 const securityLogs = [
+  "[Research] WordPress SQLite issue #568: LIKE to GLOB query distortion disclosed",
+  "[SecOps] Active client security: Manoranjan, aitrialnp, and Anushka secured",
+  "[CVE-Triage] Mitigated Node.js Brotli RCE (CVE-2026-111497) across client edge",
   "[wlan0mon] Sending packet injection frames... SUCCESS",
   "[wlan0mon] Handshake captured from Syfe-BBP-WiFi [WPA2]",
   "[GraphQL] Probing active mutations at cengage-staging-gql...",

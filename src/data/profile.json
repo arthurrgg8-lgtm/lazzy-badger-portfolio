@@ -6,8 +6,8 @@
     "short_bio": "A passionately curious mind."
   },
   "about": {
-    "persona": "Fullstack Developer, Web Developer, Software Developer, Cybersecurity Researcher, AI Systems Builder, and Automation-Focused Engineer.",
-    "full_description": "I am a highly versatile Fullstack Developer, Web Developer, Software Developer, Cybersecurity Researcher, and Advanced Systems Builder driven by an intensely curious mind and a philosophy of high-leverage efficiency. I proudly define myself as a 'lazy' engineer in the best sense of the word—I reject brute-force manual labor and mundane repetition, choosing instead to deploy innovative architecture, automation scripts, and local AI workflows to get complex tasks done creatively and effortlessly.\n\nMy work combines systems programming, cybersecurity, AI orchestration, computer vision, local LLM tooling, and automation engineering. I specialize in privacy-focused, local-first systems using Python, Rust, Linux environments, CLI agents, and AI-assisted workflows."
+    "persona": "Fullstack Developer, Cybersecurity Researcher, Systems Architect, and Deep Technical Hunter actively securing client ecosystems and researching upstream vulnerabilities.",
+    "full_description": "I am a Fullstack Developer, Advanced Systems Builder, and Cybersecurity Researcher driven by deep technical inquiry and automated efficiency. I maintain active participation in client infrastructure security—providing continuous vulnerability triage, edge-level runtime hardening (mitigating Node.js CVE-2026-111497 Brotli RCE & Next.js 16.4.3 security updates), and verified zero-vulnerability postures for production client applications.\n\nBeyond client systems, I am deeply active in bug hunting and upstream open-source core research, uncovering subtle parser differentials and query translation flaws in major ecosystems (such as WordPress Core's SQLite database integration). My work spans systems programming, low-level database internals, AI orchestration, local LLM tooling, and wireless network security using Python, Rust, Linux environments, and autonomous agent workflows."
   },
   "design_preferences": {
     "website_vibe": "Hacker, cinematic, highly technical, futuristic",
@@ -30,6 +30,8 @@
   },
   "skills_and_tools": {
     "core_traits": [
+      "Deep Upstream Research & Bug Hunting",
+      "Active Client Security Defense",
       "Determined",
       "Superhuman Curiosity",
       "Systems Thinking",
@@ -112,6 +114,21 @@
     ]
   },
   "projects": [
+    {
+      "name": "WordPress / SQLite Pattern Translation Research (Issue #568)",
+      "description": "Deep upstream research & bug discovery in WordPress Core's sqlite-database-integration. Identified a subtle SQL-to-GLOB translation flaw where literal '[' characters are mis-translated into SQLite GLOB character-class brackets, producing silent false-positive and false-negative row mismatches against MySQL LIKE semantics.",
+      "status": "Reported",
+      "url": "https://github.com/WordPress/sqlite-database-integration/issues/568",
+      "highlighted": true,
+      "stack": ["WordPress Core", "SQLite", "MySQL", "PHP", "Query Translation", "Deep Research"]
+    },
+    {
+      "name": "Active Client Security & Infrastructure Hardening",
+      "description": "Active, hands-on participation in client security across production ecosystems (Manoranjan Ramjham, AI Trial Nepal, Ar. Anushka Khatri). Continuous CVE monitoring, rapid triage of critical runtimes (mitigating Node.js CVE-2026-111497 Brotli RCE & Next.js 16.4.3 security advisories), and edge-level hardening to guarantee a verified 0-vulnerability perimeter.",
+      "status": "Secured",
+      "highlighted": true,
+      "stack": ["Client Security", "CVE Remediation", "Next.js 16 Hardening", "Cloudflare Edge", "OWASP Security"]
+    },
     {
       "name": "Prahari-Link (प्रहरी-Link)",
       "description": "🏆 2nd Place Winner, Government Led First Hackathon 2083 by Nepal Police. An emergency communication bridge linking remote communities in Nepal with command centers via LoRa/ESP-NOW and offline Bluetooth telemetry.",

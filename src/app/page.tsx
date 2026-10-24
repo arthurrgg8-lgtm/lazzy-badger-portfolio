@@ -16,6 +16,8 @@ import { NavLink } from "@/components/nav-link";
 const navItems = ["about", "certifications", "projects", "gallery", "contact"];
 
 const projectDiagnostics: Record<string, { host: string; port: number; class: string }> = {
+  "WordPress / SQLite Pattern Translation Research (Issue #568)": { host: "github.com", port: 443, class: "BUG_HUNT" },
+  "Active Client Security & Infrastructure Hardening": { host: "client-edge", port: 443, class: "SEC_OPS" },
   "Prahari-Link (प्रहरी-Link)": { host: "127.0.0.1", port: 3001, class: "LORA_MESH" },
   "AI Trial Nepal (aitrialnp.com)": { host: "aitrialnp.com", port: 443, class: "LIVE_SYS" },
   "MR Tour Service": { host: "manoranjan.com.np", port: 443, class: "LIVE_SYS" },
@@ -235,6 +237,106 @@ export default function Home() {
             ))}
           </div>
         </div>
+      </section>
+
+      {/* Active Research & Client Security Operations Section */}
+      <section className="section-shell relative z-10 py-12">
+        <Reveal>
+          <div className="glass relative overflow-hidden rounded-[2.5rem] border border-[rgba(215,181,109,0.35)] p-6 sm:p-10 bg-gradient-to-br from-white/[0.04] via-black/40 to-[rgba(215,181,109,0.04)] shadow-[0_0_40px_rgba(215,181,109,0.08)]">
+            {/* HUD Corner Accents */}
+            <div className="pointer-events-none absolute -left-px -top-px h-5 w-5 border-l-2 border-t-2 border-[var(--gold)]" />
+            <div className="pointer-events-none absolute -right-px -top-px h-5 w-5 border-r-2 border-t-2 border-[var(--gold)]" />
+            <div className="pointer-events-none absolute -left-px -bottom-px h-5 w-5 border-l-2 border-b-2 border-[var(--gold)]" />
+            <div className="pointer-events-none absolute -right-px -bottom-px h-5 w-5 border-r-2 border-b-2 border-[var(--gold)]" />
+
+            <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-6 mb-8">
+              <div>
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
+                  <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-[var(--gold)]">INTELLIGENCE BRIEFING // RESEARCH & DEFENSE</span>
+                </div>
+                <h3 className="text-2xl sm:text-4xl font-bold font-display text-[var(--cream)] tracking-tight">
+                  Active Client Security & Upstream Bug Hunting
+                </h3>
+              </div>
+              <div className="flex flex-wrap items-center gap-2 font-mono text-[9px]">
+                <span className="rounded-full border border-emerald-400/40 bg-emerald-400/10 px-3 py-1 text-emerald-400 uppercase tracking-widest font-semibold">
+                  Client Perimeter: 100% Audited
+                </span>
+                <span className="rounded-full border border-[var(--gold)]/40 bg-[var(--gold)]/10 px-3 py-1 text-[var(--gold)] uppercase tracking-widest font-semibold">
+                  Upstream Research: Disclosed
+                </span>
+              </div>
+            </div>
+
+            <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] items-center">
+              <div className="space-y-6">
+                <div className="rounded-2xl border border-white/5 bg-black/40 p-5 sm:p-6 relative">
+                  <div className="flex items-center justify-between font-mono text-[9px] text-white/40 mb-3 border-b border-white/5 pb-2">
+                    <span className="text-[var(--gold)] uppercase tracking-wider">01 // PRODUCTION CLIENT DEFENSE</span>
+                    <span>RUNTIME_HARDENING</span>
+                  </div>
+                  <h4 className="text-lg font-semibold text-[var(--cream)] mb-2 font-display">
+                    Hands-on Client Infrastructure & Zero-Day Mitigation
+                  </h4>
+                  <p className="text-sm leading-relaxed text-white/65">
+                    Proactive participation in client security across production environments (<span className="text-white font-medium">Manoranjan Ramjham</span>, <span className="text-white font-medium">AI Trial Nepal</span>, <span className="text-white font-medium">Ar. Anushka Khatri</span>). Rapid triage of zero-day runtime disclosures—including the recent Node.js Brotli RCE (<span className="text-[var(--gold)] font-mono text-xs">CVE-2026-111497</span> / Node2Shell) and Next.js 16.4.3 security patches—maintaining a verified zero-vulnerability audit standard.
+                  </p>
+                </div>
+
+                <div className="rounded-2xl border border-white/5 bg-black/40 p-5 sm:p-6 relative">
+                  <div className="flex items-center justify-between font-mono text-[9px] text-white/40 mb-3 border-b border-white/5 pb-2">
+                    <span className="text-[var(--gold)] uppercase tracking-wider">02 // UPSTREAM SECURITY RESEARCH</span>
+                    <span>PARSER_DIFFERENTIALS</span>
+                  </div>
+                  <h4 className="text-lg font-semibold text-[var(--cream)] mb-2 font-display">
+                    WordPress SQLite Core Query Translation Flaw (Issue #568)
+                  </h4>
+                  <p className="text-sm leading-relaxed text-white/65 mb-4">
+                    Deep architectural bug hunting in <code className="text-[var(--gold)] text-xs">WordPress/sqlite-database-integration</code>. Identified a subtle SQL-to-GLOB query mis-translation flaw where unescaped <code className="text-white">[</code> characters turn into SQLite character-class brackets, producing silent false-positive and false-negative row mismatches against MySQL <code className="text-white">LIKE</code>.
+                  </p>
+                  <a
+                    href="https://github.com/WordPress/sqlite-database-integration/issues/568"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[var(--gold)] hover:text-white transition-colors"
+                  >
+                    <span>View GitHub Issue #568</span>
+                    <span className="text-xs">↗</span>
+                  </a>
+                </div>
+              </div>
+
+              {/* Research Screenshot Preview Frame */}
+              <div className="group relative rounded-2xl border border-white/10 bg-black/60 p-2 sm:p-3 overflow-hidden shadow-2xl transition-all duration-500 hover:border-[var(--gold)]/50">
+                <div className="absolute top-4 left-4 z-20 flex items-center gap-2 rounded bg-black/80 px-2.5 py-1 font-mono text-[8px] text-[var(--gold)] backdrop-blur-md border border-white/10">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[var(--gold)] animate-pulse" />
+                  <span>TARGET: WordPress/sqlite-database-integration #568</span>
+                </div>
+                <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl">
+                  <Image
+                    src="/assets/research/wordpress-sqlite-issue-568.png"
+                    alt="WordPress SQLite Database Integration Issue #568 Disclosure by arthurrgg8-lgtm"
+                    fill
+                    className="object-cover object-top transition duration-700 group-hover:scale-[1.02]"
+                    sizes="(max-width: 1024px) 100vw, 550px"
+                  />
+                </div>
+                <div className="mt-3 flex items-center justify-between px-2 font-mono text-[8px] text-white/40">
+                  <span>DISCLOSED BY: arthurrgg8-lgtm (LazZy)</span>
+                  <a
+                    href="https://github.com/WordPress/sqlite-database-integration/issues/568"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[var(--gold)] hover:underline flex items-center gap-1"
+                  >
+                    GITHUB_ADVISORY ↗
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Reveal>
       </section>
 
       <section className="section-shell relative z-10 py-24">
