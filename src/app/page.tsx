@@ -26,6 +26,7 @@ const projectDiagnostics: Record<string, { host: string; port: number; class: st
   "MR Tour Service": { host: "manoranjan.com.np", port: 443, class: "LIVE_SYS" },
   "Ar. Anushka Khatri Portfolio": { host: "anushkakhatri.com.np", port: 443, class: "LIVE_SYS" },
   "Himalayan Mastiff Nepal": { host: "bhoteykukur.com.np", port: 8080, class: "DEV_PORT" },
+  "VastuVision AI": { host: "vastuvision-beta.vercel.app", port: 443, class: "AI_VISION" },
   "Lazzybiointel-v6.2-PRO": { host: "127.0.0.1", port: 9090, class: "LOCAL_CORE" },
   "Deepfake-Analyzer": { host: "127.0.0.1", port: 8000, class: "LOCAL_CORE" },
   "Autonomous RTSP Camera & 7-Day Cloud NVR": { host: "192.168.1.150", port: 554, class: "RTSP_NVR" },
@@ -641,6 +642,7 @@ export default function Home() {
                       rel="noopener noreferrer" 
                       className="absolute inset-0 z-10 rounded-[2rem]" 
                       title={`Open ${project.name} ${projectTarget.includes("github.com") ? "repository" : "live site"}`}
+                      aria-label={`Open ${project.name} ${projectTarget.includes("github.com") ? "repository" : "live site"}`}
                     />
                   )}
 
@@ -776,12 +778,12 @@ export default function Home() {
                 </h2>
               </div>
               <div className="flex flex-wrap gap-5">
-                <SocialIcon href={`https://mail.google.com/mail/?view=cm&fs=1&to=${profile.socials.email}`} icon={<MailIcon />} />
-                <SocialIcon href={`https://wa.me/${profile.socials.whatsapp}`} icon={<WhatsAppIcon />} />
-                <SocialIcon href={`https://github.com/${profile.socials.github}`} icon={<GithubIcon />} />
-                <SocialIcon href={`https://instagram.com/${profile.socials.instagram}`} icon={<InstagramIcon />} />
-                <SocialIcon href={`https://facebook.com/${profile.socials.facebook}`} icon={<FacebookIcon />} />
-                <SocialIcon href={`https://www.youtube.com/${profile.socials.youtube}`} icon={<YouTubeIcon />} />
+                <SocialIcon ariaLabel="Email Anudit Khatri via Gmail" href={`https://mail.google.com/mail/?view=cm&fs=1&to=${profile.socials.email}`} icon={<MailIcon />} />
+                <SocialIcon ariaLabel="Message Anudit Khatri on WhatsApp" href={`https://wa.me/${profile.socials.whatsapp}`} icon={<WhatsAppIcon />} />
+                <SocialIcon ariaLabel="View GitHub Profile of Anudit Khatri (arthurrgg8-lgtm)" href={`https://github.com/${profile.socials.github}`} icon={<GithubIcon />} />
+                <SocialIcon ariaLabel="View Instagram Profile" href={`https://instagram.com/${profile.socials.instagram}`} icon={<InstagramIcon />} />
+                <SocialIcon ariaLabel="View Facebook Profile" href={`https://facebook.com/${profile.socials.facebook}`} icon={<FacebookIcon />} />
+                <SocialIcon ariaLabel="View YouTube Channel" href={`https://www.youtube.com/${profile.socials.youtube}`} icon={<YouTubeIcon />} />
               </div>
             </div>
           </div>
@@ -792,13 +794,15 @@ export default function Home() {
   );
 }
 
-function SocialIcon({ href, icon }: { href: string; icon: React.ReactNode }) {
+function SocialIcon({ href, icon, ariaLabel }: { href: string; icon: React.ReactNode; ariaLabel: string }) {
   return (
     <a 
       className="group relative flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.02] transition-all duration-500 hover:border-[var(--gold)] hover:bg-[var(--gold)]/10 hover:shadow-[0_0_20px_rgba(215,181,109,0.2)]" 
       href={href}
       rel="noopener noreferrer"
       target="_blank"
+      aria-label={ariaLabel}
+      title={ariaLabel}
     >
       <div className="text-white/60 transition-all duration-500 group-hover:scale-110 group-hover:text-[var(--gold)]">
         {icon}

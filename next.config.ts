@@ -16,6 +16,7 @@ const cspHeader = `
 `.replace(/\s{2,}/g, ' ').trim();
 
 const nextConfig: NextConfig = {
+  poweredByHeader: false,
   typedRoutes: true,
   turbopack: {
     root: __dirname,

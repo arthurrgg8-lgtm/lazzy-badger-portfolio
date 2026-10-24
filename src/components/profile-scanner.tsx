@@ -1,23 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Image from "next/image";
 import { profile } from "@/lib/profile";
 
 export function ProfileScanner() {
-  const [matchRate, setMatchRate] = useState(98.65);
-
-  useEffect(() => {
-    const matchInterval = setInterval(() => {
-      setMatchRate((prev) => {
-        const delta = (Math.random() - 0.5) * 0.08;
-        return parseFloat(Math.min(99.99, Math.max(97.5, prev + delta)).toFixed(2));
-      });
-    }, 1500);
-
-    return () => clearInterval(matchInterval);
-  }, []);
-
   return (
     <div className="relative mx-auto w-full max-w-[320px] xs:max-w-[380px] md:max-w-[460px] lg:mr-0 group">
       {/* Subtle border glow */}

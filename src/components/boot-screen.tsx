@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 
 const diagnosticLines = [
   "Initializing secure handshake to badger-node-pi4...",
@@ -16,6 +16,24 @@ export function BootScreen({ onComplete }: { onComplete: () => void }) {
   const [visibleLines, setVisibleLines] = useState<string[]>([]);
   const [progress, setProgress] = useState(0);
   const [isFading, setIsFading] = useState(false);
+
+  const handleSkip = useCallback(() => {
+    setIsFading(true);
+    const skipTimer = setTimeout(() => {
+      onComplete();
+    }, 250);
+    return () => clearTimeout(skipTimer);
+  }, [onComplete]);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" || e.key === "Enter" || e.key === " ") {
+        handleSkip();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [handleSkip]);
 
   useEffect(() => {
     // 1. Diagnostics printing timeline
@@ -50,16 +68,19 @@ export function BootScreen({ onComplete }: { onComplete: () => void }) {
 
   useEffect(() => {
     if (progress === 100 && visibleLines.length >= diagnosticLines.length) {
+      let exitTimeout: NodeJS.Timeout;
       // Small pause at 100% then fade out
       const timeout = setTimeout(() => {
         setIsFading(true);
         // Fully complete after fade transition
-        const exitTimeout = setTimeout(() => {
+        exitTimeout = setTimeout(() => {
           onComplete();
-        }, 700); // matching transition duration
-        return () => clearTimeout(exitTimeout);
+        }, 700);
       }, 400);
-      return () => clearTimeout(timeout);
+      return () => {
+        clearTimeout(timeout);
+        if (exitTimeout) clearTimeout(exitTimeout);
+      };
     }
   }, [progress, visibleLines, onComplete]);
 
@@ -92,8 +113,17 @@ export function BootScreen({ onComplete }: { onComplete: () => void }) {
           <div className="h-2 w-2 animate-ping rounded-full bg-[var(--gold)]" />
           <span className="font-semibold uppercase tracking-[0.24em] text-[var(--gold)]">BADGERSEC SHELL v1.4.0</span>
         </div>
-        <div className="text-[10px] text-white/30">
-          ADDR: 192.168.1.137 // INTRUDER_LOG: ACTIVE
+        <div className="flex items-center gap-4">
+          <button
+            onClick={handleSkip}
+            className="rounded border border-[var(--gold)]/30 bg-[var(--gold)]/10 px-2.5 py-1 text-[9px] uppercase tracking-widest text-[var(--gold)] hover:bg-[var(--gold)]/20 hover:border-[var(--gold)] transition-colors cursor-pointer"
+            title="Skip boot sequence"
+          >
+            [ ESC // SKIP ]
+          </button>
+          <div className="text-[10px] text-white/30 hidden sm:block">
+            ADDR: 192.168.1.137 // INTRUDER_LOG: ACTIVE
+          </div>
         </div>
       </div>
 
