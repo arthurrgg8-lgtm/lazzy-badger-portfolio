@@ -148,8 +148,7 @@
     {
       "name": "h1watch & hunt-workspace",
       "description": "High-velocity automated bug hunting and attack surface monitoring engine. 'h1watch' monitors the HackerOne platform for newly launched programs and scope asset expansions in real time, firing instant Telegram alerts for rapid first-mover advantage. Backed by 'hunt-workspace', an orchestrated recon environment integrating subfinder, katana, and custom toolkits.",
-      "status": "Active",
-      "repository": "github.com/arthurrgg8-lgtm/h1watch",
+      "status": "Private Core",
       "highlighted": true,
       "stack": ["Python", "HackerOne API", "Telegram Bot API", "Recon Automation", "Attack Surface Mapping"]
     },
@@ -164,8 +163,7 @@
     {
       "name": "Easy Patra (इजि-पत्र)",
       "description": "Automated official letter formatting, templating, and high-fidelity print generation platform designed to eliminate tedious manual clerical work in administrative and legal correspondence across Nepal, featuring standardized letterhead layouts and instant export.",
-      "status": "Active",
-      "repository": "github.com/arthurrgg8-lgtm/easy-patra",
+      "status": "Private Beta",
       "highlighted": true,
       "stack": ["TypeScript", "Next.js", "React", "Document Automation", "Tailwind CSS"]
     },
@@ -220,13 +218,15 @@
     {
       "name": "Lazzybiointel-v6.2-PRO",
       "description": "Forensic-grade biometric identity verification system built with Python, InsightFace, and MediaPipe for advanced facial recognition and geometry tracking.",
-      "status": "active",
+      "status": "Active",
+      "repository": "github.com/arthurrgg8-lgtm/Lazzybiointel-v6.2-PRO",
       "stack": ["Python", "InsightFace", "MediaPipe", "OpenCV"]
     },
     {
       "name": "Deepfake-Analyzer",
       "description": "Offline privacy-first deepfake detection workbench using Rust and Python hybrid architecture.",
-      "status": "active",
+      "status": "Active",
+      "repository": "github.com/arthurrgg8-lgtm/deepfake-analyzer",
       "stack": ["Rust", "Python", "PyTorch", "Offline-First"]
     },
     {

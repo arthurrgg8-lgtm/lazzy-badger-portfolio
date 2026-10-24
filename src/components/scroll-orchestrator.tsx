@@ -70,6 +70,12 @@ export function ScrollOrchestrator() {
         card.addEventListener("pointermove", onMove);
         card.addEventListener("pointerleave", onLeave);
       });
+
+      if (document.fonts) {
+        document.fonts.ready.then(() => {
+          ScrollTrigger.refresh();
+        });
+      }
     });
 
     return () => context.revert();
