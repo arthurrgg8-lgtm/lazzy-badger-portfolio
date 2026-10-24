@@ -2,9 +2,9 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Anudit Khatri (Lazzy Badger) - Technical Portfolio",
+    name: "Anudit Khatri (Lazzy Badger) - Fullstack Developer & Systems Architect",
     short_name: "LazzyBadger",
-    description: "Personal technical portfolio and cybersecurity systems workbench for Anudit Khatri (Lazzy Badger).",
+    description: "Official portfolio of Anudit Khatri (Lazzy Badger) — Premier Fullstack Developer, Cybersecurity Researcher, and AI Systems Architect based in Kathmandu, Nepal.",
     start_url: "/",
     display: "standalone",
     background_color: "#030406",

@@ -12,8 +12,9 @@ import { ScrambleText } from "@/components/scramble-text";
 import { HardwareHud } from "@/components/hardware-hud";
 import { ProfileScanner } from "@/components/profile-scanner";
 import { NavLink } from "@/components/nav-link";
+import { faqs } from "@/lib/schema";
 
-const navItems = ["about", "certifications", "projects", "gallery", "contact"];
+const navItems = ["about", "certifications", "projects", "gallery", "faq", "contact"];
 
 const projectDiagnostics: Record<string, { host: string; port: number; class: string }> = {
   "WordPress / SQLite Pattern Translation Research (Issue #568)": { host: "github.com", port: 443, class: "BUG_HUNT" },
@@ -753,6 +754,33 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Technical FAQ & Capability Briefing Section */}
+      <section className="section-shell relative z-10 py-24" id="faq" aria-labelledby="faq-heading">
+        <Reveal>
+          <p className="text-xs uppercase tracking-[0.36em] text-[var(--gold)] font-mono">intelligence // faq_briefing</p>
+          <h2 id="faq-heading" className="font-display mt-3 text-3xl sm:text-5xl md:text-7xl tracking-[-0.04em]">Technical Briefing.</h2>
+          <p className="mt-4 max-w-2xl text-sm sm:text-base leading-relaxed text-white/60">
+            Frequently referenced inquiries regarding fullstack architecture, systems development, hackathon achievements, and security research with Anudit Khatri.
+          </p>
+        </Reveal>
+
+        <div className="mt-12 space-y-4 max-w-4xl">
+          {faqs.map((faq, index) => (
+            <Reveal delay={index * 0.05} key={faq.question}>
+              <div className="glass group rounded-2xl border border-white/5 bg-black/30 p-6 transition duration-300 hover:border-[var(--gold)]/30 hover:bg-black/40">
+                <div className="flex items-start gap-4">
+                  <span className="font-mono text-xs text-[var(--gold)] shrink-0 select-none pt-0.5">0{index + 1} {"//"}</span>
+                  <div className="space-y-2">
+                    <h3 className="text-lg font-semibold text-[var(--cream)] font-display tracking-wide">{faq.question}</h3>
+                    <p className="text-sm leading-relaxed text-white/65">{faq.answer}</p>
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
       <section className="section-shell relative z-10 pb-28 pt-16" id="contact">
         <Reveal>
           <div className="glass relative overflow-hidden rounded-[2.75rem] p-8 md:p-16 bg-black/20">
@@ -789,6 +817,92 @@ export default function Home() {
           </div>
         </Reveal>
       </section>
+
+      {/* Semantic High-Tech Developer & Systems Footer for SEO & Navigation */}
+      <footer className="relative z-10 border-t border-white/10 bg-black/60 pt-16 pb-12 backdrop-blur-xl">
+        <div className="section-shell">
+          <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4 pb-12 border-b border-white/10">
+            {/* Col 1: Developer Bio & Brand */}
+            <div className="space-y-4">
+              <div className="flex items-center gap-3">
+                <div className="relative h-7 w-7 overflow-hidden rounded-full border border-[var(--gold)]/40">
+                  <Image alt="Anudit Khatri Avatar" className="object-cover" fill sizes="28px" src="/assets/lazzy.jpeg" />
+                </div>
+                <span className="font-semibold text-sm tracking-[0.25em] text-[var(--cream)] uppercase">
+                  Anudit <span className="text-[var(--gold)]">Khatri</span>
+                </span>
+              </div>
+              <p className="text-xs leading-relaxed text-white/60">
+                Premier Fullstack Developer, Cybersecurity Researcher, and AI Systems Architect based in Kathmandu, Nepal. Dedicated to mission-critical engineering, local-first autonomy, and edge runtime security.
+              </p>
+              <div className="flex items-center gap-2 font-mono text-[9px] text-[var(--gold)]">
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                <span>AVAILABLE FOR GLOBAL SYSTEMS CONTRACTS</span>
+              </div>
+            </div>
+
+            {/* Col 2: Core Engineering Capabilities */}
+            <div className="space-y-3 font-mono text-xs">
+              <h4 className="text-[10px] uppercase tracking-[0.3em] text-[var(--gold)] font-bold">Engineering Stack</h4>
+              <ul className="space-y-2 text-white/65">
+                <li>• Next.js App Router &amp; Server Actions</li>
+                <li>• High-Performance Rust &amp; Python Systems</li>
+                <li>• Local LLM Orchestration &amp; MCP Tooling</li>
+                <li>• Edge Runtime Hardening &amp; Pentesting</li>
+                <li>• Mobile DFIR &amp; Digital Carving (iOS/Android)</li>
+                <li>• LoRa Wireless Telemetry &amp; IoT Meshes</li>
+              </ul>
+            </div>
+
+            {/* Col 3: Notable Systems & Verified Proof */}
+            <div className="space-y-3 font-mono text-xs">
+              <h4 className="text-[10px] uppercase tracking-[0.3em] text-[var(--gold)] font-bold">Systems &amp; Honors</h4>
+              <ul className="space-y-2 text-white/65">
+                <li>• 🏆 2nd Place: Nepal Police Hackathon 2083</li>
+                <li>• 🏆 #1 All-Time: DataCamp × Code for Nepal</li>
+                <li>• 🎓 66-Days Continuous Challenge Completer</li>
+                <li>• ⚡ Prahari-Link (LoRa Mesh Disaster Bridge)</li>
+                <li>• 🔍 WordPress SQLite Core Research (#568)</li>
+                <li>• 🛡️ 20 Verified DataCamp AI/Cloud Certs</li>
+              </ul>
+            </div>
+
+            {/* Col 4: Direct Dispatch & Location */}
+            <div className="space-y-3 font-mono text-xs">
+              <h4 className="text-[10px] uppercase tracking-[0.3em] text-[var(--gold)] font-bold">Direct Dispatch</h4>
+              <p className="text-white/60 text-[11px] leading-relaxed">
+                Base: Kathmandu, Bagmati, Nepal (NP)<br />
+                Response Latency: &lt; 24h
+              </p>
+              <div className="space-y-1.5 pt-1">
+                <a href={`mailto:${profile.socials.email}`} className="text-[var(--gold)] hover:underline block truncate">
+                  {profile.socials.email}
+                </a>
+                <a href={`https://wa.me/${profile.socials.whatsapp}`} target="_blank" rel="noopener noreferrer" className="text-emerald-400 hover:underline block">
+                  +977 9762691579 (WhatsApp)
+                </a>
+                <a href={`https://github.com/${profile.socials.github}`} target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-white block">
+                  github.com/{profile.socials.github}
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Copyright & Telemetry Bar */}
+          <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-[10px] text-white/40">
+            <div>
+              © {new Date().getFullYear()} Anudit Khatri (Lazzy Badger). All rights reserved.
+            </div>
+            <div className="flex items-center gap-4 text-[9px] text-white/30 uppercase tracking-widest">
+              <span>LAT: 27.7172° N</span>
+              <span>{"//"}</span>
+              <span>LNG: 85.3240° E</span>
+              <span>{"//"}</span>
+              <span className="text-[var(--gold)]">SYS_CORE: OPERATIONAL</span>
+            </div>
+          </div>
+        </div>
+      </footer>
     </main>
     </>
   );

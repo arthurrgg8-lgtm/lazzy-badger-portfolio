@@ -115,7 +115,7 @@ export default async function Image() {
               lineHeight: 1.4
             }}
           >
-            Cybersecurity Researcher • AI Systems Builder • Fullstack Engineer • 2nd Place Nepal Police Hackathon Winner
+            Fullstack Software Engineer • AI Systems Architect • Cybersecurity Researcher • Nepal Police Hackathon Winner
           </p>
         </div>
 
