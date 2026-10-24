@@ -107,7 +107,7 @@ export default function Home() {
             </Link>
             <div className="hidden items-center gap-4 border-l border-white/10 pl-6 md:flex">
               <div className="flex items-center gap-2">
-                <div className="h-1.5 w-1.5 animate-pulse rounded-full bg-[var(--gold)] shadow-[0_0_8px_var(--gold)]" />
+                <div className="h-1.5 w-1.5 rounded-full bg-[var(--gold)]" />
                 <span className="text-[10px] uppercase tracking-[0.2em] text-white/40">System: Online</span>
               </div>
               <div className="h-3 w-px bg-white/10" />
@@ -256,7 +256,7 @@ export default function Home() {
             <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-6 mb-8">
               <div>
                 <div className="flex items-center gap-2 mb-2">
-                  <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
                   <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-[var(--gold)]">INTELLIGENCE BRIEFING // RESEARCH & DEFENSE</span>
                 </div>
                 <h3 className="text-2xl sm:text-4xl font-bold font-display text-[var(--cream)] tracking-tight">
@@ -314,7 +314,7 @@ export default function Home() {
               {/* Research Screenshot Preview Frame */}
               <div className="group relative rounded-2xl border border-white/10 bg-black/60 p-2 sm:p-3 overflow-hidden shadow-2xl transition-all duration-500 hover:border-[var(--gold)]/50">
                 <div className="absolute top-4 left-4 z-20 flex items-center gap-2 rounded bg-black/80 px-2.5 py-1 font-mono text-[8px] text-[var(--gold)] backdrop-blur-md border border-white/10">
-                  <span className="h-1.5 w-1.5 rounded-full bg-[var(--gold)] animate-pulse" />
+                  <span className="h-1.5 w-1.5 rounded-full bg-[var(--gold)]" />
                   <span>TARGET: WordPress/sqlite-database-integration #568</span>
                 </div>
                 <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl">
@@ -378,7 +378,7 @@ export default function Home() {
             <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-6 mb-8">
               <div>
                 <div className="flex items-center gap-2 mb-2">
-                  <span className="h-2 w-2 rounded-full bg-[var(--gold)] animate-pulse shadow-[0_0_8px_var(--gold)]" />
+                  <span className="h-1.5 w-1.5 rounded-full bg-[var(--gold)]" />
                   <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-[var(--gold)]">HALL OF FAME // COMPETITIVE RANKINGS</span>
                 </div>
                 <h3 className="text-2xl sm:text-4xl font-bold font-display text-[var(--cream)] tracking-tight">
@@ -390,32 +390,16 @@ export default function Home() {
                   <span>🏆</span> #1 All-Time Rank
                 </span>
                 <span className="rounded-full border border-emerald-400/40 bg-emerald-400/10 px-3.5 py-1 text-emerald-400 uppercase tracking-widest font-semibold flex items-center gap-1.5">
-                  <span>🔥</span> 77-Day Active Streak
+                  <span>🎓</span> 66-Days Challenge Completer
                 </span>
               </div>
             </div>
 
             <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] items-center">
-              <div className="space-y-5">
+              <div className="space-y-6">
                 <p className="text-base leading-relaxed text-white/70">
-                  Secured the <span className="text-[var(--gold)] font-bold">#1 All-Time Leaderboard position</span> in the prestigious <span className="text-white font-semibold">Code for Nepal × DataCamp</span> community initiative, completing the grueling <span className="text-white font-semibold">66-Days Continuous Learning Challenge</span> and maintaining an unbroken <span className="text-emerald-400 font-mono font-bold">77+ Days daily learning streak</span>.
+                  Secured the <span className="text-[var(--gold)] font-bold">#1 All-Time Leaderboard position</span> in the prestigious <span className="text-white font-semibold">Code for Nepal × DataCamp</span> community initiative and successfully completed the rigorous <span className="text-white font-semibold">66-Days Continuous Learning Challenge</span> with verified data science and AI associate accreditations.
                 </p>
-
-                {/* Scorecards */}
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 font-mono text-center">
-                  <div className="rounded-2xl border border-white/5 bg-black/40 p-4">
-                    <span className="text-[8px] uppercase tracking-widest text-white/40 block mb-1">TOTAL EARNED XP</span>
-                    <span className="text-xl sm:text-2xl font-bold text-[var(--gold)]">826,306</span>
-                  </div>
-                  <div className="rounded-2xl border border-white/5 bg-black/40 p-4">
-                    <span className="text-[8px] uppercase tracking-widest text-white/40 block mb-1">LEADERBOARD XP</span>
-                    <span className="text-xl sm:text-2xl font-bold text-[var(--cream)]">368,042</span>
-                  </div>
-                  <div className="rounded-2xl border border-white/5 bg-black/40 p-4 col-span-2 sm:col-span-1">
-                    <span className="text-[8px] uppercase tracking-widest text-white/40 block mb-1">DAILY STREAK</span>
-                    <span className="text-xl sm:text-2xl font-bold text-emerald-400">77 Days 🔥</span>
-                  </div>
-                </div>
 
                 {/* Accreditation Stack */}
                 <div className="rounded-2xl border border-white/5 bg-black/40 p-5">
@@ -446,7 +430,7 @@ export default function Home() {
               {/* Verified Screenshot Showcase */}
               <div className="group relative rounded-2xl border border-white/10 bg-black/60 p-2 sm:p-3 overflow-hidden shadow-2xl transition-all duration-500 hover:border-[var(--gold)]/50">
                 <div className="absolute top-4 left-4 z-20 flex items-center gap-2 rounded bg-black/85 px-2.5 py-1 font-mono text-[8px] text-[var(--gold)] backdrop-blur-md border border-white/10">
-                  <span className="h-1.5 w-1.5 rounded-full bg-[var(--gold)] animate-pulse" />
+                  <span className="h-1.5 w-1.5 rounded-full bg-[var(--gold)]" />
                   <span>DATACAMP // LIVE LEADERBOARD VERIFICATION</span>
                 </div>
                 <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl">
@@ -460,7 +444,7 @@ export default function Home() {
                 </div>
                 <div className="mt-3 flex items-center justify-between px-2 font-mono text-[8px] text-white/40">
                   <span>HANDLE: LazZy Badger</span>
-                  <span className="text-[var(--gold)]">RANK: #1 ALL-TIME // 826K+ XP</span>
+                  <span className="text-[var(--gold)]">RANK: #1 ALL-TIME LEADERBOARD</span>
                 </div>
               </div>
             </div>
@@ -532,7 +516,7 @@ export default function Home() {
             <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-6 mb-8">
               <div>
                 <div className="flex items-center gap-2 mb-2">
-                  <span className="h-2 w-2 rounded-full bg-[var(--gold)] animate-pulse shadow-[0_0_8px_var(--gold)]" />
+                  <span className="h-1.5 w-1.5 rounded-full bg-[var(--gold)]" />
                   <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-[var(--gold)]">CUSTOM TOOLING ARSENAL // OFFENSIVE &amp; DFIR</span>
                 </div>
                 <h3 className="text-2xl sm:text-4xl font-bold font-display text-[var(--cream)] tracking-tight">
@@ -540,7 +524,7 @@ export default function Home() {
                 </h3>
               </div>
               <div className="flex flex-wrap items-center gap-2 font-mono text-[9px]">
-                <span className="rounded-full border border-[var(--gold)]/40 bg-[var(--gold)]/10 px-3 py-1 text-[var(--gold)] uppercase tracking-widest font-semibold flex items-center gap-1.5 shadow-[0_0_12px_rgba(215,181,109,0.15)]">
+                <span className="rounded-full border border-[var(--gold)]/40 bg-[var(--gold)]/10 px-3 py-1 text-[var(--gold)] uppercase tracking-widest font-semibold flex items-center gap-1.5">
                   <span>⚡</span> Fast Recon Engine
                 </span>
                 <span className="rounded-full border border-blue-400/40 bg-blue-400/10 px-3 py-1 text-blue-400 uppercase tracking-widest font-semibold flex items-center gap-1.5">
@@ -597,7 +581,7 @@ export default function Home() {
               {/* Verified Tooling Screenshot Showcase */}
               <div className="group relative rounded-2xl border border-white/10 bg-black/60 p-2 sm:p-3 overflow-hidden shadow-2xl transition-all duration-500 hover:border-[var(--gold)]/50">
                 <div className="absolute top-4 left-4 z-20 flex items-center gap-2 rounded bg-black/85 px-2.5 py-1 font-mono text-[8px] text-[var(--gold)] backdrop-blur-md border border-white/10">
-                  <span className="h-1.5 w-1.5 rounded-full bg-[var(--gold)] animate-pulse" />
+                  <span className="h-1.5 w-1.5 rounded-full bg-[var(--gold)]" />
                   <span>GITHUB: arthurrgg8-lgtm // TOOLING REPOSITORIES</span>
                 </div>
                 <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl">
@@ -680,19 +664,19 @@ export default function Home() {
                         <ScrambleText text={project.name} trigger={startScramble} />
                       </h3>
                       {project.status ? (
-                        <span className={`rounded-full px-3 py-1 text-[9px] uppercase tracking-[0.24em] font-semibold font-mono flex items-center gap-1.5 border transition-all duration-500 ${
+                        <span className={`rounded-full px-3 py-1 text-[9px] uppercase tracking-[0.24em] font-semibold font-mono flex items-center gap-1.5 border transition-all duration-300 ${
                           project.status === "Live"
-                            ? "border-emerald-500/30 bg-emerald-500/5 text-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.1)]"
+                            ? "border-emerald-500/30 bg-emerald-500/5 text-emerald-400"
                             : project.status === "In Development" || project.status === "2nd Place"
-                            ? "border-[var(--gold)]/40 bg-[rgba(215,181,109,0.06)] text-[var(--gold)] shadow-[0_0_10px_rgba(215,181,109,0.1)]"
-                            : "border-blue-400/30 bg-blue-400/5 text-blue-400 shadow-[0_0_10px_rgba(96,165,250,0.1)]"
+                            ? "border-[var(--gold)]/40 bg-[rgba(215,181,109,0.06)] text-[var(--gold)]"
+                            : "border-blue-400/30 bg-blue-400/5 text-blue-400"
                         }`}>
                           <span className={`h-1.5 w-1.5 rounded-full ${
                             project.status === "Live"
-                              ? "bg-emerald-400 animate-pulse shadow-[0_0_6px_rgba(52,211,153,0.6)]"
+                              ? "bg-emerald-400"
                               : project.status === "In Development" || project.status === "2nd Place"
-                              ? "bg-[var(--gold)] animate-pulse shadow-[0_0_6px_rgba(215,181,109,0.6)]"
-                              : "bg-blue-400 animate-pulse shadow-[0_0_6px_rgba(96,165,250,0.6)]"
+                              ? "bg-[var(--gold)]"
+                              : "bg-blue-400"
                           }`} />
                           {project.status}
                         </span>

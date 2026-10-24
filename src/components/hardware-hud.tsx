@@ -3,7 +3,7 @@
 import { useEffect, useState, useRef } from "react";
 
 const securityLogs = [
-  "[DataCamp] Code for Nepal #1 Leaderboard: 826K+ XP // 77-Day Streak ACTIVE",
+  "[DataCamp] Code for Nepal #1 Leaderboard // 66-Days Challenge Completer",
   "[Research] WordPress SQLite issue #568: LIKE to GLOB query distortion disclosed",
   "[SecOps] Active client security: Manoranjan, aitrialnp, and Anushka secured",
   "[CVE-Triage] Mitigated Node.js Brotli RCE (CVE-2026-111497) across client edge",
@@ -82,7 +82,7 @@ export function HardwareHud() {
       {/* Header Info */}
       <div className="flex items-center justify-between border-b border-white/5 pb-3">
         <div className="flex items-center gap-2">
-          <div className="h-1.5 w-1.5 animate-pulse rounded-full bg-[var(--gold)] shadow-[0_0_6px_var(--gold)]" />
+          <div className="h-1.5 w-1.5 rounded-full bg-[var(--gold)]" />
           <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-[var(--cream)]">NODE: badger-node-pi4</span>
         </div>
         <span className="font-mono text-[8px] uppercase tracking-[0.15em] text-white/40">SYS_TELEMETRY: ACTIVE</span>
