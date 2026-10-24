@@ -18,6 +18,9 @@ const navItems = ["about", "certifications", "projects", "gallery", "contact"];
 const projectDiagnostics: Record<string, { host: string; port: number; class: string }> = {
   "WordPress / SQLite Pattern Translation Research (Issue #568)": { host: "github.com", port: 443, class: "BUG_HUNT" },
   "Active Client Security & Infrastructure Hardening": { host: "client-edge", port: 443, class: "SEC_OPS" },
+  "h1watch & hunt-workspace": { host: "127.0.0.1", port: 9100, class: "RECON_CORE" },
+  "iforensic & aforensic (Mobile DFIR)": { host: "forensic-box", port: 5037, class: "MOBILE_DFIR" },
+  "Easy Patra (इजि-पत्र)": { host: "127.0.0.1", port: 3005, class: "DOC_AUTO" },
   "Prahari-Link (प्रहरी-Link)": { host: "127.0.0.1", port: 3001, class: "LORA_MESH" },
   "AI Trial Nepal (aitrialnp.com)": { host: "aitrialnp.com", port: 443, class: "LIVE_SYS" },
   "MR Tour Service": { host: "manoranjan.com.np", port: 443, class: "LIVE_SYS" },
@@ -25,6 +28,7 @@ const projectDiagnostics: Record<string, { host: string; port: number; class: st
   "Himalayan Mastiff Nepal": { host: "bhoteykukur.com.np", port: 8080, class: "DEV_PORT" },
   "Lazzybiointel-v6.2-PRO": { host: "127.0.0.1", port: 9090, class: "LOCAL_CORE" },
   "Deepfake-Analyzer": { host: "127.0.0.1", port: 8000, class: "LOCAL_CORE" },
+  "Autonomous RTSP Camera & 7-Day Cloud NVR": { host: "192.168.1.150", port: 554, class: "RTSP_NVR" },
   "Hardware-Driven Network & Motion Sensing Node": { host: "192.168.1.137", port: 22, class: "NODE_SSH" },
   "Cafe Billing System": { host: "192.168.1.104", port: 3000, class: "DEV_PORT" },
   "Confidential Project I": { host: "10.0.0.82", port: 8443, class: "SEC_TUNNEL" },
@@ -514,6 +518,111 @@ export default function Home() {
         <Reveal>
           <p className="text-xs uppercase tracking-[0.36em] text-[var(--gold)]">projects</p>
           <h2 className="font-display mt-3 text-3xl sm:text-5xl md:text-7xl tracking-[-0.04em]">Systems with teeth.</h2>
+        </Reveal>
+
+        {/* Custom Tooling & Forensic Engineering Showcase */}
+        <Reveal delay={0.06}>
+          <div className="mt-10 mb-12 glass relative overflow-hidden rounded-[2.5rem] border border-[rgba(215,181,109,0.38)] p-6 sm:p-10 bg-gradient-to-br from-white/[0.04] via-black/40 to-[rgba(215,181,109,0.06)] shadow-[0_0_40px_rgba(215,181,109,0.12)]">
+            {/* HUD Corner Accents */}
+            <div className="pointer-events-none absolute -left-px -top-px h-5 w-5 border-l-2 border-t-2 border-[var(--gold)]" />
+            <div className="pointer-events-none absolute -right-px -top-px h-5 w-5 border-r-2 border-t-2 border-[var(--gold)]" />
+            <div className="pointer-events-none absolute -left-px -bottom-px h-5 w-5 border-l-2 border-b-2 border-[var(--gold)]" />
+            <div className="pointer-events-none absolute -right-px -bottom-px h-5 w-5 border-r-2 border-b-2 border-[var(--gold)]" />
+
+            <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-6 mb-8">
+              <div>
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="h-2 w-2 rounded-full bg-[var(--gold)] animate-pulse shadow-[0_0_8px_var(--gold)]" />
+                  <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-[var(--gold)]">CUSTOM TOOLING ARSENAL // OFFENSIVE &amp; DFIR</span>
+                </div>
+                <h3 className="text-2xl sm:text-4xl font-bold font-display text-[var(--cream)] tracking-tight">
+                  High-Velocity Bug Hunting, Mobile DFIR &amp; Civic Automation
+                </h3>
+              </div>
+              <div className="flex flex-wrap items-center gap-2 font-mono text-[9px]">
+                <span className="rounded-full border border-[var(--gold)]/40 bg-[var(--gold)]/10 px-3 py-1 text-[var(--gold)] uppercase tracking-widest font-semibold flex items-center gap-1.5 shadow-[0_0_12px_rgba(215,181,109,0.15)]">
+                  <span>⚡</span> Fast Recon Engine
+                </span>
+                <span className="rounded-full border border-blue-400/40 bg-blue-400/10 px-3 py-1 text-blue-400 uppercase tracking-widest font-semibold flex items-center gap-1.5">
+                  <span>📱</span> Enterprise Mobile DFIR
+                </span>
+                <span className="rounded-full border border-emerald-400/40 bg-emerald-400/10 px-3 py-1 text-emerald-400 uppercase tracking-widest font-semibold flex items-center gap-1.5">
+                  <span>📄</span> Document Automation
+                </span>
+              </div>
+            </div>
+
+            <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] items-center">
+              <div className="space-y-4">
+                <div className="rounded-2xl border border-white/5 bg-black/40 p-4 sm:p-5">
+                  <div className="flex items-center justify-between font-mono text-[8px] text-white/40 mb-2">
+                    <span className="text-[var(--gold)] uppercase tracking-wider font-semibold">01 // H1WATCH &amp; HUNT-WORKSPACE</span>
+                    <span>ATTACK_SURFACE_MONITORING</span>
+                  </div>
+                  <h4 className="text-base font-semibold text-[var(--cream)] mb-1 font-display">
+                    Real-time HackerOne Scope Watcher &amp; Rapid Alerting
+                  </h4>
+                  <p className="text-xs leading-relaxed text-white/70">
+                    Engineered for high-velocity offensive security. Continuously monitors the HackerOne ecosystem for new programs and scope expansions, pushing instant Telegram alerts for immediate first-mover advantage. Seamlessly backed by <span className="text-white font-mono text-[11px]">hunt-workspace</span> to orchestrate subfinder, katana, and custom payload sweeps.
+                  </p>
+                </div>
+
+                <div className="rounded-2xl border border-white/5 bg-black/40 p-4 sm:p-5">
+                  <div className="flex items-center justify-between font-mono text-[8px] text-white/40 mb-2">
+                    <span className="text-blue-400 uppercase tracking-wider font-semibold">02 // IFORENSIC &amp; AFORENSIC</span>
+                    <span>ENTERPRISE_MOBILE_DFIR</span>
+                  </div>
+                  <h4 className="text-base font-semibold text-[var(--cream)] mb-1 font-display">
+                    Full-Fledged Deep Mobile Forensics (iOS &amp; Android)
+                  </h4>
+                  <p className="text-xs leading-relaxed text-white/70">
+                    Enterprise-grade Digital Forensics and Incident Response (DFIR) tooling suites. Automates low-level artifact carving, decrypted sandbox forensics, SQLite database extractions, iOS keychain/plist inspection, and Android Dalvik memory triage for red-team auditing and mobile investigations.
+                  </p>
+                </div>
+
+                <div className="rounded-2xl border border-white/5 bg-black/40 p-4 sm:p-5">
+                  <div className="flex items-center justify-between font-mono text-[8px] text-white/40 mb-2">
+                    <span className="text-emerald-400 uppercase tracking-wider font-semibold">03 // EASY PATRA (इजि-पत्र)</span>
+                    <span>CLERICAL_WORKFLOW_REDUCTION</span>
+                  </div>
+                  <h4 className="text-base font-semibold text-[var(--cream)] mb-1 font-display">
+                    Automated Administrative Letter Formatting &amp; Print Engine
+                  </h4>
+                  <p className="text-xs leading-relaxed text-white/70">
+                    Designed to eliminate repetitive manual clerical drafting across Nepali corporate and governmental correspondence. Formats standardized, high-fidelity administrative letters with instant print and PDF generation, dramatically reducing human error and turnaround time.
+                  </p>
+                </div>
+              </div>
+
+              {/* Verified Tooling Screenshot Showcase */}
+              <div className="group relative rounded-2xl border border-white/10 bg-black/60 p-2 sm:p-3 overflow-hidden shadow-2xl transition-all duration-500 hover:border-[var(--gold)]/50">
+                <div className="absolute top-4 left-4 z-20 flex items-center gap-2 rounded bg-black/85 px-2.5 py-1 font-mono text-[8px] text-[var(--gold)] backdrop-blur-md border border-white/10">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[var(--gold)] animate-pulse" />
+                  <span>GITHUB: arthurrgg8-lgtm // TOOLING REPOSITORIES</span>
+                </div>
+                <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl">
+                  <Image
+                    src="/assets/research/github-tooling-repos.png"
+                    alt="Active GitHub Repositories for h1watch, easy-patra, iforensic and aforensic by arthurrgg8-lgtm"
+                    fill
+                    className="object-cover object-top transition duration-700 group-hover:scale-[1.02]"
+                    sizes="(max-width: 1024px) 100vw, 550px"
+                  />
+                </div>
+                <div className="mt-3 flex items-center justify-between px-2 font-mono text-[8px] text-white/40">
+                  <span>AUTHOR: arthurrgg8-lgtm (LazZy)</span>
+                  <a
+                    href="https://github.com/arthurrgg8-lgtm"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[var(--gold)] hover:underline flex items-center gap-1"
+                  >
+                    GITHUB PROFILE ↗
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
         </Reveal>
         <div className="mt-12 grid gap-6">
           {profile.projects.map((project, index) => {

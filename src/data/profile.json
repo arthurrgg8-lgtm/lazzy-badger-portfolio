@@ -48,6 +48,15 @@
       "Bash / Shell"
     ],
     "tools": [
+      "h1watch",
+      "hunt-workspace",
+      "iforensic (iOS)",
+      "aforensic (Android)",
+      "Easy Patra",
+      "RTSP Streaming",
+      "Self-Hosted NVR",
+      "FFmpeg",
+      "Homelab Server",
       "Raspberry Pi",
       "Ralink 3070",
       "Linux",
@@ -137,6 +146,30 @@
       "stack": ["Client Security", "CVE Remediation", "Next.js 16 Hardening", "Cloudflare Edge", "OWASP Security"]
     },
     {
+      "name": "h1watch & hunt-workspace",
+      "description": "High-velocity automated bug hunting and attack surface monitoring engine. 'h1watch' monitors the HackerOne platform for newly launched programs and scope asset expansions in real time, firing instant Telegram alerts for rapid first-mover advantage. Backed by 'hunt-workspace', an orchestrated recon environment integrating subfinder, katana, and custom toolkits.",
+      "status": "Active",
+      "repository": "github.com/arthurrgg8-lgtm/h1watch",
+      "highlighted": true,
+      "stack": ["Python", "HackerOne API", "Telegram Bot API", "Recon Automation", "Attack Surface Mapping"]
+    },
+    {
+      "name": "iforensic & aforensic (Mobile DFIR)",
+      "description": "Enterprise-grade deep mobile forensic engineering suites for iOS (iforensic) and Android (aforensic). Automates low-level artifact acquisition, SQLite forensic extraction, decrypted application sandbox inspection, plist/XML parsing, live memory dumps, and mobile red-team auditing.",
+      "status": "Open Source",
+      "repository": "github.com/arthurrgg8-lgtm/iforensic",
+      "highlighted": true,
+      "stack": ["Python", "iOS Forensics", "Android DFIR", "SQLite Extraction", "Reverse Engineering", "Mobile Security"]
+    },
+    {
+      "name": "Easy Patra (इजि-पत्र)",
+      "description": "Automated official letter formatting, templating, and high-fidelity print generation platform designed to eliminate tedious manual clerical work in administrative and legal correspondence across Nepal, featuring standardized letterhead layouts and instant export.",
+      "status": "Active",
+      "repository": "github.com/arthurrgg8-lgtm/easy-patra",
+      "highlighted": true,
+      "stack": ["TypeScript", "Next.js", "React", "Document Automation", "Tailwind CSS"]
+    },
+    {
       "name": "Prahari-Link (प्रहरी-Link)",
       "description": "🏆 2nd Place Winner, Government Led First Hackathon 2083 by Nepal Police. An emergency communication bridge linking remote communities in Nepal with command centers via LoRa/ESP-NOW and offline Bluetooth telemetry.",
       "status": "2nd Place",
@@ -195,6 +228,13 @@
       "description": "Offline privacy-first deepfake detection workbench using Rust and Python hybrid architecture.",
       "status": "active",
       "stack": ["Rust", "Python", "PyTorch", "Offline-First"]
+    },
+    {
+      "name": "Autonomous RTSP Camera & 7-Day Cloud NVR",
+      "description": "Self-engineered 24/7 continuous event surveillance and NVR system built from scratch on a repurposed Linux laptop homelab server. Ingests low-latency RTSP camera streams, records continuous event clips, and executes automated rolling 7-day backups directly to cloud drive storage with zero third-party subscription dependencies.",
+      "status": "Active",
+      "highlighted": true,
+      "stack": ["RTSP Stream", "Linux Homelab", "FFmpeg", "Cloud Storage Sync", "Bash Automation", "Edge NVR", "Hardware Hacking"]
     },
     {
       "name": "Hardware-Driven Network & Motion Sensing Node",
