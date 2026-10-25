@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useRef } from "react";
 
-const matrixGlyphs = "X0189ABCDEF!@#$%^&*()_+~`<>?:{}[]-=/|";
+const matrixGlyphs = "0189ABCDEFXYZ";
 
 interface ScrambleTextProps {
   text: string;
@@ -19,7 +19,7 @@ export function ScrambleText({ text, trigger }: ScrambleTextProps) {
       return;
     }
 
-    const duration = 50; // Total duration in frames
+    const duration = 36; // Snappy 36 frames (~600ms)
     const chars = text.split("");
     const totalLength = chars.length;
 
@@ -36,7 +36,7 @@ export function ScrambleText({ text, trigger }: ScrambleTextProps) {
           if (index < lockedCount) {
             return char;
           }
-          // Cycle through random matrix code characters
+          // Cycle through clean matrix code characters without width deformation
           const randGlyph = matrixGlyphs[Math.floor(Math.random() * matrixGlyphs.length)];
           return randGlyph;
         })
@@ -61,5 +61,5 @@ export function ScrambleText({ text, trigger }: ScrambleTextProps) {
     };
   }, [text, trigger]);
 
-  return <span className="font-display select-none">{displayText}</span>;
+  return <span className="font-display select-none inline-block whitespace-nowrap">{displayText}</span>;
 }

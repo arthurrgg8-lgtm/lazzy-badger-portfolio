@@ -195,41 +195,33 @@ export default function Home() {
         </div>
       </div>
 
-      <section className="section-shell relative z-10 grid items-center gap-8 lg:gap-12 pb-12 pt-24 sm:pt-28 md:pt-32 lg:grid-cols-[1.1fr_0.9fr] min-h-[calc(100vh-4rem)] scroll-mt-24" id="top">
-        <div className="flex flex-col justify-center">
-          <Reveal delay={0.08}>
-            <div className="flex items-center gap-2 mb-3">
-              <span className="h-1.5 w-1.5 rounded-full bg-[var(--gold)] animate-pulse" />
-              <span className="font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.22em] sm:tracking-[0.3em] text-[var(--gold)]">
-                SYSTEM_ARCHITECT // CYBERSECURITY_RESEARCHER
-              </span>
-            </div>
-            <h1 className="font-display text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold leading-[0.95] md:leading-[0.86] tracking-[-0.05em] text-gradient">
-              <span className="sr-only">Anudit Khatri (Lazzy Badger) — Cybersecurity Researcher, AI Systems Architect & Fullstack Developer</span>
-              <ScrambleText text={profile.identity.brand_name} trigger={startScramble} />
-            </h1>
-          </Reveal>
-          <Reveal delay={0.16}>
-            <p className="mt-4 sm:mt-6 max-w-2xl text-sm sm:text-base md:text-lg leading-relaxed text-white/70">
-              {profile.about.persona}
-            </p>
-          </Reveal>
-          <Reveal delay={0.20}>
-            <HardwareHud />
-          </Reveal>
-          <Reveal delay={0.24}>
-            <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
-              <Link className="rounded-full bg-[var(--cream)] px-7 py-3.5 sm:py-4 text-center text-xs sm:text-sm font-bold uppercase tracking-[0.2em] text-black transition hover:bg-[var(--gold)] hover:shadow-[0_0_25px_rgba(215,181,109,0.3)]" href="#projects">
-                view systems
-              </Link>
-              <Link className="rounded-full glass px-7 py-3.5 sm:py-4 text-center text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] text-[var(--cream)] transition hover:text-[var(--gold)] hover:border-[var(--gold)]/40 hover:bg-white/[0.04]" href="#contact">
-                secure dispatch
-              </Link>
-            </div>
-          </Reveal>
-        </div>
+      <section className="section-shell relative z-10 grid items-start lg:items-center gap-8 lg:gap-12 pb-12 pt-20 sm:pt-28 md:pt-32 lg:grid-cols-[1.15fr_0.85fr] min-h-[calc(100vh-4rem)] scroll-mt-24" id="top">
+        <Reveal delay={0.04} className="flex flex-col justify-center">
+          <div className="flex items-center gap-2 mb-2.5 sm:mb-3">
+            <span className="h-1.5 w-1.5 rounded-full bg-[var(--gold)] animate-pulse" />
+            <span className="font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.2em] sm:tracking-[0.3em] text-[var(--gold)]">
+              SYSTEM_ARCHITECT // CYBERSECURITY_RESEARCHER
+            </span>
+          </div>
+          <h1 className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold leading-[0.98] sm:leading-[0.9] md:leading-[0.86] tracking-[-0.04em] text-gradient">
+            <span className="sr-only">Anudit Khatri (Lazzy Badger) — Cybersecurity Researcher, AI Systems Architect &amp; Fullstack Developer</span>
+            <ScrambleText text={profile.identity.brand_name} trigger={startScramble} />
+          </h1>
+          <p className="mt-3.5 sm:mt-6 max-w-2xl text-sm sm:text-base md:text-lg leading-relaxed text-white/70">
+            {profile.about.persona}
+          </p>
+          <HardwareHud />
+          <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
+            <Link className="rounded-full bg-[var(--cream)] px-7 py-3.5 sm:py-4 text-center text-xs sm:text-sm font-bold uppercase tracking-[0.2em] text-black transition hover:bg-[var(--gold)] hover:shadow-[0_0_25px_rgba(215,181,109,0.3)]" href="#projects">
+              view systems
+            </Link>
+            <Link className="rounded-full glass px-7 py-3.5 sm:py-4 text-center text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] text-[var(--cream)] transition hover:text-[var(--gold)] hover:border-[var(--gold)]/40 hover:bg-white/[0.04]" href="#contact">
+              secure dispatch
+            </Link>
+          </div>
+        </Reveal>
 
-        <Reveal delay={0.18} className="flex justify-center items-center mt-6 lg:mt-0">
+        <Reveal delay={0.08} className="flex justify-center items-center mt-6 lg:mt-0 w-full">
           <ProfileScanner />
         </Reveal>
       </section>

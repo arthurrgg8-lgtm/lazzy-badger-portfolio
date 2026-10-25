@@ -5,7 +5,7 @@ import { profile } from "@/lib/profile";
 
 export function ProfileScanner() {
   return (
-    <div className="relative mx-auto w-full max-w-[300px] sm:max-w-[380px] md:max-w-[440px] lg:max-w-[460px] lg:mr-0 group">
+    <div className="relative mx-auto w-full max-w-[340px] sm:max-w-[380px] md:max-w-[440px] lg:max-w-[460px] lg:mr-0 group">
       {/* Subtle border glow */}
       <div className="absolute -inset-2 rounded-[2rem] sm:rounded-[2.5rem] bg-[rgba(215,181,109,0.12)] blur-lg opacity-60 group-hover:opacity-80 transition duration-500" />
       

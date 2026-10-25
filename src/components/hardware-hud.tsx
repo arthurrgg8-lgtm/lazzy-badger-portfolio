@@ -89,21 +89,27 @@ export function HardwareHud() {
       </div>
 
       {/* Grid of Readouts */}
-      <div className="mt-3.5 sm:mt-4 grid grid-cols-3 gap-2 sm:gap-4 border-b border-white/5 pb-3.5 sm:pb-4">
+      <div className="mt-3.5 sm:mt-4 grid grid-cols-3 gap-2 sm:gap-4 border-b border-white/5 pb-3.5 sm:pb-4 items-end">
         {/* CPU Temp */}
-        <div className="flex flex-col gap-0.5 sm:gap-1">
+        <div className="flex flex-col gap-1">
           <span className="font-mono text-[7.5px] sm:text-[8px] uppercase tracking-wider text-white/30">CPU TEMP</span>
-          <span className="font-sans text-base sm:text-lg font-semibold text-[var(--cream)]">{cpuTemp}°C</span>
+          <div className="h-7 sm:h-8 flex items-center font-sans text-base sm:text-lg font-semibold text-[var(--cream)]">
+            {cpuTemp}°C
+          </div>
         </div>
         {/* RAM Usage */}
-        <div className="flex flex-col gap-0.5 sm:gap-1">
+        <div className="flex flex-col gap-1">
           <span className="font-mono text-[7.5px] sm:text-[8px] uppercase tracking-wider text-white/30">MEM LOAD</span>
-          <span className="font-sans text-base sm:text-lg font-semibold text-[var(--cream)]">{ramUsed} GB</span>
+          <div className="h-7 sm:h-8 flex items-center font-sans text-base sm:text-lg font-semibold text-[var(--cream)]">
+            {ramUsed} GB
+          </div>
         </div>
         {/* Interface status */}
-        <div className="flex flex-col gap-0.5 sm:gap-1 min-w-0">
+        <div className="flex flex-col gap-1 min-w-0">
           <span className="font-mono text-[7.5px] sm:text-[8px] uppercase tracking-wider text-white/30">NIC STATE</span>
-          <span className="font-mono text-[8.5px] sm:text-[10px] font-semibold text-[var(--gold)] uppercase leading-5 tracking-normal sm:tracking-widest truncate">wlan0mon</span>
+          <div className="h-7 sm:h-8 flex items-center font-mono text-[9px] sm:text-[10.5px] font-semibold text-[var(--gold)] uppercase tracking-wider truncate">
+            wlan0mon
+          </div>
         </div>
       </div>
 
