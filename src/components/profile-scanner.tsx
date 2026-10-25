@@ -7,10 +7,10 @@ export function ProfileScanner() {
   return (
     <div className="relative mx-auto w-full max-w-[340px] sm:max-w-[380px] md:max-w-[440px] lg:max-w-[460px] lg:mr-0 group">
       {/* Subtle border glow */}
-      <div className="absolute -inset-2 rounded-[2rem] sm:rounded-[2.5rem] bg-[rgba(215,181,109,0.12)] blur-lg opacity-60 group-hover:opacity-80 transition duration-500" />
+      <div className="absolute -inset-2 rounded-2xl sm:rounded-3xl bg-[rgba(215,181,109,0.12)] blur-lg opacity-60 group-hover:opacity-80 transition duration-500" />
       
       {/* Main Glass Frame */}
-      <div className="glass relative aspect-square w-full overflow-hidden rounded-[2rem] sm:rounded-[2.5rem] border border-white/10 shadow-[0_24px_90px_rgba(0,0,0,0.4)]">
+      <div className="glass relative aspect-square w-full overflow-hidden rounded-2xl sm:rounded-3xl border border-white/10 shadow-[0_24px_90px_rgba(0,0,0,0.4)] transition-all duration-500 group-hover:border-[var(--gold)]/40 group-hover:shadow-[0_0_35px_rgba(215,181,109,0.15)]">
         
         {/* Profile Image */}
         <Image

@@ -13,6 +13,7 @@ import { HardwareHud } from "@/components/hardware-hud";
 import { ProfileScanner } from "@/components/profile-scanner";
 import { NavLink } from "@/components/nav-link";
 import { faqs } from "@/lib/schema";
+import { SoundController, cyberSound } from "@/components/cyber-audio";
 
 const navItems = ["about", "certifications", "projects", "gallery", "faq", "contact"];
 
@@ -57,10 +58,33 @@ export default function Home() {
   const [certViewMode, setCertViewMode] = useState<"grid" | "seals">("grid");
   const [activeCertHover, setActiveCertHover] = useState<string | null>(null);
   const [datacampProofTab, setDatacampProofTab] = useState<"activity" | "leaderboard">("activity");
+  const [activePillar, setActivePillar] = useState<string | null>(null);
+  const [activeSkill, setActiveSkill] = useState<string | null>(null);
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [activeGalleryModal, setActiveGalleryModal] = useState<(typeof gallery)[0] | null>(null);
 
   const filteredCerts = certCategory === "ALL"
     ? profile.certifications_detail
     : profile.certifications_detail.filter((c: { category: string }) => c.category === certCategory);
+
+  useEffect(() => {
+    if (activeGalleryModal) {
+      document.body.style.overflow = "hidden";
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === "Escape") {
+          setActiveGalleryModal(null);
+          cyberSound.playBlip(720);
+        }
+      };
+      window.addEventListener("keydown", handleKeyDown);
+      return () => {
+        document.body.style.overflow = "";
+        window.removeEventListener("keydown", handleKeyDown);
+      };
+    } else if (!mobileMenuOpen) {
+      document.body.style.overflow = "";
+    }
+  }, [activeGalleryModal, mobileMenuOpen]);
 
   useEffect(() => {
     if (!isBooted) return;
@@ -133,6 +157,8 @@ export default function Home() {
               </div>
               <div className="h-3 w-px bg-white/10" />
               <span className="font-mono text-[9px] text-[var(--gold)] tracking-wider">LATENCY: {ping}ms</span>
+              <div className="h-3 w-px bg-white/10" />
+              <SoundController />
             </div>
           </div>
           <div className="hidden items-center gap-7 lg:gap-8 text-xs uppercase tracking-[0.26em] text-white/58 md:flex">
@@ -141,13 +167,15 @@ export default function Home() {
             ))}
           </div>
 
-          {/* Mobile hamburger button */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-[var(--cream)] hover:border-[var(--gold)] hover:text-[var(--gold)] transition duration-300 md:hidden z-50 focus:outline-none cursor-pointer"
-            aria-label="Toggle navigation menu"
-            aria-expanded={mobileMenuOpen}
-          >
+          {/* Mobile Sound & Menu Trigger Group */}
+          <div className="flex items-center gap-2 md:hidden">
+            <SoundController />
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-[var(--cream)] hover:border-[var(--gold)] hover:text-[var(--gold)] transition duration-300 z-50 focus:outline-none cursor-pointer"
+              aria-label="Toggle navigation menu"
+              aria-expanded={mobileMenuOpen}
+            >
             {mobileMenuOpen ? (
               <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -158,8 +186,9 @@ export default function Home() {
               </svg>
             )}
           </button>
-        </nav>
-      </header>
+        </div>
+      </nav>
+    </header>
 
       {/* Mobile Menu Overlay */}
       <div
@@ -247,8 +276,8 @@ export default function Home() {
           </div>
         </Reveal>
         <div className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr]">
-          <Reveal>
-            <div className="glass h-full rounded-2xl sm:rounded-[2rem] p-5 sm:p-7 relative overflow-hidden bg-black/20 flex flex-col justify-between">
+          <Reveal className="h-full">
+            <div className="glass h-full rounded-2xl sm:rounded-3xl p-5 sm:p-7 relative overflow-hidden bg-black/20 flex flex-col justify-between border border-white/10 hover:border-[var(--gold)]/30 transition-all duration-300">
               <div className="pointer-events-none absolute left-3 top-3 h-3 w-3 border-l border-t border-[var(--gold)]/40" />
               <div className="pointer-events-none absolute right-3 bottom-3 h-3 w-3 border-r border-b border-white/10" />
               <p className="text-sm sm:text-base leading-7 sm:leading-8 text-white/70 whitespace-pre-line">{profile.about.full_description}</p>
@@ -266,26 +295,61 @@ export default function Home() {
             </div>
           </Reveal>
           <div className="grid gap-4 sm:gap-5 sm:grid-cols-2">
-            {pillars.map((pillar, index) => (
-              <Reveal delay={index * 0.04} key={pillar}>
-                <div className="glass group relative overflow-hidden rounded-2xl sm:rounded-[2rem] p-5 sm:p-6 transition duration-500 hover:-translate-y-1 sm:hover:-translate-y-2 hover:border-[rgba(215,181,109,0.45)] bg-black/20" data-tilt-card>
-                  <div className="pointer-events-none absolute left-3 top-3 h-3 w-3 border-l border-t border-[var(--gold)]" />
-                  <div className="pointer-events-none absolute right-3 top-3 h-3 w-3 border-r border-t border-white/10 group-hover:border-[var(--gold)]/40 transition-colors" />
-                  
-                  <div className="flex items-center justify-between border-b border-white/5 pb-2.5">
-                    <span className="font-mono text-[8px] uppercase tracking-[0.2em] text-white/30">CORE MODULE // 0{index + 1}</span>
-                    <span className="font-mono text-[8px] uppercase tracking-[0.15em] text-[var(--gold)] group-hover:animate-pulse">Active</span>
-                  </div>
-                  
-                  <h3 className="mt-5 text-lg sm:text-xl font-semibold text-[var(--cream)] font-display tracking-wide group-hover:text-[var(--gold)] transition-colors">{pillar}</h3>
-                  
-                  <div className="mt-5 flex items-center justify-between font-mono text-[8px] text-white/30">
-                    <span>SEC_CLASS: LEVEL_4</span>
-                    <span>SYS_STATUS: OK</span>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
+            {pillars.map((pillar, index) => {
+              const isActive = activePillar === pillar;
+              return (
+                <Reveal delay={index * 0.04} key={pillar} className="h-full">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setActivePillar(isActive ? null : pillar);
+                      cyberSound.playBlip(isActive ? 760 : 1080);
+                    }}
+                    className={`glass group relative overflow-hidden rounded-2xl sm:rounded-3xl p-5 sm:p-6 transition-all duration-300 w-full text-left h-full flex flex-col justify-between cursor-pointer select-none bg-black/20 ${
+                      isActive
+                        ? "border-[var(--gold)] bg-[var(--gold)]/[0.08] shadow-[0_0_25px_rgba(215,181,109,0.22)] -translate-y-1"
+                        : "border-white/10 hover:-translate-y-1 hover:border-[rgba(215,181,109,0.45)] hover:bg-black/30 active:scale-[0.98]"
+                    }`}
+                    data-tilt-card
+                  >
+                    <div className="pointer-events-none absolute left-3 top-3 h-3 w-3 border-l border-t border-[var(--gold)]" />
+                    <div className={`pointer-events-none absolute right-3 top-3 h-3 w-3 border-r border-t transition-colors ${
+                      isActive ? "border-[var(--gold)]" : "border-white/10 group-hover:border-[var(--gold)]/40"
+                    }`} />
+                    
+                    <div className="flex items-center justify-between border-b border-white/5 pb-2.5">
+                      <span className="font-mono text-[8px] uppercase tracking-[0.2em] text-white/30">CORE MODULE // 0{index + 1}</span>
+                      <span className={`font-mono text-[8px] uppercase tracking-[0.15em] flex items-center gap-1 ${
+                        isActive ? "text-emerald-400 font-bold" : "text-[var(--gold)] group-hover:animate-pulse"
+                      }`}>
+                        <span className={`h-1.5 w-1.5 rounded-full ${isActive ? "bg-emerald-400 animate-ping" : "bg-[var(--gold)]"}`} />
+                        {isActive ? "DIAGNOSTIC ENGAGED" : "Active"}
+                      </span>
+                    </div>
+                    
+                    <div className="my-4">
+                      <h3 className={`text-lg sm:text-xl font-semibold font-display tracking-wide transition-colors ${
+                        isActive ? "text-[var(--gold)]" : "text-[var(--cream)] group-hover:text-[var(--gold)]"
+                      }`}>
+                        {pillar}
+                      </h3>
+                      {isActive && (
+                        <p className="mt-2 text-xs font-mono text-white/70 leading-relaxed border-t border-[var(--gold)]/20 pt-2">
+                          NODE ARMED // RUNTIME TELEMETRY SYNCHRONIZED // LATENCY SUB-25MS
+                        </p>
+                      )}
+                    </div>
+                    
+                    <div className="flex items-center justify-between font-mono text-[8px] text-white/30 border-t border-white/5 pt-2">
+                      <span>SEC_CLASS: LEVEL_4</span>
+                      <span className={isActive ? "text-[var(--gold)] font-semibold" : ""}>
+                        {isActive ? "TAP TO DISARM" : "TAP TO PROBE"}
+                      </span>
+                    </div>
+                  </button>
+                </Reveal>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -293,7 +357,7 @@ export default function Home() {
       {/* Active Research & Client Security Operations Section */}
       <section className="section-shell relative z-10 py-12">
         <Reveal>
-          <div className="glass relative overflow-hidden rounded-2xl sm:rounded-[2.5rem] border border-[rgba(215,181,109,0.35)] p-5 sm:p-8 lg:p-10 bg-gradient-to-br from-white/[0.04] via-black/40 to-[rgba(215,181,109,0.04)] shadow-[0_0_40px_rgba(215,181,109,0.08)]">
+          <div className="glass relative overflow-hidden rounded-2xl sm:rounded-3xl border border-[rgba(215,181,109,0.35)] p-5 sm:p-8 lg:p-10 bg-gradient-to-br from-white/[0.04] via-black/40 to-[rgba(215,181,109,0.04)] shadow-[0_0_40px_rgba(215,181,109,0.08)]">
             {/* HUD Corner Accents */}
             <div className="pointer-events-none absolute left-3 top-3 h-3.5 w-3.5 border-l-2 border-t-2 border-[var(--gold)]" />
             <div className="pointer-events-none absolute right-3 top-3 h-3.5 w-3.5 border-r-2 border-t-2 border-[var(--gold)]" />
@@ -322,7 +386,7 @@ export default function Home() {
 
             <div className="grid gap-6 sm:gap-8 lg:grid-cols-[1.1fr_0.9fr] items-center">
               <div className="space-y-4 sm:space-y-6">
-                <div className="rounded-2xl border border-white/5 bg-black/40 p-4 sm:p-6 relative">
+                <div className="rounded-xl sm:rounded-2xl border border-white/5 bg-black/40 p-4 sm:p-6 relative">
                   <div className="flex items-center justify-between font-mono text-[8.5px] sm:text-[9px] text-white/40 mb-2.5 border-b border-white/5 pb-2">
                     <span className="text-[var(--gold)] uppercase tracking-wider">01 // PRODUCTION CLIENT DEFENSE</span>
                     <span>RUNTIME_HARDENING</span>
@@ -335,7 +399,7 @@ export default function Home() {
                   </p>
                 </div>
 
-                <div className="rounded-2xl border border-white/5 bg-black/40 p-4 sm:p-6 relative">
+                <div className="rounded-xl sm:rounded-2xl border border-white/5 bg-black/40 p-4 sm:p-6 relative">
                   <div className="flex items-center justify-between font-mono text-[8.5px] sm:text-[9px] text-white/40 mb-2.5 border-b border-white/5 pb-2">
                     <span className="text-[var(--gold)] uppercase tracking-wider">02 // UPSTREAM SECURITY RESEARCH</span>
                     <span>PARSER_DIFFERENTIALS</span>
@@ -359,12 +423,12 @@ export default function Home() {
               </div>
 
               {/* Research Screenshot Preview Frame */}
-              <div className="group relative rounded-2xl border border-white/10 bg-black/60 p-2 sm:p-3 overflow-hidden shadow-2xl transition-all duration-500 hover:border-[var(--gold)]/50">
+              <div className="group relative rounded-xl sm:rounded-2xl border border-white/10 bg-black/60 p-2 sm:p-3 overflow-hidden shadow-2xl transition-all duration-500 hover:border-[var(--gold)]/50">
                 <div className="absolute top-2.5 left-2.5 sm:top-4 sm:left-4 z-20 flex items-center gap-1.5 sm:gap-2 rounded bg-black/85 px-2 py-0.5 sm:px-2.5 sm:py-1 font-mono text-[7.5px] sm:text-[8px] text-[var(--gold)] backdrop-blur-md border border-white/10 max-w-[calc(100%-1.25rem)] truncate">
                   <span className="h-1.5 w-1.5 rounded-full bg-[var(--gold)] shrink-0" />
                   <span className="truncate">TARGET: WordPress/sqlite-database-integration #568</span>
                 </div>
-                <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl">
+                <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg sm:rounded-xl">
                   <Image
                     src="/assets/research/wordpress-sqlite-issue-568.png"
                     alt="WordPress SQLite Database Integration Issue #568 Disclosure by arthurrgg8-lgtm"
@@ -397,16 +461,28 @@ export default function Home() {
             <h2 className="font-display mt-2 sm:mt-3 text-3xl sm:text-5xl md:text-6xl tracking-[-0.04em]">Core Capabilities.</h2>
           </div>
         </Reveal>
-        <Reveal>
-          <div className="grid gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            <SkillCluster title="Languages" values={profile.skills_and_tools.languages} />
-            <SkillCluster title="Bug Bounty Stack" values={profile.skills_and_tools.bug_bounty_tools} />
-            <SkillCluster title="MCP + AI Infra" values={profile.skills_and_tools.mcp_infrastructure} />
-            <SkillCluster title="Tools + Systems" values={profile.skills_and_tools.tools} />
-            <SkillCluster title="Traits" values={profile.skills_and_tools.core_traits} />
-            <SkillCluster title="Certifications" values={profile.skills_and_tools.certifications} />
-          </div>
-        </Reveal>
+        <div className="grid gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {[
+            { title: "Languages", values: profile.skills_and_tools.languages },
+            { title: "Bug Bounty Stack", values: profile.skills_and_tools.bug_bounty_tools },
+            { title: "MCP + AI Infra", values: profile.skills_and_tools.mcp_infrastructure },
+            { title: "Tools + Systems", values: profile.skills_and_tools.tools },
+            { title: "Traits", values: profile.skills_and_tools.core_traits },
+            { title: "Certifications", values: profile.skills_and_tools.certifications },
+          ].map((cluster, idx) => (
+            <Reveal delay={idx * 0.04} key={cluster.title} className="h-full">
+              <SkillCluster
+                title={cluster.title}
+                values={cluster.values}
+                activeSkill={activeSkill}
+                onSelectSkill={(skill) => {
+                  setActiveSkill(activeSkill === skill ? null : skill);
+                  cyberSound.playBlip(1160);
+                }}
+              />
+            </Reveal>
+          ))}
+        </div>
       </section>
 
       <section className="section-shell relative z-10 py-16 sm:py-24 scroll-mt-20" id="certifications" aria-labelledby="certifications-heading">
@@ -421,7 +497,7 @@ export default function Home() {
 
         {/* Code for Nepal / DataCamp #1 Leaderboard Showcase */}
         <Reveal delay={0.06}>
-          <div className="mt-8 sm:mt-10 mb-8 sm:mb-10 glass relative overflow-hidden rounded-2xl sm:rounded-[2.5rem] border border-[rgba(215,181,109,0.38)] p-4 sm:p-7 lg:p-8 bg-gradient-to-br from-white/[0.04] via-black/40 to-[rgba(215,181,109,0.06)] shadow-[0_0_40px_rgba(215,181,109,0.12)]">
+          <div className="mt-8 sm:mt-10 mb-8 sm:mb-10 glass relative overflow-hidden rounded-2xl sm:rounded-3xl border border-[rgba(215,181,109,0.38)] p-4 sm:p-7 lg:p-8 bg-gradient-to-br from-white/[0.04] via-black/40 to-[rgba(215,181,109,0.06)] shadow-[0_0_40px_rgba(215,181,109,0.12)]">
             {/* HUD Corner Accents */}
             <div className="pointer-events-none absolute left-3 top-3 h-3.5 w-3.5 border-l-2 border-t-2 border-[var(--gold)]" />
             <div className="pointer-events-none absolute right-3 top-3 h-3.5 w-3.5 border-r-2 border-t-2 border-[var(--gold)]" />
@@ -465,7 +541,7 @@ export default function Home() {
                     { label: "Tracks Completed", value: "7", color: "text-emerald-400", border: "border-emerald-400/30" },
                     { label: "Certifications", value: "11+", color: "text-purple-400", border: "border-purple-400/30" },
                   ].map((stat) => (
-                    <div key={stat.label} className={`rounded-xl border ${stat.border} bg-black/40 p-2 sm:p-2.5 text-center`}>
+                    <div key={stat.label} className={`rounded-xl border ${stat.border} bg-black/40 p-2 sm:p-2.5 text-center transition-all duration-300 hover:border-[var(--gold)]/60 hover:scale-[1.03]`}>
                       <div className={`font-display text-lg sm:text-2xl font-bold ${stat.color}`}>{stat.value}</div>
                       <div className="font-mono text-[7px] sm:text-[7.5px] uppercase tracking-wider text-white/50 mt-0.5">{stat.label}</div>
                     </div>
@@ -488,7 +564,7 @@ export default function Home() {
                     ].map((badge) => (
                       <span
                         key={badge}
-                        className="rounded-full border border-[var(--gold)]/20 bg-[var(--gold)]/5 px-2.5 py-0.5 text-[8.5px] sm:text-[9px] font-mono text-[var(--cream)] flex items-center gap-1.5"
+                        className="rounded-full border border-[var(--gold)]/20 bg-[var(--gold)]/5 px-2.5 py-0.5 text-[8.5px] sm:text-[9px] font-mono text-[var(--cream)] flex items-center gap-1.5 transition-all hover:border-[var(--gold)]/50"
                       >
                         <span className="text-[var(--gold)] text-xs">🏅</span>
                         {badge}
@@ -504,8 +580,11 @@ export default function Home() {
                 <div className="flex items-center gap-1.5 font-mono text-[8px] sm:text-[8.5px]">
                   <button
                     type="button"
-                    onClick={() => setDatacampProofTab("activity")}
-                    className={`px-3 py-1 rounded-lg border transition-all cursor-pointer flex items-center gap-1.5 ${
+                    onClick={() => {
+                      setDatacampProofTab("activity");
+                      cyberSound.playBlip(920);
+                    }}
+                    className={`px-3 py-1 rounded-lg border transition-all cursor-pointer flex items-center gap-1.5 active:scale-95 ${
                       datacampProofTab === "activity"
                         ? "border-[var(--gold)] bg-[var(--gold)]/15 text-[var(--gold)] font-bold shadow-[0_0_12px_rgba(215,181,109,0.25)]"
                         : "border-white/10 bg-black/40 text-white/50 hover:text-white"
@@ -515,8 +594,11 @@ export default function Home() {
                   </button>
                   <button
                     type="button"
-                    onClick={() => setDatacampProofTab("leaderboard")}
-                    className={`px-3 py-1 rounded-lg border transition-all cursor-pointer flex items-center gap-1.5 ${
+                    onClick={() => {
+                      setDatacampProofTab("leaderboard");
+                      cyberSound.playBlip(920);
+                    }}
+                    className={`px-3 py-1 rounded-lg border transition-all cursor-pointer flex items-center gap-1.5 active:scale-95 ${
                       datacampProofTab === "leaderboard"
                         ? "border-[var(--gold)] bg-[var(--gold)]/15 text-[var(--gold)] font-bold shadow-[0_0_12px_rgba(215,181,109,0.25)]"
                         : "border-white/10 bg-black/40 text-white/50 hover:text-white"
@@ -526,7 +608,7 @@ export default function Home() {
                   </button>
                 </div>
 
-                <div className="group relative rounded-2xl border border-white/10 bg-black/60 p-2 sm:p-3 overflow-hidden shadow-2xl transition-all duration-500 hover:border-[var(--gold)]/50">
+                <div className="group relative rounded-xl sm:rounded-2xl border border-white/10 bg-black/60 p-2 sm:p-3 overflow-hidden shadow-2xl transition-all duration-500 hover:border-[var(--gold)]/50">
                   <div className="absolute top-2.5 left-2.5 sm:top-4 sm:left-4 z-20 flex items-center gap-1.5 sm:gap-2 rounded bg-black/85 px-2 py-0.5 sm:px-2.5 sm:py-1 font-mono text-[7.5px] sm:text-[8px] text-[var(--gold)] backdrop-blur-md border border-white/10 max-w-[calc(100%-1.25rem)] truncate">
                     <span className="h-1.5 w-1.5 rounded-full bg-[var(--gold)] shrink-0" />
                     <span className="truncate">
@@ -535,7 +617,7 @@ export default function Home() {
                         : "DATACAMP // LIVE LEADERBOARD VERIFICATION // #1 RANK"}
                     </span>
                   </div>
-                  <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl">
+                  <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg sm:rounded-xl">
                     <Image
                       src={
                         datacampProofTab === "activity"
@@ -586,8 +668,11 @@ export default function Home() {
                   <button
                     key={tab.id}
                     type="button"
-                    onClick={() => setCertCategory(tab.id as typeof certCategory)}
-                    className={`px-3 py-1.5 rounded-full font-mono text-[10.5px] sm:text-xs transition-all duration-300 flex items-center gap-1.5 cursor-pointer border ${
+                    onClick={() => {
+                      setCertCategory(tab.id as typeof certCategory);
+                      cyberSound.playBlip(900);
+                    }}
+                    className={`px-3 py-1.5 rounded-full font-mono text-[10.5px] sm:text-xs transition-all duration-300 flex items-center gap-1.5 cursor-pointer border active:scale-95 select-none ${
                       active
                         ? "border-[var(--gold)] bg-[var(--gold)]/15 text-[var(--gold)] shadow-[0_0_15px_rgba(215,181,109,0.2)] font-semibold"
                         : "border-white/10 bg-white/[0.03] text-white/60 hover:border-white/20 hover:text-white"
@@ -612,9 +697,12 @@ export default function Home() {
               <div className="flex items-center p-0.5 rounded-xl border border-white/10 bg-black/40">
                 <button
                   type="button"
-                  onClick={() => setCertViewMode("grid")}
+                  onClick={() => {
+                    setCertViewMode("grid");
+                    cyberSound.playBlip(1020);
+                  }}
                   aria-label="Cards view"
-                  className={`px-2.5 py-1 rounded-lg font-mono text-[10px] uppercase tracking-wider transition-all duration-300 flex items-center gap-1.5 cursor-pointer ${
+                  className={`px-2.5 py-1 rounded-lg font-mono text-[10px] uppercase tracking-wider transition-all duration-300 flex items-center gap-1.5 cursor-pointer active:scale-95 ${
                     certViewMode === "grid"
                       ? "bg-[var(--gold)]/20 text-[var(--gold)] border border-[var(--gold)]/40 shadow-[0_0_10px_rgba(215,181,109,0.15)] font-semibold"
                       : "text-white/40 hover:text-white"
@@ -627,9 +715,12 @@ export default function Home() {
                 </button>
                 <button
                   type="button"
-                  onClick={() => setCertViewMode("seals")}
+                  onClick={() => {
+                    setCertViewMode("seals");
+                    cyberSound.playBlip(1020);
+                  }}
                   aria-label="Circles view"
-                  className={`px-2.5 py-1 rounded-lg font-mono text-[10px] uppercase tracking-wider transition-all duration-300 flex items-center gap-1.5 cursor-pointer ${
+                  className={`px-2.5 py-1 rounded-lg font-mono text-[10px] uppercase tracking-wider transition-all duration-300 flex items-center gap-1.5 cursor-pointer active:scale-95 ${
                     certViewMode === "seals"
                       ? "bg-[var(--gold)]/20 text-[var(--gold)] border border-[var(--gold)]/40 shadow-[0_0_10px_rgba(215,181,109,0.15)] font-semibold"
                       : "text-white/40 hover:text-white"
@@ -754,7 +845,7 @@ export default function Home() {
 
         {/* Custom Tooling & Forensic Engineering Showcase */}
         <Reveal delay={0.06}>
-          <div className="mt-8 sm:mt-10 mb-8 sm:mb-12 glass relative overflow-hidden rounded-2xl sm:rounded-[2.5rem] border border-[rgba(215,181,109,0.38)] p-4 sm:p-7 lg:p-10 bg-gradient-to-br from-white/[0.04] via-black/40 to-[rgba(215,181,109,0.06)] shadow-[0_0_40px_rgba(215,181,109,0.12)]">
+          <div className="mt-8 sm:mt-10 mb-8 sm:mb-12 glass relative overflow-hidden rounded-2xl sm:rounded-3xl border border-[rgba(215,181,109,0.38)] p-4 sm:p-7 lg:p-10 bg-gradient-to-br from-white/[0.04] via-black/40 to-[rgba(215,181,109,0.06)] shadow-[0_0_40px_rgba(215,181,109,0.12)]">
             {/* HUD Corner Accents */}
             <div className="pointer-events-none absolute left-3 top-3 h-3.5 w-3.5 border-l-2 border-t-2 border-[var(--gold)]" />
             <div className="pointer-events-none absolute right-3 top-3 h-3.5 w-3.5 border-r-2 border-t-2 border-[var(--gold)]" />
@@ -827,12 +918,12 @@ export default function Home() {
               </div>
 
               {/* Verified Tooling Screenshot Showcase */}
-              <div className="group relative rounded-2xl border border-white/10 bg-black/60 p-2 sm:p-3 overflow-hidden shadow-2xl transition-all duration-500 hover:border-[var(--gold)]/50">
+              <div className="group relative rounded-xl sm:rounded-2xl border border-white/10 bg-black/60 p-2 sm:p-3 overflow-hidden shadow-2xl transition-all duration-500 hover:border-[var(--gold)]/50">
                 <div className="absolute top-2.5 left-2.5 sm:top-4 sm:left-4 z-20 flex items-center gap-1.5 sm:gap-2 rounded bg-black/85 px-2 py-0.5 sm:px-2.5 sm:py-1 font-mono text-[7.5px] sm:text-[8px] text-[var(--gold)] backdrop-blur-md border border-white/10 max-w-[calc(100%-1.25rem)] truncate">
                   <span className="h-1.5 w-1.5 rounded-full bg-[var(--gold)] shrink-0" />
                   <span className="truncate">GITHUB: arthurrgg8-lgtm // TOOLING REPOSITORIES</span>
                 </div>
-                <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl">
+                <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg sm:rounded-xl">
                   <Image
                     src="/assets/research/github-tooling-repos.png"
                     alt="Active GitHub Repositories for h1watch, easy-patra, iforensic and aforensic by arthurrgg8-lgtm"
@@ -864,7 +955,7 @@ export default function Home() {
             return (
               <Reveal delay={Math.min(index * 0.03, 0.3)} key={project.name}>
                 <article 
-                  className={`glass group relative flex flex-col md:grid md:grid-cols-[70px_1fr_auto] md:items-center gap-3.5 sm:gap-6 rounded-2xl sm:rounded-[2rem] p-3.5 sm:p-6 lg:p-8 transition-all duration-500 overflow-hidden bg-black/20 ${
+                  className={`glass group relative flex flex-col md:grid md:grid-cols-[70px_1fr_auto] md:items-center gap-3.5 sm:gap-6 rounded-2xl sm:rounded-3xl p-3.5 sm:p-6 lg:p-8 transition-all duration-500 overflow-hidden bg-black/20 ${
                     project.highlighted 
                       ? "border-[rgba(215,181,109,0.38)] shadow-[0_0_35px_rgba(215,181,109,0.12)] hover:border-[var(--gold)] hover:shadow-[0_0_45px_rgba(215,181,109,0.22)] bg-gradient-to-br from-white/[0.07] via-white/[0.02] to-[rgba(215,181,109,0.05)]" 
                       : "border-white/5 hover:border-[rgba(215,181,109,0.48)] hover:shadow-[0_0_30px_rgba(255,255,255,0.02)]"
@@ -886,7 +977,7 @@ export default function Home() {
                       href={projectTarget} 
                       target="_blank" 
                       rel="noopener noreferrer" 
-                      className="absolute inset-0 z-10 rounded-2xl sm:rounded-[2rem]" 
+                      className="absolute inset-0 z-10 rounded-2xl sm:rounded-3xl" 
                       title={`Open ${project.name} ${projectTarget.includes("github.com") ? "repository" : "live site"}`}
                       aria-label={`Open ${project.name} ${projectTarget.includes("github.com") ? "repository" : "live site"}`}
                     />
@@ -1012,7 +1103,14 @@ export default function Home() {
               const coords = galleryIntel[item.label] || "LAT: 27.7172° N // LNG: 85.3240° E";
               return (
                 <div className="w-[82vw] xs:w-[75vw] sm:w-[340px] lg:w-[400px] shrink-0 snap-center sm:snap-start" key={item.src}>
-                  <div className="glass group relative aspect-[3/4] overflow-hidden rounded-2xl sm:rounded-[2rem] border border-white/5 hover:border-[var(--gold)]/35 transition duration-500 bg-black/20">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setActiveGalleryModal(item);
+                      cyberSound.playBlip(1040);
+                    }}
+                    className="glass group relative aspect-[3/4] w-full overflow-hidden rounded-2xl sm:rounded-3xl border border-white/10 hover:border-[var(--gold)]/50 transition-all duration-500 bg-black/20 cursor-pointer block text-left active:scale-[0.98]"
+                  >
                     <Image alt={item.alt} className="object-cover transition duration-700 group-hover:scale-105" fill sizes="(max-width: 640px) 82vw, 400px" src={item.src} />
                     
                     {/* Forensic target crops */}
@@ -1024,11 +1122,19 @@ export default function Home() {
                       <span>{coords}</span>
                     </div>
 
+                    {/* Visual Expand Hint */}
+                    <div className="absolute top-3 right-3 sm:top-4 sm:right-4 h-7 w-7 rounded-full bg-black/70 backdrop-blur-md border border-white/10 flex items-center justify-center text-white/60 group-hover:border-[var(--gold)] group-hover:text-[var(--gold)] transition-all">
+                      <span className="text-xs">⤢</span>
+                    </div>
+
                     <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/50 to-transparent p-4 sm:p-6">
                       <p className="font-mono text-[8px] uppercase tracking-[0.2em] text-white/40 mb-1">INTEL_LOG // 0{index + 1}</p>
-                      <p className="text-xs sm:text-sm uppercase tracking-[0.25em] text-[var(--gold)] font-semibold">{item.label}</p>
+                      <p className="text-xs sm:text-sm uppercase tracking-[0.25em] text-[var(--gold)] font-semibold flex items-center justify-between">
+                        <span>{item.label}</span>
+                        <span className="text-[10px] font-mono text-white/40 font-normal">TAP TO EXPAND</span>
+                      </p>
                     </div>
-                  </div>
+                  </button>
                 </div>
               );
             })}
@@ -1046,26 +1152,65 @@ export default function Home() {
           </p>
         </Reveal>
 
-        <div className="mt-8 sm:mt-12 space-y-3.5 sm:space-y-4 max-w-4xl">
-          {faqs.map((faq, index) => (
-            <Reveal delay={index * 0.04} key={faq.question}>
-              <div className="glass group rounded-xl sm:rounded-2xl border border-white/5 bg-black/30 p-4 sm:p-6 transition duration-300 hover:border-[var(--gold)]/30 hover:bg-black/40">
-                <div className="flex items-start gap-3 sm:gap-4">
-                  <span className="font-mono text-xs text-[var(--gold)] shrink-0 select-none pt-0.5">0{index + 1} {"//"}</span>
-                  <div className="space-y-1.5 sm:space-y-2">
-                    <h3 className="text-base sm:text-lg font-semibold text-[var(--cream)] font-display tracking-wide">{faq.question}</h3>
-                    <p className="text-xs sm:text-sm leading-relaxed text-white/65">{faq.answer}</p>
-                  </div>
+        <div className="mt-8 sm:mt-12 space-y-3 sm:space-y-3.5 max-w-4xl">
+          {faqs.map((faq, index) => {
+            const isOpen = openFaq === index;
+            return (
+              <Reveal delay={index * 0.04} key={faq.question}>
+                <div
+                  className={`glass group rounded-xl sm:rounded-2xl border transition-all duration-300 overflow-hidden ${
+                    isOpen
+                      ? "border-[var(--gold)]/50 bg-black/50 shadow-[0_0_20px_rgba(215,181,109,0.12)]"
+                      : "border-white/5 bg-black/30 hover:border-[var(--gold)]/30 hover:bg-black/40"
+                  }`}
+                >
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setOpenFaq(isOpen ? null : index);
+                      cyberSound.playBlip(isOpen ? 780 : 980);
+                    }}
+                    className="w-full text-left p-4 sm:p-5 flex items-center justify-between gap-3 sm:gap-4 cursor-pointer select-none"
+                    aria-expanded={isOpen}
+                  >
+                    <div className="flex items-center gap-3 sm:gap-4 min-w-0">
+                      <span className="font-mono text-xs text-[var(--gold)] shrink-0 select-none">
+                        0{index + 1} {"//"}
+                      </span>
+                      <h3 className={`text-sm sm:text-base md:text-lg font-semibold font-display tracking-wide transition-colors ${
+                        isOpen ? "text-[var(--gold)]" : "text-[var(--cream)] group-hover:text-[var(--gold)]"
+                      }`}>
+                        {faq.question}
+                      </h3>
+                    </div>
+                    <div
+                      className={`h-7 w-7 rounded-full border border-white/10 bg-white/[0.03] flex items-center justify-center text-xs text-white/60 transition-all duration-300 shrink-0 ${
+                        isOpen
+                          ? "rotate-180 border-[var(--gold)] text-[var(--gold)] bg-[var(--gold)]/10"
+                          : "group-hover:border-white/30"
+                      }`}
+                    >
+                      ↓
+                    </div>
+                  </button>
+
+                  {isOpen && (
+                    <div className="px-4 pb-4 sm:px-5 sm:pb-5 pt-0 border-t border-white/5 mt-1">
+                      <p className="text-xs sm:text-sm leading-relaxed text-white/70 pl-7 sm:pl-9 pt-2">
+                        {faq.answer}
+                      </p>
+                    </div>
+                  )}
                 </div>
-              </div>
-            </Reveal>
-          ))}
+              </Reveal>
+            );
+          })}
         </div>
       </section>
 
       <section className="section-shell relative z-10 pb-20 sm:pb-28 pt-12 sm:pt-16 scroll-mt-20" id="contact">
         <Reveal>
-          <div className="glass relative overflow-hidden rounded-2xl sm:rounded-[2.5rem] p-6 sm:p-10 md:p-16 bg-black/20">
+          <div className="glass relative overflow-hidden rounded-2xl sm:rounded-3xl p-6 sm:p-10 md:p-16 bg-black/20">
             <div className="pointer-events-none absolute left-3 top-3 h-4 w-4 border-l border-t border-[var(--gold)]/40" />
             <div className="pointer-events-none absolute right-3 top-3 h-4 w-4 border-r border-t border-white/10" />
             <div className="pointer-events-none absolute left-3 bottom-3 h-4 w-4 border-l border-b border-white/10" />
@@ -1184,6 +1329,71 @@ export default function Home() {
           </div>
         </div>
       </footer>
+
+      {/* Floating Cyber Ambient Audio Controller for Mobile Screens */}
+      <div className="fixed bottom-4 right-4 z-40 sm:hidden">
+        <SoundController />
+      </div>
+
+      {/* Interactive Cyber HUD Lightbox Modal */}
+      {activeGalleryModal && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-2xl p-3 sm:p-6 md:p-10 animate-fadeIn"
+          onClick={() => {
+            setActiveGalleryModal(null);
+            cyberSound.playBlip(720);
+          }}
+        >
+          <div
+            className="relative max-w-4xl w-full max-h-[92vh] glass rounded-2xl sm:rounded-3xl border border-[var(--gold)]/40 overflow-hidden shadow-[0_0_60px_rgba(215,181,109,0.25)] flex flex-col bg-black/95"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Modal Header */}
+            <div className="flex items-center justify-between border-b border-white/10 px-4 sm:px-6 py-3 sm:py-3.5 bg-black/70 font-mono text-[9px] sm:text-xs">
+              <div className="flex items-center gap-2 text-[var(--gold)] min-w-0">
+                <span className="h-2 w-2 rounded-full bg-[var(--gold)] animate-pulse shrink-0" />
+                <span className="font-bold tracking-widest uppercase truncate">FIELD INTEL // {activeGalleryModal.label}</span>
+              </div>
+              <div className="flex items-center gap-3 sm:gap-4 shrink-0">
+                <span className="text-white/40 hidden md:inline">{galleryIntel[activeGalleryModal.label] || "LAT: 27.7172° N // LNG: 85.3240° E"}</span>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setActiveGalleryModal(null);
+                    cyberSound.playBlip(720);
+                  }}
+                  className="h-8 w-8 rounded-full border border-white/10 bg-white/5 flex items-center justify-center text-white/70 hover:border-[var(--gold)] hover:text-[var(--gold)] hover:bg-[var(--gold)]/10 transition-all cursor-pointer"
+                  aria-label="Close image modal"
+                >
+                  ✕
+                </button>
+              </div>
+            </div>
+
+            {/* Modal Image Area */}
+            <div className="relative aspect-[4/3] sm:aspect-[16/10] w-full bg-black/80 flex items-center justify-center overflow-hidden">
+              <Image
+                src={activeGalleryModal.src}
+                alt={activeGalleryModal.alt}
+                fill
+                className="object-contain p-2"
+                sizes="(max-width: 1024px) 95vw, 1000px"
+              />
+              {/* Reticle Overlay */}
+              <div className="pointer-events-none absolute left-4 top-4 h-4 w-4 border-l-2 border-t-2 border-[var(--gold)]" />
+              <div className="pointer-events-none absolute right-4 top-4 h-4 w-4 border-r-2 border-t-2 border-[var(--gold)]" />
+              <div className="pointer-events-none absolute left-4 bottom-4 h-4 w-4 border-l-2 border-b-2 border-[var(--gold)]" />
+              <div className="pointer-events-none absolute right-4 bottom-4 h-4 w-4 border-r-2 border-b-2 border-[var(--gold)]" />
+            </div>
+
+            {/* Modal Footer */}
+            <div className="flex flex-wrap items-center justify-between gap-2 px-4 sm:px-6 py-2.5 sm:py-3 border-t border-white/10 bg-black/70 font-mono text-[8px] sm:text-[9.5px] text-white/50">
+              <span className="truncate max-w-[280px] sm:max-w-none">TARGET: {activeGalleryModal.alt}</span>
+              <span className="text-[var(--gold)]">ESC OR TAP ✕ TO DISMISS</span>
+            </div>
+          </div>
+        </div>
+      )}
     </main>
     </>
   );
@@ -1192,7 +1402,7 @@ export default function Home() {
 function SocialIcon({ href, icon, ariaLabel }: { href: string; icon: React.ReactNode; ariaLabel: string }) {
   return (
     <a 
-      className="group relative flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-xl sm:rounded-2xl border border-white/10 bg-white/[0.02] transition-all duration-300 hover:border-[var(--gold)] hover:bg-[var(--gold)]/10 hover:shadow-[0_0_20px_rgba(215,181,109,0.2)]" 
+      className="group relative flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-xl sm:rounded-2xl border border-white/10 bg-white/[0.02] transition-all duration-300 hover:border-[var(--gold)] hover:bg-[var(--gold)]/10 hover:shadow-[0_0_20px_rgba(215,181,109,0.2)] active:scale-95" 
       href={href}
       rel="noopener noreferrer"
       target="_blank"
@@ -1207,26 +1417,52 @@ function SocialIcon({ href, icon, ariaLabel }: { href: string; icon: React.React
   );
 }
 
-function SkillCluster({ title, values }: { title: string; values: string[] }) {
+function SkillCluster({
+  title,
+  values,
+  activeSkill,
+  onSelectSkill,
+}: {
+  title: string;
+  values: string[];
+  activeSkill: string | null;
+  onSelectSkill: (skill: string) => void;
+}) {
   return (
-    <div className="glass relative p-4 sm:p-6 rounded-2xl sm:rounded-[1.5rem] bg-black/25 border border-white/5 transition-all duration-300 hover:border-[var(--gold)]/20 shadow-lg">
+    <div className="glass relative p-4 sm:p-6 rounded-2xl sm:rounded-3xl bg-black/25 border border-white/5 transition-all duration-300 hover:border-[var(--gold)]/30 shadow-lg h-full flex flex-col justify-between">
       <div className="pointer-events-none absolute left-3 top-3 h-3 w-3 border-l border-t border-[var(--gold)]/40" />
       <div className="pointer-events-none absolute right-3 bottom-3 h-3 w-3 border-r border-b border-white/10" />
       
-      <div className="flex items-center justify-between border-b border-white/5 pb-2.5 mb-3.5 select-none">
-        <h3 className="font-mono text-[9px] uppercase tracking-[0.2em] sm:tracking-[0.25em] text-[var(--gold)]">{title}</h3>
-        <span className="font-mono text-[7px] text-white/20 select-none">DB_CLUSTER_READY</span>
+      <div>
+        <div className="flex items-center justify-between border-b border-white/5 pb-2.5 mb-3.5 select-none">
+          <h3 className="font-mono text-[9px] uppercase tracking-[0.2em] sm:tracking-[0.25em] text-[var(--gold)] font-bold">{title}</h3>
+          <span className="font-mono text-[7px] text-white/30 select-none">DB_CLUSTER_READY</span>
+        </div>
+
+        <div className="flex flex-wrap gap-1.5 sm:gap-2">
+          {values.map((value) => {
+            const isSelected = activeSkill === value;
+            return (
+              <button
+                type="button"
+                key={value}
+                onClick={() => onSelectSkill(value)}
+                className={`rounded border px-2 py-0.5 sm:px-2.5 sm:py-1 font-mono text-[8.5px] sm:text-[9px] uppercase tracking-wider transition-all duration-200 cursor-pointer select-none active:scale-95 ${
+                  isSelected
+                    ? "border-[var(--gold)] bg-[var(--gold)]/20 text-[var(--gold)] font-bold shadow-[0_0_12px_rgba(215,181,109,0.3)] ring-1 ring-[var(--gold)]/50"
+                    : "border-white/5 bg-white/[0.02] text-white/50 hover:border-[var(--gold)]/35 hover:text-[var(--gold)] hover:bg-[var(--gold)]/5"
+                }`}
+              >
+                {value}
+              </button>
+            );
+          })}
+        </div>
       </div>
 
-      <div className="flex flex-wrap gap-1.5">
-        {values.map((value) => (
-          <span 
-            className="rounded border border-white/5 bg-white/[0.02] px-2 py-0.5 sm:px-2.5 sm:py-1 font-mono text-[8.5px] sm:text-[9px] uppercase tracking-wider text-white/50 transition-all duration-300 hover:border-[var(--gold)]/35 hover:text-[var(--gold)] hover:bg-[var(--gold)]/5 select-none" 
-            key={value}
-          >
-            {value}
-          </span>
-        ))}
+      <div className="mt-3.5 pt-2 border-t border-white/5 flex items-center justify-between font-mono text-[7.5px] text-white/30 select-none">
+        <span>NODES: {values.length}</span>
+        <span className="text-[var(--gold)]/60">TAP SKILL TO HIGHLIGHT</span>
       </div>
     </div>
   );
