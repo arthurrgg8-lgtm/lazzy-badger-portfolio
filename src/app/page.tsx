@@ -56,6 +56,7 @@ export default function Home() {
   const [certCategory, setCertCategory] = useState<"ALL" | "AI" | "Cloud" | "DevTools">("ALL");
   const [certViewMode, setCertViewMode] = useState<"grid" | "seals">("grid");
   const [activeCertHover, setActiveCertHover] = useState<string | null>(null);
+  const [datacampProofTab, setDatacampProofTab] = useState<"activity" | "leaderboard">("activity");
 
   const filteredCerts = certCategory === "ALL"
     ? profile.certifications_detail
@@ -207,7 +208,7 @@ export default function Home() {
           <div className="flex items-center gap-2 mb-2.5 sm:mb-3">
             <span className="h-1.5 w-1.5 rounded-full bg-[var(--gold)] animate-pulse" />
             <span className="font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.2em] sm:tracking-[0.3em] text-[var(--gold)]">
-              SYSTEM_ARCHITECT // CYBERSECURITY_RESEARCHER
+              SYSTEM_ARCHITECT // IOT_BUILDER // CYBERSECURITY_RESEARCHER
             </span>
           </div>
           <h1 className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold leading-[0.98] sm:leading-[0.9] md:leading-[0.86] tracking-[-0.04em] text-gradient">
@@ -247,10 +248,21 @@ export default function Home() {
         </Reveal>
         <div className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr]">
           <Reveal>
-            <div className="glass h-full rounded-2xl sm:rounded-[2rem] p-5 sm:p-7 relative overflow-hidden bg-black/20">
+            <div className="glass h-full rounded-2xl sm:rounded-[2rem] p-5 sm:p-7 relative overflow-hidden bg-black/20 flex flex-col justify-between">
               <div className="pointer-events-none absolute left-3 top-3 h-3 w-3 border-l border-t border-[var(--gold)]/40" />
               <div className="pointer-events-none absolute right-3 bottom-3 h-3 w-3 border-r border-b border-white/10" />
               <p className="text-sm sm:text-base leading-7 sm:leading-8 text-white/70 whitespace-pre-line">{profile.about.full_description}</p>
+
+              {/* Operative Ethos Callout Box */}
+              <div className="mt-5 rounded-xl border border-[var(--gold)]/25 bg-gradient-to-r from-[rgba(215,181,109,0.08)] via-black/40 to-transparent p-3.5 sm:p-4">
+                <div className="flex items-center gap-2 mb-1.5 font-mono text-[8.5px] uppercase tracking-widest text-[var(--gold)]">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[var(--gold)] animate-pulse" />
+                  <span>OPERATIVE ETHOS // EXPLORATION HORIZON</span>
+                </div>
+                <p className="font-display italic text-xs sm:text-[13px] text-[var(--cream)] leading-relaxed">
+                  &ldquo;IT is an ocean, filled with infinite knowledge, and my mission is to explore every current and fathom of it. My mind naturally deconstructs algorithms, software, and hardware architectures with intuitive ease—allowing me to engineer, secure, and master systems across every domain.&rdquo;
+                </p>
+              </div>
             </div>
           </Reveal>
           <div className="grid gap-4 sm:gap-5 sm:grid-cols-2">
@@ -409,42 +421,60 @@ export default function Home() {
 
         {/* Code for Nepal / DataCamp #1 Leaderboard Showcase */}
         <Reveal delay={0.06}>
-          <div className="mt-8 sm:mt-10 mb-10 sm:mb-12 glass relative overflow-hidden rounded-2xl sm:rounded-[2.5rem] border border-[rgba(215,181,109,0.38)] p-5 sm:p-8 lg:p-10 bg-gradient-to-br from-white/[0.04] via-black/40 to-[rgba(215,181,109,0.06)] shadow-[0_0_40px_rgba(215,181,109,0.12)]">
+          <div className="mt-8 sm:mt-10 mb-8 sm:mb-10 glass relative overflow-hidden rounded-2xl sm:rounded-[2.5rem] border border-[rgba(215,181,109,0.38)] p-4 sm:p-7 lg:p-8 bg-gradient-to-br from-white/[0.04] via-black/40 to-[rgba(215,181,109,0.06)] shadow-[0_0_40px_rgba(215,181,109,0.12)]">
             {/* HUD Corner Accents */}
             <div className="pointer-events-none absolute left-3 top-3 h-3.5 w-3.5 border-l-2 border-t-2 border-[var(--gold)]" />
             <div className="pointer-events-none absolute right-3 top-3 h-3.5 w-3.5 border-r-2 border-t-2 border-[var(--gold)]" />
             <div className="pointer-events-none absolute left-3 bottom-3 h-3.5 w-3.5 border-l-2 border-b-2 border-[var(--gold)]" />
             <div className="pointer-events-none absolute right-3 bottom-3 h-3.5 w-3.5 border-r-2 border-b-2 border-[var(--gold)]" />
 
-            <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-5 sm:pb-6 mb-6 sm:mb-8">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 border-b border-white/10 pb-4 sm:pb-6 mb-5 sm:mb-8">
               <div>
-                <div className="flex items-center gap-2 mb-2">
+                <div className="flex items-center gap-2 mb-1.5">
                   <span className="h-1.5 w-1.5 rounded-full bg-[var(--gold)]" />
-                  <span className="font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.2em] sm:tracking-[0.3em] text-[var(--gold)]">HALL OF FAME // COMPETITIVE RANKINGS</span>
+                  <span className="font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.2em] sm:tracking-[0.3em] text-[var(--gold)]">HALL OF FAME // COMPETITIVE RANKINGS &amp; PLATFORM TELEMETRY</span>
                 </div>
-                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold font-display text-[var(--cream)] tracking-tight">
-                  DataCamp / Code for Nepal #1 Leaderboard &amp; 66-Days Challenge Completer
+                <h3 className="text-xl sm:text-3xl lg:text-4xl font-bold font-display text-[var(--cream)] tracking-tight">
+                  DataCamp / Code for Nepal #1 Leaderboard &amp; 179+ Courses Verified
                 </h3>
               </div>
-              <div className="flex flex-wrap items-center gap-2 font-mono text-[8.5px] sm:text-[9px]">
+              <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 font-mono text-[8px] sm:text-[9px]">
                 <span className="rounded-full border border-[var(--gold)]/40 bg-[var(--gold)]/10 px-3 py-1 text-[var(--gold)] uppercase tracking-wider sm:tracking-widest font-semibold flex items-center gap-1.5 shadow-[0_0_12px_rgba(215,181,109,0.2)]">
                   <span>🏆</span> #1 All-Time Rank
                 </span>
+                <span className="rounded-full border border-sky-400/40 bg-sky-400/10 px-3 py-1 text-sky-400 uppercase tracking-wider sm:tracking-widest font-semibold flex items-center gap-1.5">
+                  <span>⚡</span> 179 Courses
+                </span>
                 <span className="rounded-full border border-emerald-400/40 bg-emerald-400/10 px-3 py-1 text-emerald-400 uppercase tracking-wider sm:tracking-widest font-semibold flex items-center gap-1.5">
-                  <span>🎓</span> 66-Days Challenge Completer
+                  <span>🎓</span> 66-Days Completer
                 </span>
               </div>
             </div>
 
             <div className="grid gap-6 sm:gap-8 lg:grid-cols-[1.1fr_0.9fr] items-center">
-              <div className="space-y-4 sm:space-y-6">
+              <div className="space-y-4 sm:space-y-5">
                 <p className="text-sm sm:text-base leading-relaxed text-white/70">
-                  Secured the <span className="text-[var(--gold)] font-bold">#1 All-Time Leaderboard position</span> in the prestigious <span className="text-white font-semibold">Code for Nepal × DataCamp</span> community initiative and successfully completed the rigorous <span className="text-white font-semibold">66-Days Continuous Learning Challenge</span> with verified data science and AI associate accreditations.
+                  Secured the <span className="text-[var(--gold)] font-bold">#1 All-Time Leaderboard position</span> in the prestigious <span className="text-white font-semibold">Code for Nepal × DataCamp</span> community initiative and completed the rigorous <span className="text-white font-semibold">66-Days Continuous Learning Challenge</span>. Conquered over <span className="text-[var(--gold)] font-semibold">179 verified technical courses</span>, <span className="text-white font-semibold">120 DataLab engineering projects</span>, and <span className="text-white font-semibold">7 career tracks</span> across artificial intelligence, cloud architectures, and developer tooling.
                 </p>
 
+                {/* Verified Platform Telemetry Stats Grid */}
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-2.5">
+                  {[
+                    { label: "Courses Completed", value: "179", color: "text-[var(--gold)]", border: "border-[var(--gold)]/30" },
+                    { label: "DataLab Projects", value: "120", color: "text-sky-400", border: "border-sky-400/30" },
+                    { label: "Tracks Completed", value: "7", color: "text-emerald-400", border: "border-emerald-400/30" },
+                    { label: "Certifications", value: "11+", color: "text-purple-400", border: "border-purple-400/30" },
+                  ].map((stat) => (
+                    <div key={stat.label} className={`rounded-xl border ${stat.border} bg-black/40 p-2 sm:p-2.5 text-center`}>
+                      <div className={`font-display text-lg sm:text-2xl font-bold ${stat.color}`}>{stat.value}</div>
+                      <div className="font-mono text-[7px] sm:text-[7.5px] uppercase tracking-wider text-white/50 mt-0.5">{stat.label}</div>
+                    </div>
+                  ))}
+                </div>
+
                 {/* Accreditation Stack */}
-                <div className="rounded-2xl border border-white/5 bg-black/40 p-4 sm:p-5">
-                  <span className="font-mono text-[8.5px] sm:text-[9px] uppercase tracking-wider sm:tracking-widest text-[var(--gold)] block mb-3 font-semibold">
+                <div className="rounded-xl sm:rounded-2xl border border-white/5 bg-black/40 p-3.5 sm:p-4">
+                  <span className="font-mono text-[8.5px] sm:text-[9px] uppercase tracking-wider sm:tracking-widest text-[var(--gold)] block mb-2 font-semibold">
                     VERIFIED ASSOCIATE ACCREDITATIONS
                   </span>
                   <div className="flex flex-wrap gap-1.5 sm:gap-2">
@@ -458,7 +488,7 @@ export default function Home() {
                     ].map((badge) => (
                       <span
                         key={badge}
-                        className="rounded-lg border border-[var(--gold)]/20 bg-[var(--gold)]/5 px-2.5 py-1 text-[9.5px] sm:text-[10px] font-mono text-[var(--cream)] flex items-center gap-1.5"
+                        className="rounded-full border border-[var(--gold)]/20 bg-[var(--gold)]/5 px-2.5 py-0.5 text-[8.5px] sm:text-[9px] font-mono text-[var(--cream)] flex items-center gap-1.5"
                       >
                         <span className="text-[var(--gold)] text-xs">🏅</span>
                         {badge}
@@ -468,24 +498,72 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Verified Screenshot Showcase */}
-              <div className="group relative rounded-2xl border border-white/10 bg-black/60 p-2 sm:p-3 overflow-hidden shadow-2xl transition-all duration-500 hover:border-[var(--gold)]/50">
-                <div className="absolute top-2.5 left-2.5 sm:top-4 sm:left-4 z-20 flex items-center gap-1.5 sm:gap-2 rounded bg-black/85 px-2 py-0.5 sm:px-2.5 sm:py-1 font-mono text-[7.5px] sm:text-[8px] text-[var(--gold)] backdrop-blur-md border border-white/10 max-w-[calc(100%-1.25rem)] truncate">
-                  <span className="h-1.5 w-1.5 rounded-full bg-[var(--gold)] shrink-0" />
-                  <span className="truncate">DATACAMP // LIVE LEADERBOARD VERIFICATION</span>
+              {/* Dual-Verification Showcase Screenshot Switcher */}
+              <div className="space-y-2">
+                {/* Proof Switcher Tabs */}
+                <div className="flex items-center gap-1.5 font-mono text-[8px] sm:text-[8.5px]">
+                  <button
+                    type="button"
+                    onClick={() => setDatacampProofTab("activity")}
+                    className={`px-3 py-1 rounded-lg border transition-all cursor-pointer flex items-center gap-1.5 ${
+                      datacampProofTab === "activity"
+                        ? "border-[var(--gold)] bg-[var(--gold)]/15 text-[var(--gold)] font-bold shadow-[0_0_12px_rgba(215,181,109,0.25)]"
+                        : "border-white/10 bg-black/40 text-white/50 hover:text-white"
+                    }`}
+                  >
+                    <span>⚡</span> 179 Courses Activity
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setDatacampProofTab("leaderboard")}
+                    className={`px-3 py-1 rounded-lg border transition-all cursor-pointer flex items-center gap-1.5 ${
+                      datacampProofTab === "leaderboard"
+                        ? "border-[var(--gold)] bg-[var(--gold)]/15 text-[var(--gold)] font-bold shadow-[0_0_12px_rgba(215,181,109,0.25)]"
+                        : "border-white/10 bg-black/40 text-white/50 hover:text-white"
+                    }`}
+                  >
+                    <span>🏆</span> #1 All-Time Rank
+                  </button>
                 </div>
-                <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl">
-                  <Image
-                    src="/assets/research/datacamp-leaderboard-66days.png"
-                    alt="DataCamp Code for Nepal All Time #1 Leaderboard and 66 Days Challenge Completer - LazZy Badger"
-                    fill
-                    className="object-cover object-top transition duration-700 group-hover:scale-[1.02]"
-                    sizes="(max-width: 1024px) 100vw, 550px"
-                  />
-                </div>
-                <div className="mt-3 flex flex-wrap items-center justify-between gap-2 px-1 sm:px-2 font-mono text-[7.5px] sm:text-[8px] text-white/40">
-                  <span>HANDLE: LazZy Badger</span>
-                  <span className="text-[var(--gold)]">RANK: #1 ALL-TIME LEADERBOARD</span>
+
+                <div className="group relative rounded-2xl border border-white/10 bg-black/60 p-2 sm:p-3 overflow-hidden shadow-2xl transition-all duration-500 hover:border-[var(--gold)]/50">
+                  <div className="absolute top-2.5 left-2.5 sm:top-4 sm:left-4 z-20 flex items-center gap-1.5 sm:gap-2 rounded bg-black/85 px-2 py-0.5 sm:px-2.5 sm:py-1 font-mono text-[7.5px] sm:text-[8px] text-[var(--gold)] backdrop-blur-md border border-white/10 max-w-[calc(100%-1.25rem)] truncate">
+                    <span className="h-1.5 w-1.5 rounded-full bg-[var(--gold)] shrink-0" />
+                    <span className="truncate">
+                      {datacampProofTab === "activity"
+                        ? "DATACAMP // ACTIVITY TELEMETRY // 179 COURSES • 120 PROJECTS"
+                        : "DATACAMP // LIVE LEADERBOARD VERIFICATION // #1 RANK"}
+                    </span>
+                  </div>
+                  <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl">
+                    <Image
+                      src={
+                        datacampProofTab === "activity"
+                          ? "/assets/research/datacamp-activity-metrics.png"
+                          : "/assets/research/datacamp-leaderboard-66days.png"
+                      }
+                      alt={
+                        datacampProofTab === "activity"
+                          ? "DataCamp Verified Activity Metrics - 179 Courses, 120 Projects, 7 Tracks by LazZy Badger"
+                          : "DataCamp Code for Nepal All Time #1 Leaderboard and 66 Days Challenge Completer - LazZy Badger"
+                      }
+                      fill
+                      className="object-cover object-top transition duration-700 group-hover:scale-[1.02]"
+                      sizes="(max-width: 1024px) 100vw, 550px"
+                    />
+                  </div>
+                  <div className="mt-2.5 flex flex-wrap items-center justify-between gap-2 px-1 font-mono text-[7.5px] sm:text-[8px] text-white/40">
+                    <span>
+                      {datacampProofTab === "activity"
+                        ? "STATUS: 179 COMPLETED • 44 IN PROGRESS"
+                        : "HANDLE: LazZy Badger"}
+                    </span>
+                    <span className="text-[var(--gold)]">
+                      {datacampProofTab === "activity"
+                        ? "PLATFORM: DATACAMP ACTIVE"
+                        : "RANK: #1 ALL-TIME LEADERBOARD"}
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
