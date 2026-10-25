@@ -53,6 +53,13 @@ export default function Home() {
   const [startScramble, setStartScramble] = useState(false);
   const [ping, setPing] = useState(24);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [certCategory, setCertCategory] = useState<"ALL" | "AI" | "Cloud" | "DevTools">("ALL");
+  const [certViewMode, setCertViewMode] = useState<"grid" | "seals">("grid");
+  const [activeCertHover, setActiveCertHover] = useState<string | null>(null);
+
+  const filteredCerts = certCategory === "ALL"
+    ? profile.certifications_detail
+    : profile.certifications_detail.filter((c: { category: string }) => c.category === certCategory);
 
   useEffect(() => {
     if (!isBooted) return;
@@ -485,52 +492,180 @@ export default function Home() {
           </div>
         </Reveal>
 
-        <div className="mt-8 sm:mt-12 grid gap-3 sm:gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {profile.certifications_detail.map((cert: { name: string; issuer: string; file: string; category: string }, index: number) => (
-            <Reveal delay={index * 0.03} key={cert.name}>
-              <a
-                href={cert.file}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="glass group relative flex flex-col justify-between overflow-hidden rounded-2xl sm:rounded-[1.5rem] p-4 sm:p-6 transition-all duration-500 hover:-translate-y-1 hover:border-[var(--gold)] hover:shadow-[0_0_30px_rgba(215,181,109,0.12)] bg-black/20 h-full"
-              >
-                {/* HUD corner marks */}
-                <div className="pointer-events-none absolute left-3 top-3 h-3 w-3 border-l border-t border-[var(--gold)]/30 group-hover:border-[var(--gold)] transition-colors duration-500" />
-                <div className="pointer-events-none absolute right-3 bottom-3 h-3 w-3 border-r border-b border-[var(--gold)]/30 group-hover:border-[var(--gold)] transition-colors duration-500" />
+        {/* Certifications Navigation & View Controller */}
+        <Reveal delay={0.08}>
+          <div className="mt-8 sm:mt-10 mb-5 sm:mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-white/10 pb-4">
+            {/* Category Filter Pills */}
+            <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
+              {[
+                { id: "ALL", label: "All Credentials", count: profile.certifications_detail.length },
+                { id: "AI", label: "AI & Agents", count: 8 },
+                { id: "Cloud", label: "Cloud & Infra", count: 7 },
+                { id: "DevTools", label: "Developer Tools", count: 5 },
+              ].map((tab) => {
+                const active = certCategory === tab.id;
+                return (
+                  <button
+                    key={tab.id}
+                    type="button"
+                    onClick={() => setCertCategory(tab.id as typeof certCategory)}
+                    className={`px-3 py-1.5 rounded-full font-mono text-[10.5px] sm:text-xs transition-all duration-300 flex items-center gap-1.5 cursor-pointer border ${
+                      active
+                        ? "border-[var(--gold)] bg-[var(--gold)]/15 text-[var(--gold)] shadow-[0_0_15px_rgba(215,181,109,0.2)] font-semibold"
+                        : "border-white/10 bg-white/[0.03] text-white/60 hover:border-white/20 hover:text-white"
+                    }`}
+                  >
+                    <span>{tab.label}</span>
+                    <span
+                      className={`px-1.5 py-0.2 rounded-full text-[9px] font-semibold ${
+                        active ? "bg-[var(--gold)] text-black font-bold" : "bg-white/10 text-white/50"
+                      }`}
+                    >
+                      {tab.count}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
 
-                {/* Header: index + category */}
-                <div className="flex items-center justify-between border-b border-white/5 pb-2.5 mb-3 sm:mb-4">
-                  <span className="font-mono text-[8px] uppercase tracking-[0.2em] sm:tracking-[0.25em] text-white/30">CERT // {String(index + 1).padStart(2, "0")}</span>
-                  <span className={`rounded-full px-2.5 py-0.5 text-[8px] uppercase tracking-[0.16em] sm:tracking-[0.2em] font-mono font-semibold border transition-all duration-300 ${
-                    cert.category === "AI"
-                      ? "border-[var(--gold)]/30 bg-[var(--gold)]/5 text-[var(--gold)]"
-                      : cert.category === "Cloud"
-                      ? "border-sky-400/30 bg-sky-400/5 text-sky-400"
-                      : "border-emerald-400/30 bg-emerald-400/5 text-emerald-400"
-                  }`}>
-                    {cert.category}
-                  </span>
+            {/* View Switcher: Cards vs Small Circle Seals */}
+            <div className="flex items-center gap-2 self-start sm:self-auto">
+              <span className="font-mono text-[8.5px] uppercase tracking-wider text-white/40 hidden md:inline">LAYOUT:</span>
+              <div className="flex items-center p-0.5 rounded-xl border border-white/10 bg-black/40">
+                <button
+                  type="button"
+                  onClick={() => setCertViewMode("grid")}
+                  aria-label="Cards view"
+                  className={`px-2.5 py-1 rounded-lg font-mono text-[10px] uppercase tracking-wider transition-all duration-300 flex items-center gap-1.5 cursor-pointer ${
+                    certViewMode === "grid"
+                      ? "bg-[var(--gold)]/20 text-[var(--gold)] border border-[var(--gold)]/40 shadow-[0_0_10px_rgba(215,181,109,0.15)] font-semibold"
+                      : "text-white/40 hover:text-white"
+                  }`}
+                >
+                  <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+                  </svg>
+                  <span>Cards</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setCertViewMode("seals")}
+                  aria-label="Circles view"
+                  className={`px-2.5 py-1 rounded-lg font-mono text-[10px] uppercase tracking-wider transition-all duration-300 flex items-center gap-1.5 cursor-pointer ${
+                    certViewMode === "seals"
+                      ? "bg-[var(--gold)]/20 text-[var(--gold)] border border-[var(--gold)]/40 shadow-[0_0_10px_rgba(215,181,109,0.15)] font-semibold"
+                      : "text-white/40 hover:text-white"
+                  }`}
+                >
+                  <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <circle cx="12" cy="12" r="9" strokeWidth="2" />
+                    <circle cx="12" cy="12" r="3" fill="currentColor" />
+                  </svg>
+                  <span>Circles</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </Reveal>
+
+        {certViewMode === "grid" ? (
+          <div className="grid gap-2 sm:gap-2.5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+            {filteredCerts.map((cert: { name: string; issuer: string; file: string; category: string }, index: number) => {
+              const theme = getCertTheme(cert.category);
+              return (
+                <Reveal delay={Math.min(index * 0.02, 0.25)} key={cert.name}>
+                  <a
+                    href={cert.file}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group relative flex items-center gap-3 rounded-xl border border-white/10 bg-black/25 px-3 py-2.5 hover:border-[var(--gold)]/60 hover:bg-white/[0.03] hover:shadow-[0_0_20px_rgba(215,181,109,0.12)] transition-all duration-300 min-w-0"
+                  >
+                    {/* Small Circle Badge */}
+                    <div
+                      className={`relative flex h-9 w-9 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-full border transition-transform duration-300 group-hover:scale-105 shadow-sm ${theme.border} ${theme.bg} ${theme.text} ring-1 ${theme.ring}`}
+                    >
+                      <CertCategoryIcon category={cert.category} className="h-4.5 w-4.5 sm:h-5 sm:w-5" />
+                      <span className={`absolute -bottom-0.5 -right-0.5 h-2 w-2 rounded-full border border-black ${theme.dot}`} />
+                    </div>
+
+                    {/* Meta info */}
+                    <div className="min-w-0 flex-1">
+                      <h4
+                        className="text-xs sm:text-[13px] font-semibold text-[var(--cream)] truncate group-hover:text-[var(--gold)] transition-colors leading-tight"
+                        title={cert.name}
+                      >
+                        {cert.name}
+                      </h4>
+                      <div className="mt-0.5 flex items-center gap-1.5 font-mono text-[8.5px] sm:text-[9px] text-white/40 truncate">
+                        <span className="truncate">{cert.issuer}</span>
+                        <span className="text-white/20">•</span>
+                        <span className={theme.text}>{cert.category}</span>
+                      </div>
+                    </div>
+
+                    {/* Small Circle Link Button */}
+                    <div className="h-7 w-7 rounded-full border border-white/10 bg-white/[0.02] flex items-center justify-center text-[10px] text-white/40 group-hover:border-[var(--gold)]/50 group-hover:text-[var(--gold)] group-hover:bg-[var(--gold)]/10 transition-all shrink-0">
+                      <span>↗</span>
+                    </div>
+                  </a>
+                </Reveal>
+              );
+            })}
+          </div>
+        ) : (
+          /* Circles View: Pure small circular seals matrix with interactive live HUD ticker */
+          <div className="space-y-4">
+            <div className="glass rounded-2xl border border-white/10 bg-black/30 p-4 sm:p-6">
+              <div className="flex flex-wrap gap-2.5 sm:gap-3.5 justify-center sm:justify-start">
+                {filteredCerts.map((cert: { name: string; issuer: string; file: string; category: string }) => {
+                  const theme = getCertTheme(cert.category);
+                  const isHovered = activeCertHover === cert.name;
+                  return (
+                    <a
+                      key={cert.name}
+                      href={cert.file}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onMouseEnter={() => setActiveCertHover(cert.name)}
+                      onMouseLeave={() => setActiveCertHover(null)}
+                      onFocus={() => setActiveCertHover(cert.name)}
+                      onBlur={() => setActiveCertHover(null)}
+                      title={`${cert.name} (${cert.issuer} // ${cert.category}) - Click to view PDF`}
+                      className={`group relative flex flex-col items-center justify-center w-11 h-11 sm:w-13 sm:h-13 rounded-full border transition-all duration-300 hover:scale-110 active:scale-95 shadow-md cursor-pointer ${
+                        theme.border
+                      } ${theme.bg} ${theme.text} ring-2 ${theme.ring} ${
+                        isHovered ? `border-[var(--gold)] ${theme.glow} scale-110` : ""
+                      }`}
+                    >
+                      <CertCategoryIcon category={cert.category} className="h-5 w-5 sm:h-5.5 sm:w-5.5" />
+                      <span className={`absolute -bottom-0.5 -right-0.5 h-2 w-2 rounded-full border border-black ${theme.dot}`} />
+                      <span className="sr-only">{cert.name}</span>
+                    </a>
+                  );
+                })}
+              </div>
+
+              {/* HUD Telemetry Ticker for Circles View */}
+              <div className="mt-4 pt-3 border-t border-white/10 flex items-center justify-between gap-2 font-mono text-[9px] sm:text-[10px]">
+                <div className="flex items-center gap-2 min-w-0 flex-1 truncate">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[var(--gold)] animate-pulse shrink-0" />
+                  {activeCertHover ? (
+                    <span className="text-[var(--cream)] truncate">
+                      <span className="text-[var(--gold)] font-bold">INSPECTING:</span> {activeCertHover}
+                    </span>
+                  ) : (
+                    <span className="text-white/40 truncate">
+                      HOVER OR TAP ANY CIRCULAR SEAL TO INSPECT CREDENTIAL // CLICK TO OPEN VERIFIED PDF
+                    </span>
+                  )}
                 </div>
-
-                {/* Cert name */}
-                <h3 className="text-sm sm:text-base font-semibold text-[var(--cream)] font-display tracking-wide leading-snug group-hover:text-[var(--gold)] transition-colors duration-300">{cert.name}</h3>
-
-                {/* Footer */}
-                <div className="mt-4 sm:mt-5 flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <svg className="h-3.5 w-3.5 text-white/30 group-hover:text-[var(--gold)] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342" />
-                    </svg>
-                    <span className="font-mono text-[8.5px] sm:text-[9px] uppercase tracking-wider text-white/40">{cert.issuer}</span>
-                  </div>
-                  <span className="font-mono text-[8.5px] sm:text-[9px] uppercase tracking-[0.2em] text-[var(--gold)] opacity-80 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-300 flex items-center gap-1">
-                    view <span className="text-[8px]">↗</span>
-                  </span>
+                <div className="text-white/40 shrink-0 font-mono text-[8.5px]">
+                  {filteredCerts.length} OF 20 ACTIVE
                 </div>
-              </a>
-            </Reveal>
-          ))}
-        </div>
+              </div>
+            </div>
+          </div>
+        )}
       </section>
 
       <section className="section-shell relative z-10 py-16 sm:py-24 scroll-mt-20" id="projects">
@@ -1012,6 +1147,62 @@ function SkillCluster({ title, values }: { title: string; values: string[] }) {
       </div>
     </div>
   );
+}
+
+function CertCategoryIcon({ category, className = "h-4 w-4" }: { category: string; className?: string }) {
+  if (category === "AI") {
+    return (
+      <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.75">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z" />
+      </svg>
+    );
+  }
+  if (category === "Cloud") {
+    return (
+      <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.75">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15a4.5 4.5 0 004.5 4.5H18a3.75 3.75 0 001.332-7.257 3 3 0 00-3.758-3.848 5.25 5.25 0 00-10.233 2.33A4.502 4.502 0 002.25 15z" />
+      </svg>
+    );
+  }
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.75">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" />
+    </svg>
+  );
+}
+
+function getCertTheme(category: string) {
+  if (category === "AI") {
+    return {
+      border: "border-[var(--gold)]/40",
+      bg: "bg-[var(--gold)]/10",
+      text: "text-[var(--gold)]",
+      ring: "ring-[var(--gold)]/20",
+      glow: "shadow-[0_0_15px_rgba(215,181,109,0.25)]",
+      dot: "bg-[var(--gold)]",
+      badge: "border-[var(--gold)]/30 bg-[var(--gold)]/5 text-[var(--gold)]",
+    };
+  }
+  if (category === "Cloud") {
+    return {
+      border: "border-sky-400/40",
+      bg: "bg-sky-400/10",
+      text: "text-sky-400",
+      ring: "ring-sky-400/20",
+      glow: "shadow-[0_0_15px_rgba(56,189,248,0.25)]",
+      dot: "bg-sky-400",
+      badge: "border-sky-400/30 bg-sky-400/5 text-sky-400",
+    };
+  }
+  return {
+    border: "border-emerald-400/40",
+    bg: "bg-emerald-400/10",
+    text: "text-emerald-400",
+    ring: "ring-emerald-400/20",
+    glow: "shadow-[0_0_15px_rgba(52,211,153,0.25)]",
+    dot: "bg-emerald-400",
+    badge: "border-emerald-400/30 bg-emerald-400/5 text-emerald-400",
+  };
 }
 
 function MailIcon() {
