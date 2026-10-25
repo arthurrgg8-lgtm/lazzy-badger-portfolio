@@ -86,7 +86,7 @@ export function BootScreen({ onComplete }: { onComplete: () => void }) {
 
   return (
     <div
-      className={`fixed inset-0 z-50 flex flex-col justify-between bg-[#030406] p-6 font-mono text-[11px] leading-relaxed tracking-wider text-[var(--cream)] transition-all duration-700 ease-in-out md:p-12 ${
+      className={`fixed inset-0 z-50 flex flex-col justify-between bg-[#030406] p-4 sm:p-6 font-mono text-[10px] sm:text-[11px] leading-relaxed tracking-wider text-[var(--cream)] transition-all duration-700 ease-in-out md:p-12 ${
         isFading ? "pointer-events-none scale-105 opacity-0 blur-md" : "opacity-100"
       }`}
     >
@@ -108,20 +108,20 @@ export function BootScreen({ onComplete }: { onComplete: () => void }) {
 
 
       {/* Top Header */}
-      <div className="flex items-center justify-between border-b border-[var(--gold)]/10 pb-4">
-        <div className="flex items-center gap-3">
-          <div className="h-2 w-2 animate-ping rounded-full bg-[var(--gold)]" />
-          <span className="font-semibold uppercase tracking-[0.24em] text-[var(--gold)]">BADGERSEC SHELL v1.4.0</span>
+      <div className="flex items-center justify-between border-b border-[var(--gold)]/10 pb-3 sm:pb-4">
+        <div className="flex items-center gap-2 sm:gap-3">
+          <div className="h-1.5 w-1.5 sm:h-2 sm:w-2 animate-ping rounded-full bg-[var(--gold)]" />
+          <span className="font-semibold uppercase tracking-[0.16em] sm:tracking-[0.24em] text-[var(--gold)] text-[10px] sm:text-[11px]">BADGERSEC SHELL v1.4.0</span>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3 sm:gap-4">
           <button
             onClick={handleSkip}
-            className="rounded border border-[var(--gold)]/30 bg-[var(--gold)]/10 px-2.5 py-1 text-[9px] uppercase tracking-widest text-[var(--gold)] hover:bg-[var(--gold)]/20 hover:border-[var(--gold)] transition-colors cursor-pointer"
+            className="rounded border border-[var(--gold)]/30 bg-[var(--gold)]/10 px-2 py-0.5 sm:px-2.5 sm:py-1 text-[8.5px] sm:text-[9px] uppercase tracking-widest text-[var(--gold)] hover:bg-[var(--gold)]/20 hover:border-[var(--gold)] transition-colors cursor-pointer"
             title="Skip boot sequence"
           >
             [ ESC // SKIP ]
           </button>
-          <div className="text-[10px] text-white/30 hidden sm:block">
+          <div className="text-[9px] sm:text-[10px] text-white/30 hidden sm:block">
             ADDR: 192.168.1.137 // INTRUDER_LOG: ACTIVE
           </div>
         </div>

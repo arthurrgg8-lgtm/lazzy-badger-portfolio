@@ -65,6 +65,17 @@ export default function Home() {
     return () => clearInterval(pingInterval);
   }, [isBooted]);
 
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileMenuOpen]);
+
   return (
     <>
       {!isBooted && (
@@ -96,14 +107,14 @@ export default function Home() {
         <div className="absolute h-[120vmin] w-[1px] bg-gradient-to-b from-transparent via-[var(--gold)] to-transparent" />
       </div>
 
-      <header className="fixed left-0 right-0 top-0 z-30 border-b border-white/10 bg-black/30 backdrop-blur-2xl">
+      <header className="fixed left-0 right-0 top-0 z-50 border-b border-white/10 bg-black/60 backdrop-blur-2xl">
         <nav className="section-shell flex h-16 items-center justify-between">
           <div className="flex items-center gap-6">
-            <Link className="group flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.34em] text-[var(--cream)]" href="#top">
-              <div className="relative h-8 w-8 overflow-hidden rounded-full border border-[var(--gold)]/30">
+            <Link className="group flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.28em] sm:tracking-[0.34em] text-[var(--cream)]" href="#top">
+              <div className="relative h-8 w-8 overflow-hidden rounded-full border border-[var(--gold)]/30 shrink-0">
                 <Image alt="Lazzy Badger Logo" className="object-cover" fill sizes="32px" src="/assets/lazzy.jpeg" />
               </div>
-              <span className="translate-x-[0.17em]">
+              <span className="translate-x-[0.1em]">
                 Lazzy<span className="text-[var(--gold)]">Badger</span>
               </span>
             </Link>
@@ -116,7 +127,7 @@ export default function Home() {
               <span className="font-mono text-[9px] text-[var(--gold)] tracking-wider">LATENCY: {ping}ms</span>
             </div>
           </div>
-          <div className="hidden items-center gap-8 text-xs uppercase tracking-[0.26em] text-white/58 md:flex">
+          <div className="hidden items-center gap-7 lg:gap-8 text-xs uppercase tracking-[0.26em] text-white/58 md:flex">
             {navItems.map((item) => (
               <NavLink className="transition hover:text-[var(--gold)]" href={`#${item}`} key={item} text={item} />
             ))}
@@ -125,7 +136,7 @@ export default function Home() {
           {/* Mobile hamburger button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.02] text-[var(--cream)] hover:border-[var(--gold)] hover:text-[var(--gold)] transition duration-300 md:hidden z-40 focus:outline-none"
+            className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-[var(--cream)] hover:border-[var(--gold)] hover:text-[var(--gold)] transition duration-300 md:hidden z-50 focus:outline-none cursor-pointer"
             aria-label="Toggle navigation menu"
             aria-expanded={mobileMenuOpen}
           >
@@ -144,7 +155,7 @@ export default function Home() {
 
       {/* Mobile Menu Overlay */}
       <div
-        className={`fixed inset-0 z-20 flex flex-col justify-center items-center bg-black/95 backdrop-blur-3xl md:hidden transition-all duration-500 ease-in-out ${
+        className={`fixed inset-0 z-40 flex flex-col justify-between bg-black/95 backdrop-blur-3xl md:hidden transition-all duration-500 ease-in-out p-6 pt-24 pb-8 overflow-y-auto ${
           mobileMenuOpen ? "opacity-100 pointer-events-auto scale-100" : "opacity-0 pointer-events-none scale-105"
         }`}
       >
@@ -152,10 +163,10 @@ export default function Home() {
         <div className="absolute inset-x-0 h-px bg-gradient-to-r from-transparent via-[var(--gold)]/20 to-transparent top-1/4" />
         <div className="absolute inset-x-0 h-px bg-gradient-to-r from-transparent via-[var(--gold)]/20 to-transparent bottom-1/4" />
 
-        <nav className="flex flex-col items-center gap-8 text-lg font-bold uppercase tracking-[0.3em] text-[var(--cream)]">
+        <nav className="my-auto flex flex-col items-center gap-5 text-base sm:text-lg font-bold uppercase tracking-[0.25em] text-[var(--cream)]">
           {navItems.map((item) => (
             <NavLink
-              className="transition-all duration-300 hover:text-[var(--gold)] hover:scale-115 active:text-[var(--gold)] py-2 block text-center"
+              className="transition-all duration-300 hover:text-[var(--gold)] active:text-[var(--gold)] py-1.5 block text-center"
               href={`#${item}`}
               key={item}
               text={item}
@@ -163,21 +174,43 @@ export default function Home() {
             />
           ))}
         </nav>
-        <div className="absolute bottom-10 text-[9px] font-mono tracking-widest text-white/30 select-none">
-          SECURE_MENU // ACCESS_GRANTED
+
+        <div className="border-t border-white/10 pt-4 flex flex-col items-center gap-3">
+          <div className="flex flex-wrap items-center justify-center gap-4 text-xs font-mono text-[var(--gold)]">
+            <a href={`mailto:${profile.socials.email}`} className="hover:underline flex items-center gap-1">
+              <span>EMAIL</span> ↗
+            </a>
+            <span className="text-white/20">•</span>
+            <a href={`https://wa.me/${profile.socials.whatsapp}`} target="_blank" rel="noopener noreferrer" className="hover:underline flex items-center gap-1 text-emerald-400">
+              <span>WHATSAPP</span> ↗
+            </a>
+            <span className="text-white/20">•</span>
+            <a href={`https://github.com/${profile.socials.github}`} target="_blank" rel="noopener noreferrer" className="hover:underline flex items-center gap-1 text-white/60">
+              <span>GITHUB</span> ↗
+            </a>
+          </div>
+          <div className="text-[9px] font-mono tracking-widest text-white/35 select-none">
+            SECURE_MENU // ACCESS_GRANTED // PING: {ping}MS
+          </div>
         </div>
       </div>
 
-      <section className="section-shell relative z-10 grid items-center gap-8 pb-12 pt-20 md:pb-20 md:pt-28 lg:grid-cols-[1.1fr_0.9fr] min-h-[calc(100vh-4rem)]" id="top">
+      <section className="section-shell relative z-10 grid items-center gap-8 lg:gap-12 pb-12 pt-24 sm:pt-28 md:pt-32 lg:grid-cols-[1.1fr_0.9fr] min-h-[calc(100vh-4rem)] scroll-mt-24" id="top">
         <div className="flex flex-col justify-center">
           <Reveal delay={0.08}>
-            <h1 className="font-display text-4xl xs:text-5xl sm:text-7xl lg:text-9xl font-bold leading-[0.95] md:leading-[0.86] tracking-[-0.06em] text-gradient">
+            <div className="flex items-center gap-2 mb-3">
+              <span className="h-1.5 w-1.5 rounded-full bg-[var(--gold)] animate-pulse" />
+              <span className="font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.22em] sm:tracking-[0.3em] text-[var(--gold)]">
+                SYSTEM_ARCHITECT // CYBERSECURITY_RESEARCHER
+              </span>
+            </div>
+            <h1 className="font-display text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold leading-[0.95] md:leading-[0.86] tracking-[-0.05em] text-gradient">
               <span className="sr-only">Anudit Khatri (Lazzy Badger) — Cybersecurity Researcher, AI Systems Architect & Fullstack Developer</span>
               <ScrambleText text={profile.identity.brand_name} trigger={startScramble} />
             </h1>
           </Reveal>
           <Reveal delay={0.16}>
-            <p className="mt-4 sm:mt-7 max-w-2xl text-sm sm:text-lg leading-6 sm:leading-8 text-white/68 sm:text-xl">
+            <p className="mt-4 sm:mt-6 max-w-2xl text-sm sm:text-base md:text-lg leading-relaxed text-white/70">
               {profile.about.persona}
             </p>
           </Reveal>
@@ -185,9 +218,12 @@ export default function Home() {
             <HardwareHud />
           </Reveal>
           <Reveal delay={0.24}>
-            <div className="mt-6 sm:mt-10 flex flex-col gap-3 sm:flex-row">
-              <Link className="rounded-full bg-[var(--cream)] px-7 py-4 text-center text-sm font-bold uppercase tracking-[0.22em] text-black transition hover:bg-[var(--gold)]" href="#projects">
+            <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
+              <Link className="rounded-full bg-[var(--cream)] px-7 py-3.5 sm:py-4 text-center text-xs sm:text-sm font-bold uppercase tracking-[0.2em] text-black transition hover:bg-[var(--gold)] hover:shadow-[0_0_25px_rgba(215,181,109,0.3)]" href="#projects">
                 view systems
+              </Link>
+              <Link className="rounded-full glass px-7 py-3.5 sm:py-4 text-center text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] text-[var(--cream)] transition hover:text-[var(--gold)] hover:border-[var(--gold)]/40 hover:bg-white/[0.04]" href="#contact">
+                secure dispatch
               </Link>
             </div>
           </Reveal>
@@ -198,43 +234,41 @@ export default function Home() {
         </Reveal>
       </section>
 
-      <section className="section-shell relative z-10 py-24" id="about">
+      <section className="section-shell relative z-10 py-16 sm:py-24 scroll-mt-20" id="about">
         <Reveal>
-          <div className="mb-10 flex flex-col justify-between gap-6 md:flex-row md:items-end">
+          <div className="mb-8 sm:mb-12 flex flex-col justify-between gap-4 sm:gap-6 md:flex-row md:items-end">
             <div>
-              <p className="text-xs uppercase tracking-[0.36em] text-[var(--gold)]">about</p>
-              <h2 className="font-display mt-3 max-w-3xl text-3xl sm:text-5xl md:text-7xl leading-tight md:leading-none tracking-[-0.04em]">
+              <p className="text-xs uppercase tracking-[0.3em] sm:tracking-[0.36em] text-[var(--gold)] font-mono">about // architecture</p>
+              <h2 className="font-display mt-2 sm:mt-3 max-w-3xl text-3xl sm:text-5xl md:text-6xl tracking-[-0.04em]">
                 Built around curiosity, automation, and local-first systems.
               </h2>
             </div>
-            <p className="max-w-sm text-sm leading-7 text-white/56">A personal technical portfolio focused on {profile.website_structure.target_audience}.</p>
+            <p className="max-w-sm text-sm leading-6 sm:leading-7 text-white/60">A personal technical portfolio focused on {profile.website_structure.target_audience}.</p>
           </div>
         </Reveal>
         <div className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr]">
           <Reveal>
-            <div className="glass h-full rounded-[2rem] p-7 relative overflow-hidden bg-black/20">
-              <div className="absolute left-0 top-0 h-full w-px bg-gradient-to-b from-[var(--gold)]/40 via-transparent to-transparent" />
-              <div className="absolute left-0 top-0 h-4 w-4 border-l border-t border-[var(--gold)]/40" />
-              <div className="absolute right-0 bottom-0 h-4 w-4 border-r border-b border-white/10" />
-              <p className="text-base leading-8 text-white/70">{profile.about.full_description}</p>
+            <div className="glass h-full rounded-2xl sm:rounded-[2rem] p-5 sm:p-7 relative overflow-hidden bg-black/20">
+              <div className="pointer-events-none absolute left-3 top-3 h-3 w-3 border-l border-t border-[var(--gold)]/40" />
+              <div className="pointer-events-none absolute right-3 bottom-3 h-3 w-3 border-r border-b border-white/10" />
+              <p className="text-sm sm:text-base leading-7 sm:leading-8 text-white/70 whitespace-pre-line">{profile.about.full_description}</p>
             </div>
           </Reveal>
-          <div className="grid gap-5 sm:grid-cols-2">
+          <div className="grid gap-4 sm:gap-5 sm:grid-cols-2">
             {pillars.map((pillar, index) => (
               <Reveal delay={index * 0.04} key={pillar}>
-                <div className="glass group relative overflow-hidden rounded-[2rem] p-6 transition duration-500 hover:-translate-y-2 hover:border-[rgba(215,181,109,0.45)] bg-black/20" data-tilt-card>
-                  <div className="absolute left-0 top-0 h-full w-px bg-gradient-to-b from-[var(--gold)] via-[var(--gold)]/20 to-transparent" />
-                  <div className="absolute left-0 top-0 h-3.5 w-3.5 border-l border-t border-[var(--gold)]" />
-                  <div className="absolute right-0 top-0 h-3.5 w-3.5 border-r border-t border-white/5 group-hover:border-[var(--gold)]/30 transition-colors" />
+                <div className="glass group relative overflow-hidden rounded-2xl sm:rounded-[2rem] p-5 sm:p-6 transition duration-500 hover:-translate-y-1 sm:hover:-translate-y-2 hover:border-[rgba(215,181,109,0.45)] bg-black/20" data-tilt-card>
+                  <div className="pointer-events-none absolute left-3 top-3 h-3 w-3 border-l border-t border-[var(--gold)]" />
+                  <div className="pointer-events-none absolute right-3 top-3 h-3 w-3 border-r border-t border-white/10 group-hover:border-[var(--gold)]/40 transition-colors" />
                   
-                  <div className="flex items-center justify-between border-b border-white/5 pb-3">
-                    <span className="font-mono text-[8px] uppercase tracking-[0.25em] text-white/30">CORE MODULE // 0{index + 1}</span>
+                  <div className="flex items-center justify-between border-b border-white/5 pb-2.5">
+                    <span className="font-mono text-[8px] uppercase tracking-[0.2em] text-white/30">CORE MODULE // 0{index + 1}</span>
                     <span className="font-mono text-[8px] uppercase tracking-[0.15em] text-[var(--gold)] group-hover:animate-pulse">Active</span>
                   </div>
                   
-                  <h3 className="mt-6 text-xl font-semibold text-[var(--cream)] font-display tracking-wide group-hover:text-[var(--gold)] transition-colors">{pillar}</h3>
+                  <h3 className="mt-5 text-lg sm:text-xl font-semibold text-[var(--cream)] font-display tracking-wide group-hover:text-[var(--gold)] transition-colors">{pillar}</h3>
                   
-                  <div className="mt-6 flex items-center justify-between font-mono text-[8px] text-white/20">
+                  <div className="mt-5 flex items-center justify-between font-mono text-[8px] text-white/30">
                     <span>SEC_CLASS: LEVEL_4</span>
                     <span>SYS_STATUS: OK</span>
                   </div>
@@ -248,64 +282,64 @@ export default function Home() {
       {/* Active Research & Client Security Operations Section */}
       <section className="section-shell relative z-10 py-12">
         <Reveal>
-          <div className="glass relative overflow-hidden rounded-[2.5rem] border border-[rgba(215,181,109,0.35)] p-6 sm:p-10 bg-gradient-to-br from-white/[0.04] via-black/40 to-[rgba(215,181,109,0.04)] shadow-[0_0_40px_rgba(215,181,109,0.08)]">
+          <div className="glass relative overflow-hidden rounded-2xl sm:rounded-[2.5rem] border border-[rgba(215,181,109,0.35)] p-5 sm:p-8 lg:p-10 bg-gradient-to-br from-white/[0.04] via-black/40 to-[rgba(215,181,109,0.04)] shadow-[0_0_40px_rgba(215,181,109,0.08)]">
             {/* HUD Corner Accents */}
-            <div className="pointer-events-none absolute -left-px -top-px h-5 w-5 border-l-2 border-t-2 border-[var(--gold)]" />
-            <div className="pointer-events-none absolute -right-px -top-px h-5 w-5 border-r-2 border-t-2 border-[var(--gold)]" />
-            <div className="pointer-events-none absolute -left-px -bottom-px h-5 w-5 border-l-2 border-b-2 border-[var(--gold)]" />
-            <div className="pointer-events-none absolute -right-px -bottom-px h-5 w-5 border-r-2 border-b-2 border-[var(--gold)]" />
+            <div className="pointer-events-none absolute left-3 top-3 h-3.5 w-3.5 border-l-2 border-t-2 border-[var(--gold)]" />
+            <div className="pointer-events-none absolute right-3 top-3 h-3.5 w-3.5 border-r-2 border-t-2 border-[var(--gold)]" />
+            <div className="pointer-events-none absolute left-3 bottom-3 h-3.5 w-3.5 border-l-2 border-b-2 border-[var(--gold)]" />
+            <div className="pointer-events-none absolute right-3 bottom-3 h-3.5 w-3.5 border-r-2 border-b-2 border-[var(--gold)]" />
 
-            <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-6 mb-8">
+            <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-5 sm:pb-6 mb-6 sm:mb-8">
               <div>
                 <div className="flex items-center gap-2 mb-2">
                   <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-                  <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-[var(--gold)]">INTELLIGENCE BRIEFING // RESEARCH & DEFENSE</span>
+                  <span className="font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.2em] sm:tracking-[0.3em] text-[var(--gold)]">INTELLIGENCE BRIEFING // RESEARCH &amp; DEFENSE</span>
                 </div>
-                <h3 className="text-2xl sm:text-4xl font-bold font-display text-[var(--cream)] tracking-tight">
-                  Active Client Security & Upstream Bug Hunting
+                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold font-display text-[var(--cream)] tracking-tight">
+                  Active Client Security &amp; Upstream Bug Hunting
                 </h3>
               </div>
-              <div className="flex flex-wrap items-center gap-2 font-mono text-[9px]">
-                <span className="rounded-full border border-emerald-400/40 bg-emerald-400/10 px-3 py-1 text-emerald-400 uppercase tracking-widest font-semibold">
+              <div className="flex flex-wrap items-center gap-2 font-mono text-[8.5px] sm:text-[9px]">
+                <span className="rounded-full border border-emerald-400/40 bg-emerald-400/10 px-3 py-1 text-emerald-400 uppercase tracking-wider sm:tracking-widest font-semibold">
                   Client Perimeter: 100% Audited
                 </span>
-                <span className="rounded-full border border-[var(--gold)]/40 bg-[var(--gold)]/10 px-3 py-1 text-[var(--gold)] uppercase tracking-widest font-semibold">
+                <span className="rounded-full border border-[var(--gold)]/40 bg-[var(--gold)]/10 px-3 py-1 text-[var(--gold)] uppercase tracking-wider sm:tracking-widest font-semibold">
                   Upstream Research: Disclosed
                 </span>
               </div>
             </div>
 
-            <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] items-center">
-              <div className="space-y-6">
-                <div className="rounded-2xl border border-white/5 bg-black/40 p-5 sm:p-6 relative">
-                  <div className="flex items-center justify-between font-mono text-[9px] text-white/40 mb-3 border-b border-white/5 pb-2">
+            <div className="grid gap-6 sm:gap-8 lg:grid-cols-[1.1fr_0.9fr] items-center">
+              <div className="space-y-4 sm:space-y-6">
+                <div className="rounded-2xl border border-white/5 bg-black/40 p-4 sm:p-6 relative">
+                  <div className="flex items-center justify-between font-mono text-[8.5px] sm:text-[9px] text-white/40 mb-2.5 border-b border-white/5 pb-2">
                     <span className="text-[var(--gold)] uppercase tracking-wider">01 // PRODUCTION CLIENT DEFENSE</span>
                     <span>RUNTIME_HARDENING</span>
                   </div>
-                  <h4 className="text-lg font-semibold text-[var(--cream)] mb-2 font-display">
-                    Hands-on Client Infrastructure & Zero-Day Mitigation
+                  <h4 className="text-base sm:text-lg font-semibold text-[var(--cream)] mb-2 font-display">
+                    Hands-on Client Infrastructure &amp; Zero-Day Mitigation
                   </h4>
-                  <p className="text-sm leading-relaxed text-white/65">
+                  <p className="text-xs sm:text-sm leading-relaxed text-white/65">
                     Proactive participation in client security across production environments (<span className="text-white font-medium">Manoranjan Ramjham</span>, <span className="text-white font-medium">AI Trial Nepal</span>, <span className="text-white font-medium">Ar. Anushka Khatri</span>). Rapid triage of zero-day runtime disclosures—including the recent Node.js Brotli RCE (<span className="text-[var(--gold)] font-mono text-xs">CVE-2026-111497</span> / Node2Shell) and Next.js 16.4.3 security patches—maintaining a verified zero-vulnerability audit standard.
                   </p>
                 </div>
 
-                <div className="rounded-2xl border border-white/5 bg-black/40 p-5 sm:p-6 relative">
-                  <div className="flex items-center justify-between font-mono text-[9px] text-white/40 mb-3 border-b border-white/5 pb-2">
+                <div className="rounded-2xl border border-white/5 bg-black/40 p-4 sm:p-6 relative">
+                  <div className="flex items-center justify-between font-mono text-[8.5px] sm:text-[9px] text-white/40 mb-2.5 border-b border-white/5 pb-2">
                     <span className="text-[var(--gold)] uppercase tracking-wider">02 // UPSTREAM SECURITY RESEARCH</span>
                     <span>PARSER_DIFFERENTIALS</span>
                   </div>
-                  <h4 className="text-lg font-semibold text-[var(--cream)] mb-2 font-display">
+                  <h4 className="text-base sm:text-lg font-semibold text-[var(--cream)] mb-2 font-display">
                     WordPress SQLite Core Query Translation Flaw (Issue #568)
                   </h4>
-                  <p className="text-sm leading-relaxed text-white/65 mb-4">
+                  <p className="text-xs sm:text-sm leading-relaxed text-white/65 mb-4">
                     Deep architectural bug hunting in <code className="text-[var(--gold)] text-xs">WordPress/sqlite-database-integration</code>. Identified a subtle SQL-to-GLOB query mis-translation flaw where unescaped <code className="text-white">[</code> characters turn into SQLite character-class brackets, producing silent false-positive and false-negative row mismatches against MySQL <code className="text-white">LIKE</code>.
                   </p>
                   <a
                     href="https://github.com/WordPress/sqlite-database-integration/issues/568"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[var(--gold)] hover:text-white transition-colors"
+                    className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider sm:tracking-widest text-[var(--gold)] hover:text-white transition-colors"
                   >
                     <span>View GitHub Issue #568</span>
                     <span className="text-xs">↗</span>
@@ -315,9 +349,9 @@ export default function Home() {
 
               {/* Research Screenshot Preview Frame */}
               <div className="group relative rounded-2xl border border-white/10 bg-black/60 p-2 sm:p-3 overflow-hidden shadow-2xl transition-all duration-500 hover:border-[var(--gold)]/50">
-                <div className="absolute top-4 left-4 z-20 flex items-center gap-2 rounded bg-black/80 px-2.5 py-1 font-mono text-[8px] text-[var(--gold)] backdrop-blur-md border border-white/10">
-                  <span className="h-1.5 w-1.5 rounded-full bg-[var(--gold)]" />
-                  <span>TARGET: WordPress/sqlite-database-integration #568</span>
+                <div className="absolute top-2.5 left-2.5 sm:top-4 sm:left-4 z-20 flex items-center gap-1.5 sm:gap-2 rounded bg-black/85 px-2 py-0.5 sm:px-2.5 sm:py-1 font-mono text-[7.5px] sm:text-[8px] text-[var(--gold)] backdrop-blur-md border border-white/10 max-w-[calc(100%-1.25rem)] truncate">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[var(--gold)] shrink-0" />
+                  <span className="truncate">TARGET: WordPress/sqlite-database-integration #568</span>
                 </div>
                 <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl">
                   <Image
@@ -328,7 +362,7 @@ export default function Home() {
                     sizes="(max-width: 1024px) 100vw, 550px"
                   />
                 </div>
-                <div className="mt-3 flex items-center justify-between px-2 font-mono text-[8px] text-white/40">
+                <div className="mt-3 flex flex-wrap items-center justify-between gap-2 px-1 sm:px-2 font-mono text-[7.5px] sm:text-[8px] text-white/40">
                   <span>DISCLOSED BY: arthurrgg8-lgtm (LazZy)</span>
                   <a
                     href="https://github.com/WordPress/sqlite-database-integration/issues/568"
@@ -345,9 +379,15 @@ export default function Home() {
         </Reveal>
       </section>
 
-      <section className="section-shell relative z-10 py-24">
+      <section className="section-shell relative z-10 py-16 sm:py-24">
         <Reveal>
-          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          <div className="mb-8 sm:mb-12">
+            <p className="text-xs uppercase tracking-[0.3em] sm:tracking-[0.36em] text-[var(--gold)] font-mono">arsenal // technical_matrix</p>
+            <h2 className="font-display mt-2 sm:mt-3 text-3xl sm:text-5xl md:text-6xl tracking-[-0.04em]">Core Capabilities.</h2>
+          </div>
+        </Reveal>
+        <Reveal>
+          <div className="grid gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
             <SkillCluster title="Languages" values={profile.skills_and_tools.languages} />
             <SkillCluster title="Bug Bounty Stack" values={profile.skills_and_tools.bug_bounty_tools} />
             <SkillCluster title="MCP + AI Infra" values={profile.skills_and_tools.mcp_infrastructure} />
@@ -358,10 +398,10 @@ export default function Home() {
         </Reveal>
       </section>
 
-      <section className="section-shell relative z-10 py-24" id="certifications" aria-labelledby="certifications-heading">
+      <section className="section-shell relative z-10 py-16 sm:py-24 scroll-mt-20" id="certifications" aria-labelledby="certifications-heading">
         <Reveal>
-          <p className="text-xs uppercase tracking-[0.36em] text-[var(--gold)] font-mono">certifications // verified_credentials</p>
-          <h2 id="certifications-heading" className="font-display mt-3 text-3xl sm:text-5xl md:text-7xl tracking-[-0.04em]">Proof of work.</h2>
+          <p className="text-xs uppercase tracking-[0.3em] sm:tracking-[0.36em] text-[var(--gold)] font-mono">certifications // verified_credentials</p>
+          <h2 id="certifications-heading" className="font-display mt-2 sm:mt-3 text-3xl sm:text-5xl md:text-6xl tracking-[-0.04em]">Proof of work.</h2>
           <p className="sr-only">
             Anudit Khatri (LazZy Badger) holds #1 All-Time Leaderboard ranking on Code for Nepal / DataCamp, completed the 66-Days Challenge, and holds {profile.certifications_detail.length} verified technical certifications from DataCamp covering Artificial Intelligence, Cloud Infrastructure (AWS and Microsoft Azure), and Developer Tools:
             {profile.certifications_detail.map((c) => `${c.name} (${c.category}, by ${c.issuer})`).join(", ")}.
@@ -370,45 +410,45 @@ export default function Home() {
 
         {/* Code for Nepal / DataCamp #1 Leaderboard Showcase */}
         <Reveal delay={0.06}>
-          <div className="mt-10 mb-12 glass relative overflow-hidden rounded-[2.5rem] border border-[rgba(215,181,109,0.38)] p-6 sm:p-10 bg-gradient-to-br from-white/[0.04] via-black/40 to-[rgba(215,181,109,0.06)] shadow-[0_0_40px_rgba(215,181,109,0.12)]">
+          <div className="mt-8 sm:mt-10 mb-10 sm:mb-12 glass relative overflow-hidden rounded-2xl sm:rounded-[2.5rem] border border-[rgba(215,181,109,0.38)] p-5 sm:p-8 lg:p-10 bg-gradient-to-br from-white/[0.04] via-black/40 to-[rgba(215,181,109,0.06)] shadow-[0_0_40px_rgba(215,181,109,0.12)]">
             {/* HUD Corner Accents */}
-            <div className="pointer-events-none absolute -left-px -top-px h-5 w-5 border-l-2 border-t-2 border-[var(--gold)]" />
-            <div className="pointer-events-none absolute -right-px -top-px h-5 w-5 border-r-2 border-t-2 border-[var(--gold)]" />
-            <div className="pointer-events-none absolute -left-px -bottom-px h-5 w-5 border-l-2 border-b-2 border-[var(--gold)]" />
-            <div className="pointer-events-none absolute -right-px -bottom-px h-5 w-5 border-r-2 border-b-2 border-[var(--gold)]" />
+            <div className="pointer-events-none absolute left-3 top-3 h-3.5 w-3.5 border-l-2 border-t-2 border-[var(--gold)]" />
+            <div className="pointer-events-none absolute right-3 top-3 h-3.5 w-3.5 border-r-2 border-t-2 border-[var(--gold)]" />
+            <div className="pointer-events-none absolute left-3 bottom-3 h-3.5 w-3.5 border-l-2 border-b-2 border-[var(--gold)]" />
+            <div className="pointer-events-none absolute right-3 bottom-3 h-3.5 w-3.5 border-r-2 border-b-2 border-[var(--gold)]" />
 
-            <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-6 mb-8">
+            <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-5 sm:pb-6 mb-6 sm:mb-8">
               <div>
                 <div className="flex items-center gap-2 mb-2">
                   <span className="h-1.5 w-1.5 rounded-full bg-[var(--gold)]" />
-                  <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-[var(--gold)]">HALL OF FAME // COMPETITIVE RANKINGS</span>
+                  <span className="font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.2em] sm:tracking-[0.3em] text-[var(--gold)]">HALL OF FAME // COMPETITIVE RANKINGS</span>
                 </div>
-                <h3 className="text-2xl sm:text-4xl font-bold font-display text-[var(--cream)] tracking-tight">
-                  DataCamp / Code for Nepal #1 Leaderboard & 66-Days Challenge Completer
+                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold font-display text-[var(--cream)] tracking-tight">
+                  DataCamp / Code for Nepal #1 Leaderboard &amp; 66-Days Challenge Completer
                 </h3>
               </div>
-              <div className="flex flex-wrap items-center gap-2 font-mono text-[9px]">
-                <span className="rounded-full border border-[var(--gold)]/40 bg-[var(--gold)]/10 px-3.5 py-1 text-[var(--gold)] uppercase tracking-widest font-semibold flex items-center gap-1.5 shadow-[0_0_12px_rgba(215,181,109,0.2)]">
+              <div className="flex flex-wrap items-center gap-2 font-mono text-[8.5px] sm:text-[9px]">
+                <span className="rounded-full border border-[var(--gold)]/40 bg-[var(--gold)]/10 px-3 py-1 text-[var(--gold)] uppercase tracking-wider sm:tracking-widest font-semibold flex items-center gap-1.5 shadow-[0_0_12px_rgba(215,181,109,0.2)]">
                   <span>🏆</span> #1 All-Time Rank
                 </span>
-                <span className="rounded-full border border-emerald-400/40 bg-emerald-400/10 px-3.5 py-1 text-emerald-400 uppercase tracking-widest font-semibold flex items-center gap-1.5">
+                <span className="rounded-full border border-emerald-400/40 bg-emerald-400/10 px-3 py-1 text-emerald-400 uppercase tracking-wider sm:tracking-widest font-semibold flex items-center gap-1.5">
                   <span>🎓</span> 66-Days Challenge Completer
                 </span>
               </div>
             </div>
 
-            <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] items-center">
-              <div className="space-y-6">
-                <p className="text-base leading-relaxed text-white/70">
+            <div className="grid gap-6 sm:gap-8 lg:grid-cols-[1.1fr_0.9fr] items-center">
+              <div className="space-y-4 sm:space-y-6">
+                <p className="text-sm sm:text-base leading-relaxed text-white/70">
                   Secured the <span className="text-[var(--gold)] font-bold">#1 All-Time Leaderboard position</span> in the prestigious <span className="text-white font-semibold">Code for Nepal × DataCamp</span> community initiative and successfully completed the rigorous <span className="text-white font-semibold">66-Days Continuous Learning Challenge</span> with verified data science and AI associate accreditations.
                 </p>
 
                 {/* Accreditation Stack */}
-                <div className="rounded-2xl border border-white/5 bg-black/40 p-5">
-                  <span className="font-mono text-[9px] uppercase tracking-widest text-[var(--gold)] block mb-3">
+                <div className="rounded-2xl border border-white/5 bg-black/40 p-4 sm:p-5">
+                  <span className="font-mono text-[8.5px] sm:text-[9px] uppercase tracking-wider sm:tracking-widest text-[var(--gold)] block mb-3 font-semibold">
                     VERIFIED ASSOCIATE ACCREDITATIONS
                   </span>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-1.5 sm:gap-2">
                     {[
                       "AI Engineer for Developers Associate",
                       "Python Data Associate",
@@ -419,7 +459,7 @@ export default function Home() {
                     ].map((badge) => (
                       <span
                         key={badge}
-                        className="rounded-lg border border-[var(--gold)]/20 bg-[var(--gold)]/5 px-2.5 py-1 text-[10px] font-mono text-[var(--cream)] flex items-center gap-1.5"
+                        className="rounded-lg border border-[var(--gold)]/20 bg-[var(--gold)]/5 px-2.5 py-1 text-[9.5px] sm:text-[10px] font-mono text-[var(--cream)] flex items-center gap-1.5"
                       >
                         <span className="text-[var(--gold)] text-xs">🏅</span>
                         {badge}
@@ -431,9 +471,9 @@ export default function Home() {
 
               {/* Verified Screenshot Showcase */}
               <div className="group relative rounded-2xl border border-white/10 bg-black/60 p-2 sm:p-3 overflow-hidden shadow-2xl transition-all duration-500 hover:border-[var(--gold)]/50">
-                <div className="absolute top-4 left-4 z-20 flex items-center gap-2 rounded bg-black/85 px-2.5 py-1 font-mono text-[8px] text-[var(--gold)] backdrop-blur-md border border-white/10">
-                  <span className="h-1.5 w-1.5 rounded-full bg-[var(--gold)]" />
-                  <span>DATACAMP // LIVE LEADERBOARD VERIFICATION</span>
+                <div className="absolute top-2.5 left-2.5 sm:top-4 sm:left-4 z-20 flex items-center gap-1.5 sm:gap-2 rounded bg-black/85 px-2 py-0.5 sm:px-2.5 sm:py-1 font-mono text-[7.5px] sm:text-[8px] text-[var(--gold)] backdrop-blur-md border border-white/10 max-w-[calc(100%-1.25rem)] truncate">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[var(--gold)] shrink-0" />
+                  <span className="truncate">DATACAMP // LIVE LEADERBOARD VERIFICATION</span>
                 </div>
                 <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl">
                   <Image
@@ -444,7 +484,7 @@ export default function Home() {
                     sizes="(max-width: 1024px) 100vw, 550px"
                   />
                 </div>
-                <div className="mt-3 flex items-center justify-between px-2 font-mono text-[8px] text-white/40">
+                <div className="mt-3 flex flex-wrap items-center justify-between gap-2 px-1 sm:px-2 font-mono text-[7.5px] sm:text-[8px] text-white/40">
                   <span>HANDLE: LazZy Badger</span>
                   <span className="text-[var(--gold)]">RANK: #1 ALL-TIME LEADERBOARD</span>
                 </div>
@@ -452,23 +492,24 @@ export default function Home() {
             </div>
           </div>
         </Reveal>
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+
+        <div className="mt-8 sm:mt-12 grid gap-3 sm:gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {profile.certifications_detail.map((cert: { name: string; issuer: string; file: string; category: string }, index: number) => (
-            <Reveal delay={index * 0.04} key={cert.name}>
+            <Reveal delay={index * 0.03} key={cert.name}>
               <a
                 href={cert.file}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="glass group relative flex flex-col justify-between overflow-hidden rounded-[1.5rem] p-5 sm:p-6 transition-all duration-500 hover:-translate-y-1 hover:border-[var(--gold)] hover:shadow-[0_0_30px_rgba(215,181,109,0.12)] bg-black/20 h-full"
+                className="glass group relative flex flex-col justify-between overflow-hidden rounded-2xl sm:rounded-[1.5rem] p-4 sm:p-6 transition-all duration-500 hover:-translate-y-1 hover:border-[var(--gold)] hover:shadow-[0_0_30px_rgba(215,181,109,0.12)] bg-black/20 h-full"
               >
                 {/* HUD corner marks */}
-                <div className="pointer-events-none absolute -left-px -top-px h-3 w-3 border-l border-t border-[var(--gold)]/30 group-hover:border-[var(--gold)] transition-colors duration-500" />
-                <div className="pointer-events-none absolute -right-px -bottom-px h-3 w-3 border-r border-b border-[var(--gold)]/30 group-hover:border-[var(--gold)] transition-colors duration-500" />
+                <div className="pointer-events-none absolute left-3 top-3 h-3 w-3 border-l border-t border-[var(--gold)]/30 group-hover:border-[var(--gold)] transition-colors duration-500" />
+                <div className="pointer-events-none absolute right-3 bottom-3 h-3 w-3 border-r border-b border-[var(--gold)]/30 group-hover:border-[var(--gold)] transition-colors duration-500" />
 
                 {/* Header: index + category */}
-                <div className="flex items-center justify-between border-b border-white/5 pb-3 mb-4">
-                  <span className="font-mono text-[8px] uppercase tracking-[0.25em] text-white/30">CERT // {String(index + 1).padStart(2, "0")}</span>
-                  <span className={`rounded-full px-2.5 py-0.5 text-[8px] uppercase tracking-[0.2em] font-mono font-semibold border transition-all duration-300 ${
+                <div className="flex items-center justify-between border-b border-white/5 pb-2.5 mb-3 sm:mb-4">
+                  <span className="font-mono text-[8px] uppercase tracking-[0.2em] sm:tracking-[0.25em] text-white/30">CERT // {String(index + 1).padStart(2, "0")}</span>
+                  <span className={`rounded-full px-2.5 py-0.5 text-[8px] uppercase tracking-[0.16em] sm:tracking-[0.2em] font-mono font-semibold border transition-all duration-300 ${
                     cert.category === "AI"
                       ? "border-[var(--gold)]/30 bg-[var(--gold)]/5 text-[var(--gold)]"
                       : cert.category === "Cloud"
@@ -480,17 +521,17 @@ export default function Home() {
                 </div>
 
                 {/* Cert name */}
-                <h3 className="text-base font-semibold text-[var(--cream)] font-display tracking-wide leading-snug group-hover:text-[var(--gold)] transition-colors duration-300">{cert.name}</h3>
+                <h3 className="text-sm sm:text-base font-semibold text-[var(--cream)] font-display tracking-wide leading-snug group-hover:text-[var(--gold)] transition-colors duration-300">{cert.name}</h3>
 
                 {/* Footer */}
-                <div className="mt-5 flex items-center justify-between">
+                <div className="mt-4 sm:mt-5 flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <svg className="h-3.5 w-3.5 text-white/30 group-hover:text-[var(--gold)] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342" />
                     </svg>
-                    <span className="font-mono text-[9px] uppercase tracking-wider text-white/40">{cert.issuer}</span>
+                    <span className="font-mono text-[8.5px] sm:text-[9px] uppercase tracking-wider text-white/40">{cert.issuer}</span>
                   </div>
-                  <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-[var(--gold)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center gap-1">
+                  <span className="font-mono text-[8.5px] sm:text-[9px] uppercase tracking-[0.2em] text-[var(--gold)] opacity-80 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-300 flex items-center gap-1">
                     view <span className="text-[8px]">↗</span>
                   </span>
                 </div>
@@ -500,52 +541,52 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section-shell relative z-10 py-24" id="projects">
+      <section className="section-shell relative z-10 py-16 sm:py-24 scroll-mt-20" id="projects">
         <Reveal>
-          <p className="text-xs uppercase tracking-[0.36em] text-[var(--gold)]">projects</p>
-          <h2 className="font-display mt-3 text-3xl sm:text-5xl md:text-7xl tracking-[-0.04em]">Systems with teeth.</h2>
+          <p className="text-xs uppercase tracking-[0.3em] sm:tracking-[0.36em] text-[var(--gold)] font-mono">projects // systems_index</p>
+          <h2 className="font-display mt-2 sm:mt-3 text-3xl sm:text-5xl md:text-6xl tracking-[-0.04em]">Systems with teeth.</h2>
         </Reveal>
 
         {/* Custom Tooling & Forensic Engineering Showcase */}
         <Reveal delay={0.06}>
-          <div className="mt-10 mb-12 glass relative overflow-hidden rounded-[2.5rem] border border-[rgba(215,181,109,0.38)] p-6 sm:p-10 bg-gradient-to-br from-white/[0.04] via-black/40 to-[rgba(215,181,109,0.06)] shadow-[0_0_40px_rgba(215,181,109,0.12)]">
+          <div className="mt-8 sm:mt-10 mb-10 sm:mb-12 glass relative overflow-hidden rounded-2xl sm:rounded-[2.5rem] border border-[rgba(215,181,109,0.38)] p-5 sm:p-8 lg:p-10 bg-gradient-to-br from-white/[0.04] via-black/40 to-[rgba(215,181,109,0.06)] shadow-[0_0_40px_rgba(215,181,109,0.12)]">
             {/* HUD Corner Accents */}
-            <div className="pointer-events-none absolute -left-px -top-px h-5 w-5 border-l-2 border-t-2 border-[var(--gold)]" />
-            <div className="pointer-events-none absolute -right-px -top-px h-5 w-5 border-r-2 border-t-2 border-[var(--gold)]" />
-            <div className="pointer-events-none absolute -left-px -bottom-px h-5 w-5 border-l-2 border-b-2 border-[var(--gold)]" />
-            <div className="pointer-events-none absolute -right-px -bottom-px h-5 w-5 border-r-2 border-b-2 border-[var(--gold)]" />
+            <div className="pointer-events-none absolute left-3 top-3 h-3.5 w-3.5 border-l-2 border-t-2 border-[var(--gold)]" />
+            <div className="pointer-events-none absolute right-3 top-3 h-3.5 w-3.5 border-r-2 border-t-2 border-[var(--gold)]" />
+            <div className="pointer-events-none absolute left-3 bottom-3 h-3.5 w-3.5 border-l-2 border-b-2 border-[var(--gold)]" />
+            <div className="pointer-events-none absolute right-3 bottom-3 h-3.5 w-3.5 border-r-2 border-b-2 border-[var(--gold)]" />
 
-            <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-6 mb-8">
+            <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-5 sm:pb-6 mb-6 sm:mb-8">
               <div>
                 <div className="flex items-center gap-2 mb-2">
                   <span className="h-1.5 w-1.5 rounded-full bg-[var(--gold)]" />
-                  <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-[var(--gold)]">CUSTOM TOOLING ARSENAL // OFFENSIVE &amp; DFIR</span>
+                  <span className="font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.2em] sm:tracking-[0.3em] text-[var(--gold)]">CUSTOM TOOLING ARSENAL // OFFENSIVE &amp; DFIR</span>
                 </div>
-                <h3 className="text-2xl sm:text-4xl font-bold font-display text-[var(--cream)] tracking-tight">
+                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold font-display text-[var(--cream)] tracking-tight">
                   High-Velocity Bug Hunting, Mobile DFIR &amp; Civic Automation
                 </h3>
               </div>
-              <div className="flex flex-wrap items-center gap-2 font-mono text-[9px]">
-                <span className="rounded-full border border-[var(--gold)]/40 bg-[var(--gold)]/10 px-3 py-1 text-[var(--gold)] uppercase tracking-widest font-semibold flex items-center gap-1.5">
+              <div className="flex flex-wrap items-center gap-2 font-mono text-[8.5px] sm:text-[9px]">
+                <span className="rounded-full border border-[var(--gold)]/40 bg-[var(--gold)]/10 px-3 py-1 text-[var(--gold)] uppercase tracking-wider sm:tracking-widest font-semibold flex items-center gap-1.5">
                   <span>⚡</span> Fast Recon Engine
                 </span>
-                <span className="rounded-full border border-blue-400/40 bg-blue-400/10 px-3 py-1 text-blue-400 uppercase tracking-widest font-semibold flex items-center gap-1.5">
+                <span className="rounded-full border border-blue-400/40 bg-blue-400/10 px-3 py-1 text-blue-400 uppercase tracking-wider sm:tracking-widest font-semibold flex items-center gap-1.5">
                   <span>📱</span> Enterprise Mobile DFIR
                 </span>
-                <span className="rounded-full border border-emerald-400/40 bg-emerald-400/10 px-3 py-1 text-emerald-400 uppercase tracking-widest font-semibold flex items-center gap-1.5">
+                <span className="rounded-full border border-emerald-400/40 bg-emerald-400/10 px-3 py-1 text-emerald-400 uppercase tracking-wider sm:tracking-widest font-semibold flex items-center gap-1.5">
                   <span>📄</span> Document Automation
                 </span>
               </div>
             </div>
 
-            <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] items-center">
-              <div className="space-y-4">
+            <div className="grid gap-6 sm:gap-8 lg:grid-cols-[1.1fr_0.9fr] items-center">
+              <div className="space-y-3.5 sm:space-y-4">
                 <div className="rounded-2xl border border-white/5 bg-black/40 p-4 sm:p-5">
                   <div className="flex items-center justify-between font-mono text-[8px] text-white/40 mb-2">
                     <span className="text-[var(--gold)] uppercase tracking-wider font-semibold">01 // H1WATCH &amp; HUNT-WORKSPACE</span>
                     <span>ATTACK_SURFACE_MONITORING</span>
                   </div>
-                  <h4 className="text-base font-semibold text-[var(--cream)] mb-1 font-display">
+                  <h4 className="text-sm sm:text-base font-semibold text-[var(--cream)] mb-1 font-display">
                     Real-time HackerOne Scope Watcher &amp; Rapid Alerting
                   </h4>
                   <p className="text-xs leading-relaxed text-white/70">
@@ -558,7 +599,7 @@ export default function Home() {
                     <span className="text-blue-400 uppercase tracking-wider font-semibold">02 // IFORENSIC &amp; AFORENSIC</span>
                     <span>ENTERPRISE_MOBILE_DFIR</span>
                   </div>
-                  <h4 className="text-base font-semibold text-[var(--cream)] mb-1 font-display">
+                  <h4 className="text-sm sm:text-base font-semibold text-[var(--cream)] mb-1 font-display">
                     Full-Fledged Deep Mobile Forensics (iOS &amp; Android)
                   </h4>
                   <p className="text-xs leading-relaxed text-white/70">
@@ -571,7 +612,7 @@ export default function Home() {
                     <span className="text-emerald-400 uppercase tracking-wider font-semibold">03 // EASY PATRA (इजि-पत्र)</span>
                     <span>CLERICAL_WORKFLOW_REDUCTION</span>
                   </div>
-                  <h4 className="text-base font-semibold text-[var(--cream)] mb-1 font-display">
+                  <h4 className="text-sm sm:text-base font-semibold text-[var(--cream)] mb-1 font-display">
                     Automated Administrative Letter Formatting &amp; Print Engine
                   </h4>
                   <p className="text-xs leading-relaxed text-white/70">
@@ -582,9 +623,9 @@ export default function Home() {
 
               {/* Verified Tooling Screenshot Showcase */}
               <div className="group relative rounded-2xl border border-white/10 bg-black/60 p-2 sm:p-3 overflow-hidden shadow-2xl transition-all duration-500 hover:border-[var(--gold)]/50">
-                <div className="absolute top-4 left-4 z-20 flex items-center gap-2 rounded bg-black/85 px-2.5 py-1 font-mono text-[8px] text-[var(--gold)] backdrop-blur-md border border-white/10">
-                  <span className="h-1.5 w-1.5 rounded-full bg-[var(--gold)]" />
-                  <span>GITHUB: arthurrgg8-lgtm // TOOLING REPOSITORIES</span>
+                <div className="absolute top-2.5 left-2.5 sm:top-4 sm:left-4 z-20 flex items-center gap-1.5 sm:gap-2 rounded bg-black/85 px-2 py-0.5 sm:px-2.5 sm:py-1 font-mono text-[7.5px] sm:text-[8px] text-[var(--gold)] backdrop-blur-md border border-white/10 max-w-[calc(100%-1.25rem)] truncate">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[var(--gold)] shrink-0" />
+                  <span className="truncate">GITHUB: arthurrgg8-lgtm // TOOLING REPOSITORIES</span>
                 </div>
                 <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl">
                   <Image
@@ -595,7 +636,7 @@ export default function Home() {
                     sizes="(max-width: 1024px) 100vw, 550px"
                   />
                 </div>
-                <div className="mt-3 flex items-center justify-between px-2 font-mono text-[8px] text-white/40">
+                <div className="mt-3 flex flex-wrap items-center justify-between gap-2 px-1 sm:px-2 font-mono text-[7.5px] sm:text-[8px] text-white/40">
                   <span>AUTHOR: arthurrgg8-lgtm (LazZy)</span>
                   <a
                     href="https://github.com/arthurrgg8-lgtm"
@@ -610,25 +651,24 @@ export default function Home() {
             </div>
           </div>
         </Reveal>
-        <div className="mt-12 grid gap-6">
+
+        <div className="mt-8 sm:mt-12 grid gap-4 sm:gap-6">
           {profile.projects.map((project, index) => {
             const diag = projectDiagnostics[project.name] || { host: "unknown", port: 80, class: "TARGET" };
             const projectTarget = project.url || (project.repository ? `https://${project.repository}` : undefined);
             return (
-              <Reveal delay={index * 0.05} key={project.name}>
+              <Reveal delay={index * 0.04} key={project.name}>
                 <article 
-                  className={`glass group relative grid gap-6 rounded-[2rem] p-5 sm:p-8 transition-all duration-500 md:grid-cols-[0.16fr_1fr_0.2fr] md:items-center overflow-hidden bg-black/20 ${
+                  className={`glass group relative flex flex-col md:grid md:grid-cols-[70px_1fr_auto] md:items-center gap-4 sm:gap-6 rounded-2xl sm:rounded-[2rem] p-4 sm:p-6 lg:p-8 transition-all duration-500 overflow-hidden bg-black/20 ${
                     project.highlighted 
                       ? "border-[rgba(215,181,109,0.38)] shadow-[0_0_35px_rgba(215,181,109,0.12)] hover:border-[var(--gold)] hover:shadow-[0_0_45px_rgba(215,181,109,0.22)] bg-gradient-to-br from-white/[0.07] via-white/[0.02] to-[rgba(215,181,109,0.05)]" 
                       : "border-white/5 hover:border-[rgba(215,181,109,0.48)] hover:shadow-[0_0_30px_rgba(255,255,255,0.02)]"
                   }`}
                   data-tilt-card
                 >
-                  {/* Visual HUD Crop Marks (Teeth corners) */}
-                  <div className="pointer-events-none absolute -left-px -top-px h-3.5 w-3.5 border-l border-t border-[var(--gold)]/30 group-hover:border-[var(--gold)] transition-colors duration-500" />
-                  <div className="pointer-events-none absolute -right-px -top-px h-3.5 w-3.5 border-r border-t border-[var(--gold)]/30 group-hover:border-[var(--gold)] transition-colors duration-500" />
-                  <div className="pointer-events-none absolute -left-px -bottom-px h-3.5 w-3.5 border-l border-b border-[var(--gold)]/30 group-hover:border-[var(--gold)] transition-colors duration-500" />
-                  <div className="pointer-events-none absolute -right-px -bottom-px h-3.5 w-3.5 border-r border-b border-[var(--gold)]/30 group-hover:border-[var(--gold)] transition-colors duration-500" />
+                  {/* Visual HUD Crop Marks */}
+                  <div className="pointer-events-none absolute left-3 top-3 h-3 w-3 border-l border-t border-[var(--gold)]/30 group-hover:border-[var(--gold)] transition-colors duration-500" />
+                  <div className="pointer-events-none absolute right-3 bottom-3 h-3 w-3 border-r border-b border-[var(--gold)]/30 group-hover:border-[var(--gold)] transition-colors duration-500" />
 
                   {/* Golden corner glow for highlighted cards */}
                   {project.highlighted && (
@@ -641,20 +681,43 @@ export default function Home() {
                       href={projectTarget} 
                       target="_blank" 
                       rel="noopener noreferrer" 
-                      className="absolute inset-0 z-10 rounded-[2rem]" 
+                      className="absolute inset-0 z-10 rounded-2xl sm:rounded-[2rem]" 
                       title={`Open ${project.name} ${projectTarget.includes("github.com") ? "repository" : "live site"}`}
                       aria-label={`Open ${project.name} ${projectTarget.includes("github.com") ? "repository" : "live site"}`}
                     />
                   )}
 
-                  <div className="flex flex-col">
-                    <span className="font-display text-5xl text-white/12 transition duration-500 group-hover:text-[var(--gold)]/40">{String(index + 1).padStart(2, "0")}</span>
-                    <span className="mt-1 font-mono text-[8px] uppercase tracking-[0.2em] text-white/20">{diag.class}</span>
+                  {/* Mobile Header Row */}
+                  <div className="flex items-center justify-between border-b border-white/5 pb-3 md:hidden">
+                    <div className="flex items-center gap-2">
+                      <span className="font-display text-2xl text-[var(--gold)] font-bold">{String(index + 1).padStart(2, "0")}</span>
+                      <span className="font-mono text-[8px] uppercase tracking-widest text-white/35">{"//"} {diag.class}</span>
+                    </div>
+                    {project.status && (
+                      <span className={`rounded-full px-2.5 py-0.5 text-[8.5px] uppercase tracking-wider font-semibold font-mono flex items-center gap-1 border ${
+                        project.status === "Live"
+                          ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-400"
+                          : project.status === "In Development" || project.status === "2nd Place"
+                          ? "border-[var(--gold)]/40 bg-[rgba(215,181,109,0.1)] text-[var(--gold)]"
+                          : "border-blue-400/30 bg-blue-400/10 text-blue-400"
+                      }`}>
+                        <span className={`h-1.5 w-1.5 rounded-full ${
+                          project.status === "Live" ? "bg-emerald-400" : project.status === "In Development" || project.status === "2nd Place" ? "bg-[var(--gold)]" : "bg-blue-400"
+                        }`} />
+                        {project.status}
+                      </span>
+                    )}
                   </div>
 
-                  <div>
+                  {/* Desktop Index Column */}
+                  <div className="hidden md:flex flex-col">
+                    <span className="font-display text-4xl lg:text-5xl text-white/15 transition duration-500 group-hover:text-[var(--gold)]/40">{String(index + 1).padStart(2, "0")}</span>
+                    <span className="mt-1 font-mono text-[8px] uppercase tracking-[0.2em] text-white/30">{diag.class}</span>
+                  </div>
+
+                  <div className="min-w-0">
                     {/* Technical Diagnostics Info bar */}
-                    <div className="flex items-center gap-3 font-mono text-[8px] text-white/30 mb-2 select-none">
+                    <div className="flex flex-wrap items-center gap-2 sm:gap-3 font-mono text-[8px] text-white/35 mb-2 select-none">
                       <span>IP: {diag.host}</span>
                       <span>{"//"}</span>
                       <span className="text-[var(--gold)]">PORT: {diag.port}</span>
@@ -662,12 +725,12 @@ export default function Home() {
                       <span>STATUS: ACTIVE</span>
                     </div>
 
-                    <div className="flex flex-wrap items-center gap-3">
-                      <h3 className="text-2xl font-semibold transition group-hover:text-[var(--cream)]">
+                    <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
+                      <h3 className="text-lg sm:text-xl md:text-2xl font-semibold break-words transition group-hover:text-[var(--cream)]">
                         <ScrambleText text={project.name} trigger={startScramble} />
                       </h3>
                       {project.status ? (
-                        <span className={`rounded-full px-3 py-1 text-[9px] uppercase tracking-[0.24em] font-semibold font-mono flex items-center gap-1.5 border transition-all duration-300 ${
+                        <span className={`hidden md:inline-flex rounded-full px-3 py-1 text-[9px] uppercase tracking-[0.2em] font-semibold font-mono items-center gap-1.5 border transition-all duration-300 ${
                           project.status === "Live"
                             ? "border-emerald-500/30 bg-emerald-500/5 text-emerald-400"
                             : project.status === "In Development" || project.status === "2nd Place"
@@ -685,14 +748,14 @@ export default function Home() {
                         </span>
                       ) : null}
                     </div>
-                    <p className="mt-3 max-w-3xl leading-7 text-white/60 transition group-hover:text-white/80">{project.description}</p>
+                    <p className="mt-2.5 sm:mt-3 max-w-3xl text-xs sm:text-sm leading-6 sm:leading-7 text-white/60 transition group-hover:text-white/80">{project.description}</p>
                     
                     {project.stack && (
-                      <div className="mt-5 flex flex-wrap gap-1.5">
+                      <div className="mt-3.5 sm:mt-5 flex flex-wrap gap-1.5">
                         {project.stack.map((tech) => (
                           <span 
                             key={tech} 
-                            className="rounded border border-white/5 bg-white/[0.02] px-2.5 py-0.5 font-mono text-[9px] uppercase tracking-wider text-white/40 transition-colors duration-300 group-hover:border-[var(--gold)]/15 group-hover:text-white/60"
+                            className="rounded border border-white/5 bg-white/[0.02] px-2 py-0.5 sm:px-2.5 sm:py-0.5 font-mono text-[8.5px] sm:text-[9px] uppercase tracking-wider text-white/40 transition-colors duration-300 group-hover:border-[var(--gold)]/15 group-hover:text-white/60"
                           >
                             {tech}
                           </span>
@@ -701,13 +764,13 @@ export default function Home() {
                     )}
                   </div>
                   
-                  <div className="flex md:justify-end">
+                  <div className="mt-3 md:mt-0 flex items-center justify-between md:justify-end border-t border-white/5 pt-3 md:border-t-0 md:pt-0">
                     {projectTarget ? (
-                      <span className="text-sm uppercase tracking-[0.22em] text-[var(--gold)] font-bold transition duration-300 group-hover:text-white flex items-center gap-1">
-                        {projectTarget.includes("github.com") ? "repo link" : "live site"} <span className="text-xs transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
+                      <span className="text-xs sm:text-sm uppercase tracking-[0.18em] sm:tracking-[0.22em] text-[var(--gold)] font-bold transition duration-300 group-hover:text-white flex items-center gap-1">
+                        {projectTarget.includes("github.com") ? "view repository" : "visit live system"} <span className="text-xs transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
                       </span>
                     ) : (
-                      <span className="text-sm uppercase tracking-[0.22em] text-white/28 font-mono">private</span>
+                      <span className="text-xs sm:text-sm uppercase tracking-[0.2em] text-white/28 font-mono">internal system</span>
                     )}
                   </div>
                 </article>
@@ -717,37 +780,46 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="relative z-10 md:min-h-screen overflow-hidden py-24" id="gallery">
-        <div className="section-shell mb-12">
+      <section className="relative z-10 overflow-hidden py-16 sm:py-24 scroll-mt-20" id="gallery">
+        <div className="section-shell mb-8 sm:mb-12">
           <Reveal>
-            <p className="text-xs uppercase tracking-[0.36em] text-[var(--gold)] font-mono">gallery // field_intel</p>
-            <h2 className="font-display mt-3 max-w-3xl text-3xl sm:text-5xl md:text-7xl tracking-[-0.04em]">MEMORIES</h2>
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+              <div>
+                <p className="text-xs uppercase tracking-[0.3em] sm:tracking-[0.36em] text-[var(--gold)] font-mono">gallery // field_intel</p>
+                <h2 className="font-display mt-2 sm:mt-3 max-w-3xl text-3xl sm:text-5xl md:text-6xl tracking-[-0.04em]">MEMORIES</h2>
+              </div>
+              <p className="font-mono text-[8.5px] sm:text-[9px] uppercase tracking-widest text-white/40 flex items-center gap-2">
+                <span className="inline-block h-1.5 w-1.5 rounded-full bg-[var(--gold)] animate-pulse" />
+                <span>Swipe horizontally</span>
+                <span className="text-xs">→</span>
+              </p>
+            </div>
           </Reveal>
         </div>
-        <div className="w-full overflow-x-auto md:overflow-visible scrollbar-none" data-gallery-section>
-          <div className="flex w-max gap-5 pl-[max(16px,calc((100vw-1180px)/2))] pr-8 pb-6 will-change-transform" data-gallery-track>
+        <div className="w-full overflow-x-auto md:overflow-visible scrollbar-none snap-x snap-mandatory pb-6" data-gallery-section>
+          <div className="flex w-max gap-4 sm:gap-6 px-4 sm:px-6 lg:px-8 will-change-transform" data-gallery-track>
             {gallery.map((item, index) => {
               const coords = galleryIntel[item.label] || "LAT: 27.7172° N // LNG: 85.3240° E";
               return (
-                <Reveal className="w-[78vw] shrink-0 sm:w-[360px] lg:w-[420px]" delay={index * 0.05} key={item.src}>
-                  <div className="glass group relative aspect-[3/4] overflow-hidden rounded-[2rem] border border-white/5 hover:border-[var(--gold)]/35 transition duration-500 bg-black/20">
-                    <Image alt={item.alt} className="object-cover transition duration-700 group-hover:scale-105" fill sizes="(max-width: 640px) 78vw, 420px" src={item.src} />
+                <div className="w-[82vw] xs:w-[75vw] sm:w-[340px] lg:w-[400px] shrink-0 snap-center sm:snap-start" key={item.src}>
+                  <div className="glass group relative aspect-[3/4] overflow-hidden rounded-2xl sm:rounded-[2rem] border border-white/5 hover:border-[var(--gold)]/35 transition duration-500 bg-black/20">
+                    <Image alt={item.alt} className="object-cover transition duration-700 group-hover:scale-105" fill sizes="(max-width: 640px) 82vw, 400px" src={item.src} />
                     
                     {/* Forensic target crops */}
-                    <div className="pointer-events-none absolute left-0 top-0 h-3 w-3 border-l border-t border-[var(--gold)]/30" />
-                    <div className="pointer-events-none absolute right-0 bottom-0 h-3 w-3 border-r border-b border-[var(--gold)]/30" />
+                    <div className="pointer-events-none absolute left-3 top-3 h-3 w-3 border-l border-t border-[var(--gold)]/40" />
+                    <div className="pointer-events-none absolute right-3 bottom-3 h-3 w-3 border-r border-b border-[var(--gold)]/40" />
 
                     {/* Corner telemetry overlays */}
-                    <div className="absolute top-4 left-4 p-1.5 bg-black/60 backdrop-blur-md rounded border border-white/5 font-mono text-[7px] text-white/40 pointer-events-none">
+                    <div className="absolute top-3 left-3 sm:top-4 sm:left-4 p-1.5 bg-black/70 backdrop-blur-md rounded border border-white/5 font-mono text-[7px] text-white/50 pointer-events-none">
                       <span>{coords}</span>
                     </div>
 
-                    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/45 to-transparent p-6">
-                      <p className="font-mono text-[8px] uppercase tracking-[0.2em] text-white/30 mb-1">INTEL_LOG // 0{index + 1}</p>
-                      <p className="text-xs uppercase tracking-[0.3em] text-[var(--gold)] font-semibold">{item.label}</p>
+                    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/50 to-transparent p-4 sm:p-6">
+                      <p className="font-mono text-[8px] uppercase tracking-[0.2em] text-white/40 mb-1">INTEL_LOG // 0{index + 1}</p>
+                      <p className="text-xs sm:text-sm uppercase tracking-[0.25em] text-[var(--gold)] font-semibold">{item.label}</p>
                     </div>
                   </div>
-                </Reveal>
+                </div>
               );
             })}
           </div>
@@ -755,24 +827,24 @@ export default function Home() {
       </section>
 
       {/* Technical FAQ & Capability Briefing Section */}
-      <section className="section-shell relative z-10 py-24" id="faq" aria-labelledby="faq-heading">
+      <section className="section-shell relative z-10 py-16 sm:py-24 scroll-mt-20" id="faq" aria-labelledby="faq-heading">
         <Reveal>
-          <p className="text-xs uppercase tracking-[0.36em] text-[var(--gold)] font-mono">intelligence // faq_briefing</p>
-          <h2 id="faq-heading" className="font-display mt-3 text-3xl sm:text-5xl md:text-7xl tracking-[-0.04em]">Technical Briefing.</h2>
-          <p className="mt-4 max-w-2xl text-sm sm:text-base leading-relaxed text-white/60">
+          <p className="text-xs uppercase tracking-[0.3em] sm:tracking-[0.36em] text-[var(--gold)] font-mono">intelligence // faq_briefing</p>
+          <h2 id="faq-heading" className="font-display mt-2 sm:mt-3 text-3xl sm:text-5xl md:text-6xl tracking-[-0.04em]">Technical Briefing.</h2>
+          <p className="mt-3 sm:mt-4 max-w-2xl text-xs sm:text-sm md:text-base leading-relaxed text-white/60">
             Frequently referenced inquiries regarding fullstack architecture, systems development, hackathon achievements, and security research with Anudit Khatri.
           </p>
         </Reveal>
 
-        <div className="mt-12 space-y-4 max-w-4xl">
+        <div className="mt-8 sm:mt-12 space-y-3.5 sm:space-y-4 max-w-4xl">
           {faqs.map((faq, index) => (
-            <Reveal delay={index * 0.05} key={faq.question}>
-              <div className="glass group rounded-2xl border border-white/5 bg-black/30 p-6 transition duration-300 hover:border-[var(--gold)]/30 hover:bg-black/40">
-                <div className="flex items-start gap-4">
+            <Reveal delay={index * 0.04} key={faq.question}>
+              <div className="glass group rounded-xl sm:rounded-2xl border border-white/5 bg-black/30 p-4 sm:p-6 transition duration-300 hover:border-[var(--gold)]/30 hover:bg-black/40">
+                <div className="flex items-start gap-3 sm:gap-4">
                   <span className="font-mono text-xs text-[var(--gold)] shrink-0 select-none pt-0.5">0{index + 1} {"//"}</span>
-                  <div className="space-y-2">
-                    <h3 className="text-lg font-semibold text-[var(--cream)] font-display tracking-wide">{faq.question}</h3>
-                    <p className="text-sm leading-relaxed text-white/65">{faq.answer}</p>
+                  <div className="space-y-1.5 sm:space-y-2">
+                    <h3 className="text-base sm:text-lg font-semibold text-[var(--cream)] font-display tracking-wide">{faq.question}</h3>
+                    <p className="text-xs sm:text-sm leading-relaxed text-white/65">{faq.answer}</p>
                   </div>
                 </div>
               </div>
@@ -781,16 +853,15 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section-shell relative z-10 pb-28 pt-16" id="contact">
+      <section className="section-shell relative z-10 pb-20 sm:pb-28 pt-12 sm:pt-16 scroll-mt-20" id="contact">
         <Reveal>
-          <div className="glass relative overflow-hidden rounded-[2.75rem] p-8 md:p-16 bg-black/20">
-            <div className="absolute left-0 top-0 h-full w-px bg-gradient-to-b from-[var(--gold)]/40 via-transparent to-transparent" />
-            <div className="absolute left-0 top-0 h-4 w-4 border-l border-t border-[var(--gold)]/40" />
-            <div className="absolute right-0 top-0 h-4 w-4 border-r border-t border-white/10" />
-            <div className="absolute left-0 bottom-0 h-4 w-4 border-l border-b border-white/10" />
-            <div className="absolute right-0 bottom-0 h-4 w-4 border-r border-b border-[var(--gold)]/40" />
+          <div className="glass relative overflow-hidden rounded-2xl sm:rounded-[2.5rem] p-6 sm:p-10 md:p-16 bg-black/20">
+            <div className="pointer-events-none absolute left-3 top-3 h-4 w-4 border-l border-t border-[var(--gold)]/40" />
+            <div className="pointer-events-none absolute right-3 top-3 h-4 w-4 border-r border-t border-white/10" />
+            <div className="pointer-events-none absolute left-3 bottom-3 h-4 w-4 border-l border-b border-white/10" />
+            <div className="pointer-events-none absolute right-3 bottom-3 h-4 w-4 border-r border-b border-[var(--gold)]/40" />
 
-            <div className="flex flex-col gap-12">
+            <div className="flex flex-col gap-8 sm:gap-12">
               <div className="relative">
                 {/* Terminal prompt watermarks in bg */}
                 <div className="absolute -top-10 right-0 font-mono text-[8px] text-white/5 select-none hidden md:block space-y-1">
@@ -799,13 +870,13 @@ export default function Home() {
                   <p>STATUS: ESTABLISHED // CHANNEL: SECURE</p>
                 </div>
 
-                <p className="text-xs uppercase tracking-[0.4em] text-[var(--gold)] font-mono">connect // secure_handshake</p>
-                <h2 className="font-display mt-6 text-5xl leading-[1.1] tracking-[-0.03em] md:text-7xl">
+                <p className="text-xs uppercase tracking-[0.3em] sm:tracking-[0.4em] text-[var(--gold)] font-mono">connect // secure_handshake</p>
+                <h2 className="font-display mt-4 sm:mt-6 text-3xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.15] sm:leading-[1.1] tracking-[-0.03em]">
                   Build less by hand.<br />Build more with systems.<br />
                   <span className="text-[var(--gold)]/80">Else if</span> Build your own System.
                 </h2>
               </div>
-              <div className="flex flex-wrap gap-5">
+              <div className="flex flex-wrap gap-3 sm:gap-5">
                 <SocialIcon ariaLabel="Email Anudit Khatri via Gmail" href={`https://mail.google.com/mail/?view=cm&fs=1&to=${profile.socials.email}`} icon={<MailIcon />} />
                 <SocialIcon ariaLabel="Message Anudit Khatri on WhatsApp" href={`https://wa.me/${profile.socials.whatsapp}`} icon={<WhatsAppIcon />} />
                 <SocialIcon ariaLabel="View GitHub Profile of Anudit Khatri (arthurrgg8-lgtm)" href={`https://github.com/${profile.socials.github}`} icon={<GithubIcon />} />
@@ -819,13 +890,13 @@ export default function Home() {
       </section>
 
       {/* Semantic High-Tech Developer & Systems Footer for SEO & Navigation */}
-      <footer className="relative z-10 border-t border-white/10 bg-black/60 pt-16 pb-12 backdrop-blur-xl">
+      <footer className="relative z-10 border-t border-white/10 bg-black/60 pt-12 sm:pt-16 pb-12 backdrop-blur-xl">
         <div className="section-shell">
-          <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4 pb-12 border-b border-white/10">
+          <div className="grid gap-8 sm:gap-10 sm:grid-cols-2 lg:grid-cols-4 pb-10 sm:pb-12 border-b border-white/10">
             {/* Col 1: Developer Bio & Brand */}
-            <div className="space-y-4">
+            <div className="space-y-3.5 sm:space-y-4">
               <div className="flex items-center gap-3">
-                <div className="relative h-7 w-7 overflow-hidden rounded-full border border-[var(--gold)]/40">
+                <div className="relative h-7 w-7 overflow-hidden rounded-full border border-[var(--gold)]/40 shrink-0">
                   <Image alt="Anudit Khatri Avatar" className="object-cover" fill sizes="28px" src="/assets/lazzy.jpeg" />
                 </div>
                 <span className="font-semibold text-sm tracking-[0.25em] text-[var(--cream)] uppercase">
@@ -835,16 +906,16 @@ export default function Home() {
               <p className="text-xs leading-relaxed text-white/60">
                 Premier Fullstack Developer, Cybersecurity Researcher, and AI Systems Architect based in Kathmandu, Nepal. Dedicated to mission-critical engineering, local-first autonomy, and edge runtime security.
               </p>
-              <div className="flex items-center gap-2 font-mono text-[9px] text-[var(--gold)]">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+              <div className="flex items-center gap-2 font-mono text-[8.5px] sm:text-[9px] text-[var(--gold)]">
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 shrink-0" />
                 <span>AVAILABLE FOR GLOBAL SYSTEMS CONTRACTS</span>
               </div>
             </div>
 
             {/* Col 2: Core Engineering Capabilities */}
-            <div className="space-y-3 font-mono text-xs">
-              <h4 className="text-[10px] uppercase tracking-[0.3em] text-[var(--gold)] font-bold">Engineering Stack</h4>
-              <ul className="space-y-2 text-white/65">
+            <div className="space-y-2.5 sm:space-y-3 font-mono text-xs">
+              <h4 className="text-[10px] uppercase tracking-[0.25em] sm:tracking-[0.3em] text-[var(--gold)] font-bold">Engineering Stack</h4>
+              <ul className="space-y-1.5 sm:space-y-2 text-white/65 text-[11px] sm:text-xs">
                 <li>• Next.js App Router &amp; Server Actions</li>
                 <li>• High-Performance Rust &amp; Python Systems</li>
                 <li>• Local LLM Orchestration &amp; MCP Tooling</li>
@@ -855,9 +926,9 @@ export default function Home() {
             </div>
 
             {/* Col 3: Notable Systems & Verified Proof */}
-            <div className="space-y-3 font-mono text-xs">
-              <h4 className="text-[10px] uppercase tracking-[0.3em] text-[var(--gold)] font-bold">Systems &amp; Honors</h4>
-              <ul className="space-y-2 text-white/65">
+            <div className="space-y-2.5 sm:space-y-3 font-mono text-xs">
+              <h4 className="text-[10px] uppercase tracking-[0.25em] sm:tracking-[0.3em] text-[var(--gold)] font-bold">Systems &amp; Honors</h4>
+              <ul className="space-y-1.5 sm:space-y-2 text-white/65 text-[11px] sm:text-xs">
                 <li>• 🏆 2nd Place: Nepal Police Hackathon 2083</li>
                 <li>• 🏆 #1 All-Time: DataCamp × Code for Nepal</li>
                 <li>• 🎓 66-Days Continuous Challenge Completer</li>
@@ -868,8 +939,8 @@ export default function Home() {
             </div>
 
             {/* Col 4: Direct Dispatch & Location */}
-            <div className="space-y-3 font-mono text-xs">
-              <h4 className="text-[10px] uppercase tracking-[0.3em] text-[var(--gold)] font-bold">Direct Dispatch</h4>
+            <div className="space-y-2.5 sm:space-y-3 font-mono text-xs">
+              <h4 className="text-[10px] uppercase tracking-[0.25em] sm:tracking-[0.3em] text-[var(--gold)] font-bold">Direct Dispatch</h4>
               <p className="text-white/60 text-[11px] leading-relaxed">
                 Base: Kathmandu, Bagmati, Nepal (NP)<br />
                 Response Latency: &lt; 24h
@@ -889,11 +960,11 @@ export default function Home() {
           </div>
 
           {/* Bottom Copyright & Telemetry Bar */}
-          <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-[10px] text-white/40">
+          <div className="mt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 font-mono text-[9px] sm:text-[10px] text-white/40">
             <div>
               © {new Date().getFullYear()} Anudit Khatri (Lazzy Badger). All rights reserved.
             </div>
-            <div className="flex items-center gap-4 text-[9px] text-white/30 uppercase tracking-widest">
+            <div className="flex flex-wrap items-center gap-2 sm:gap-4 text-[8.5px] sm:text-[9px] text-white/30 uppercase tracking-wider sm:tracking-widest">
               <span>LAT: 27.7172° N</span>
               <span>{"//"}</span>
               <span>LNG: 85.3240° E</span>
@@ -911,36 +982,36 @@ export default function Home() {
 function SocialIcon({ href, icon, ariaLabel }: { href: string; icon: React.ReactNode; ariaLabel: string }) {
   return (
     <a 
-      className="group relative flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.02] transition-all duration-500 hover:border-[var(--gold)] hover:bg-[var(--gold)]/10 hover:shadow-[0_0_20px_rgba(215,181,109,0.2)]" 
+      className="group relative flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-xl sm:rounded-2xl border border-white/10 bg-white/[0.02] transition-all duration-300 hover:border-[var(--gold)] hover:bg-[var(--gold)]/10 hover:shadow-[0_0_20px_rgba(215,181,109,0.2)]" 
       href={href}
       rel="noopener noreferrer"
       target="_blank"
       aria-label={ariaLabel}
       title={ariaLabel}
     >
-      <div className="text-white/60 transition-all duration-500 group-hover:scale-110 group-hover:text-[var(--gold)]">
+      <div className="text-white/60 transition-all duration-300 group-hover:scale-110 group-hover:text-[var(--gold)]">
         {icon}
       </div>
-      <div className="absolute inset-0 -z-10 rounded-2xl bg-[var(--gold)] opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-20" />
+      <div className="absolute inset-0 -z-10 rounded-xl sm:rounded-2xl bg-[var(--gold)] opacity-0 blur-xl transition-opacity duration-300 group-hover:opacity-20" />
     </a>
   );
 }
 
 function SkillCluster({ title, values }: { title: string; values: string[] }) {
   return (
-    <div className="glass relative p-6 rounded-[1.5rem] bg-black/25 border border-white/5 transition-all duration-300 hover:border-[var(--gold)]/20 shadow-lg">
-      <div className="absolute left-0 top-0 h-3 w-3 border-l border-t border-[var(--gold)]/40" />
-      <div className="absolute right-0 bottom-0 h-3 w-3 border-r border-b border-white/10" />
+    <div className="glass relative p-4 sm:p-6 rounded-2xl sm:rounded-[1.5rem] bg-black/25 border border-white/5 transition-all duration-300 hover:border-[var(--gold)]/20 shadow-lg">
+      <div className="pointer-events-none absolute left-3 top-3 h-3 w-3 border-l border-t border-[var(--gold)]/40" />
+      <div className="pointer-events-none absolute right-3 bottom-3 h-3 w-3 border-r border-b border-white/10" />
       
-      <div className="flex items-center justify-between border-b border-white/5 pb-3 mb-4 select-none">
-        <h3 className="font-mono text-[9px] uppercase tracking-[0.25em] text-[var(--gold)]">{title}</h3>
+      <div className="flex items-center justify-between border-b border-white/5 pb-2.5 mb-3.5 select-none">
+        <h3 className="font-mono text-[9px] uppercase tracking-[0.2em] sm:tracking-[0.25em] text-[var(--gold)]">{title}</h3>
         <span className="font-mono text-[7px] text-white/20 select-none">DB_CLUSTER_READY</span>
       </div>
 
       <div className="flex flex-wrap gap-1.5">
         {values.map((value) => (
           <span 
-            className="rounded border border-white/5 bg-white/[0.02] px-2.5 py-1 font-mono text-[9px] uppercase tracking-wider text-white/50 transition-all duration-300 hover:border-[var(--gold)]/35 hover:text-[var(--gold)] hover:bg-[var(--gold)]/5 hover:scale-[1.03] select-none" 
+            className="rounded border border-white/5 bg-white/[0.02] px-2 py-0.5 sm:px-2.5 sm:py-1 font-mono text-[8.5px] sm:text-[9px] uppercase tracking-wider text-white/50 transition-all duration-300 hover:border-[var(--gold)]/35 hover:text-[var(--gold)] hover:bg-[var(--gold)]/5 select-none" 
             key={value}
           >
             {value}

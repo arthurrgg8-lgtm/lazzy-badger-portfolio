@@ -72,51 +72,51 @@ export function HardwareHud() {
   }, []);
 
   return (
-    <div className="glass relative overflow-hidden rounded-[1.5rem] bg-black/40 p-5 border border-white/5 shadow-2xl transition duration-500 hover:border-[var(--gold)]/30 mt-6 max-w-xl">
+    <div className="glass relative overflow-hidden rounded-2xl sm:rounded-[1.5rem] bg-black/40 p-4 sm:p-5 border border-white/5 shadow-2xl transition duration-500 hover:border-[var(--gold)]/30 mt-6 w-full max-w-xl">
       {/* HUD Tech Corner Marks */}
-      <div className="pointer-events-none absolute left-0 top-0 h-3 w-3 border-l border-t border-[var(--gold)]/30" />
-      <div className="pointer-events-none absolute right-0 top-0 h-3 w-3 border-r border-t border-white/10" />
-      <div className="pointer-events-none absolute left-0 bottom-0 h-3 w-3 border-l border-b border-white/10" />
-      <div className="pointer-events-none absolute right-0 bottom-0 h-3 w-3 border-r border-b border-[var(--gold)]/30" />
+      <div className="pointer-events-none absolute left-2.5 top-2.5 h-3 w-3 border-l border-t border-[var(--gold)]/30" />
+      <div className="pointer-events-none absolute right-2.5 top-2.5 h-3 w-3 border-r border-t border-white/10" />
+      <div className="pointer-events-none absolute left-2.5 bottom-2.5 h-3 w-3 border-l border-b border-white/10" />
+      <div className="pointer-events-none absolute right-2.5 bottom-2.5 h-3 w-3 border-r border-b border-[var(--gold)]/30" />
 
       {/* Header Info */}
-      <div className="flex items-center justify-between border-b border-white/5 pb-3">
+      <div className="flex items-center justify-between border-b border-white/5 pb-2.5 sm:pb-3">
         <div className="flex items-center gap-2">
           <div className="h-1.5 w-1.5 rounded-full bg-[var(--gold)]" />
-          <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-[var(--cream)]">NODE: badger-node-pi4</span>
+          <span className="font-mono text-[8.5px] sm:text-[9px] uppercase tracking-[0.16em] sm:tracking-[0.2em] text-[var(--cream)]">NODE: badger-node-pi4</span>
         </div>
-        <span className="font-mono text-[8px] uppercase tracking-[0.15em] text-white/40">SYS_TELEMETRY: ACTIVE</span>
+        <span className="font-mono text-[7.5px] sm:text-[8px] uppercase tracking-[0.12em] sm:tracking-[0.15em] text-white/40">SYS_TELEMETRY: ACTIVE</span>
       </div>
 
       {/* Grid of Readouts */}
-      <div className="mt-4 grid grid-cols-3 gap-4 border-b border-white/5 pb-4">
+      <div className="mt-3.5 sm:mt-4 grid grid-cols-3 gap-2 sm:gap-4 border-b border-white/5 pb-3.5 sm:pb-4">
         {/* CPU Temp */}
-        <div className="flex flex-col gap-1">
-          <span className="font-mono text-[8px] uppercase tracking-wider text-white/30">CPU TEMP</span>
-          <span className="font-sans text-lg font-semibold text-[var(--cream)]">{cpuTemp}°C</span>
+        <div className="flex flex-col gap-0.5 sm:gap-1">
+          <span className="font-mono text-[7.5px] sm:text-[8px] uppercase tracking-wider text-white/30">CPU TEMP</span>
+          <span className="font-sans text-base sm:text-lg font-semibold text-[var(--cream)]">{cpuTemp}°C</span>
         </div>
         {/* RAM Usage */}
-        <div className="flex flex-col gap-1">
-          <span className="font-mono text-[8px] uppercase tracking-wider text-white/30">MEM LOAD</span>
-          <span className="font-sans text-lg font-semibold text-[var(--cream)]">{ramUsed} GB</span>
+        <div className="flex flex-col gap-0.5 sm:gap-1">
+          <span className="font-mono text-[7.5px] sm:text-[8px] uppercase tracking-wider text-white/30">MEM LOAD</span>
+          <span className="font-sans text-base sm:text-lg font-semibold text-[var(--cream)]">{ramUsed} GB</span>
         </div>
         {/* Interface status */}
-        <div className="flex flex-col gap-1">
-          <span className="font-mono text-[8px] uppercase tracking-wider text-white/30">NIC STATE</span>
-          <span className="font-mono text-[10px] font-semibold text-[var(--gold)] uppercase leading-5 tracking-widest">wlan0mon</span>
+        <div className="flex flex-col gap-0.5 sm:gap-1 min-w-0">
+          <span className="font-mono text-[7.5px] sm:text-[8px] uppercase tracking-wider text-white/30">NIC STATE</span>
+          <span className="font-mono text-[8.5px] sm:text-[10px] font-semibold text-[var(--gold)] uppercase leading-5 tracking-normal sm:tracking-widest truncate">wlan0mon</span>
         </div>
       </div>
 
       {/* Live Intercept Ticker Log */}
-      <div className="mt-4">
+      <div className="mt-3.5 sm:mt-4">
         <div className="flex items-center justify-between mb-2">
-          <span className="font-mono text-[8px] uppercase tracking-wider text-white/30">ACTIVE EXPLOIT & SCAN TELEMETRY</span>
-          <span className="font-mono text-[8px] text-[var(--gold)]">{packetRate} PKTS/S</span>
+          <span className="font-mono text-[7.5px] sm:text-[8px] uppercase tracking-wider text-white/30">ACTIVE EXPLOIT & SCAN TELEMETRY</span>
+          <span className="font-mono text-[7.5px] sm:text-[8px] text-[var(--gold)] shrink-0">{packetRate} PKTS/S</span>
         </div>
-        <div className="space-y-1.5 rounded-lg bg-black/60 p-3 border border-white/[0.03]">
+        <div className="space-y-1.5 rounded-lg bg-black/60 p-2.5 sm:p-3 border border-white/[0.03]">
           {activeLogs.map((log, idx) => (
-            <div className="flex items-start gap-2 font-mono text-[9px] text-white/60" key={idx}>
-              <span className="text-[var(--gold)] select-none">&gt;&gt;</span>
+            <div className="flex items-start gap-1.5 sm:gap-2 font-mono text-[8px] sm:text-[9px] text-white/60" key={idx}>
+              <span className="text-[var(--gold)] select-none shrink-0">&gt;&gt;</span>
               <p className="truncate text-white/70">{log}</p>
             </div>
           ))}
