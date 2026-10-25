@@ -3,26 +3,25 @@
 import { useEffect, useState, useRef } from "react";
 
 const securityLogs = [
-  "[DataCamp] Code for Nepal #1 Leaderboard // 66-Days Challenge Completer",
-  "[Research] WordPress SQLite issue #568: LIKE to GLOB query distortion disclosed",
-  "[SecOps] Active client security: Manoranjan, aitrialnp, and Anushka secured",
-  "[CVE-Triage] Mitigated Node.js Brotli RCE (CVE-2026-111497) across client edge",
-  "[h1watch] Real-time HackerOne asset & scope watcher armed // Telegram dispatch ON",
-  "[hunt-workspace] Automated recon pipeline: subfinder + katana synchronized",
-  "[RTSP-NVR] Continuous 24/7 stream recording active // 7-day cloud sync OK",
-  "[iforensic] iOS deep sandbox & SQLite keychain extraction: SUCCESS",
+  "[DataCamp] Code for Nepal #1 // 66-Days Challenge OK",
+  "[Research] WordPress SQLite #568: LIKE/GLOB flaw disclosed",
+  "[SecOps] Active client security: Manoranjan, aitrialnp secured",
+  "[CVE-Triage] Mitigated Node.js Brotli RCE (CVE-2026-111497)",
+  "[h1watch] Real-time HackerOne asset & scope watcher armed",
+  "[hunt-workspace] Automated recon: subfinder + katana synchronized",
+  "[RTSP-NVR] Continuous 24/7 recording // 7-day cloud sync OK",
+  "[iforensic] iOS deep sandbox & SQLite keychain: SUCCESS",
   "[aforensic] Android DFIR Dalvik runtime & package audit complete",
-  "[Easy-Patra] Automated letter formatting engine: template pipeline READY",
+  "[Easy-Patra] Automated letter formatting engine: READY",
   "[wlan0mon] Sending packet injection frames... SUCCESS",
   "[wlan0mon] Handshake captured from Syfe-BBP-WiFi [WPA2]",
-  "[GraphQL] Probing active mutations at cengage-staging-gql...",
+  "[GraphQL] Probing active mutations at staging-gql...",
   "[GraphQL] Next.js configuration leak audit: COMPLETED",
-  "[SQLMap] Injecting UTF-16 bypass payloads on Milady API...",
-  "[Katana] Crawled 12 active endpoints under DoD target scope",
+  "[SQLMap] Injecting UTF-16 bypass payloads on API...",
+  "[Katana] Crawled 12 active endpoints under DoD scope",
   "[subfinder] Discovered 48 subdomains on corporate scope",
-  "[httpx] Probing live web servers on corporate asset... SUCCESS",
+  "[httpx] Probing live web servers on corporate asset... OK",
   "[wlan0mon] Staging deauth flood on target channel 11...",
-  "[GraphQL] Testing GraphQL introspection at milady-dev-graphql",
   "[Nuclei] Running systemic disclosure templates on DoD assets"
 ];
 
@@ -72,7 +71,7 @@ export function HardwareHud() {
   }, []);
 
   return (
-    <div className="glass relative overflow-hidden rounded-2xl sm:rounded-[1.5rem] bg-black/40 p-4 sm:p-5 border border-white/5 shadow-2xl transition duration-500 hover:border-[var(--gold)]/30 mt-6 w-full max-w-xl">
+    <div className="glass relative overflow-hidden rounded-2xl sm:rounded-[1.5rem] bg-black/40 p-4 sm:p-5 border border-white/5 shadow-2xl transition duration-500 hover:border-[var(--gold)]/30 mt-6 w-full max-w-xl min-w-0">
       {/* HUD Tech Corner Marks */}
       <div className="pointer-events-none absolute left-2.5 top-2.5 h-3 w-3 border-l border-t border-[var(--gold)]/30" />
       <div className="pointer-events-none absolute right-2.5 top-2.5 h-3 w-3 border-r border-t border-white/10" />
@@ -89,24 +88,24 @@ export function HardwareHud() {
       </div>
 
       {/* Grid of Readouts */}
-      <div className="mt-3.5 sm:mt-4 grid grid-cols-3 gap-2 sm:gap-4 border-b border-white/5 pb-3.5 sm:pb-4 items-end">
+      <div className="mt-3.5 sm:mt-4 grid grid-cols-3 gap-2 sm:gap-4 border-b border-white/5 pb-3.5 sm:pb-4 items-end min-w-0 w-full">
         {/* CPU Temp */}
-        <div className="flex flex-col gap-1">
-          <span className="font-mono text-[7.5px] sm:text-[8px] uppercase tracking-wider text-white/30">CPU TEMP</span>
+        <div className="flex flex-col gap-1 min-w-0">
+          <span className="font-mono text-[7.5px] sm:text-[8px] uppercase tracking-wider text-white/30 truncate">CPU TEMP</span>
           <div className="h-7 sm:h-8 flex items-center font-sans text-base sm:text-lg font-semibold text-[var(--cream)]">
             {cpuTemp}°C
           </div>
         </div>
         {/* RAM Usage */}
-        <div className="flex flex-col gap-1">
-          <span className="font-mono text-[7.5px] sm:text-[8px] uppercase tracking-wider text-white/30">MEM LOAD</span>
+        <div className="flex flex-col gap-1 min-w-0">
+          <span className="font-mono text-[7.5px] sm:text-[8px] uppercase tracking-wider text-white/30 truncate">MEM LOAD</span>
           <div className="h-7 sm:h-8 flex items-center font-sans text-base sm:text-lg font-semibold text-[var(--cream)]">
             {ramUsed} GB
           </div>
         </div>
         {/* Interface status */}
         <div className="flex flex-col gap-1 min-w-0">
-          <span className="font-mono text-[7.5px] sm:text-[8px] uppercase tracking-wider text-white/30">NIC STATE</span>
+          <span className="font-mono text-[7.5px] sm:text-[8px] uppercase tracking-wider text-white/30 truncate">NIC STATE</span>
           <div className="h-7 sm:h-8 flex items-center font-mono text-[9px] sm:text-[10.5px] font-semibold text-[var(--gold)] uppercase tracking-wider truncate">
             wlan0mon
           </div>
@@ -114,16 +113,16 @@ export function HardwareHud() {
       </div>
 
       {/* Live Intercept Ticker Log */}
-      <div className="mt-3.5 sm:mt-4">
-        <div className="flex items-center justify-between mb-2">
-          <span className="font-mono text-[7.5px] sm:text-[8px] uppercase tracking-wider text-white/30">ACTIVE EXPLOIT & SCAN TELEMETRY</span>
+      <div className="mt-3.5 sm:mt-4 min-w-0 w-full">
+        <div className="flex items-center justify-between mb-2 gap-2">
+          <span className="font-mono text-[7.5px] sm:text-[8px] uppercase tracking-wider text-white/30 truncate">ACTIVE EXPLOIT &amp; SCAN TELEMETRY</span>
           <span className="font-mono text-[7.5px] sm:text-[8px] text-[var(--gold)] shrink-0">{packetRate} PKTS/S</span>
         </div>
-        <div className="space-y-1.5 rounded-lg bg-black/60 p-2.5 sm:p-3 border border-white/[0.03]">
+        <div className="space-y-1.5 rounded-lg bg-black/60 p-2.5 sm:p-3 border border-white/[0.03] min-w-0 w-full overflow-hidden">
           {activeLogs.map((log, idx) => (
-            <div className="flex items-start gap-1.5 sm:gap-2 font-mono text-[8px] sm:text-[9px] text-white/60" key={idx}>
+            <div className="flex items-center gap-1.5 sm:gap-2 font-mono text-[8px] sm:text-[9px] text-white/60 min-w-0 w-full h-4 sm:h-4.5 overflow-hidden" key={idx}>
               <span className="text-[var(--gold)] select-none shrink-0">&gt;&gt;</span>
-              <p className="truncate text-white/70">{log}</p>
+              <p className="min-w-0 flex-1 truncate text-white/70">{log}</p>
             </div>
           ))}
         </div>

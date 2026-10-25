@@ -196,7 +196,7 @@ export default function Home() {
       </div>
 
       <section className="section-shell relative z-10 grid items-start lg:items-center gap-8 lg:gap-12 pb-12 pt-20 sm:pt-28 md:pt-32 lg:grid-cols-[1.15fr_0.85fr] min-h-[calc(100vh-4rem)] scroll-mt-24" id="top">
-        <Reveal delay={0.04} className="flex flex-col justify-center">
+        <Reveal delay={0.04} className="flex flex-col justify-center min-w-0 w-full">
           <div className="flex items-center gap-2 mb-2.5 sm:mb-3">
             <span className="h-1.5 w-1.5 rounded-full bg-[var(--gold)] animate-pulse" />
             <span className="font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.2em] sm:tracking-[0.3em] text-[var(--gold)]">
