@@ -108,13 +108,36 @@ export default function Home() {
     };
   }, [mobileMenuOpen]);
 
+  // Compulsory Audio Activation: Ensure ambient audio plays on any first user interaction
+  useEffect(() => {
+    const unlockAudio = async () => {
+      if (!cyberSound?.running) {
+        try {
+          await cyberSound.start();
+        } catch {}
+      }
+    };
+    window.addEventListener("click", unlockAudio);
+    window.addEventListener("keydown", unlockAudio);
+    window.addEventListener("touchstart", unlockAudio);
+    return () => {
+      window.removeEventListener("click", unlockAudio);
+      window.removeEventListener("keydown", unlockAudio);
+      window.removeEventListener("touchstart", unlockAudio);
+    };
+  }, []);
+
   return (
     <>
       {!isBooted && (
         <BootScreen
-          onComplete={() => {
+          onComplete={async () => {
             setIsBooted(true);
             setStartScramble(true);
+            try {
+              await cyberSound.start();
+              cyberSound.playBlip(980);
+            } catch {}
           }}
         />
       )}
@@ -141,8 +164,8 @@ export default function Home() {
 
       <header className="fixed left-0 right-0 top-0 z-50 border-b border-white/10 bg-black/60 backdrop-blur-2xl">
         <nav className="section-shell flex h-16 items-center justify-between">
-          <div className="flex items-center gap-6">
-            <Link className="group flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.28em] sm:tracking-[0.34em] text-[var(--cream)]" href="#top">
+          <div className="flex items-center gap-4 xl:gap-6 shrink-0">
+            <Link className="group flex items-center gap-2.5 sm:gap-3 text-xs sm:text-sm font-semibold uppercase tracking-[0.24em] sm:tracking-[0.32em] text-[var(--cream)] whitespace-nowrap shrink-0" href="#top">
               <div className="relative h-8 w-8 overflow-hidden rounded-full border border-[var(--gold)]/30 shrink-0">
                 <Image alt="Lazzy Badger Logo" className="object-cover" fill sizes="32px" src="/assets/lazzy.jpeg" />
               </div>
@@ -150,25 +173,25 @@ export default function Home() {
                 Lazzy<span className="text-[var(--gold)]">Badger</span>
               </span>
             </Link>
-            <div className="hidden items-center gap-4 border-l border-white/10 pl-6 md:flex">
+            <div className="hidden items-center gap-3 xl:gap-4 border-l border-white/10 pl-4 xl:pl-6 lg:flex whitespace-nowrap shrink-0">
               <div className="flex items-center gap-2">
                 <div className="h-1.5 w-1.5 rounded-full bg-[var(--gold)]" />
-                <span className="text-[10px] uppercase tracking-[0.2em] text-white/40">System: Online</span>
+                <span className="text-[10px] uppercase tracking-[0.16em] text-white/40 whitespace-nowrap">System: Online</span>
               </div>
               <div className="h-3 w-px bg-white/10" />
-              <span className="font-mono text-[9px] text-[var(--gold)] tracking-wider">LATENCY: {ping}ms</span>
+              <span className="font-mono text-[9px] text-[var(--gold)] tracking-wider whitespace-nowrap">LATENCY: {ping}ms</span>
               <div className="h-3 w-px bg-white/10" />
               <SoundController />
             </div>
           </div>
-          <div className="hidden items-center gap-7 lg:gap-8 text-xs uppercase tracking-[0.26em] text-white/58 md:flex">
+          <div className="hidden items-center gap-5 xl:gap-8 text-xs uppercase tracking-[0.2em] xl:tracking-[0.26em] text-white/58 lg:flex whitespace-nowrap shrink-0">
             {navItems.map((item) => (
               <NavLink className="transition hover:text-[var(--gold)]" href={`#${item}`} key={item} text={item} />
             ))}
           </div>
 
-          {/* Mobile Sound & Menu Trigger Group */}
-          <div className="flex items-center gap-2 md:hidden">
+          {/* Mobile / Tablet Sound & Menu Trigger Group */}
+          <div className="flex items-center gap-2 lg:hidden">
             <SoundController />
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -176,23 +199,23 @@ export default function Home() {
               aria-label="Toggle navigation menu"
               aria-expanded={mobileMenuOpen}
             >
-            {mobileMenuOpen ? (
-              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            ) : (
-              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16m-7 6h7" />
-              </svg>
-            )}
-          </button>
-        </div>
-      </nav>
-    </header>
+              {mobileMenuOpen ? (
+                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              ) : (
+                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+              )}
+            </button>
+          </div>
+        </nav>
+      </header>
 
       {/* Mobile Menu Overlay */}
       <div
-        className={`fixed inset-0 z-40 flex flex-col justify-between bg-black/95 backdrop-blur-3xl md:hidden transition-all duration-500 ease-in-out p-6 pt-24 pb-8 overflow-y-auto ${
+        className={`fixed inset-0 z-40 flex flex-col justify-between bg-black/95 backdrop-blur-3xl lg:hidden transition-all duration-500 ease-in-out p-6 pt-24 pb-8 overflow-y-auto ${
           mobileMenuOpen ? "opacity-100 pointer-events-auto scale-100" : "opacity-0 pointer-events-none scale-105"
         }`}
       >
@@ -234,9 +257,9 @@ export default function Home() {
 
       <section className="section-shell relative z-10 grid items-start lg:items-center gap-8 lg:gap-12 pb-12 pt-20 sm:pt-28 md:pt-32 lg:grid-cols-[1.15fr_0.85fr] min-h-[calc(100vh-4rem)] scroll-mt-24" id="top">
         <Reveal delay={0.04} className="flex flex-col justify-center min-w-0 w-full">
-          <div className="flex items-center gap-2 mb-2.5 sm:mb-3">
-            <span className="h-1.5 w-1.5 rounded-full bg-[var(--gold)] animate-pulse" />
-            <span className="font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.2em] sm:tracking-[0.3em] text-[var(--gold)]">
+          <div className="flex flex-wrap items-center gap-x-2 gap-y-1 mb-2.5 sm:mb-3 max-w-full">
+            <span className="h-1.5 w-1.5 rounded-full bg-[var(--gold)] animate-pulse shrink-0" />
+            <span className="font-mono text-[8px] xs:text-[8.5px] sm:text-[9.5px] uppercase tracking-[0.14em] sm:tracking-[0.22em] text-[var(--gold)] break-words leading-tight">
               SYSTEM_ARCHITECT // IOT_BUILDER // CYBERSECURITY_RESEARCHER
             </span>
           </div>
@@ -1330,9 +1353,9 @@ export default function Home() {
         </div>
       </footer>
 
-      {/* Floating Cyber Ambient Audio Controller for Mobile Screens */}
-      <div className="fixed bottom-4 right-4 z-40 sm:hidden">
-        <SoundController />
+      {/* Floating Cyber Ambient Audio Controller on All Screens */}
+      <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40">
+        <SoundController className="shadow-[0_0_20px_rgba(0,0,0,0.85)] backdrop-blur-xl bg-black/90" />
       </div>
 
       {/* Interactive Cyber HUD Lightbox Modal */}

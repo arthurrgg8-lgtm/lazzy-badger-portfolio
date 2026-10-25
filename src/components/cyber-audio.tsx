@@ -12,6 +12,23 @@ class CyberSoundEngine {
   private lfo: OscillatorNode | null = null;
   private lfoGain: GainNode | null = null;
   private isRunning = false;
+  private listeners = new Set<(running: boolean) => void>();
+
+  public subscribe(fn: (running: boolean) => void) {
+    this.listeners.add(fn);
+    fn(this.isRunning);
+    return () => {
+      this.listeners.delete(fn);
+    };
+  }
+
+  private notify() {
+    this.listeners.forEach((fn) => {
+      try {
+        fn(this.isRunning);
+      } catch {}
+    });
+  }
 
   public init() {
     if (this.ctx) return;
@@ -86,6 +103,7 @@ class CyberSoundEngine {
       this.oscThird.start();
 
       this.isRunning = true;
+      this.notify();
     } catch (e) {
       console.warn("Audio start prevented:", e);
     }
@@ -111,6 +129,7 @@ class CyberSoundEngine {
           this.masterGain?.disconnect();
         } catch {}
         this.isRunning = false;
+        this.notify();
       }, 650);
     } catch {}
   }
@@ -138,18 +157,31 @@ class CyberSoundEngine {
   }
 }
 
-export const cyberSound = typeof window !== "undefined" ? new CyberSoundEngine() : ({} as CyberSoundEngine);
+export const cyberSound =
+  typeof window !== "undefined"
+    ? new CyberSoundEngine()
+    : ({
+        subscribe: () => () => {},
+        start: async () => {},
+        stop: () => {},
+        playBlip: () => {},
+        running: false,
+      } as unknown as CyberSoundEngine);
 
-export function SoundController() {
+export function SoundController({ className = "" }: { className?: string }) {
   const [isPlaying, setIsPlaying] = useState(false);
+
+  useEffect(() => {
+    if (!cyberSound?.subscribe) return;
+    const unsubscribe = cyberSound.subscribe(setIsPlaying);
+    return unsubscribe;
+  }, []);
 
   const toggleSound = async () => {
     if (isPlaying) {
       cyberSound.stop();
-      setIsPlaying(false);
     } else {
       await cyberSound.start();
-      setIsPlaying(true);
       cyberSound.playBlip(960);
     }
   };
@@ -160,11 +192,11 @@ export function SoundController() {
       onClick={toggleSound}
       title={isPlaying ? "Mute ambient audio" : "Play ambient cyberpunk soundtrack"}
       aria-label={isPlaying ? "Mute ambient audio" : "Play ambient cyberpunk soundtrack"}
-      className={`group relative flex items-center gap-2 rounded-full border px-2.5 py-1 sm:px-3 sm:py-1.5 font-mono text-[9px] sm:text-[10px] transition-all duration-300 cursor-pointer select-none ${
+      className={`group relative flex items-center gap-1.5 sm:gap-2 rounded-full border px-2.5 py-1 sm:px-3 sm:py-1.5 font-mono text-[8.5px] sm:text-[9.5px] transition-all duration-300 cursor-pointer select-none whitespace-nowrap shrink-0 active:scale-95 ${
         isPlaying
           ? "border-[var(--gold)] bg-[var(--gold)]/15 text-[var(--gold)] shadow-[0_0_15px_rgba(215,181,109,0.3)]"
           : "border-white/10 bg-white/[0.03] text-white/50 hover:border-[var(--gold)]/40 hover:text-white"
-      }`}
+      } ${className}`}
     >
       {/* Equalizer animation bars */}
       <div className="flex items-end gap-0.5 h-3 w-3 sm:h-3.5 sm:w-3.5 shrink-0">

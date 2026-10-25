@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
+import { cyberSound } from "@/components/cyber-audio";
 
 const diagnosticLines = [
   "Initializing secure handshake to badger-node-pi4...",
@@ -17,23 +18,29 @@ export function BootScreen({ onComplete }: { onComplete: () => void }) {
   const [progress, setProgress] = useState(0);
   const [isFading, setIsFading] = useState(false);
 
-  const handleSkip = useCallback(() => {
+  const readyToLaunch = progress === 100 && visibleLines.length >= diagnosticLines.length;
+
+  const handleLaunch = useCallback(async () => {
+    try {
+      await cyberSound.start();
+      cyberSound.playBlip(1040);
+    } catch {}
     setIsFading(true);
-    const skipTimer = setTimeout(() => {
+    const launchTimer = setTimeout(() => {
       onComplete();
-    }, 250);
-    return () => clearTimeout(skipTimer);
+    }, 450);
+    return () => clearTimeout(launchTimer);
   }, [onComplete]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape" || e.key === "Enter" || e.key === " ") {
-        handleSkip();
+        handleLaunch();
       }
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [handleSkip]);
+  }, [handleLaunch]);
 
   useEffect(() => {
     // 1. Diagnostics printing timeline
@@ -45,7 +52,7 @@ export function BootScreen({ onComplete }: { onComplete: () => void }) {
       } else {
         clearInterval(printInterval);
       }
-    }, 220);
+    }, 180);
 
     // 2. Progress bar loader
     const progressInterval = setInterval(() => {
@@ -55,34 +62,16 @@ export function BootScreen({ onComplete }: { onComplete: () => void }) {
           return 100;
         }
         // Random progress jumps
-        const jump = Math.floor(Math.random() * 8) + 4;
+        const jump = Math.floor(Math.random() * 8) + 5;
         return Math.min(100, prev + jump);
       });
-    }, 80);
+    }, 60);
 
     return () => {
       clearInterval(printInterval);
       clearInterval(progressInterval);
     };
   }, []);
-
-  useEffect(() => {
-    if (progress === 100 && visibleLines.length >= diagnosticLines.length) {
-      let exitTimeout: NodeJS.Timeout;
-      // Small pause at 100% then fade out
-      const timeout = setTimeout(() => {
-        setIsFading(true);
-        // Fully complete after fade transition
-        exitTimeout = setTimeout(() => {
-          onComplete();
-        }, 700);
-      }, 400);
-      return () => {
-        clearTimeout(timeout);
-        if (exitTimeout) clearTimeout(exitTimeout);
-      };
-    }
-  }, [progress, visibleLines, onComplete]);
 
   return (
     <div
@@ -115,11 +104,11 @@ export function BootScreen({ onComplete }: { onComplete: () => void }) {
         </div>
         <div className="flex items-center gap-3 sm:gap-4">
           <button
-            onClick={handleSkip}
-            className="rounded border border-[var(--gold)]/30 bg-[var(--gold)]/10 px-2 py-0.5 sm:px-2.5 sm:py-1 text-[8.5px] sm:text-[9px] uppercase tracking-widest text-[var(--gold)] hover:bg-[var(--gold)]/20 hover:border-[var(--gold)] transition-colors cursor-pointer"
-            title="Skip boot sequence"
+            onClick={handleLaunch}
+            className="rounded border border-[var(--gold)]/30 bg-[var(--gold)]/10 px-2.5 py-1 sm:px-3 sm:py-1.5 text-[8.5px] sm:text-[9px] uppercase tracking-widest text-[var(--gold)] hover:bg-[var(--gold)] hover:text-black transition-colors cursor-pointer flex items-center gap-1.5"
+            title="Launch system and audio"
           >
-            [ ESC // SKIP ]
+            <span>[ ESC // LAUNCH WITH AUDIO ]</span>
           </button>
           <div className="text-[9px] sm:text-[10px] text-white/30 hidden sm:block">
             ADDR: 192.168.1.137 // INTRUDER_LOG: ACTIVE
@@ -146,11 +135,13 @@ export function BootScreen({ onComplete }: { onComplete: () => void }) {
         )}
       </div>
 
-      {/* Bottom Progress Block */}
-      <div className="border-t border-[var(--gold)]/10 pt-6">
+      {/* Bottom Progress & Compulsory Audio Launch Block */}
+      <div className="border-t border-[var(--gold)]/10 pt-4 sm:pt-6">
         <div className="flex flex-col gap-3">
           <div className="flex items-center justify-between text-[10px] uppercase tracking-[0.18em]">
-            <span className="text-white/40">Loading Core Suite</span>
+            <span className="text-white/40">
+              {readyToLaunch ? "SYSTEM READY // AUTHORIZATION GRANTED" : "Loading Core Suite"}
+            </span>
             <span className="font-bold text-[var(--gold)]">{progress}%</span>
           </div>
           {/* Custom Golden Bar */}
@@ -159,6 +150,22 @@ export function BootScreen({ onComplete }: { onComplete: () => void }) {
               className="h-full rounded-full bg-gradient-to-r from-[rgba(215,181,109,0.4)] to-[var(--gold)] transition-all duration-300 ease-out shadow-[0_0_8px_var(--gold)]"
               style={{ width: `${progress}%` }}
             />
+          </div>
+
+          {/* Compulsory Launch Gate */}
+          <div className="mt-2 flex flex-col sm:flex-row items-center justify-between gap-3 pt-1">
+            <div className="font-mono text-[9px] text-white/50 flex items-center gap-2 text-center sm:text-left">
+              <span className="h-2 w-2 rounded-full bg-[var(--gold)] animate-pulse shrink-0" />
+              <span>CLICK TO ENGAGE AMBIENT CYBER AUDIO &amp; ENTER SYSTEM</span>
+            </div>
+            <button
+              type="button"
+              onClick={handleLaunch}
+              className="w-full sm:w-auto rounded-full border border-[var(--gold)] bg-[var(--gold)]/20 hover:bg-[var(--gold)] hover:text-black px-6 py-2.5 sm:px-8 sm:py-2.5 font-mono text-[10px] sm:text-xs font-bold uppercase tracking-[0.22em] text-[var(--gold)] shadow-[0_0_25px_rgba(215,181,109,0.35)] transition-all duration-300 cursor-pointer flex items-center justify-center gap-2 active:scale-95 animate-pulse"
+            >
+              <span>▶</span>
+              <span>INITIALIZE SYSTEM [AUDIO ON]</span>
+            </button>
           </div>
         </div>
       </div>
