@@ -676,42 +676,42 @@ export default function Home() {
 
         {/* Custom Tooling & Forensic Engineering Showcase */}
         <Reveal delay={0.06}>
-          <div className="mt-8 sm:mt-10 mb-10 sm:mb-12 glass relative overflow-hidden rounded-2xl sm:rounded-[2.5rem] border border-[rgba(215,181,109,0.38)] p-5 sm:p-8 lg:p-10 bg-gradient-to-br from-white/[0.04] via-black/40 to-[rgba(215,181,109,0.06)] shadow-[0_0_40px_rgba(215,181,109,0.12)]">
+          <div className="mt-8 sm:mt-10 mb-8 sm:mb-12 glass relative overflow-hidden rounded-2xl sm:rounded-[2.5rem] border border-[rgba(215,181,109,0.38)] p-4 sm:p-7 lg:p-10 bg-gradient-to-br from-white/[0.04] via-black/40 to-[rgba(215,181,109,0.06)] shadow-[0_0_40px_rgba(215,181,109,0.12)]">
             {/* HUD Corner Accents */}
             <div className="pointer-events-none absolute left-3 top-3 h-3.5 w-3.5 border-l-2 border-t-2 border-[var(--gold)]" />
             <div className="pointer-events-none absolute right-3 top-3 h-3.5 w-3.5 border-r-2 border-t-2 border-[var(--gold)]" />
             <div className="pointer-events-none absolute left-3 bottom-3 h-3.5 w-3.5 border-l-2 border-b-2 border-[var(--gold)]" />
             <div className="pointer-events-none absolute right-3 bottom-3 h-3.5 w-3.5 border-r-2 border-b-2 border-[var(--gold)]" />
 
-            <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-5 sm:pb-6 mb-6 sm:mb-8">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 border-b border-white/10 pb-4 sm:pb-6 mb-5 sm:mb-8">
               <div>
-                <div className="flex items-center gap-2 mb-2">
+                <div className="flex items-center gap-2 mb-1.5">
                   <span className="h-1.5 w-1.5 rounded-full bg-[var(--gold)]" />
-                  <span className="font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.2em] sm:tracking-[0.3em] text-[var(--gold)]">CUSTOM TOOLING ARSENAL // OFFENSIVE &amp; DFIR</span>
+                  <span className="font-mono text-[8.5px] sm:text-[10px] uppercase tracking-[0.2em] sm:tracking-[0.3em] text-[var(--gold)]">CUSTOM TOOLING ARSENAL // OFFENSIVE &amp; DFIR</span>
                 </div>
-                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold font-display text-[var(--cream)] tracking-tight">
+                <h3 className="text-xl sm:text-3xl lg:text-4xl font-bold font-display text-[var(--cream)] tracking-tight">
                   High-Velocity Bug Hunting, Mobile DFIR &amp; Civic Automation
                 </h3>
               </div>
-              <div className="flex flex-wrap items-center gap-2 font-mono text-[8.5px] sm:text-[9px]">
-                <span className="rounded-full border border-[var(--gold)]/40 bg-[var(--gold)]/10 px-3 py-1 text-[var(--gold)] uppercase tracking-wider sm:tracking-widest font-semibold flex items-center gap-1.5">
-                  <span>⚡</span> Fast Recon Engine
+              <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 font-mono text-[8px] sm:text-[9px]">
+                <span className="rounded-full border border-[var(--gold)]/40 bg-[var(--gold)]/10 px-2.5 py-0.5 sm:px-3 sm:py-1 text-[var(--gold)] uppercase tracking-wider sm:tracking-widest font-semibold flex items-center gap-1.5">
+                  <span>⚡</span> Fast Recon
                 </span>
-                <span className="rounded-full border border-blue-400/40 bg-blue-400/10 px-3 py-1 text-blue-400 uppercase tracking-wider sm:tracking-widest font-semibold flex items-center gap-1.5">
-                  <span>📱</span> Enterprise Mobile DFIR
+                <span className="rounded-full border border-blue-400/40 bg-blue-400/10 px-2.5 py-0.5 sm:px-3 sm:py-1 text-blue-400 uppercase tracking-wider sm:tracking-widest font-semibold flex items-center gap-1.5">
+                  <span>📱</span> Mobile DFIR
                 </span>
-                <span className="rounded-full border border-emerald-400/40 bg-emerald-400/10 px-3 py-1 text-emerald-400 uppercase tracking-wider sm:tracking-widest font-semibold flex items-center gap-1.5">
-                  <span>📄</span> Document Automation
+                <span className="rounded-full border border-emerald-400/40 bg-emerald-400/10 px-2.5 py-0.5 sm:px-3 sm:py-1 text-emerald-400 uppercase tracking-wider sm:tracking-widest font-semibold flex items-center gap-1.5">
+                  <span>📄</span> Civic Auto
                 </span>
               </div>
             </div>
 
             <div className="grid gap-6 sm:gap-8 lg:grid-cols-[1.1fr_0.9fr] items-center">
               <div className="space-y-3.5 sm:space-y-4">
-                <div className="rounded-2xl border border-white/5 bg-black/40 p-4 sm:p-5">
-                  <div className="flex items-center justify-between font-mono text-[8px] text-white/40 mb-2">
+                <div className="rounded-xl sm:rounded-2xl border border-white/5 bg-black/40 p-3.5 sm:p-5">
+                  <div className="flex flex-wrap items-center justify-between gap-1.5 font-mono text-[8px] text-white/40 mb-1.5 sm:mb-2">
                     <span className="text-[var(--gold)] uppercase tracking-wider font-semibold">01 // H1WATCH &amp; HUNT-WORKSPACE</span>
-                    <span>ATTACK_SURFACE_MONITORING</span>
+                    <span className="text-white/30 truncate">ATTACK_SURFACE_MONITORING</span>
                   </div>
                   <h4 className="text-sm sm:text-base font-semibold text-[var(--cream)] mb-1 font-display">
                     Real-time HackerOne Scope Watcher &amp; Rapid Alerting
@@ -721,10 +721,10 @@ export default function Home() {
                   </p>
                 </div>
 
-                <div className="rounded-2xl border border-white/5 bg-black/40 p-4 sm:p-5">
-                  <div className="flex items-center justify-between font-mono text-[8px] text-white/40 mb-2">
+                <div className="rounded-xl sm:rounded-2xl border border-white/5 bg-black/40 p-3.5 sm:p-5">
+                  <div className="flex flex-wrap items-center justify-between gap-1.5 font-mono text-[8px] text-white/40 mb-1.5 sm:mb-2">
                     <span className="text-blue-400 uppercase tracking-wider font-semibold">02 // IFORENSIC &amp; AFORENSIC</span>
-                    <span>ENTERPRISE_MOBILE_DFIR</span>
+                    <span className="text-white/30 truncate">ENTERPRISE_MOBILE_DFIR</span>
                   </div>
                   <h4 className="text-sm sm:text-base font-semibold text-[var(--cream)] mb-1 font-display">
                     Full-Fledged Deep Mobile Forensics (iOS &amp; Android)
@@ -734,10 +734,10 @@ export default function Home() {
                   </p>
                 </div>
 
-                <div className="rounded-2xl border border-white/5 bg-black/40 p-4 sm:p-5">
-                  <div className="flex items-center justify-between font-mono text-[8px] text-white/40 mb-2">
+                <div className="rounded-xl sm:rounded-2xl border border-white/5 bg-black/40 p-3.5 sm:p-5">
+                  <div className="flex flex-wrap items-center justify-between gap-1.5 font-mono text-[8px] text-white/40 mb-1.5 sm:mb-2">
                     <span className="text-emerald-400 uppercase tracking-wider font-semibold">03 // EASY PATRA (इजि-पत्र)</span>
-                    <span>CLERICAL_WORKFLOW_REDUCTION</span>
+                    <span className="text-white/30 truncate">CLERICAL_WORKFLOW_REDUCTION</span>
                   </div>
                   <h4 className="text-sm sm:text-base font-semibold text-[var(--cream)] mb-1 font-display">
                     Automated Administrative Letter Formatting &amp; Print Engine
@@ -779,14 +779,14 @@ export default function Home() {
           </div>
         </Reveal>
 
-        <div className="mt-8 sm:mt-12 grid gap-4 sm:gap-6">
+        <div className="mt-8 sm:mt-12 grid gap-3.5 sm:gap-6">
           {profile.projects.map((project, index) => {
-            const diag = projectDiagnostics[project.name] || { host: "unknown", port: 80, class: "TARGET" };
+            const diag = projectDiagnostics[project.name] || { host: "127.0.0.1", port: 443, class: "CORE_SYS" };
             const projectTarget = project.url || (project.repository ? `https://${project.repository}` : undefined);
             return (
-              <Reveal delay={index * 0.04} key={project.name}>
+              <Reveal delay={Math.min(index * 0.03, 0.3)} key={project.name}>
                 <article 
-                  className={`glass group relative flex flex-col md:grid md:grid-cols-[70px_1fr_auto] md:items-center gap-4 sm:gap-6 rounded-2xl sm:rounded-[2rem] p-4 sm:p-6 lg:p-8 transition-all duration-500 overflow-hidden bg-black/20 ${
+                  className={`glass group relative flex flex-col md:grid md:grid-cols-[70px_1fr_auto] md:items-center gap-3.5 sm:gap-6 rounded-2xl sm:rounded-[2rem] p-3.5 sm:p-6 lg:p-8 transition-all duration-500 overflow-hidden bg-black/20 ${
                     project.highlighted 
                       ? "border-[rgba(215,181,109,0.38)] shadow-[0_0_35px_rgba(215,181,109,0.12)] hover:border-[var(--gold)] hover:shadow-[0_0_45px_rgba(215,181,109,0.22)] bg-gradient-to-br from-white/[0.07] via-white/[0.02] to-[rgba(215,181,109,0.05)]" 
                       : "border-white/5 hover:border-[rgba(215,181,109,0.48)] hover:shadow-[0_0_30px_rgba(255,255,255,0.02)]"
@@ -815,13 +815,13 @@ export default function Home() {
                   )}
 
                   {/* Mobile Header Row */}
-                  <div className="flex items-center justify-between border-b border-white/5 pb-3 md:hidden">
-                    <div className="flex items-center gap-2">
-                      <span className="font-display text-2xl text-[var(--gold)] font-bold">{String(index + 1).padStart(2, "0")}</span>
-                      <span className="font-mono text-[8px] uppercase tracking-widest text-white/35">{"//"} {diag.class}</span>
+                  <div className="flex items-center justify-between border-b border-white/5 pb-2.5 md:hidden">
+                    <div className="flex items-center gap-2 min-w-0">
+                      <span className="font-display text-2xl text-[var(--gold)] font-bold shrink-0">{String(index + 1).padStart(2, "0")}</span>
+                      <span className="font-mono text-[8px] uppercase tracking-wider text-white/35 truncate">{"//"} {diag.class}</span>
                     </div>
                     {project.status && (
-                      <span className={`rounded-full px-2.5 py-0.5 text-[8.5px] uppercase tracking-wider font-semibold font-mono flex items-center gap-1 border ${
+                      <span className={`rounded-full px-2.5 py-0.5 text-[8.5px] uppercase tracking-wider font-semibold font-mono flex items-center gap-1 border shrink-0 ${
                         project.status === "Live"
                           ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-400"
                           : project.status === "In Development" || project.status === "2nd Place"
@@ -844,17 +844,17 @@ export default function Home() {
 
                   <div className="min-w-0">
                     {/* Technical Diagnostics Info bar */}
-                    <div className="flex flex-wrap items-center gap-2 sm:gap-3 font-mono text-[8px] text-white/35 mb-2 select-none">
-                      <span>IP: {diag.host}</span>
-                      <span>{"//"}</span>
-                      <span className="text-[var(--gold)]">PORT: {diag.port}</span>
-                      <span>{"//"}</span>
-                      <span>STATUS: ACTIVE</span>
+                    <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 font-mono text-[8px] text-white/35 mb-2 select-none">
+                      <span className="truncate max-w-[180px] sm:max-w-none">IP: {diag.host}</span>
+                      <span className="text-white/20">{"//"}</span>
+                      <span className="text-[var(--gold)] shrink-0">PORT: {diag.port}</span>
+                      <span className="text-white/20">{"//"}</span>
+                      <span className="shrink-0">ACTIVE</span>
                     </div>
 
                     <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
-                      <h3 className="text-lg sm:text-xl md:text-2xl font-semibold break-words transition group-hover:text-[var(--cream)]">
-                        <ScrambleText text={project.name} trigger={startScramble} />
+                      <h3 className="text-base sm:text-xl md:text-2xl font-semibold break-words transition group-hover:text-[var(--cream)] leading-snug">
+                        {project.name}
                       </h3>
                       {project.status ? (
                         <span className={`hidden md:inline-flex rounded-full px-3 py-1 text-[9px] uppercase tracking-[0.2em] font-semibold font-mono items-center gap-1.5 border transition-all duration-300 ${
@@ -875,14 +875,14 @@ export default function Home() {
                         </span>
                       ) : null}
                     </div>
-                    <p className="mt-2.5 sm:mt-3 max-w-3xl text-xs sm:text-sm leading-6 sm:leading-7 text-white/60 transition group-hover:text-white/80">{project.description}</p>
+                    <p className="mt-2 sm:mt-2.5 max-w-3xl text-xs sm:text-sm leading-relaxed text-white/60 transition group-hover:text-white/80">{project.description}</p>
                     
                     {project.stack && (
-                      <div className="mt-3.5 sm:mt-5 flex flex-wrap gap-1.5">
+                      <div className="mt-3 sm:mt-4 flex flex-wrap gap-1 sm:gap-1.5">
                         {project.stack.map((tech) => (
                           <span 
                             key={tech} 
-                            className="rounded border border-white/5 bg-white/[0.02] px-2 py-0.5 sm:px-2.5 sm:py-0.5 font-mono text-[8.5px] sm:text-[9px] uppercase tracking-wider text-white/40 transition-colors duration-300 group-hover:border-[var(--gold)]/15 group-hover:text-white/60"
+                            className="rounded border border-white/5 bg-white/[0.02] px-2 py-0.5 sm:px-2.5 sm:py-0.5 font-mono text-[8px] sm:text-[9px] uppercase tracking-wider text-white/40 transition-colors duration-300 group-hover:border-[var(--gold)]/15 group-hover:text-white/60"
                           >
                             {tech}
                           </span>
@@ -891,9 +891,14 @@ export default function Home() {
                     )}
                   </div>
                   
-                  <div className="mt-3 md:mt-0 flex items-center justify-between md:justify-end border-t border-white/5 pt-3 md:border-t-0 md:pt-0">
+                  {/* Action Footer */}
+                  <div className="mt-3 md:mt-0 flex items-center justify-between md:justify-end border-t border-white/5 pt-2.5 md:border-t-0 md:pt-0">
+                    <span className="font-mono text-[8px] uppercase tracking-wider text-white/35 md:hidden flex items-center gap-1.5">
+                      <span className="h-1 w-1 rounded-full bg-[var(--gold)]/60" />
+                      {projectTarget ? (projectTarget.includes("github.com") ? "SOURCE CODE" : "LIVE SYSTEM") : "INTERNAL SYSTEM"}
+                    </span>
                     {projectTarget ? (
-                      <span className="text-xs sm:text-sm uppercase tracking-[0.18em] sm:tracking-[0.22em] text-[var(--gold)] font-bold transition duration-300 group-hover:text-white flex items-center gap-1">
+                      <span className="text-xs sm:text-sm uppercase tracking-[0.18em] sm:tracking-[0.22em] text-[var(--gold)] font-bold transition duration-300 group-hover:text-white flex items-center gap-1 shrink-0">
                         {projectTarget.includes("github.com") ? "view repository" : "visit live system"} <span className="text-xs transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
                       </span>
                     ) : (
