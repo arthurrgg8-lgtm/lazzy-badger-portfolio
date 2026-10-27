@@ -15,7 +15,7 @@ export const faqs = [
   },
   {
     question: "What is Anudit Khatri's background in security research and vulnerability triage?",
-    answer: "Anudit actively conducts upstream security research (such as discovering subtle SQL-to-GLOB query translation flaws in WordPress Core's SQLite integration, Issue #568) and provides hands-on client infrastructure defense, including rapid mitigation of critical zero-days (such as the Node.js Brotli RCE CVE-2026-111497) across production client platforms."
+    answer: "Anudit actively conducts upstream security research (such as discovering subtle SQL-to-GLOB query translation flaws in WordPress Core's SQLite integration, Issue #568) and provides comprehensive client penetration testing and infrastructure defense, including the October 2026 white-box security audit of the Bolts Army official platform (Code Runners Technologies Pvt. Ltd.) and rapid mitigation of critical zero-days (such as the Node.js Brotli RCE CVE-2026-111497) across production client platforms."
   },
   {
     question: "How can businesses and engineering teams hire or collaborate with Anudit Khatri?",
@@ -76,7 +76,7 @@ export function generateSchemaGraph() {
         "@type": "Occupation",
         name: "Cybersecurity Researcher & Penetration Tester",
         occupationalCategory: "15-1212.00 - Information Security Analysts",
-        skills: "Vulnerability Assessment, Bug Bounty, GraphQL Security, Kernel & Network Exploitation, Node.js Brotli RCE Mitigation"
+        skills: "Vulnerability Assessment, White-Box Source Code Auditing, Bug Bounty, OWASP Top 10 Testing, Kernel & Network Exploitation, Node.js Brotli RCE Mitigation"
       },
       {
         "@type": "Occupation",

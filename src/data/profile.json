@@ -131,6 +131,21 @@
   },
   "projects": [
     {
+      "name": "Bolts Army Official Platform Security Audit (Code Runners Technologies)",
+      "description": "Comprehensive white-box static source code review (Next.js/Node.js frontend & backend API) and non-invasive live production penetration test for Code Runners Technologies Pvt. Ltd. (Janakpur Bolts Army official fan platform). Benchmarked against OWASP Top 10 (2021), validated bcrypt hashing, strict CORS allowlisting, and HttpOnly session controls, and surfaced 2 High (DoS/library gaps) and 4 Medium issues with prioritized remediation roadmaps.",
+      "status": "Audited",
+      "url": "https://www.boltsarmy.com",
+      "highlighted": true,
+      "stack": [
+        "White-Box Code Audit",
+        "Node.js API",
+        "OWASP Top 10",
+        "Penetration Testing",
+        "Security Architecture",
+        "Vulnerability Assessment"
+      ]
+    },
+    {
       "name": "WordPress / SQLite Pattern Translation Research (Issue #568)",
       "description": "Deep upstream research & bug discovery in WordPress Core's sqlite-database-integration. Identified a subtle SQL-to-GLOB translation flaw where literal '[' characters are mis-translated into SQLite GLOB character-class brackets, producing silent false-positive and false-negative row mismatches against MySQL LIKE semantics.",
       "status": "Reported",

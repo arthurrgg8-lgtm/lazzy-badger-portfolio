@@ -27,6 +27,7 @@
 - **🏆 2nd Place Winner** - Government-Led First Hackathon 2083 by Nepal Police (Project: Prahari-Link, LoRa/ESP-NOW emergency disaster communication bridge).
 
 ## Upstream Security Research & Defense Operations
+- **Bolts Army Official Platform Security Audit (Code Runners Technologies Pvt. Ltd.)**: Conducted end-to-end white-box source code review (Next.js/Node.js frontend & backend API) and non-invasive production penetration testing for Code Runners Technologies Pvt. Ltd. (official Janakpur Bolts Army fan club platform, `boltsarmy.com` & `api.boltsarmy.com`). Benchmarked against OWASP Top 10 (2021), confirmed robust core controls (0 critical vulnerabilities, secure bcrypt hashing, HttpOnly session cookies, strict CORS allowlist), and identified 2 High (unpatched third-party library DoS & auth-layer controls) and 4 Medium issues (sensitive endpoint rate limiting/CAPTCHA, CSRF defense, missing security headers) paired with an actionable remediation roadmap.
 - **WordPress Core SQLite Integration Flaw (Issue #568)**: Identified subtle query distortion in `WordPress/sqlite-database-integration` where unescaped `[` characters convert into SQLite character-class brackets, producing silent false-positive and false-negative row mismatches against MySQL `LIKE`.
 - **Production Client Security Hardening**: Continuous perimeter triage and edge-level runtime hardening (mitigated Node.js Brotli RCE CVE-2026-111497 / Node2Shell and Next.js 16.4.3 security patches) across live production environments (Manoranjan Ramjham, AI Trial Nepal, Ar. Anushka Khatri).
 

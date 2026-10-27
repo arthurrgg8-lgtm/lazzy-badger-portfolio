@@ -18,6 +18,7 @@ import { SoundController, cyberSound } from "@/components/cyber-audio";
 const navItems = ["about", "certifications", "projects", "gallery", "faq", "contact"];
 
 const projectDiagnostics: Record<string, { host: string; port: number; class: string }> = {
+  "Bolts Army Official Platform Security Audit (Code Runners Technologies)": { host: "api.boltsarmy.com", port: 443, class: "CLIENT_AUDIT" },
   "WordPress / SQLite Pattern Translation Research (Issue #568)": { host: "github.com", port: 443, class: "BUG_HUNT" },
   "Active Client Security & Infrastructure Hardening": { host: "client-edge", port: 443, class: "SEC_OPS" },
   "h1watch & hunt-workspace": { host: "127.0.0.1", port: 9100, class: "RECON_CORE" },
@@ -49,6 +50,51 @@ const galleryIntel: Record<string, string> = {
   "COLLEGE SQUAD": "LAT: 27.6890° N // LNG: 85.3204° E"
 };
 
+const securityProofs: Record<
+  "github" | "linkedin" | "wordpress",
+  {
+    src: string;
+    alt: string;
+    target: string;
+    tag: string;
+    assessor: string;
+    client: string;
+    actionLabel: string;
+    actionUrl: string;
+  }
+> = {
+  github: {
+    src: "/assets/research/boltsarmy-security-audit-github.png",
+    alt: "Bolts Army Official Website Security Audit Report #4 on GitHub by LazZy",
+    target: "AUDIT_ISSUE // Code-Runners-Nepal/Bolts-Army-Official-Website_Backend #4",
+    tag: "WHITE-BOX SOURCE CODE REVIEW + PRODUCTION AUDIT",
+    assessor: "LazZy (arthurrgg8-lgtm)",
+    client: "Code Runners Technologies Pvt. Ltd.",
+    actionLabel: "TARGET DOMAIN ↗",
+    actionUrl: "https://www.boltsarmy.com"
+  },
+  linkedin: {
+    src: "/assets/research/boltsarmy-security-audit-linkedin.png",
+    alt: "Anudit Khatri LinkedIn Public Security Assessment Announcement for Bolts Army",
+    target: "PUBLIC_DISCLOSURE // LinkedIn: Anudit Khatri // Bolts Army Assessment",
+    tag: "OWASP TOP 10 (2021) // CLIENT ENGAGEMENT BRIEFING",
+    assessor: "Anudit Khatri (Cyber Security Researcher)",
+    client: "Code Runners Technologies Pvt. Ltd.",
+    actionLabel: "LIVE SYSTEM ↗",
+    actionUrl: "https://www.boltsarmy.com"
+  },
+  wordpress: {
+    src: "/assets/research/wordpress-sqlite-issue-568.png",
+    alt: "WordPress SQLite Database Integration Issue #568 Disclosure by arthurrgg8-lgtm",
+    target: "UPSTREAM // WordPress/sqlite-database-integration #568",
+    tag: "SQL-TO-GLOB QUERY TRANSLATION FLAW",
+    assessor: "arthurrgg8-lgtm (LazZy)",
+    client: "WordPress Core Community",
+    actionLabel: "GITHUB_ADVISORY ↗",
+    actionUrl: "https://github.com/WordPress/sqlite-database-integration/issues/568"
+  }
+};
+
 export default function Home() {
   const [isBooted, setIsBooted] = useState(false);
   const [startScramble, setStartScramble] = useState(false);
@@ -58,6 +104,7 @@ export default function Home() {
   const [certViewMode, setCertViewMode] = useState<"grid" | "seals">("grid");
   const [activeCertHover, setActiveCertHover] = useState<string | null>(null);
   const [datacampProofTab, setDatacampProofTab] = useState<"activity" | "leaderboard">("activity");
+  const [securityProofTab, setSecurityProofTab] = useState<"github" | "linkedin" | "wordpress">("github");
   const [activePillar, setActivePillar] = useState<string | null>(null);
   const [activeSkill, setActiveSkill] = useState<string | null>(null);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
@@ -391,13 +438,17 @@ export default function Home() {
               <div>
                 <div className="flex items-center gap-2 mb-2">
                   <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-                  <span className="font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.2em] sm:tracking-[0.3em] text-[var(--gold)]">INTELLIGENCE BRIEFING // RESEARCH &amp; DEFENSE</span>
+                  <span className="font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.2em] sm:tracking-[0.3em] text-[var(--gold)]">INTELLIGENCE BRIEFING // SECURITY AUDITS &amp; UPSTREAM RESEARCH</span>
                 </div>
                 <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold font-display text-[var(--cream)] tracking-tight">
-                  Active Client Security &amp; Upstream Bug Hunting
+                  Recent Works: Client Security Audits &amp; Upstream Research
                 </h3>
               </div>
               <div className="flex flex-wrap items-center gap-2 font-mono text-[8.5px] sm:text-[9px]">
+                <span className="rounded-full border border-amber-400/40 bg-amber-400/10 px-3 py-1 text-amber-300 uppercase tracking-wider sm:tracking-widest font-semibold flex items-center gap-1.5">
+                  <span className="h-1.5 w-1.5 rounded-full bg-amber-400 animate-pulse" />
+                  <span>Recent: Bolts Army (Oct 2026)</span>
+                </span>
                 <span className="rounded-full border border-emerald-400/40 bg-emerald-400/10 px-3 py-1 text-emerald-400 uppercase tracking-wider sm:tracking-widest font-semibold">
                   Client Perimeter: 100% Audited
                 </span>
@@ -407,14 +458,71 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="grid gap-6 sm:gap-8 lg:grid-cols-[1.1fr_0.9fr] items-center">
-              <div className="space-y-4 sm:space-y-6">
-                <div className="rounded-xl sm:rounded-2xl border border-white/5 bg-black/40 p-4 sm:p-6 relative">
-                  <div className="flex items-center justify-between font-mono text-[8.5px] sm:text-[9px] text-white/40 mb-2.5 border-b border-white/5 pb-2">
-                    <span className="text-[var(--gold)] uppercase tracking-wider">01 // PRODUCTION CLIENT DEFENSE</span>
+            <div className="grid gap-6 sm:gap-8 lg:grid-cols-[1.1fr_0.9fr] items-start">
+              <div className="space-y-4 sm:space-y-5">
+                {/* 01 // Recent Client Security Audit */}
+                <div className="rounded-xl sm:rounded-2xl border border-[rgba(215,181,109,0.32)] bg-gradient-to-br from-[rgba(215,181,109,0.06)] via-black/45 to-transparent p-4 sm:p-6 relative shadow-[0_0_25px_rgba(215,181,109,0.06)]">
+                  <div className="flex flex-wrap items-center justify-between gap-1.5 font-mono text-[8.5px] sm:text-[9px] text-white/40 mb-2.5 border-b border-white/5 pb-2">
+                    <div className="flex items-center gap-2">
+                      <span className="h-1.5 w-1.5 rounded-full bg-[var(--gold)] animate-pulse" />
+                      <span className="text-[var(--gold)] uppercase tracking-wider font-semibold">01 // RECENT CLIENT SECURITY AUDIT (OCT 27, 2026)</span>
+                    </div>
+                    <span className="rounded bg-[var(--gold)]/10 px-2 py-0.5 text-[8px] text-[var(--gold)] border border-[var(--gold)]/30 font-semibold uppercase">COMPLETED &amp; DELIVERED</span>
+                  </div>
+                  <h4 className="text-base sm:text-lg font-semibold text-[var(--cream)] mb-1.5 font-display">
+                    Bolts Army Official Platform (Code Runners Technologies Pvt. Ltd.)
+                  </h4>
+                  <p className="text-xs sm:text-sm leading-relaxed text-white/70 mb-3.5">
+                    Conducted a comprehensive white-box source code review (Next.js/Node.js frontend &amp; backend API) paired with non-invasive live production checks on <span className="text-white font-mono text-[11px]">boltsarmy.com</span> and <span className="text-white font-mono text-[11px]">api.boltsarmy.com</span>. Benchmarked against the <span className="text-white font-semibold">OWASP Top 10 (2021)</span>. Confirmed robust core defenses (0 critical vulnerabilities, secure bcrypt hashing, HttpOnly session cookies, strict CORS allowlist, and fail-closed startup). Identified 2 High (unpatched third-party library DoS &amp; auth-layer controls) and 4 Medium issues (rate limiting, CSRF defense, missing security headers) paired with an actionable remediation roadmap.
+                  </p>
+                  <div className="flex flex-wrap items-center gap-2 pt-1 font-mono text-[8px] sm:text-[9px]">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setSecurityProofTab("github");
+                        cyberSound.playBlip(1080);
+                      }}
+                      className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded border transition-colors ${
+                        securityProofTab === "github"
+                          ? "border-[var(--gold)] bg-[var(--gold)]/20 text-[var(--gold)] font-bold shadow-[0_0_12px_rgba(215,181,109,0.2)]"
+                          : "border-white/10 bg-white/5 text-white/70 hover:border-[var(--gold)]/40 hover:text-[var(--gold)]"
+                      }`}
+                    >
+                      <span>⚡ View GitHub Report Proof</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setSecurityProofTab("linkedin");
+                        cyberSound.playBlip(1140);
+                      }}
+                      className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded border transition-colors ${
+                        securityProofTab === "linkedin"
+                          ? "border-[var(--gold)] bg-[var(--gold)]/20 text-[var(--gold)] font-bold shadow-[0_0_12px_rgba(215,181,109,0.2)]"
+                          : "border-white/10 bg-white/5 text-white/70 hover:border-[var(--gold)]/40 hover:text-[var(--gold)]"
+                      }`}
+                    >
+                      <span>📢 View Client Announcement</span>
+                    </button>
+                    <a
+                      href="https://www.boltsarmy.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 px-2.5 py-1 text-[var(--gold)] hover:text-white transition-colors ml-auto uppercase tracking-wider"
+                    >
+                      <span>Visit Platform</span>
+                      <span className="text-xs">↗</span>
+                    </a>
+                  </div>
+                </div>
+
+                {/* 02 // Production Client Defense */}
+                <div className="rounded-xl sm:rounded-2xl border border-white/5 bg-black/40 p-4 sm:p-5 relative">
+                  <div className="flex items-center justify-between font-mono text-[8.5px] sm:text-[9px] text-white/40 mb-2 border-b border-white/5 pb-2">
+                    <span className="text-[var(--gold)] uppercase tracking-wider">02 // PRODUCTION CLIENT DEFENSE</span>
                     <span>RUNTIME_HARDENING</span>
                   </div>
-                  <h4 className="text-base sm:text-lg font-semibold text-[var(--cream)] mb-2 font-display">
+                  <h4 className="text-base sm:text-lg font-semibold text-[var(--cream)] mb-1.5 font-display">
                     Hands-on Client Infrastructure &amp; Zero-Day Mitigation
                   </h4>
                   <p className="text-xs sm:text-sm leading-relaxed text-white/65">
@@ -422,53 +530,129 @@ export default function Home() {
                   </p>
                 </div>
 
-                <div className="rounded-xl sm:rounded-2xl border border-white/5 bg-black/40 p-4 sm:p-6 relative">
-                  <div className="flex items-center justify-between font-mono text-[8.5px] sm:text-[9px] text-white/40 mb-2.5 border-b border-white/5 pb-2">
-                    <span className="text-[var(--gold)] uppercase tracking-wider">02 // UPSTREAM SECURITY RESEARCH</span>
+                {/* 03 // Upstream Security Research */}
+                <div className="rounded-xl sm:rounded-2xl border border-white/5 bg-black/40 p-4 sm:p-5 relative">
+                  <div className="flex items-center justify-between font-mono text-[8.5px] sm:text-[9px] text-white/40 mb-2 border-b border-white/5 pb-2">
+                    <span className="text-[var(--gold)] uppercase tracking-wider">03 // UPSTREAM SECURITY RESEARCH</span>
                     <span>PARSER_DIFFERENTIALS</span>
                   </div>
-                  <h4 className="text-base sm:text-lg font-semibold text-[var(--cream)] mb-2 font-display">
+                  <h4 className="text-base sm:text-lg font-semibold text-[var(--cream)] mb-1.5 font-display">
                     WordPress SQLite Core Query Translation Flaw (Issue #568)
                   </h4>
-                  <p className="text-xs sm:text-sm leading-relaxed text-white/65 mb-4">
+                  <p className="text-xs sm:text-sm leading-relaxed text-white/65 mb-3">
                     Deep architectural bug hunting in <code className="text-[var(--gold)] text-xs">WordPress/sqlite-database-integration</code>. Identified a subtle SQL-to-GLOB query mis-translation flaw where unescaped <code className="text-white">[</code> characters turn into SQLite character-class brackets, producing silent false-positive and false-negative row mismatches against MySQL <code className="text-white">LIKE</code>.
                   </p>
-                  <a
-                    href="https://github.com/WordPress/sqlite-database-integration/issues/568"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider sm:tracking-widest text-[var(--gold)] hover:text-white transition-colors"
-                  >
-                    <span>View GitHub Issue #568</span>
-                    <span className="text-xs">↗</span>
-                  </a>
+                  <div className="flex flex-wrap items-center gap-2 font-mono text-[8px] sm:text-[9px]">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setSecurityProofTab("wordpress");
+                        cyberSound.playBlip(980);
+                      }}
+                      className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded border transition-colors ${
+                        securityProofTab === "wordpress"
+                          ? "border-[var(--gold)] bg-[var(--gold)]/20 text-[var(--gold)] font-bold"
+                          : "border-white/10 bg-white/5 text-white/70 hover:border-[var(--gold)]/40 hover:text-[var(--gold)]"
+                      }`}
+                    >
+                      <span>🐛 View Issue #568 Proof</span>
+                    </button>
+                    <a
+                      href="https://github.com/WordPress/sqlite-database-integration/issues/568"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 px-2.5 py-1 text-[var(--gold)] hover:text-white transition-colors ml-auto uppercase tracking-wider"
+                    >
+                      <span>GitHub Issue #568</span>
+                      <span className="text-xs">↗</span>
+                    </a>
+                  </div>
                 </div>
               </div>
 
-              {/* Research Screenshot Preview Frame */}
-              <div className="group relative rounded-xl sm:rounded-2xl border border-white/10 bg-black/60 p-2 sm:p-3 overflow-hidden shadow-2xl transition-all duration-500 hover:border-[var(--gold)]/50">
-                <div className="absolute top-2.5 left-2.5 sm:top-4 sm:left-4 z-20 flex items-center gap-1.5 sm:gap-2 rounded bg-black/85 px-2 py-0.5 sm:px-2.5 sm:py-1 font-mono text-[7.5px] sm:text-[8px] text-[var(--gold)] backdrop-blur-md border border-white/10 max-w-[calc(100%-1.25rem)] truncate">
-                  <span className="h-1.5 w-1.5 rounded-full bg-[var(--gold)] shrink-0" />
-                  <span className="truncate">TARGET: WordPress/sqlite-database-integration #568</span>
+              {/* Research & Audit Multi-Proof Interactive Terminal Frame */}
+              <div className="group relative rounded-xl sm:rounded-2xl border border-white/10 bg-black/60 p-2.5 sm:p-4 overflow-hidden shadow-2xl transition-all duration-500 hover:border-[var(--gold)]/50">
+                {/* Proof Switcher Tabs */}
+                <div className="flex flex-wrap items-center gap-1.5 p-1 bg-black/70 rounded-lg sm:rounded-xl border border-white/10 mb-3">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSecurityProofTab("github");
+                      cyberSound.playBlip(1080);
+                    }}
+                    className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md font-mono text-[8px] sm:text-[8.5px] uppercase tracking-wider transition-all duration-300 ${
+                      securityProofTab === "github"
+                        ? "bg-[var(--gold)] text-black font-bold shadow-[0_0_15px_rgba(215,181,109,0.3)]"
+                        : "text-white/60 hover:text-white hover:bg-white/5"
+                    }`}
+                  >
+                    <span className="h-1.5 w-1.5 rounded-full bg-current" />
+                    <span>01 // GitHub Audit #4</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSecurityProofTab("linkedin");
+                      cyberSound.playBlip(1140);
+                    }}
+                    className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md font-mono text-[8px] sm:text-[8.5px] uppercase tracking-wider transition-all duration-300 ${
+                      securityProofTab === "linkedin"
+                        ? "bg-[var(--gold)] text-black font-bold shadow-[0_0_15px_rgba(215,181,109,0.3)]"
+                        : "text-white/60 hover:text-white hover:bg-white/5"
+                    }`}
+                  >
+                    <span className="h-1.5 w-1.5 rounded-full bg-current" />
+                    <span>02 // Client Disclosure</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSecurityProofTab("wordpress");
+                      cyberSound.playBlip(980);
+                    }}
+                    className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md font-mono text-[8px] sm:text-[8.5px] uppercase tracking-wider transition-all duration-300 ${
+                      securityProofTab === "wordpress"
+                        ? "bg-[var(--gold)] text-black font-bold shadow-[0_0_15px_rgba(215,181,109,0.3)]"
+                        : "text-white/60 hover:text-white hover:bg-white/5"
+                    }`}
+                  >
+                    <span className="h-1.5 w-1.5 rounded-full bg-current" />
+                    <span>03 // WP Core SQLite #568</span>
+                  </button>
                 </div>
-                <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg sm:rounded-xl">
+
+                {/* HUD Banner Header */}
+                <div className="mb-2 flex items-center justify-between gap-1.5 rounded bg-black/85 px-2.5 py-1 font-mono text-[7.5px] sm:text-[8px] text-[var(--gold)] backdrop-blur-md border border-white/10 truncate">
+                  <div className="flex items-center gap-1.5 shrink-0">
+                    <span className="h-1.5 w-1.5 rounded-full bg-[var(--gold)] shrink-0 animate-pulse" />
+                    <span className="truncate max-w-[280px] sm:max-w-none">{securityProofs[securityProofTab].target}</span>
+                  </div>
+                  <span className="text-white/30 hidden sm:inline truncate">{securityProofs[securityProofTab].tag}</span>
+                </div>
+
+                {/* Screenshot Display Frame */}
+                <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg sm:rounded-xl border border-white/5 bg-black/40">
                   <Image
-                    src="/assets/research/wordpress-sqlite-issue-568.png"
-                    alt="WordPress SQLite Database Integration Issue #568 Disclosure by arthurrgg8-lgtm"
+                    key={securityProofs[securityProofTab].src}
+                    src={securityProofs[securityProofTab].src}
+                    alt={securityProofs[securityProofTab].alt}
                     fill
                     className="object-cover object-top transition duration-700 group-hover:scale-[1.02]"
                     sizes="(max-width: 1024px) 100vw, 550px"
+                    priority={securityProofTab === "github"}
                   />
                 </div>
-                <div className="mt-3 flex flex-wrap items-center justify-between gap-2 px-1 sm:px-2 font-mono text-[7.5px] sm:text-[8px] text-white/40">
-                  <span>DISCLOSED BY: arthurrgg8-lgtm (LazZy)</span>
+
+                {/* Footer Telemetry & External Link */}
+                <div className="mt-3 flex flex-wrap items-center justify-between gap-2 px-1 sm:px-2 font-mono text-[7.5px] sm:text-[8px] text-white/50">
+                  <span>{securityProofs[securityProofTab].assessor}</span>
                   <a
-                    href="https://github.com/WordPress/sqlite-database-integration/issues/568"
+                    href={securityProofs[securityProofTab].actionUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-[var(--gold)] hover:underline flex items-center gap-1"
                   >
-                    GITHUB_ADVISORY ↗
+                    {securityProofs[securityProofTab].actionLabel}
                   </a>
                 </div>
               </div>
@@ -1016,12 +1200,20 @@ export default function Home() {
                       <span className={`rounded-full px-2.5 py-0.5 text-[8.5px] uppercase tracking-wider font-semibold font-mono flex items-center gap-1 border shrink-0 ${
                         project.status === "Live"
                           ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-400"
+                          : project.status === "Audited"
+                          ? "border-amber-400/40 bg-amber-400/10 text-amber-300"
                           : project.status === "In Development" || project.status === "2nd Place"
                           ? "border-[var(--gold)]/40 bg-[rgba(215,181,109,0.1)] text-[var(--gold)]"
                           : "border-blue-400/30 bg-blue-400/10 text-blue-400"
                       }`}>
                         <span className={`h-1.5 w-1.5 rounded-full ${
-                          project.status === "Live" ? "bg-emerald-400" : project.status === "In Development" || project.status === "2nd Place" ? "bg-[var(--gold)]" : "bg-blue-400"
+                          project.status === "Live"
+                            ? "bg-emerald-400"
+                            : project.status === "Audited"
+                            ? "bg-amber-300"
+                            : project.status === "In Development" || project.status === "2nd Place"
+                            ? "bg-[var(--gold)]"
+                            : "bg-blue-400"
                         }`} />
                         {project.status}
                       </span>
@@ -1052,6 +1244,8 @@ export default function Home() {
                         <span className={`hidden md:inline-flex rounded-full px-3 py-1 text-[9px] uppercase tracking-[0.2em] font-semibold font-mono items-center gap-1.5 border transition-all duration-300 ${
                           project.status === "Live"
                             ? "border-emerald-500/30 bg-emerald-500/5 text-emerald-400"
+                            : project.status === "Audited"
+                            ? "border-amber-400/40 bg-amber-400/10 text-amber-300"
                             : project.status === "In Development" || project.status === "2nd Place"
                             ? "border-[var(--gold)]/40 bg-[rgba(215,181,109,0.06)] text-[var(--gold)]"
                             : "border-blue-400/30 bg-blue-400/5 text-blue-400"
@@ -1059,6 +1253,8 @@ export default function Home() {
                           <span className={`h-1.5 w-1.5 rounded-full ${
                             project.status === "Live"
                               ? "bg-emerald-400"
+                              : project.status === "Audited"
+                              ? "bg-amber-300"
                               : project.status === "In Development" || project.status === "2nd Place"
                               ? "bg-[var(--gold)]"
                               : "bg-blue-400"

@@ -4,7 +4,9 @@ import { useEffect, useState, useRef } from "react";
 
 const securityLogs = [
   "[DataCamp] Code for Nepal #1 // 66-Days Challenge OK",
+  "[Audit] Bolts Army platform security assessment: 0-Crit, 2-High, 4-Med remediated",
   "[Research] WordPress SQLite #568: LIKE/GLOB flaw disclosed",
+  "[SecOps] Client audit complete: Code Runners Tech (boltsarmy.com) OK",
   "[SecOps] Active client security: Manoranjan, aitrialnp secured",
   "[CVE-Triage] Mitigated Node.js Brotli RCE (CVE-2026-111497)",
   "[h1watch] Real-time HackerOne asset & scope watcher armed",
