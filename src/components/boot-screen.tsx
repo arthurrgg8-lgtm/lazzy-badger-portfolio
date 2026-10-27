@@ -20,16 +20,18 @@ export function BootScreen({ onComplete }: { onComplete: () => void }) {
 
   const readyToLaunch = progress === 100 && visibleLines.length >= diagnosticLines.length;
 
-  const handleLaunch = useCallback(async () => {
+  const handleLaunch = useCallback(() => {
+    // Non-blocking background audio activation
     try {
-      await cyberSound.start();
-      cyberSound.playBlip(1040);
+      cyberSound.start().then(() => {
+        cyberSound.playBlip(1040);
+      }).catch(() => {});
     } catch {}
+
     setIsFading(true);
-    const launchTimer = setTimeout(() => {
+    setTimeout(() => {
       onComplete();
-    }, 450);
-    return () => clearTimeout(launchTimer);
+    }, 350);
   }, [onComplete]);
 
   useEffect(() => {
@@ -40,6 +42,24 @@ export function BootScreen({ onComplete }: { onComplete: () => void }) {
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [handleLaunch]);
+
+  // Auto-launch once diagnostic sequence completes
+  useEffect(() => {
+    if (readyToLaunch) {
+      const autoTimer = setTimeout(() => {
+        handleLaunch();
+      }, 900);
+      return () => clearTimeout(autoTimer);
+    }
+  }, [readyToLaunch, handleLaunch]);
+
+  // Safety fallback: guaranteed entrance after 3.2s so no user is ever locked on loading
+  useEffect(() => {
+    const safetyTimer = setTimeout(() => {
+      handleLaunch();
+    }, 3200);
+    return () => clearTimeout(safetyTimer);
   }, [handleLaunch]);
 
   useEffect(() => {
@@ -75,7 +95,8 @@ export function BootScreen({ onComplete }: { onComplete: () => void }) {
 
   return (
     <div
-      className={`fixed inset-0 z-50 flex flex-col justify-between bg-[#030406] p-4 sm:p-6 font-mono text-[10px] sm:text-[11px] leading-relaxed tracking-wider text-[var(--cream)] transition-all duration-700 ease-in-out md:p-12 ${
+      onClick={handleLaunch}
+      className={`fixed inset-0 z-50 flex flex-col justify-between bg-[#030406] p-4 sm:p-6 font-mono text-[10px] sm:text-[11px] leading-relaxed tracking-wider text-[var(--cream)] transition-all duration-700 ease-in-out md:p-12 cursor-pointer ${
         isFading ? "pointer-events-none scale-105 opacity-0 blur-md" : "opacity-100"
       }`}
     >

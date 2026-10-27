@@ -44,7 +44,14 @@ class CyberSoundEngine {
     this.init();
     if (!this.ctx) return;
     if (this.ctx.state === "suspended") {
-      await this.ctx.resume();
+      try {
+        await Promise.race([
+          this.ctx.resume(),
+          new Promise((_, reject) => setTimeout(() => reject(new Error("AudioContext resume timeout")), 250))
+        ]);
+      } catch {
+        return;
+      }
     }
     if (this.isRunning) return;
 

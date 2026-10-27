@@ -167,7 +167,14 @@ export default function Home() {
     window.addEventListener("click", unlockAudio);
     window.addEventListener("keydown", unlockAudio);
     window.addEventListener("touchstart", unlockAudio);
+    // Universal failsafe: ensure site is never permanently hidden under any browser condition
+    const failsafeTimer = setTimeout(() => {
+      setIsBooted(true);
+      setStartScramble(true);
+    }, 3200);
+
     return () => {
+      clearTimeout(failsafeTimer);
       window.removeEventListener("click", unlockAudio);
       window.removeEventListener("keydown", unlockAudio);
       window.removeEventListener("touchstart", unlockAudio);
@@ -178,12 +185,13 @@ export default function Home() {
     <>
       {!isBooted && (
         <BootScreen
-          onComplete={async () => {
+          onComplete={() => {
             setIsBooted(true);
             setStartScramble(true);
             try {
-              await cyberSound.start();
-              cyberSound.playBlip(980);
+              cyberSound.start().then(() => {
+                cyberSound.playBlip(980);
+              }).catch(() => {});
             } catch {}
           }}
         />
