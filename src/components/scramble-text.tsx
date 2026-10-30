@@ -61,5 +61,5 @@ export function ScrambleText({ text, trigger }: ScrambleTextProps) {
     };
   }, [text, trigger]);
 
-  return <span className="font-display select-none inline-block whitespace-nowrap">{displayText}</span>;
+  return <span className="font-display select-none inline-block max-w-full break-words sm:whitespace-nowrap">{displayText}</span>;
 }

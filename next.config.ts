@@ -1,19 +1,23 @@
 import type { NextConfig } from "next";
 
+const isDev = process.env.NODE_ENV !== "production";
+
 const cspHeader = `
   default-src 'self';
-  script-src 'self' 'unsafe-inline' 'unsafe-eval';
+  script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""};
   style-src 'self' 'unsafe-inline';
-  img-src 'self' blob: data: https://media.giphy.com https://capsule-render.vercel.app https://github-readme-stats.vercel.app https://github-readme-streak-stats.herokuapp.com;
+  img-src 'self' blob: data:;
   font-src 'self' data:;
   connect-src 'self';
+  media-src 'self';
+  worker-src 'self' blob:;
   frame-src 'none';
   object-src 'none';
   base-uri 'self';
   form-action 'self';
   frame-ancestors 'none';
   upgrade-insecure-requests;
-`.replace(/\s{2,}/g, ' ').trim();
+`.replace(/\s{2,}/g, " ").trim();
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
@@ -43,8 +47,12 @@ const nextConfig: NextConfig = {
             value: "nosniff"
           },
           {
-            key: "X-XSS-Protection",
-            value: "1; mode=block"
+            key: "X-DNS-Prefetch-Control",
+            value: "on"
+          },
+          {
+            key: "X-Permitted-Cross-Domain-Policies",
+            value: "none"
           },
           {
             key: "Referrer-Policy",
@@ -52,7 +60,7 @@ const nextConfig: NextConfig = {
           },
           {
             key: "Permissions-Policy",
-            value: "camera=(), microphone=(), geolocation=()"
+            value: "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
           },
           {
             key: "Cross-Origin-Opener-Policy",

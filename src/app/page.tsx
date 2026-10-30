@@ -49,6 +49,21 @@ const galleryIntel: Record<string, string> = {
   "COLLEGE SQUAD": "LAT: 27.6890° N // LNG: 85.3204° E"
 };
 
+const pillarSeoBriefs: Record<string, string> = {
+  "IoT Systems & Hardware Research":
+    "ESP32, LoRa/ESP-NOW offline disaster meshes (Prahari-Link), Raspberry Pi 4 sensing nodes, and 24/7 RTSP Cloud NVR telemetry.",
+  "Computer Algorithms & Architectures":
+    "High-concurrency systems programming in Rust, Python, and TypeScript with distributed cloud-edge pipelines on AWS, Azure & Cloudflare.",
+  "Cybersecurity Research":
+    "Ethical hacking, OWASP Top 10 white-box source code auditing, production penetration testing, API/GraphQL security, and upstream CVE research.",
+  "Local AI & Autonomous Agents":
+    "Autonomous LLM agent orchestration, Model Context Protocol (MCP) servers, computer vision (InsightFace/MediaPipe), and local Ollama workflows.",
+  "Fullstack Development":
+    "Production web & mobile app development in Kathmandu, Nepal using Next.js App Router, React, React Native, Kotlin Android, FastAPI & PostgreSQL.",
+  "Mobile Forensics & DFIR":
+    "Enterprise iOS (iforensic) and Android (aforensic) digital forensics, decrypted sandbox extraction, SQLite carving, and mobile security auditing."
+};
+
 const securityProofs: Record<
   "github" | "linkedin" | "wordpress",
   {
@@ -376,15 +391,20 @@ export default function Home() {
                       </span>
                     </div>
                     
-                    <div className="my-4">
+                    <div className="my-3.5 sm:my-4">
                       <h3 className={`text-lg sm:text-xl font-semibold font-display tracking-wide transition-colors ${
                         isActive ? "text-[var(--gold)]" : "text-[var(--cream)] group-hover:text-[var(--gold)]"
                       }`}>
                         {pillar}
                       </h3>
+                      <p className={`mt-2 text-xs leading-relaxed transition-colors ${
+                        isActive ? "text-white/85" : "text-white/55 group-hover:text-white/75"
+                      }`}>
+                        {pillarSeoBriefs[pillar] || "Production systems architecture, fullstack engineering, and security operations."}
+                      </p>
                       {isActive && (
-                        <p className="mt-2 text-xs font-mono text-white/70 leading-relaxed border-t border-[var(--gold)]/20 pt-2">
-                          NODE ARMED // RUNTIME TELEMETRY SYNCHRONIZED // LATENCY SUB-25MS
+                        <p className="mt-2.5 text-[10px] font-mono text-[var(--gold)] leading-relaxed border-t border-[var(--gold)]/20 pt-2">
+                          NODE ARMED // KATHMANDU_NEPAL_CORE // LATENCY SUB-25MS
                         </p>
                       )}
                     </div>
@@ -1328,21 +1348,30 @@ export default function Home() {
       </section>
 
       {/* Technical FAQ & Capability Briefing Section */}
-      <section className="section-shell relative z-10 py-16 sm:py-24 scroll-mt-20" id="faq" aria-labelledby="faq-heading">
+      <section
+        className="section-shell relative z-10 py-16 sm:py-24 scroll-mt-20"
+        id="faq"
+        aria-labelledby="faq-heading"
+        itemScope
+        itemType="https://schema.org/FAQPage"
+      >
         <Reveal>
           <p className="text-xs uppercase tracking-[0.3em] sm:tracking-[0.36em] text-[var(--gold)] font-mono">intelligence // faq_briefing</p>
           <h2 id="faq-heading" className="font-display mt-2 sm:mt-3 text-3xl sm:text-5xl md:text-6xl tracking-[-0.04em]">Technical Briefing.</h2>
-          <p className="mt-3 sm:mt-4 max-w-2xl text-xs sm:text-sm md:text-base leading-relaxed text-white/60">
-            Frequently referenced inquiries regarding fullstack architecture, systems development, hackathon achievements, and security research with Anudit Khatri.
+          <p className="mt-3 sm:mt-4 max-w-3xl text-xs sm:text-sm md:text-base leading-relaxed text-white/60">
+            Verified intelligence briefing covering fullstack web development, Android &amp; iOS mobile app engineering, ethical hacking, OWASP cybersecurity audits, AI agent systems, and IT consulting in Kathmandu, Nepal with Anudit Khatri (Lazzy Badger).
           </p>
         </Reveal>
 
-        <div className="mt-8 sm:mt-12 space-y-3 sm:space-y-3.5 max-w-4xl">
+        <div className="mt-8 sm:mt-12 space-y-3 sm:space-y-4 max-w-4xl">
           {faqs.map((faq, index) => {
             const isOpen = openFaq === index;
             return (
               <Reveal delay={index * 0.04} key={faq.question}>
-                <div
+                <article
+                  itemScope
+                  itemProp="mainEntity"
+                  itemType="https://schema.org/Question"
                   className={`glass group rounded-xl sm:rounded-2xl border transition-all duration-300 overflow-hidden ${
                     isOpen
                       ? "border-[var(--gold)]/50 bg-black/50 shadow-[0_0_20px_rgba(215,181,109,0.12)]"
@@ -1354,21 +1383,29 @@ export default function Home() {
                     onClick={() => {
                       setOpenFaq(isOpen ? null : index);
                     }}
-                    className="w-full text-left p-4 sm:p-5 flex items-center justify-between gap-3 sm:gap-4 cursor-pointer select-none"
+                    className="w-full text-left p-4 sm:p-5 flex items-start sm:items-center justify-between gap-3 sm:gap-4 cursor-pointer select-none"
                     aria-expanded={isOpen}
                   >
-                    <div className="flex items-center gap-3 sm:gap-4 min-w-0">
-                      <span className="font-mono text-xs text-[var(--gold)] shrink-0 select-none">
-                        0{index + 1} {"//"}
-                      </span>
-                      <h3 className={`text-sm sm:text-base md:text-lg font-semibold font-display tracking-wide transition-colors ${
-                        isOpen ? "text-[var(--gold)]" : "text-[var(--cream)] group-hover:text-[var(--gold)]"
-                      }`}>
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-4 min-w-0 flex-1">
+                      <div className="flex items-center gap-2 shrink-0">
+                        <span className="font-mono text-xs text-[var(--gold)] select-none">
+                          0{index + 1} {"//"}
+                        </span>
+                        <span className="rounded border border-[var(--gold)]/25 bg-[var(--gold)]/10 px-2 py-0.5 font-mono text-[7.5px] sm:text-[8px] uppercase tracking-widest text-[var(--gold)]">
+                          {faq.category}
+                        </span>
+                      </div>
+                      <h3
+                        itemProp="name"
+                        className={`text-sm sm:text-base md:text-lg font-semibold font-display tracking-wide transition-colors leading-snug ${
+                          isOpen ? "text-[var(--gold)]" : "text-[var(--cream)] group-hover:text-[var(--gold)]"
+                        }`}
+                      >
                         {faq.question}
                       </h3>
                     </div>
                     <div
-                      className={`h-7 w-7 rounded-full border border-white/10 bg-white/[0.03] flex items-center justify-center text-xs text-white/60 transition-all duration-300 shrink-0 ${
+                      className={`h-7 w-7 rounded-full border border-white/10 bg-white/[0.03] flex items-center justify-center text-xs text-white/60 transition-all duration-300 shrink-0 mt-0.5 sm:mt-0 ${
                         isOpen
                           ? "rotate-180 border-[var(--gold)] text-[var(--gold)] bg-[var(--gold)]/10"
                           : "group-hover:border-white/30"
@@ -1379,15 +1416,30 @@ export default function Home() {
                   </button>
 
                   <div
+                    itemScope
+                    itemProp="acceptedAnswer"
+                    itemType="https://schema.org/Answer"
                     className={`px-4 pb-4 sm:px-5 sm:pb-5 pt-0 border-t border-white/5 mt-1 ${
                       isOpen ? "block" : "hidden"
                     }`}
                   >
-                    <p className="text-xs sm:text-sm leading-relaxed text-white/70 pl-7 sm:pl-9 pt-2">
+                    <p itemProp="text" className="text-xs sm:text-sm leading-relaxed text-white/75 pt-3">
                       {faq.answer}
                     </p>
+                    {faq.tags && (
+                      <div className="mt-3 flex flex-wrap gap-1.5 pt-2 border-t border-white/5">
+                        {faq.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="rounded border border-white/10 bg-white/[0.02] px-2 py-0.5 font-mono text-[8px] sm:text-[8.5px] uppercase tracking-wider text-white/50"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    )}
                   </div>
-                </div>
+                </article>
               </Reveal>
             );
           })}
@@ -1396,13 +1448,13 @@ export default function Home() {
 
       <section className="section-shell relative z-10 pb-20 sm:pb-28 pt-12 sm:pt-16 scroll-mt-20" id="contact">
         <Reveal>
-          <div className="glass relative overflow-hidden rounded-2xl sm:rounded-3xl p-6 sm:p-10 md:p-16 bg-black/20">
+          <div className="glass relative overflow-hidden rounded-2xl sm:rounded-3xl p-5 sm:p-10 md:p-16 bg-black/20">
             <div className="pointer-events-none absolute left-3 top-3 h-4 w-4 border-l border-t border-[var(--gold)]/40" />
             <div className="pointer-events-none absolute right-3 top-3 h-4 w-4 border-r border-t border-white/10" />
             <div className="pointer-events-none absolute left-3 bottom-3 h-4 w-4 border-l border-b border-white/10" />
             <div className="pointer-events-none absolute right-3 bottom-3 h-4 w-4 border-r border-b border-[var(--gold)]/40" />
 
-            <div className="flex flex-col gap-8 sm:gap-12">
+            <div className="flex flex-col gap-6 sm:gap-10">
               <div className="relative">
                 {/* Terminal prompt watermarks in bg */}
                 <div className="absolute -top-10 right-0 font-mono text-[8px] text-white/5 select-none hidden md:block space-y-1">
@@ -1412,14 +1464,14 @@ export default function Home() {
                 </div>
 
                 <p className="text-xs uppercase tracking-[0.3em] sm:tracking-[0.4em] text-[var(--gold)] font-mono">connect // secure_handshake</p>
-                <h2 className="font-display mt-4 sm:mt-6 text-3xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.15] sm:leading-[1.1] tracking-[-0.03em]">
+                <h2 className="font-display mt-3 sm:mt-6 text-3xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.15] sm:leading-[1.1] tracking-[-0.03em]">
                   Build less by hand.<br />Build more with systems.<br />
                   <span className="text-[var(--gold)]/80">Else if</span> Build your own System.
                 </h2>
               </div>
 
               {/* Engineering & Security Services Authority Matrix (Kathmandu, Nepal & Global) */}
-              <div className="grid gap-3 sm:gap-4 sm:grid-cols-2 lg:grid-cols-5 border-y border-white/10 py-6 sm:py-8">
+              <div className="grid gap-2.5 sm:gap-3.5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 border-y border-white/10 py-5 sm:py-7">
                 {[
                   {
                     tag: "01 // WEB DEV",

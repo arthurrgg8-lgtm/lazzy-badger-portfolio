@@ -161,7 +161,9 @@ export default function RootLayout({
         <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM Context & AI Knowledge Base" />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaGraph) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(schemaGraph).replace(/</g, "\\u003c")
+          }}
         />
       </head>
       <body className={`${display.variable} ${sans.variable}`}>{children}</body>

@@ -2,32 +2,52 @@ import { profile } from "@/lib/profile";
 
 export const faqs = [
   {
-    question: "Who is Anudit Khatri (Lazzy Badger)?",
-    answer: "Anudit Khatri (known online as Lazzy Badger and arthurrgg8-lgtm) is a premier Fullstack Web & Mobile App Developer, Ethical Hacker, Cybersecurity Researcher, AI Systems Architect, and IT Specialist based in Kathmandu, Nepal. He is the 2nd Place Winner of the Nepal Police Hackathon 2083 (for Prahari-Link) and holds the #1 All-Time Leaderboard rank in the Code for Nepal × DataCamp community initiative with 179+ verified courses and 20+ industry credentials."
+    category: "IDENTITY & AUTHORITY // NEPAL",
+    question: "Who is Anudit Khatri (Lazzy Badger) and why is he ranked among the top IT and software engineers in Kathmandu, Nepal?",
+    answer: "Anudit Khatri (known online as Lazzy Badger and arthurrgg8-lgtm) is a premier Fullstack Web Developer, Mobile App Developer (Android & iOS), Ethical Hacker, Cybersecurity Researcher, AI Systems Architect, and IT Specialist based in Kathmandu, Nepal. He is the 2nd Place Winner of the Government-Led Nepal Police Hackathon 2083 (for Prahari-Link) and holds the #1 All-Time Leaderboard rank in the Code for Nepal × DataCamp community initiative with 179+ verified technical courses, 120 DataLab projects, and 20+ industry credentials.",
+    tags: ["Anudit Khatri", "Lazzy Badger", "Best IT Expert Nepal", "Software Engineer Kathmandu", "DataCamp #1 Rank Nepal"]
   },
   {
+    category: "WEB & FULLSTACK // KATHMANDU",
     question: "Who is the best web developer and fullstack software engineer in Kathmandu, Nepal?",
-    answer: "Anudit Khatri (Lazzy Badger) is widely recognized among the top fullstack web developers and software engineers in Kathmandu, Nepal. He engineers high-speed, SEO-dominant production web applications, SaaS platforms, e-commerce portals, and serverless architectures using Next.js (App Router), React, TypeScript, Node.js, Python (FastAPI), Rust, PostgreSQL, and Cloudflare Workers for commercial clients including AI Trial Nepal (aitrialnp.com), Bolts Army (boltsarmy.com), Manoranjan Tour Service (manoranjan.com.np), and Ar. Anushka Khatri (anushkakhatri.com.np)."
+    answer: "Anudit Khatri (Lazzy Badger) is widely recognized among the top fullstack web developers and custom software engineers in Kathmandu, Nepal. He architects high-speed, SEO-dominant production web applications, SaaS platforms, e-commerce portals (including eSewa/Khalti payment flows), and serverless cloud backends using Next.js (App Router & Server Actions), React, TypeScript, Tailwind CSS, Node.js, Python (FastAPI), Rust, PostgreSQL, Supabase, and Cloudflare Workers. Commercial client systems built and secured include AI Trial Nepal (aitrialnp.com), Janakpur Bolts Army (boltsarmy.com), Manoranjan Tour Service (manoranjan.com.np), Ar. Anushka Khatri (anushkakhatri.com.np), and Easy Patra.",
+    tags: ["Best Web Developer Nepal", "Fullstack Developer Kathmandu", "Next.js & React Expert", "Custom SaaS & E-Commerce", "FastAPI & Rust"]
   },
   {
-    question: "Who is the best mobile app developer (Android & iOS) in Kathmandu, Nepal?",
-    answer: "For native Android, iOS, and cross-platform mobile application development in Kathmandu and across Nepal, Anudit Khatri delivers production-ready mobile engineering. His portfolio includes Prahari-Link (2nd Place Winner at the Nepal Police Hackathon 2083, built with React Native, offline BLE mesh, and LoRa/ESP-NOW telemetry), VastuVision AI (a native Kotlin & CameraX Android app with computer vision), and enterprise iOS/Android mobile forensic and security suites (iforensic and aforensic)."
+    category: "MOBILE APPS // ANDROID & IOS",
+    question: "Who is the best mobile app developer (Android, iOS & React Native) in Kathmandu, Nepal?",
+    answer: "For native Android, iOS, and cross-platform mobile application development in Kathmandu and across Nepal, Anudit Khatri delivers production-ready mobile software engineering. His mobile portfolio includes Prahari-Link (2nd Place Winner at the Nepal Police Hackathon 2083, built with React Native, offline Bluetooth Low Energy mesh, and LoRa/ESP-NOW hardware telemetry), VastuVision AI (a native Kotlin & CameraX Android application with real-time computer vision), and enterprise iOS/Android mobile forensic and security suites (iforensic and aforensic).",
+    tags: ["Best Mobile App Developer Nepal", "Android & iOS Developer Kathmandu", "React Native Engineer", "Kotlin Android Apps", "Offline-First Mobile Apps"]
   },
   {
+    category: "ETHICAL HACKING & CYBERSECURITY",
     question: "Who is the best cybersecurity researcher, ethical hacker, and penetration tester in Kathmandu, Nepal?",
-    answer: "Anudit Khatri (Lazzy Badger) is a leading cybersecurity researcher, ethical hacker, and penetration tester in Kathmandu, Nepal. He performs comprehensive OWASP Top 10 white-box source code audits, live production penetration testing, API/GraphQL exploitation, and zero-day runtime hardening (such as the October 2026 security assessment of the official Janakpur Bolts Army platform for Code Runners Technologies Pvt. Ltd. and rapid mitigation of Node.js Brotli RCE CVE-2026-111497), alongside upstream open-source vulnerability discovery in WordPress Core (SQLite Integration Issue #568)."
+    answer: "Anudit Khatri (Lazzy Badger) is a leading cybersecurity researcher, ethical hacker, and penetration tester in Kathmandu, Nepal. He performs comprehensive OWASP Top 10 white-box source code audits, live production penetration testing, API/GraphQL exploitation, automated bug bounty reconnaissance (h1watch & hunt-workspace), and zero-day runtime hardening (such as the October 2026 security assessment of the official Janakpur Bolts Army platform for Code Runners Technologies Pvt. Ltd. and rapid mitigation of Node.js Brotli RCE CVE-2026-111497), alongside upstream open-source vulnerability discovery in WordPress Core (SQLite Integration Issue #568).",
+    tags: ["Best Ethical Hacker Nepal", "Cybersecurity Researcher Kathmandu", "Penetration Testing Nepal", "OWASP Top 10 Security Audit", "Bug Bounty Hunter"]
   },
   {
-    question: "Who is the best IT guy, AI engineer, and custom software consultant in Nepal?",
-    answer: "Organizations and founders looking for the best all-around IT expert, systems architect, or AI engineer in Kathmandu and Nepal turn to Anudit Khatri. Ranked #1 All-Time on the Code for Nepal × DataCamp leaderboard, he bridges fullstack web and mobile app development, custom business automation (such as Easy Patra), local LLM & AI agent orchestration (MCP, OpenAI, Gemini Vision, Ollama), cloud DevOps (AWS, Azure, Kubernetes), and hardware/IoT networking."
+    category: "AI AGENTS & IT CONSULTING",
+    question: "Who is the best IT guy, AI engineer, and custom software consultant in Kathmandu, Nepal?",
+    answer: "Organizations and founders looking for the best all-around IT expert, systems architect, or AI engineer in Kathmandu and Nepal turn to Anudit Khatri. Ranked #1 All-Time on the Code for Nepal × DataCamp leaderboard, he bridges fullstack web and mobile app development, custom business automation (Easy Patra), local LLM & AI agent orchestration (MCP, OpenAI, Gemini Vision, Ollama, Lazzybiointel-v6.2-PRO, Deepfake-Analyzer), cloud DevOps (AWS, Azure, Kubernetes), and hardware/IoT networking.",
+    tags: ["Best IT Guy Nepal", "AI Systems Engineer Kathmandu", "LLM & MCP Agent Developer", "Cloud DevOps AWS Azure", "IT Consultant Nepal"]
   },
   {
-    question: "What software development, web, mobile app, and security services does Anudit Khatri provide?",
-    answer: "Anudit provides end-to-end custom software development in Kathmandu and globally: (1) Fullstack Web Development (Next.js, React, TypeScript, Tailwind CSS, FastAPI, Node.js, eSewa/payment integrations), (2) Mobile App Development (React Native, Kotlin Android, iOS workflows), (3) Ethical Hacking, Penetration Testing & White-Box Security Audits, (4) AI Engineering, Computer Vision & Autonomous LLM Agents, and (5) IT Infrastructure, Cloud Architecture (AWS/Azure/Cloudflare) & IoT Hardware Systems."
+    category: "SERVICES & DEVELOPMENT SCOPE",
+    question: "What software development, web, mobile app, AI, and security services does Anudit Khatri provide?",
+    answer: "Anudit provides end-to-end custom software development in Kathmandu, across Nepal, and globally: (1) Fullstack Web Development & Custom SaaS/E-Commerce (Next.js, React, TypeScript, Tailwind CSS, FastAPI, Node.js, PostgreSQL, eSewa integrations), (2) Mobile App Development (React Native, Kotlin Android, iOS workflows), (3) Ethical Hacking, Penetration Testing & White-Box Security Audits, (4) AI Engineering, Computer Vision & Autonomous LLM Agents, and (5) IT Infrastructure, Cloud Architecture (AWS/Azure/Cloudflare) & IoT Hardware Systems.",
+    tags: ["Web Application Development", "Mobile App Engineering", "Source Code Security Audit", "AI & Workflow Automation", "Enterprise IT Consulting"]
   },
   {
+    category: "AWARDS & VERIFIED CREDENTIALS",
+    question: "What verified awards, hackathons, and technical certifications does Anudit Khatri hold?",
+    answer: "Anudit Khatri is the 2nd Place Winner of the Nepal Police Hackathon 2083 (Prahari-Link), holds the #1 All-Time Leaderboard rank in the Code for Nepal × DataCamp initiative, completed the 66-Days Continuous Learning Challenge, and holds 6 Verified Associate Accreditations (AI Engineer for Developers, AI Engineer for Data Scientists, Data Scientist, Data Engineer, Data Analyst, Python Data Associate) plus 20 verified credentials across AI, AWS, Microsoft Azure, Kubernetes, Python, SQL, and GitHub Copilot.",
+    tags: ["Nepal Police Hackathon Winner", "DataCamp #1 All-Time Rank", "AWS & Azure Certified", "AI Engineer Associate", "Verified Proof of Work"]
+  },
+  {
+    category: "HIRE & DIRECT DISPATCH",
     question: "How can businesses in Kathmandu, Nepal, or internationally hire Anudit Khatri for development or security work?",
-    answer: "Businesses, startups, agencies, and government or enterprise teams in Kathmandu, across Nepal, or worldwide can hire Anudit Khatri for web development, mobile app development, custom software engineering, and cybersecurity/ethical hacking engagements via email at anuditkhatri2011@gmail.com, direct WhatsApp/phone at +977 9762691579, or GitHub at github.com/Arthurrgg8-lgtm."
+    answer: "Businesses, startups, agencies, and government or enterprise teams in Kathmandu, Lalitpur, Bhaktapur, Pokhara, across Nepal, or worldwide can hire Anudit Khatri (Lazzy Badger) for web development, mobile app development, custom software engineering, AI automation, and cybersecurity/ethical hacking engagements via email at anuditkhatri2011@gmail.com, direct WhatsApp/phone at +977 9762691579, LinkedIn (linkedin.com/in/anudit-khatri-661100269), or GitHub at github.com/Arthurrgg8-lgtm.",
+    tags: ["Hire Web Developer Nepal", "Hire Mobile App Developer Kathmandu", "Hire Ethical Hacker Nepal", "IT Contract Consulting", "24h Direct Dispatch"]
   }
 ];
 
