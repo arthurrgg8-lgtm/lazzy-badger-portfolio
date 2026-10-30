@@ -13,7 +13,6 @@ import { HardwareHud } from "@/components/hardware-hud";
 import { ProfileScanner } from "@/components/profile-scanner";
 import { NavLink } from "@/components/nav-link";
 import { faqs } from "@/lib/schema";
-import { SoundController, cyberSound } from "@/components/cyber-audio";
 
 const navItems = ["about", "certifications", "projects", "gallery", "faq", "contact"];
 
@@ -115,22 +114,28 @@ export default function Home() {
     : profile.certifications_detail.filter((c: { category: string }) => c.category === certCategory);
 
   useEffect(() => {
-    if (activeGalleryModal) {
+    if (activeGalleryModal || mobileMenuOpen) {
       document.body.style.overflow = "hidden";
-      const handleKeyDown = (e: KeyboardEvent) => {
-        if (e.key === "Escape") {
-          setActiveGalleryModal(null);
-          cyberSound.playBlip(720);
-        }
-      };
-      window.addEventListener("keydown", handleKeyDown);
-      return () => {
-        document.body.style.overflow = "";
-        window.removeEventListener("keydown", handleKeyDown);
-      };
-    } else if (!mobileMenuOpen) {
+    } else {
       document.body.style.overflow = "";
     }
+
+    if (!activeGalleryModal) {
+      return () => {
+        document.body.style.overflow = "";
+      };
+    }
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setActiveGalleryModal(null);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", handleKeyDown);
+    };
   }, [activeGalleryModal, mobileMenuOpen]);
 
   useEffect(() => {
@@ -144,30 +149,8 @@ export default function Home() {
     return () => clearInterval(pingInterval);
   }, [isBooted]);
 
+  // Universal failsafe: ensure site is never permanently hidden under any browser condition
   useEffect(() => {
-    if (mobileMenuOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [mobileMenuOpen]);
-
-  // Compulsory Audio Activation: Ensure ambient audio plays on any first user interaction
-  useEffect(() => {
-    const unlockAudio = async () => {
-      if (!cyberSound?.running) {
-        try {
-          await cyberSound.start();
-        } catch {}
-      }
-    };
-    window.addEventListener("click", unlockAudio);
-    window.addEventListener("keydown", unlockAudio);
-    window.addEventListener("touchstart", unlockAudio);
-    // Universal failsafe: ensure site is never permanently hidden under any browser condition
     const failsafeTimer = setTimeout(() => {
       setIsBooted(true);
       setStartScramble(true);
@@ -175,9 +158,6 @@ export default function Home() {
 
     return () => {
       clearTimeout(failsafeTimer);
-      window.removeEventListener("click", unlockAudio);
-      window.removeEventListener("keydown", unlockAudio);
-      window.removeEventListener("touchstart", unlockAudio);
     };
   }, []);
 
@@ -188,17 +168,12 @@ export default function Home() {
           onComplete={() => {
             setIsBooted(true);
             setStartScramble(true);
-            try {
-              cyberSound.start().then(() => {
-                cyberSound.playBlip(980);
-              }).catch(() => {});
-            } catch {}
           }}
         />
       )}
       <main
-        className={`relative isolate min-h-screen overflow-hidden transition-all duration-[1200ms] ease-out ${
-          isBooted ? "opacity-100 filter-none" : "opacity-0 blur-md pointer-events-none"
+        className={`relative isolate min-h-screen overflow-hidden transition-all duration-700 ease-out ${
+          isBooted ? "opacity-100 filter-none" : "opacity-100 pointer-events-none"
         }`}
       >
       <AmbientStage />
@@ -235,8 +210,6 @@ export default function Home() {
               </div>
               <div className="h-3 w-px bg-white/10" />
               <span className="font-mono text-[9px] text-[var(--gold)] tracking-wider whitespace-nowrap">LATENCY: {ping}ms</span>
-              <div className="h-3 w-px bg-white/10" />
-              <SoundController />
             </div>
           </div>
           <div className="hidden items-center gap-5 xl:gap-8 text-xs uppercase tracking-[0.2em] xl:tracking-[0.26em] text-white/58 lg:flex whitespace-nowrap shrink-0">
@@ -245,9 +218,8 @@ export default function Home() {
             ))}
           </div>
 
-          {/* Mobile / Tablet Sound & Menu Trigger Group */}
+          {/* Mobile / Tablet Menu Trigger Group */}
           <div className="flex items-center gap-2 lg:hidden">
-            <SoundController />
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-[var(--cream)] hover:border-[var(--gold)] hover:text-[var(--gold)] transition duration-300 z-50 focus:outline-none cursor-pointer"
@@ -319,7 +291,7 @@ export default function Home() {
             </span>
           </div>
           <h1 className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold leading-[0.98] sm:leading-[0.9] md:leading-[0.86] tracking-[-0.04em] text-gradient">
-            <span className="sr-only">Anudit Khatri (Lazzy Badger) — Cybersecurity Researcher, AI Systems Architect &amp; Fullstack Developer</span>
+            <span className="sr-only">Anudit Khatri (Lazzy Badger) — Premier Fullstack Web Developer, Mobile App Developer (Android &amp; iOS), Ethical Hacker, Cybersecurity Researcher, AI Systems Architect &amp; IT Specialist in Kathmandu, Nepal</span>
             <ScrambleText text={profile.identity.brand_name} trigger={startScramble} />
           </h1>
           <p className="mt-3.5 sm:mt-6 max-w-2xl text-sm sm:text-base md:text-lg leading-relaxed text-white/70">
@@ -381,7 +353,6 @@ export default function Home() {
                     type="button"
                     onClick={() => {
                       setActivePillar(isActive ? null : pillar);
-                      cyberSound.playBlip(isActive ? 760 : 1080);
                     }}
                     className={`glass group relative overflow-hidden rounded-2xl sm:rounded-3xl p-5 sm:p-6 transition-all duration-300 w-full text-left h-full flex flex-col justify-between cursor-pointer select-none bg-black/20 ${
                       isActive
@@ -488,7 +459,6 @@ export default function Home() {
                       type="button"
                       onClick={() => {
                         setSecurityProofTab("github");
-                        cyberSound.playBlip(1080);
                       }}
                       className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded border transition-colors ${
                         securityProofTab === "github"
@@ -502,7 +472,6 @@ export default function Home() {
                       type="button"
                       onClick={() => {
                         setSecurityProofTab("linkedin");
-                        cyberSound.playBlip(1140);
                       }}
                       className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded border transition-colors ${
                         securityProofTab === "linkedin"
@@ -555,7 +524,6 @@ export default function Home() {
                       type="button"
                       onClick={() => {
                         setSecurityProofTab("wordpress");
-                        cyberSound.playBlip(980);
                       }}
                       className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded border transition-colors ${
                         securityProofTab === "wordpress"
@@ -586,7 +554,6 @@ export default function Home() {
                     type="button"
                     onClick={() => {
                       setSecurityProofTab("github");
-                      cyberSound.playBlip(1080);
                     }}
                     className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md font-mono text-[8px] sm:text-[8.5px] uppercase tracking-wider transition-all duration-300 ${
                       securityProofTab === "github"
@@ -601,7 +568,6 @@ export default function Home() {
                     type="button"
                     onClick={() => {
                       setSecurityProofTab("linkedin");
-                      cyberSound.playBlip(1140);
                     }}
                     className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md font-mono text-[8px] sm:text-[8.5px] uppercase tracking-wider transition-all duration-300 ${
                       securityProofTab === "linkedin"
@@ -616,7 +582,6 @@ export default function Home() {
                     type="button"
                     onClick={() => {
                       setSecurityProofTab("wordpress");
-                      cyberSound.playBlip(980);
                     }}
                     className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md font-mono text-[8px] sm:text-[8.5px] uppercase tracking-wider transition-all duration-300 ${
                       securityProofTab === "wordpress"
@@ -692,7 +657,6 @@ export default function Home() {
                 activeSkill={activeSkill}
                 onSelectSkill={(skill) => {
                   setActiveSkill(activeSkill === skill ? null : skill);
-                  cyberSound.playBlip(1160);
                 }}
               />
             </Reveal>
@@ -797,7 +761,6 @@ export default function Home() {
                     type="button"
                     onClick={() => {
                       setDatacampProofTab("activity");
-                      cyberSound.playBlip(920);
                     }}
                     className={`px-3 py-1 rounded-lg border transition-all cursor-pointer flex items-center gap-1.5 active:scale-95 ${
                       datacampProofTab === "activity"
@@ -811,7 +774,6 @@ export default function Home() {
                     type="button"
                     onClick={() => {
                       setDatacampProofTab("leaderboard");
-                      cyberSound.playBlip(920);
                     }}
                     className={`px-3 py-1 rounded-lg border transition-all cursor-pointer flex items-center gap-1.5 active:scale-95 ${
                       datacampProofTab === "leaderboard"
@@ -885,7 +847,6 @@ export default function Home() {
                     type="button"
                     onClick={() => {
                       setCertCategory(tab.id as typeof certCategory);
-                      cyberSound.playBlip(900);
                     }}
                     className={`px-3 py-1.5 rounded-full font-mono text-[10.5px] sm:text-xs transition-all duration-300 flex items-center gap-1.5 cursor-pointer border active:scale-95 select-none ${
                       active
@@ -914,7 +875,6 @@ export default function Home() {
                   type="button"
                   onClick={() => {
                     setCertViewMode("grid");
-                    cyberSound.playBlip(1020);
                   }}
                   aria-label="Cards view"
                   className={`px-2.5 py-1 rounded-lg font-mono text-[10px] uppercase tracking-wider transition-all duration-300 flex items-center gap-1.5 cursor-pointer active:scale-95 ${
@@ -932,7 +892,6 @@ export default function Home() {
                   type="button"
                   onClick={() => {
                     setCertViewMode("seals");
-                    cyberSound.playBlip(1020);
                   }}
                   aria-label="Circles view"
                   className={`px-2.5 py-1 rounded-lg font-mono text-[10px] uppercase tracking-wider transition-all duration-300 flex items-center gap-1.5 cursor-pointer active:scale-95 ${
@@ -1334,7 +1293,6 @@ export default function Home() {
                     type="button"
                     onClick={() => {
                       setActiveGalleryModal(item);
-                      cyberSound.playBlip(1040);
                     }}
                     className="glass group relative aspect-[3/4] w-full overflow-hidden rounded-2xl sm:rounded-3xl border border-white/10 hover:border-[var(--gold)]/50 transition-all duration-500 bg-black/20 cursor-pointer block text-left active:scale-[0.98]"
                   >
@@ -1395,7 +1353,6 @@ export default function Home() {
                     type="button"
                     onClick={() => {
                       setOpenFaq(isOpen ? null : index);
-                      cyberSound.playBlip(isOpen ? 780 : 980);
                     }}
                     className="w-full text-left p-4 sm:p-5 flex items-center justify-between gap-3 sm:gap-4 cursor-pointer select-none"
                     aria-expanded={isOpen}
@@ -1421,13 +1378,15 @@ export default function Home() {
                     </div>
                   </button>
 
-                  {isOpen && (
-                    <div className="px-4 pb-4 sm:px-5 sm:pb-5 pt-0 border-t border-white/5 mt-1">
-                      <p className="text-xs sm:text-sm leading-relaxed text-white/70 pl-7 sm:pl-9 pt-2">
-                        {faq.answer}
-                      </p>
-                    </div>
-                  )}
+                  <div
+                    className={`px-4 pb-4 sm:px-5 sm:pb-5 pt-0 border-t border-white/5 mt-1 ${
+                      isOpen ? "block" : "hidden"
+                    }`}
+                  >
+                    <p className="text-xs sm:text-sm leading-relaxed text-white/70 pl-7 sm:pl-9 pt-2">
+                      {faq.answer}
+                    </p>
+                  </div>
                 </div>
               </Reveal>
             );
@@ -1458,10 +1417,60 @@ export default function Home() {
                   <span className="text-[var(--gold)]/80">Else if</span> Build your own System.
                 </h2>
               </div>
+
+              {/* Engineering & Security Services Authority Matrix (Kathmandu, Nepal & Global) */}
+              <div className="grid gap-3 sm:gap-4 sm:grid-cols-2 lg:grid-cols-5 border-y border-white/10 py-6 sm:py-8">
+                {[
+                  {
+                    tag: "01 // WEB DEV",
+                    title: "Web & Fullstack Development",
+                    desc: "Next.js, React, TypeScript, Node.js, FastAPI, SaaS, E-Commerce & Custom Software in Kathmandu, Nepal."
+                  },
+                  {
+                    tag: "02 // MOBILE APPS",
+                    title: "Mobile App Development",
+                    desc: "Native Android (Kotlin) & Cross-Platform iOS/Android (React Native) Apps with Offline & BLE Telemetry."
+                  },
+                  {
+                    tag: "03 // OFFENSIVE SEC",
+                    title: "Ethical Hacking & Pentesting",
+                    desc: "OWASP Top 10 Audits, White-Box Source Code Reviews, API/GraphQL Security & Vulnerability Triage."
+                  },
+                  {
+                    tag: "04 // CYBERSECURITY",
+                    title: "Cybersecurity & Mobile DFIR",
+                    desc: "Production Perimeter Hardening, Zero-Day CVE Mitigation, iOS/Android Digital Forensics & Incident Response."
+                  },
+                  {
+                    tag: "05 // AI & IT OPS",
+                    title: "AI Systems & IT Consulting",
+                    desc: "Autonomous LLM Agents, MCP Tooling, Computer Vision, Cloud DevOps (AWS/Azure) & IoT Hardware."
+                  }
+                ].map((service) => (
+                  <div
+                    key={service.tag}
+                    className="rounded-xl border border-white/10 bg-black/40 p-3.5 sm:p-4 flex flex-col justify-between hover:border-[var(--gold)]/40 transition-colors"
+                  >
+                    <div>
+                      <span className="font-mono text-[8px] uppercase tracking-widest text-[var(--gold)] block mb-1.5">
+                        {service.tag}
+                      </span>
+                      <h3 className="font-display text-sm sm:text-base font-semibold text-[var(--cream)] mb-1.5">
+                        {service.title}
+                      </h3>
+                      <p className="text-[11px] leading-relaxed text-white/60">
+                        {service.desc}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
               <div className="flex flex-wrap gap-3 sm:gap-5">
                 <SocialIcon ariaLabel="Email Anudit Khatri via Gmail" href={`https://mail.google.com/mail/?view=cm&fs=1&to=${profile.socials.email}`} icon={<MailIcon />} />
                 <SocialIcon ariaLabel="Message Anudit Khatri on WhatsApp" href={`https://wa.me/${profile.socials.whatsapp}`} icon={<WhatsAppIcon />} />
                 <SocialIcon ariaLabel="View GitHub Profile of Anudit Khatri (arthurrgg8-lgtm)" href={`https://github.com/${profile.socials.github}`} icon={<GithubIcon />} />
+                <SocialIcon ariaLabel="Connect with Anudit Khatri on LinkedIn" href={profile.socials.linkedin} icon={<LinkedInIcon />} />
                 <SocialIcon ariaLabel="View Instagram Profile" href={`https://instagram.com/${profile.socials.instagram}`} icon={<InstagramIcon />} />
                 <SocialIcon ariaLabel="View Facebook Profile" href={`https://facebook.com/${profile.socials.facebook}`} icon={<FacebookIcon />} />
                 <SocialIcon ariaLabel="View YouTube Channel" href={`https://www.youtube.com/${profile.socials.youtube}`} icon={<YouTubeIcon />} />
@@ -1486,24 +1495,24 @@ export default function Home() {
                 </span>
               </div>
               <p className="text-xs leading-relaxed text-white/60">
-                Premier Fullstack Developer, Cybersecurity Researcher, and AI Systems Architect based in Kathmandu, Nepal. Dedicated to mission-critical engineering, local-first autonomy, and edge runtime security.
+                Premier Fullstack Web Developer, Mobile App Developer (Android &amp; iOS), Ethical Hacker, Cybersecurity Researcher, AI Systems Architect, and IT Consultant based in Kathmandu, Nepal. Dedicated to mission-critical software engineering, local-first autonomy, and edge runtime security.
               </p>
               <div className="flex items-center gap-2 font-mono text-[8.5px] sm:text-[9px] text-[var(--gold)]">
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 shrink-0" />
-                <span>AVAILABLE FOR GLOBAL SYSTEMS CONTRACTS</span>
+                <span>AVAILABLE FOR KATHMANDU, NEPAL &amp; GLOBAL CONTRACTS</span>
               </div>
             </div>
 
             {/* Col 2: Core Engineering Capabilities */}
             <div className="space-y-2.5 sm:space-y-3 font-mono text-xs">
-              <h4 className="text-[10px] uppercase tracking-[0.25em] sm:tracking-[0.3em] text-[var(--gold)] font-bold">Engineering Stack</h4>
+              <h4 className="text-[10px] uppercase tracking-[0.25em] sm:tracking-[0.3em] text-[var(--gold)] font-bold">Engineering &amp; Security Stack</h4>
               <ul className="space-y-1.5 sm:space-y-2 text-white/65 text-[11px] sm:text-xs">
-                <li>• Next.js App Router &amp; Server Actions</li>
+                <li>• Fullstack Web Dev (Next.js, React, FastAPI)</li>
+                <li>• Mobile App Dev (React Native, Kotlin, iOS)</li>
+                <li>• Ethical Hacking &amp; OWASP Penetration Testing</li>
                 <li>• High-Performance Rust &amp; Python Systems</li>
                 <li>• Local LLM Orchestration &amp; MCP Tooling</li>
-                <li>• Edge Runtime Hardening &amp; Pentesting</li>
-                <li>• Mobile DFIR &amp; Digital Carving (iOS/Android)</li>
-                <li>• LoRa Wireless Telemetry &amp; IoT Meshes</li>
+                <li>• Mobile DFIR (iOS/Android) &amp; LoRa IoT Meshes</li>
               </ul>
             </div>
 
@@ -1557,18 +1566,12 @@ export default function Home() {
         </div>
       </footer>
 
-      {/* Floating Cyber Ambient Audio Controller on All Screens */}
-      <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40">
-        <SoundController className="shadow-[0_0_20px_rgba(0,0,0,0.85)] backdrop-blur-xl bg-black/90" />
-      </div>
-
       {/* Interactive Cyber HUD Lightbox Modal */}
       {activeGalleryModal && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-2xl p-3 sm:p-6 md:p-10 animate-fadeIn"
           onClick={() => {
             setActiveGalleryModal(null);
-            cyberSound.playBlip(720);
           }}
         >
           <div
@@ -1587,7 +1590,6 @@ export default function Home() {
                   type="button"
                   onClick={() => {
                     setActiveGalleryModal(null);
-                    cyberSound.playBlip(720);
                   }}
                   className="h-8 w-8 rounded-full border border-white/10 bg-white/5 flex items-center justify-center text-white/70 hover:border-[var(--gold)] hover:text-[var(--gold)] hover:bg-[var(--gold)]/10 transition-all cursor-pointer"
                   aria-label="Close image modal"
@@ -1761,6 +1763,10 @@ function WhatsAppIcon() {
 
 function GithubIcon() {
   return <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.43.372.823 1.102.823 2.222 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>;
+}
+
+function LinkedInIcon() {
+  return <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>;
 }
 
 function InstagramIcon() {

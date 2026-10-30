@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
-import { cyberSound } from "@/components/cyber-audio";
 
 const diagnosticLines = [
   "Initializing secure handshake to badger-node-pi4...",
@@ -21,13 +20,6 @@ export function BootScreen({ onComplete }: { onComplete: () => void }) {
   const readyToLaunch = progress === 100 && visibleLines.length >= diagnosticLines.length;
 
   const handleLaunch = useCallback(() => {
-    // Non-blocking background audio activation
-    try {
-      cyberSound.start().then(() => {
-        cyberSound.playBlip(1040);
-      }).catch(() => {});
-    } catch {}
-
     setIsFading(true);
     setTimeout(() => {
       onComplete();
@@ -127,9 +119,9 @@ export function BootScreen({ onComplete }: { onComplete: () => void }) {
           <button
             onClick={handleLaunch}
             className="rounded border border-[var(--gold)]/30 bg-[var(--gold)]/10 px-2.5 py-1 sm:px-3 sm:py-1.5 text-[8.5px] sm:text-[9px] uppercase tracking-widest text-[var(--gold)] hover:bg-[var(--gold)] hover:text-black transition-colors cursor-pointer flex items-center gap-1.5"
-            title="Launch system and audio"
+            title="Launch system"
           >
-            <span>[ ESC // LAUNCH WITH AUDIO ]</span>
+            <span>[ ESC // LAUNCH SYSTEM ]</span>
           </button>
           <div className="text-[9px] sm:text-[10px] text-white/30 hidden sm:block">
             ADDR: 192.168.1.137 // INTRUDER_LOG: ACTIVE
@@ -173,11 +165,11 @@ export function BootScreen({ onComplete }: { onComplete: () => void }) {
             />
           </div>
 
-          {/* Compulsory Launch Gate */}
+          {/* Launch Gate */}
           <div className="mt-2 flex flex-col sm:flex-row items-center justify-between gap-3 pt-1">
             <div className="font-mono text-[9px] text-white/50 flex items-center gap-2 text-center sm:text-left">
               <span className="h-2 w-2 rounded-full bg-[var(--gold)] animate-pulse shrink-0" />
-              <span>CLICK TO ENGAGE AMBIENT CYBER AUDIO &amp; ENTER SYSTEM</span>
+              <span>CLICK TO ENTER SYSTEM</span>
             </div>
             <button
               type="button"
@@ -185,7 +177,7 @@ export function BootScreen({ onComplete }: { onComplete: () => void }) {
               className="w-full sm:w-auto rounded-full border border-[var(--gold)] bg-[var(--gold)]/20 hover:bg-[var(--gold)] hover:text-black px-6 py-2.5 sm:px-8 sm:py-2.5 font-mono text-[10px] sm:text-xs font-bold uppercase tracking-[0.22em] text-[var(--gold)] shadow-[0_0_25px_rgba(215,181,109,0.35)] transition-all duration-300 cursor-pointer flex items-center justify-center gap-2 active:scale-95 animate-pulse"
             >
               <span>▶</span>
-              <span>INITIALIZE SYSTEM [AUDIO ON]</span>
+              <span>INITIALIZE SYSTEM</span>
             </button>
           </div>
         </div>

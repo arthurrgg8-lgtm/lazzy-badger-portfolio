@@ -148,23 +148,3 @@ body::after {
   scrollbar-width: none;
 }
 
-@keyframes hud-eq-1 {
-  0%, 100% { height: 4px; }
-  50% { height: 12px; }
-}
-
-@keyframes hud-eq-2 {
-  0%, 100% { height: 14px; }
-  50% { height: 5px; }
-}
-
-@keyframes hud-eq-3 {
-  0%, 100% { height: 6px; }
-  50% { height: 13px; }
-}
-
-@keyframes hud-eq-4 {
-  0%, 100% { height: 11px; }
-  50% { height: 3px; }
-}
-

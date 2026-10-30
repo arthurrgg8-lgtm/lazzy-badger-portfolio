@@ -20,49 +20,69 @@ const baseUrl = "https://anuditk.vercel.app";
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: "Anudit Khatri (Lazzy Badger) | Fullstack Developer, Cybersecurity Researcher & Systems Architect",
-    template: "%s | Anudit Khatri (Lazzy Badger)"
+    default: "Anudit Khatri (Lazzy Badger) | Best Web, Mobile App Developer, Ethical Hacker & Cybersecurity Expert in Kathmandu, Nepal",
+    template: "%s | Anudit Khatri (Lazzy Badger) — Kathmandu, Nepal"
   },
   description:
-    "Official portfolio of Anudit Khatri (Lazzy Badger) — Premier Fullstack Developer, AI Systems Architect, and Cybersecurity Researcher based in Kathmandu, Nepal. Winner of 2nd Place in Nepal Police Hackathon 2083 and #1 All-Time DataCamp Leaderboard. Specializing in Next.js, React, Rust, Python, cloud architecture, and mission-critical systems engineering.",
+    "Official portfolio of Anudit Khatri (Lazzy Badger) — Premier Fullstack Web Developer, Mobile App Developer (Android & iOS), Ethical Hacker, Cybersecurity Researcher, AI Systems Architect, and IT Consultant in Kathmandu, Nepal. 2nd Place Nepal Police Hackathon 2083 Winner & #1 All-Time DataCamp Leaderboard. Available for custom software, web, mobile app, AI, and security engineering.",
   keywords: [
     "Anudit Khatri",
     "Lazzy Badger",
     "LazzyBadger",
     "anuditk",
     "Arthurrgg8-lgtm",
+    "Best Web Developer in Nepal",
+    "Best Web Developer in Kathmandu",
+    "Best Mobile App Developer in Nepal",
+    "Best Mobile App Developer in Kathmandu",
+    "Android and iOS App Developer Nepal",
+    "React Native Developer Kathmandu",
+    "Best Ethical Hacker in Nepal",
+    "Best Ethical Hacker in Kathmandu",
+    "Best Cybersecurity Researcher in Nepal",
+    "Best Cybersecurity Expert in Kathmandu",
+    "Penetration Tester Nepal",
+    "Best IT Guy in Nepal",
+    "Best IT Expert in Kathmandu",
+    "IT Consultant Kathmandu Nepal",
+    "Custom Software Developer Nepal",
+    "Software Engineer Kathmandu",
     "Fullstack Developer Nepal",
     "Fullstack Engineer Kathmandu",
     "Top Next.js Developer Nepal",
     "React Developer Kathmandu",
     "Python Developer Nepal",
+    "FastAPI Developer Nepal",
     "Rust Systems Programmer",
-    "Cybersecurity Researcher Nepal",
     "Bug Bounty Hunter Nepal",
+    "OWASP Security Auditor Nepal",
     "Nepal Police Hackathon Winner",
     "Prahari-Link",
-    "AI Systems Engineer",
-    "AI Agent Developer",
+    "AI Systems Engineer Nepal",
+    "AI Agent Developer Kathmandu",
     "Model Context Protocol MCP",
     "DataCamp Nepal Rank 1",
     "DataCamp Certified AI Engineer",
-    "AWS Certified Developer",
+    "AWS Certified Developer Nepal",
     "Microsoft Azure Architecture",
     "LoRa Wireless Telemetry",
     "Hardware Hacking",
     "Mobile Forensics DFIR",
     "AI Trial Nepal",
     "VastuVision AI",
+    "Bolts Army Security Audit",
     "Best Software Developer Portfolio Nepal",
     "Hire Fullstack Developer Nepal",
+    "Hire Mobile App Developer Kathmandu",
+    "Freelance Developer Kathmandu Nepal",
     "Web Application Development Kathmandu"
   ],
   authors: [{ name: "Anudit Khatri", url: baseUrl }],
   creator: "Anudit Khatri (Lazzy Badger)",
   publisher: "Anudit Khatri",
   applicationName: "Anudit Khatri Portfolio",
-  category: "Software Development & Cybersecurity Portfolio",
-  classification: "Fullstack Web Engineering, Systems Architecture, Artificial Intelligence & Cybersecurity",
+  category: "Web Development, Mobile App Development, AI & Cybersecurity Portfolio (Kathmandu, Nepal)",
+  classification: "Fullstack Web Engineering, Mobile Application Development, Ethical Hacking, Cybersecurity, AI Systems & IT Consulting",
   formatDetection: {
     email: false,
     address: false,
@@ -73,9 +93,9 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    title: "Anudit Khatri (Lazzy Badger) | Fullstack Developer & Systems Architect",
+    title: "Anudit Khatri (Lazzy Badger) | Best Web, Mobile App Developer, Ethical Hacker & IT Expert in Kathmandu, Nepal",
     description:
-      "Premier Fullstack Developer, AI Systems Architect, and Cybersecurity Researcher in Kathmandu, Nepal. 2nd Place Nepal Police Hackathon Winner and #1 All-Time DataCamp Leaderboard. Explore production systems and research.",
+      "Premier Fullstack Web & Mobile App Developer, Ethical Hacker, Cybersecurity Researcher, and AI Systems Architect in Kathmandu, Nepal. 2nd Place Nepal Police Hackathon Winner & #1 All-Time DataCamp Leaderboard.",
     url: baseUrl,
     siteName: "Anudit Khatri (Lazzy Badger) - Technical Engineering Portfolio",
     locale: "en_US",
@@ -91,9 +111,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Anudit Khatri (Lazzy Badger) | Fullstack Developer & Systems Engineer",
+    title: "Anudit Khatri (Lazzy Badger) | Web, Mobile App, AI & Cybersecurity Engineer (Kathmandu, Nepal)",
     description:
-      "Premier Fullstack Developer, AI Systems Architect, and Cybersecurity Researcher in Kathmandu, Nepal. 2nd Place Nepal Police Hackathon Winner and #1 All-Time DataCamp Leaderboard.",
+      "Premier Fullstack Web & Mobile App Developer, Ethical Hacker, Cybersecurity Researcher, and AI Systems Architect in Kathmandu, Nepal. 2nd Place Nepal Police Hackathon Winner & #1 All-Time DataCamp Leaderboard.",
     images: ["/opengraph-image"],
     creator: "@anudit1.5"
   },
@@ -138,6 +158,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM Context & AI Knowledge Base" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaGraph) }}

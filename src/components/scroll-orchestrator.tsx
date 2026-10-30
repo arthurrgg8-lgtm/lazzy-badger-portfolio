@@ -45,6 +45,7 @@ export function ScrollOrchestrator() {
         });
       });
 
+      const tiltCleanups: Array<() => void> = [];
       if (!isTouch) {
         gsap.utils.toArray<HTMLElement>("[data-tilt-card]").forEach((card) => {
           const onMove = (event: PointerEvent) => {
@@ -71,6 +72,10 @@ export function ScrollOrchestrator() {
 
           card.addEventListener("pointermove", onMove);
           card.addEventListener("pointerleave", onLeave);
+          tiltCleanups.push(() => {
+            card.removeEventListener("pointermove", onMove);
+            card.removeEventListener("pointerleave", onLeave);
+          });
         });
       }
 
@@ -84,7 +89,10 @@ export function ScrollOrchestrator() {
         });
       }
 
-      return () => clearTimeout(refreshTimer);
+      return () => {
+        clearTimeout(refreshTimer);
+        tiltCleanups.forEach((cleanup) => cleanup());
+      };
     });
 
     return () => context.revert();
